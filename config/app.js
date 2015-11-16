@@ -12,14 +12,14 @@ function (root,settings,angularAMD) {
         templateUrl: function (rp) {
 			return settings.VIEWS_DIRECTORY+'/pages/home.html';
 		},
-		controllerUrl: "controllers/page_controller"            
+		controllerUrl: settings.CTRLS_DIRECTORY+"/page_controller"            
     }))
 	
 	.when("/pages/:page",angularAMD.route({
 		templateUrl: function (rp) {
 			return settings.VIEWS_DIRECTORY+'/pages/'+rp.page+'.'+settings.VIEW_EXTENSION;
 		},
-		controllerUrl: "controllers/page_controller"      
+		controllerUrl:  settings.CTRLS_DIRECTORY+"/page_controller"      
 	}))
 	
 	.when("/:controller/:action", angularAMD.route({
@@ -33,7 +33,7 @@ function (root,settings,angularAMD) {
                 var path = $location.path();
                 var parsePath = path.split("/");
 				var controllerName = parsePath[1];
-                var loadController = "controllers/"  + 
+                var loadController =  settings.CTRLS_DIRECTORY+"/"  + 
                                       controllerName + "_controller";
                 var deferred = $q.defer();
                 require([loadController], function () {
