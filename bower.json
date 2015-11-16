@@ -1,0 +1,25 @@
+{
+  "name": "SUIX",
+  "homepage": "https://github.com/daveil/uix",
+  "authors": [
+    "Dave Arroyo-Alaras <arroyo.daveil@gmail.com>"
+  ],
+  "description": "Simple UI/X",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+  ],
+  "dependencies": {
+    "angular-cookies": "~1.4.7",
+    "angular-bootstrap": "~0.14.3",
+    "angular-route": "~1.4.7",
+    "angularjs": "~1.4.7",
+    "angularAMD": "~0.2.1",
+    "requirejs": "~2.1.20"
+  }
+}
