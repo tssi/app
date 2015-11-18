@@ -1,5 +1,6 @@
 <hr />
-<div class="row" ng-controller="PageController" ng-init="init()">
+<div  ng-controller="PageController" ng-init="init()">
+<div class="row">
 	<div class="col-md-6">
 		<button class="btn btn-primary btn-fab top right fixed"><span class="glyphicon glyphicon-plus"></span></button>
 		<div class="list-group">
@@ -74,6 +75,71 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<div class="list-group">
+			<div class="list-group-item list-group-header">
+				<div class="btn-group btn-group-sm pull-right" uib-dropdown>
+					<button class="btn btn-default disabled">1 - 5 of 10</button>
+					<button class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span></button>
+					<button class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span></button>
+					
+					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" uib-dropdown-toggle>
+						<span class="glyphicon glyphicon-chevron-down"></span>
+					  </button>
+					  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						<li><a href="#/">Sort</a></li>
+						<li><a href="#/">Filter</a></li>
+						<li><a href="#/">Go to Page</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="#/">Some other link</a></li>
+						
+					  </ul>
+				</div>
+				<label class="clear-fix">Checklist</label>
+			</div>
+			<div class="list-group-canvas list-group-search-results">
+			  <div class="list-group-item" ng-repeat="list in List track by $index" ng-if="List.length">
+				<div class="row">
+					<div class="col-md-8">
+					 <div class="checkbox checkbox-lg">
+					  <label>
+						<input type="checkbox" value="" ng-checked="false">
+						<span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+					  </label>
+					  <div class="description">
+							<h4 class="list-group-item-heading">{{list.title}}</h4>
+							<p class="list-group-item-text">{{list.description}}</p>
+						</div>
+					</div>
+						
+					</div>
+					<div class="col-md-4">
+						<div class="input-group">
+						<span class="input-group-addon">P</span>
+						<input type="number" class="input-lg form-control" />
+						</div>
+						
+					</div>
+				</div>
+				
+			  </div>
+			   <div class="list-group-item text-center" ng-if="!List.length">
+					Loading...
+			   </div>
+			 </div>
+			 <div class="list-group-item list-group-search-box">
+				<div class="input-group"> 
+					<div class="input-group-btn"><button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button></div>
+					<input type="text" class="form-control" placeholder="Search" />
+					<div class="input-group-btn"><button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button></div>
+				</div>
+			  </div>
+		</div>
+
+	</div>
+	<div class="col-md-6"></div>
 </div>
 <hr />
 <div class="row">
@@ -412,5 +478,6 @@
 		  </ul>
 		</nav>
 	</div>
+</div>
 </div>
 </div>
