@@ -555,3 +555,78 @@ div#school-name {
     95% {left: 120%;}
     to {left: 100%; opacity:0;}
 }
+.checkbox label:after, 
+.radio label:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.checkbox .cr,
+.radio .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    margin-right: .5em;
+	margin-bottom: 33.33%;
+}
+
+.radio .cr, .checkbox .cr {
+    border-radius: 50%;
+}
+
+.checkbox .cr .cr-icon,
+.radio .cr .cr-icon {
+    position: absolute;
+    font-size: .8em;
+    line-height: 0;
+    top: 50%;
+    left: 13%;
+}
+
+.radio .cr .cr-icon {
+    margin-left: 0.04em;
+}
+
+.checkbox label input[type="checkbox"],
+.radio label input[type="radio"] {
+    display: none;
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon,
+.radio label input[type="radio"] + .cr > .cr-icon {
+    transform: scale(0);
+    opacity: 0;
+    transition: all .3s ease;
+}
+.checkbox label input[type="checkbox"] + .cr{
+	background:none;
+	transition: all .2s ease;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+.radio label input[type="radio"]:checked + .cr > .cr-icon {
+    transform: scale(0.666);
+	color:white;
+    opacity: 1;
+}
+
+.checkbox label input[type="checkbox"]:disabled + .cr,
+.radio label input[type="radio"]:disabled + .cr {
+    opacity: .5;
+}
+.checkbox label input[type="checkbox"]:checked + .cr {
+	background: #337AB7;
+    border-color: #0C5594;
+}
+.checkbox-lg .cr{font-size:1.5rem;}
+.checkbox label{padding-left:0;}
+.checkbox .description{display:inline-block;}
+input[type="number"]{text-align:right;}
+.amount {text-align:right;}
+.amount.debit{color: #D9534F;}
+.amount.credit{color: #449D44;}
+.active .amount{color: white;}
