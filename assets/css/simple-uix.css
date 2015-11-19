@@ -254,6 +254,9 @@ div#school-name {
     z-index: 3;
     background: #f9f9f9;
 }
+.list-group>.list-group-item.list-group-header{
+	z-index: 4;
+}
 .list-group>.list-group-item.list-group-header>label{
 	font-weight: bold;
     font-size: 1.43rem;
