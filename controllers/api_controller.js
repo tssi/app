@@ -16,7 +16,7 @@ define(['app'], function(app){
 					if(typeof __args[1] =='object') data = __args[1];
 					if(typeof __args[1] =='function') success = __args[1];
 					else if(typeof __args[2] =='function') success = __args[2];
-					if(__args.length>2) error = __args[__args.length-1];
+					if(__args.length>3) error = __args[__args.length-1];
 				}else{
 					throw new Error("Incomplete arguments");
 				}
