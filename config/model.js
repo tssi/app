@@ -13,6 +13,7 @@ define([],function(){
 			var data = __data.slice(index,index+limit);
 			var meta = __meta;
 			meta.page = page;
+			meta.limit = limit;
 			meta.count = __data.length;
 			meta.last = Math.ceil(meta.count/limit);
 			meta.next =  page<meta.last?page+1:null;
