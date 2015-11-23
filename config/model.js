@@ -1,10 +1,24 @@
 "use strict";
 define([],function(){
 	function model(value){
+		var DEFAULT_PAGE = 1;
+		var DEFAULT_ITEM = 5;
 		var __meta = {},__data = [],object = {meta:__meta,data:__data};
 		
 		function list(){
-			return angular.copy({meta:__meta,data:__data});
+			var config = arguments[0]||{};
+			var page = config.page||DEFAULT_PAGE;
+			var limit = config.limit||DEFAULT_ITEM;
+			var index = ((page - 1) * limit);
+			var data = __data.slice(index,index+limit);
+			var meta = __meta;
+			meta.page = page;
+			meta.limit = limit;
+			meta.count = __data.length;
+			meta.last = Math.ceil(meta.count/limit);
+			meta.next =  page<meta.last?page+1:null;
+			meta.prev =  page>1?page-1:null;
+			return angular.copy({meta:meta,data:data});
 		};
 		function error(){
 			return angular.copy({meta:__meta});
@@ -35,8 +49,8 @@ define([],function(){
 				__data.push(datum);
 			}
 		}
-		object.GET = function(){
-			return {success:list(),error:error()};
+		object.GET = function(data){
+			return {success:list(data),error:error()};
 		}
 		object.POST = function(data){
 			return {success:save(data),error:error()};
