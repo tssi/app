@@ -9,8 +9,27 @@ define([],function(){
 			var config = arguments[0]||{};
 			var page = config.page||DEFAULT_PAGE;
 			var limit = config.limit||DEFAULT_ITEM;
+			var keyword = config.keyword;
+			var fields = config.fields;
 			var index = ((page - 1) * limit);
-			var data = __data.slice(index,index+limit);
+			var data = __data;
+			if(keyword&&fields){
+				var _d=[];
+				var regex = new RegExp(keyword, 'i');
+				for(var i in data){
+					var d  =  data[i];
+					var t = false;
+					for(var ii in fields){
+						var f =  fields[ii];
+						t = t || regex.test(d[f]);
+					}
+					if(t){
+						_d.push(d);
+					}
+				}
+				data = _d;
+			}
+			data = data.slice(index,index+limit);
 			var meta = __meta;
 			meta.page = page;
 			meta.limit = limit;
