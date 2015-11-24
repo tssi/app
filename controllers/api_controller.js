@@ -8,6 +8,9 @@ define(['app'], function(app){
 			GET:function(){
 				return this.HTTP('GET',arguments);
 			},
+			DELETE:function(){
+				return this.HTTP('DELETE',arguments);
+			},
 			HTTP:function(method,__args){
 				var self = this;
 				var endpoint,data,success,error;

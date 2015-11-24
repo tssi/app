@@ -38,6 +38,18 @@ define([],function(){
 			}
 			return angular.copy({meta:__meta,data:data});
 		}
+		function remove(data){
+			if(data.hasOwnProperty('id')){
+				for(var i in __data){
+					var datum = __data[i];
+					if(datum.id==data.id){
+						__data.splice(i,1);
+						break;
+					}
+				}
+			}
+			return angular.copy({meta:__meta,data:data});
+		}
 		function setMeta(meta){
 			__meta = meta;
 		}
@@ -55,7 +67,9 @@ define([],function(){
 		object.POST = function(data){
 			return {success:save(data),error:error()};
 		}
-		
+		object.DELETE = function(data){
+			return {success:remove(data),error:error()};
+		}
 		if(value.hasOwnProperty('meta'))setMeta(value.meta);
 		if(value.hasOwnProperty('data'))setData(value.data);
 		
