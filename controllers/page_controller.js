@@ -26,6 +26,16 @@ define(['app','api'], function (app) {
 			$scope.openListItem = function($index){
 				$scope.ActiveListItem = $scope.List[$index];
 			}
+			$scope.closeListItem = function(){
+				$scope.ActiveListItem = null;
+			}
+			$scope.deleteListItem = function(id){
+				var data = {id:id};
+				api.DELETE('test',data,function(response){
+					$scope.closeListItem();
+					getTestList({page:$scope.ActivePage});
+				});
+			}
 	   }
     }]);
 });
