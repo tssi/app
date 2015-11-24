@@ -36,6 +36,18 @@ define(['app','api'], function (app) {
 					getTestList({page:$scope.ActivePage});
 				});
 			}
+			$scope.filterSearch = function(list){
+				var searchBox = $scope.SearchBox;
+				var keyword = new RegExp(searchBox, 'i');
+				var test = keyword.test(list.title) || keyword.test(list.description);
+				return !searchBox || test ; //Return NO FILTER or filter by patient_name
+			}
+			$scope.confirmSearch = function(){
+				getTestList({page:$scope.ActivePage,keyword:$scope.SearchBox,fields:['title','description']});
+			}
+			$scope.cancelSearch = function(){
+				$scope.SearchBox = null;
+			}
 	   }
     }]);
 });
