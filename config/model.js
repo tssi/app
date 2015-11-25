@@ -51,6 +51,9 @@ define([],function(){
 					var datum = __data[i];
 					if(datum.id==data.id){
 						__data[i] = data;
+						for(var iii in data){
+							__data[i][iii] = data[ii];
+						}
 						break;
 					}
 				}
