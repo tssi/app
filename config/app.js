@@ -1,6 +1,6 @@
 "use strict";
-define(['root','settings','angularAMD','angular-route', 'angular-cookies', 'ui-bootstrap'], 
-function (root,settings,angularAMD) {
+define(['root','directives','settings','angularAMD','angular-route', 'angular-cookies', 'ui-bootstrap'], 
+function (root,directives,settings,angularAMD) {
     var app = angular.module("mainModule", 
         ['ngRoute', 'ngCookies', 'ui.bootstrap']);
           
@@ -50,6 +50,9 @@ function (root,settings,angularAMD) {
 	
 	//Bootstrap RootController
 	app.controller('RootController', root);
+	//Bootstrap Directives
+	for(var drctv in directives)
+		app.directive(drctv, directives[drctv]);
     // Bootstrap Angular when DOM is ready
     angularAMD.bootstrap(app);
 	
