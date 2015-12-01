@@ -1,13 +1,12 @@
 "use strict";
 define([], function(){
-	var FocusDirective =  function ($timeout) {
+	var FocusDirective =  function ($timeout,$parse) {
 			return{
-				scope:{
-					trigger : '@focus'
-				},
-				link : function(scope, element) {
-					scope.$watch('trigger', function(value) {
-						if (value === "true")
+				link : function(scope, element,attrs) {
+					
+					scope.$watch($parse(attrs.focus), function(value) {
+						
+						if (value === true)
 							 $timeout(function() {
 								 element[0].focus();
 							 });
@@ -15,7 +14,7 @@ define([], function(){
 				}
 			}
         };
-	FocusDirective.$inject = ['$timeout'];
+	FocusDirective.$inject = ['$timeout','$parse'];
 	return {
 		focus: FocusDirective
 	};
