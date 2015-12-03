@@ -633,3 +633,11 @@ input[type="number"]{text-align:right;}
 .amount.debit{color: #D9534F;}
 .amount.credit{color: #449D44;}
 .active .amount{color: white;}
+.empty-state>.well {
+    height: 333px;
+}
+.empty-state .empty-state-icon {
+    font-size: 3.33rem;
+    padding-bottom: 1.33rem;
+    padding-top: 6.66rem;
+}
