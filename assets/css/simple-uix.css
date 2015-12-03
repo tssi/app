@@ -635,9 +635,22 @@ input[type="number"]{text-align:right;}
 .active .amount{color: white;}
 .empty-state>.well {
     height: 333px;
+	background: none;
+    box-shadow: none;
 }
 .empty-state .empty-state-icon {
     font-size: 3.33rem;
     padding-bottom: 1.33rem;
     padding-top: 6.66rem;
+}
+.empty-state .empty-state-help{
+	padding: 0.5rem;
+    font-size: 1.23rem;
+	text-align:center;
+}
+.empty-state .empty-state-action-icon{
+	    border-radius: 50%;
+    border: 1px solid #31708F;
+    padding: 1rem;
+    font-size: 1.23rem;
 }
