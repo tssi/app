@@ -633,3 +633,21 @@ input[type="number"]{text-align:right;}
 .amount.debit{color: #D9534F;}
 .amount.credit{color: #449D44;}
 .active .amount{color: white;}
+.angular-ui-tree-handle{
+	cursor:move;
+}
+.angular-ui-tree-drag {
+    position: absolute;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.96;
+	border:1px solid #ddd;
+	background:#fdfdfd;
+	color: #666;
+	box-shadow:0px 1px 1px #eee;
+}
+.angular-ui-tree-drag td{
+	font-size:1.45rem;
+	padding:3px 5px;
+	border:1px solid #ddd;
+}
