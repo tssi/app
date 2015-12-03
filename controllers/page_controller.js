@@ -48,6 +48,24 @@ define(['app','api'], function (app) {
 			$scope.cancelSearch = function(){
 				$scope.SearchBox = null;
 			}
+			$scope.data = [{
+				'id': 1,
+				'title': 'node 1'
+			  }, {
+				'id': 2,
+				'title': 'node 2'
+			  }, {
+				'id': 3,
+				'title': 'node 3'
+				}
+				, {
+				'id': 4,
+				'title': 'node 4'
+			}, {
+				'id': 5,
+				'title': 'node 5'
+			}
+			];
 	   }
     }]);
 });
