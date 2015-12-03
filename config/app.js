@@ -47,7 +47,11 @@ function (root,directives,settings,angularAMD) {
         }))
         .otherwise({ redirectTo: '/' }) 
     }]);                
-	
+	app.config(['$uibModalProvider', function($uibModalProvider) {
+		$uibModalProvider.options = {
+		  backdrop: 'static',
+		};
+	  }]);
 	//Bootstrap RootController
 	app.controller('RootController', root);
 	//Bootstrap Directives
