@@ -308,7 +308,7 @@ div#school-name {
 }
 .nav-pills.nav-wizard{
   display: block;
-  width: 96%;
+  width: 100%;
   min-height:40px;
   overflow-y: hidden;
   overflow-x: auto;
