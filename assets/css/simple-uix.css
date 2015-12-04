@@ -633,6 +633,8 @@ input[type="number"]{text-align:right;}
 .amount.debit{color: #D9534F;}
 .amount.credit{color: #449D44;}
 .active .amount{color: white;}
+.amount.amount-total>*{margin:0;padding-top:0.33rem;}
+.amount.amount-total>label{text-transform:uppercase;font-weight:normal;}
 .empty-state>.well {
     height: 333px;
 	background: none;
