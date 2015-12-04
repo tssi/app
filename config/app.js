@@ -52,6 +52,16 @@ function (root,directives,settings,angularAMD) {
 		  backdrop: 'static',
 		};
 	  }]);
+	 app.config(['$provide', function($provide) {
+		$provide.decorator('$locale', ['$delegate', function($delegate) {
+			console.log($delegate.id);
+			$delegate.NUMBER_FORMATS.PATTERNS[1].negPre = '(\u00A4';
+			$delegate.NUMBER_FORMATS.PATTERNS[1].negSuf = ')';
+			$delegate.NUMBER_FORMATS.CURRENCY_SYM = '';
+		  
+		  return $delegate;
+		}]);
+	  }]);
 	//Bootstrap RootController
 	app.controller('RootController', root);
 	//Bootstrap Directives
