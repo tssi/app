@@ -674,3 +674,18 @@ input[type="number"]{text-align:right;}
     padding: 1rem;
     font-size: 1.23rem;
 }
+.amount.peso:before {
+    content: "\20B1";
+    float: left;
+}
+.amount.peso {
+    width: 100%;
+}
+.amount.total.peso{
+	width:auto;
+}
+.amount.total.peso:before{
+	margin-right: 0.666rem;
+	float:none;
+}
+.table-amounts tfoot tr{font-weight:bold;} 
