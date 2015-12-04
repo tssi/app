@@ -1,8 +1,8 @@
 "use strict";
-define(['root','directives','settings','angularAMD','angular-route', 'angular-cookies', 'ui-bootstrap'], 
+define(['root','directives','settings','angularAMD','angular-route', 'angular-cookies', 'ui-bootstrap','ui.tree'], 
 function (root,directives,settings,angularAMD) {
     var app = angular.module("mainModule", 
-        ['ngRoute', 'ngCookies', 'ui.bootstrap']);
+        ['ngRoute', 'ngCookies', 'ui.bootstrap','ui.tree']);
           
     app.config(['$routeProvider', function ($routeProvider) {
    

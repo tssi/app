@@ -13,6 +13,7 @@ require.config({
 		'angular-route': 'bower_components/angular-route/angular-route.min',
         'angular-cookies': 'bower_components/angular-cookies/angular-cookies.min',
 		'ui-bootstrap' : 'bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
+        'ui.tree': 'bower_components/angular-ui-tree/dist/angular-ui-tree', 
         'ngload': 'bower_components/angularAMD/ngload.min', 
 		'root': 'controllers/root_controller',
 		'directives': 'directives/bootstrap_directive',
@@ -25,6 +26,7 @@ require.config({
 		'angular-cookies': ['angular'],         
 		'angularAMD': ['angular'],
         'ui-bootstrap': ['angular'],
+        'ui.tree': ['angular'],
     },
     // kick start application
     deps: ['app']
