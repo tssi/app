@@ -17,6 +17,13 @@ define(['settings'], function(settings){
 			},settings.APP_TRANSITION_DELAY);
 			
         });
+		$rootScope.isEmpty =function(obj){
+			 for(var key in obj) {
+				if(obj.hasOwnProperty(key))
+					return false;
+			}
+			return true;
+		}
 	};
 	RootController.$inject = ['$scope', '$rootScope','$timeout','$cookieStore'];
 	return RootController;
