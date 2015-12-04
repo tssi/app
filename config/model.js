@@ -43,9 +43,9 @@ define([],function(){
 			return angular.copy({meta:__meta});
 		};
 		function save(data){
+			var saved = false;
 			if(!data.hasOwnProperty('id')){
 				data.id = __data.length;
-				__data.push(data);
 			}else{
 				for(var i in __data){
 					var datum = __data[i];
@@ -53,9 +53,13 @@ define([],function(){
 						for(var ii in data){
 							__data[i][ii] = data[ii];
 						}
+						saved=true;
 						break;
 					}
 				}
+			}
+			if(!saved){
+				__data.push(data);
 			}
 			return angular.copy({meta:__meta,data:data});
 		}
