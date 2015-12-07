@@ -679,13 +679,19 @@ input[type="number"]{text-align:right;}
     float: left;
 }
 .amount.peso {
-    width: 100%;
+    width: 8.88rem;
+    float: right;
 }
 .amount.total.peso{
 	width:auto;
+	float:none;
 }
 .amount.total.peso:before{
 	margin-right: 0.666rem;
 	float:none;
 }
 .table-amounts tfoot tr{font-weight:bold;} 
+.table .help-text{
+	padding-top: 0.666rem;
+	color: #7B7B7B;
+}
