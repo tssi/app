@@ -668,7 +668,6 @@
 
               pos = UiTreeHelper.positionStarted(eventObj, element);
               placeElm.css('height', UiTreeHelper.height(element) + 'px');
-			  console.log(scope.$parentNodesScope);
 			  var elmTag = scope.$parentNodesScope.$element.prop('tagName').toLowerCase();
 			  var baseElem = $window.document.createElement(elmTag);
 			  if(elmTag=='tbody'){
