@@ -278,8 +278,8 @@ div#school-name {
     border-right: none;
     border-radius: 0;
 }
-.list-group-canvas>.list-group-item:hover{
-	cursor:pointer;
+.list-group-canvas>.list-group-item	{
+	cursor: auto;
 }
 .list-group-canvas .list-group-item:first-child{
 	border-top:none;
@@ -342,6 +342,7 @@ div#school-name {
 .nav-pills.nav-wizard > li a {
   border-radius: 0;
   background-color: #FFF;
+  color: #777777;
 }
 .nav-pills.nav-wizard > li .nav-arrow {
   position: absolute;
@@ -383,6 +384,7 @@ div#school-name {
 }
 .nav-pills.nav-wizard > li.active a {
   background-color: #428bca;
+  color: white;
 }
 
 .c-hamburger {
