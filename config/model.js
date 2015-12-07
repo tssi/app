@@ -11,7 +11,7 @@ define([],function(){
 			var limit = config.limit||DEFAULT_ITEM;
 			var keyword = config.keyword;
 			var fields = config.fields;
-			var index = ((page - 1) * limit);
+			var index = limit=='less'?null:((page - 1) * limit);
 			var data = __data;
 			if(keyword&&fields){
 				var _d=[];
@@ -29,12 +29,13 @@ define([],function(){
 				}
 				data = _d;
 			}
-			data = data.slice(index,index+limit);
+			if(index)
+				data = data.slice(index,index+limit);
 			var meta = __meta;
 			meta.page = page;
 			meta.limit = limit;
 			meta.count = __data.length;
-			meta.last = Math.ceil(meta.count/limit);
+			meta.last = limit=='less'?1:Math.ceil(meta.count/limit);
 			meta.next =  page<meta.last?page+1:null;
 			meta.prev =  page>1?page-1:null;
 			return angular.copy({meta:meta,data:data});
