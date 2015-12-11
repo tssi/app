@@ -697,3 +697,28 @@ input[type="number"]{text-align:right;}
 	padding-top: 0.666rem;
 	color: #7B7B7B;
 }
+.modal.in .modal-dialog.modal-sm{
+	padding-top:13.33%;
+}
+.btn-fab-drop{
+    right: 36.66%;
+    top: -36.66%;
+    box-shadow: none;
+	width: 0;
+    height: 0;
+    font-size: 0;
+    padding: 0;
+    margin-right: 4rem;
+    margin-top: 4rem;
+}
+.btn-fab-drop.show{
+	width: 8rem;
+    height: 8rem;
+    font-size: 2.22rem;
+    padding-top: 0.33rem;
+	margin-right: 0rem;
+    margin-top: 0rem;
+}
+.list-group-item .preloader-message{
+	margin:10px;
+}
