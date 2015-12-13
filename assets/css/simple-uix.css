@@ -693,9 +693,11 @@ input[type="number"]{text-align:right;}
 	float:none;
 }
 .table-amounts tfoot tr{font-weight:bold;} 
-.table .help-text{
+.help-text {
 	padding-top: 0.666rem;
 	color: #7B7B7B;
+	font-size:1.33rem;
+	text-align:center;
 }
 .modal.in .modal-dialog.modal-sm{
 	padding-top:13.33%;
@@ -721,4 +723,9 @@ input[type="number"]{text-align:right;}
 }
 .list-group-item .preloader-message{
 	margin:10px;
+}
+.popover-content .btn-dismiss{
+	float:right;
+	margin-top: -0.33rem;
+    font-size: 0.99rem;
 }
