@@ -29,7 +29,7 @@ define([],function(){
 				}
 				data = _d;
 			}
-			if(index)
+			if(index!=null)
 				data = data.slice(index,index+limit);
 			var meta = __meta;
 			meta.page = page;
