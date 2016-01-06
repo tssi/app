@@ -11,7 +11,32 @@ define([], function(){
 			}
         };
 	FocusDirective.$inject = ['$timeout','$parse'];
+	var AutoSelectDirective =  function ($window) {
+		return {
+			restrict: 'A',
+			link: function (scope, element) {
+				var focusedElement;
+				element.on('click', function () {
+					if (focusedElement != this) {
+						this.select();
+						focusedElement = this;
+					}
+				});
+				element.on('focus', function () {
+					if (focusedElement != this) {
+						this.select();
+						focusedElement = this;
+					}
+				});
+				element.on('blur', function () {
+					focusedElement = null;
+				});
+			}
+		};
+        };
+	AutoSelectDirective.$inject = ['$window'];
 	return {
-		focus: FocusDirective
+		focus: FocusDirective,
+		autoselect: AutoSelectDirective
 	};
 });
