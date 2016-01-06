@@ -3,7 +3,6 @@ define(['root','directives','settings','angularAMD','angular-route', 'angular-co
 function (root,directives,settings,angularAMD) {
     var app = angular.module("mainModule", 
         ['ngRoute', 'ngCookies', 'ui.bootstrap','ui.tree']);
-          
     app.config(['$routeProvider', function ($routeProvider) {
    
     $routeProvider
@@ -52,6 +51,9 @@ function (root,directives,settings,angularAMD) {
 		  backdrop: 'static',
 		};
 	  }]);
+	app.config(['$logProvider', function($logProvider){
+		$logProvider.debugEnabled(settings.DEBUG_MODE);
+	}]);
 	 app.config(['$provide', function($provide) {
 		$provide.decorator('$locale', ['$delegate', function($delegate) {
 			console.log($delegate.id);
