@@ -46,10 +46,14 @@ define(['app'], function(app){
 						  url: url,
 						  dataType: app.settings.API_EXT,
 						  headers: {
-						   'Content-Type': 'application/'+app.settings.API_EXT
-							},
-						  params:data
+						   'X-Requested-With': 'XMLHttpRequest',
+						   'Content-Type': 'application'+app.settings.API_EXT,
+						   'Accepts': 'application/'+app.settings.API_EXT
+							}
 						};
+					if(method=='GET') request.params = data;
+					else request.data = data;
+					
 					$http(request).success(success).error(error);
 				}
 			}
