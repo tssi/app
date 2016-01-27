@@ -20,6 +20,7 @@ define(['app'], function(app){
 					if(typeof __args[1] =='function') success = __args[1];
 					else if(typeof __args[2] =='function') success = __args[2];
 					if(__args.length>3) error = __args[__args.length-1];
+					else error = function(){};
 				}else{
 					throw new Error("Incomplete arguments");
 				}
@@ -38,6 +39,18 @@ define(['app'], function(app){
 						});
 					},app.settings.TEST_DELAY);
 					return this;
+				}else{
+					var url = app.settings.API_URL + endpoint + '.' + app.settings.API_EXT;
+					var request ={
+						  method: method,
+						  url: url,
+						  dataType: app.settings.API_EXT,
+						  headers: {
+						   'Content-Type': 'application/'+app.settings.API_EXT
+							},
+						  params:data
+						};
+					$http(request).success(success).error(error);
 				}
 			}
 		}
