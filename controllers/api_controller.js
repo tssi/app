@@ -11,6 +11,9 @@ define(['app'], function(app){
 			DELETE:function(){
 				return this.HTTP('DELETE',arguments);
 			},
+			PUT:function(){
+				return this.HTTP('PUT',arguments);
+			},
 			HTTP:function(method,__args){
 				var self = this;
 				var endpoint,data,success,error;
