@@ -22,7 +22,7 @@ define(['app'], function(app){
 					if(typeof __args[1] =='object') data = __args[1];
 					if(typeof __args[1] =='function') success = __args[1];
 					else if(typeof __args[2] =='function') success = __args[2];
-					if(__args.length>3) error = __args[__args.length-1];
+					if(__args.length>3||!data) error = __args[__args.length-1];
 					else error = function(){};
 				}else{
 					throw new Error("Incomplete arguments");
@@ -56,7 +56,7 @@ define(['app'], function(app){
 						};
 					if(method=='GET') request.params = data;
 					else request.data = data;
-					
+
 					$http(request).success(success).error(error);
 				}
 			}
