@@ -729,3 +729,7 @@ input[type="number"]{text-align:right;}
 	margin-top: -0.33rem;
     font-size: 0.99rem;
 }
+ .form-control[readonly]{
+	 background:none;
+	 cursor:not-allowed;
+ }
