@@ -733,3 +733,9 @@ input[type="number"]{text-align:right;}
 	 background:none;
 	 cursor:not-allowed;
  }
+.text-bold{
+	 font-weight:bold !important;
+ }
+ .align-middle {
+	 vertical-align:middle !important;
+ }
