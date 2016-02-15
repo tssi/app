@@ -6,6 +6,7 @@
 
 /* Toggle Styles */
 body{ overflow-x:hidden;}
+body.full{ overflow:hidden;}
 .ease{
 	 -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -196,8 +197,26 @@ div#school-name {
 	width: 6rem;
 	z-index: 6;
 	height: 6rem;
-	box-shadow: 0 3px 2px rgba(0,0,0,.5);
+	box-shadow: 0 2px 1px rgba(0,0,0,.5);
 }
+a.btn-fab{
+	box-shadow: none;
+	height:4.44rem;
+	width:4.44rem;
+}
+a.btn-fab>span.glyphicon {
+	margin-top:30%;
+	opacity:0.777;
+}
+a.btn-fab:hover>span.glyphicon,a.btn-fab:active>span.glyphicon{
+	opacity:1;
+}
+.toggled a.btn-fab>span.glyphicon {
+	margin-top:0;
+	font-size:0;
+	opacity:0;
+}
+
 .btn-fab, .btn-fab span.glyphicon {
 	 -webkit-transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
@@ -205,7 +224,9 @@ div#school-name {
     transition: all 0.4s ease;
 }
 
-.btn-fab.top{ top:1.5rem;}
+.btn-fab.top{ top:1.5rem;z-index:1034;}
+.btn-fab.fixed.top{ top:2.5rem;}
+a.btn-fab.fixed.top{ top:3.33rem;}
 .btn-fab.bottom{bottom:1.5rem;}
 .btn-fab.left{left:3rem;}
 .btn-fab.right{right:3rem;}
