@@ -9,7 +9,7 @@ function (root,directives,settings,angularAMD) {
 
     .when("/", angularAMD.route({
         templateUrl: function (rp) {
-			return settings.VIEWS_DIRECTORY+'/pages/home.html';
+			return settings.VIEWS_DIRECTORY+'/pages/home.'+settings.VIEW_EXTENSION;
 		},
 		controllerUrl: settings.CTRLS_DIRECTORY+"/page_controller"            
     }))
