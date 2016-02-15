@@ -198,6 +198,15 @@ div#school-name {
 	height: 6rem;
 	box-shadow: 0 3px 2px rgba(0,0,0,.5);
 }
+
+a.btn-fab>span.glyphicon {
+	margin-top:40%;
+}
+.toggled a.btn-fab>span.glyphicon {
+	margin-top:0;
+	font-size:0;
+	opacity:0;
+}
 .btn-fab, .btn-fab span.glyphicon {
 	 -webkit-transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
@@ -205,7 +214,7 @@ div#school-name {
     transition: all 0.4s ease;
 }
 
-.btn-fab.top{ top:1.5rem;}
+.btn-fab.top{ top:1.5rem;z-index:1034;}
 .btn-fab.bottom{bottom:1.5rem;}
 .btn-fab.left{left:3rem;}
 .btn-fab.right{right:3rem;}
@@ -250,7 +259,7 @@ div#school-name {
 .list-group label, .list-group dt{
 	font-size: 1.24rem;
 }
-.list-group-header{
+.list-group-header,.list-group-footer{
     z-index: 3;
     background: #f9f9f9;
 }
@@ -271,6 +280,9 @@ div#school-name {
 }
 .list-group-canvas:active,.list-group-canvas:hover{
 	overflow-y: auto;
+}
+.page-body .list-group-canvas{
+	 height: 37.55rem;
 }
 
 .list-group-canvas>.list-group-item {
@@ -305,6 +317,19 @@ div#school-name {
     color: #777;
     font-size: 1.23rem;
     height: 100%;
+}
+.list-group-thumbnail{
+	min-height:33.33rem;
+}
+.list-group-thumbnail>.glyphicon{
+    margin: 0 auto;
+    display: block;
+    width: 5rem;
+    margin-top: 13rem;
+    font-size: 5.33rem;
+}
+.list-group-thumbnail>img{
+	width:100%;
 }
 .nav-pills.nav-wizard{
   display: block;
