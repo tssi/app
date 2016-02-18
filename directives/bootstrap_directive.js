@@ -35,8 +35,39 @@ define([], function(){
 		};
         };
 	AutoSelectDirective.$inject = ['$window'];
+	var MonetaryInputDirective = function ($filter) {
+			var decimalCases = 2,
+				whatToSet = function (str) {
+				  /**
+				   * TODO:
+				   * don't allow any non digits character, except decimal seperator character
+				   */
+				  return str ? Number(str) : '';
+				},
+				whatToShow = function (num) {
+					
+				  return $filter('number')(num, decimalCases);
+				};
+
+			return {
+			  restrict: 'A',
+			  require: 'ngModel',
+			  link: function (scope, element, attr, ngModel) {
+				ngModel.$parsers.push(whatToSet);
+				ngModel.$formatters.push(whatToShow);
+				element.on('blur', function() {
+				  element.val(whatToShow(ngModel.$modelValue));
+				});
+				element.on('focus', function () {
+				  element.val(ngModel.$modelValue);
+				});
+			  }
+			};
+		}
+		MonetaryInputDirective.$inject = ['$filter'];
 	return {
 		focus: FocusDirective,
-		autoselect: AutoSelectDirective
+		autoselect: AutoSelectDirective,
+		monetary: MonetaryInputDirective
 	};
 });
