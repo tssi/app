@@ -54,11 +54,14 @@ define(['app'], function(app){
 						   'Accepts': 'application/'+app.settings.API_EXT
 							}
 						};
-					for(var key in data){
-						if(typeof data[key] == "object")
-							data[key] = data[key].join(',');
+					
+					if(method=='GET') {
+						for(var key in data){
+							if(typeof data[key] == "object")
+								data[key] = data[key].join(',');
+						}
+						request.params = data;
 					}
-					if(method=='GET') request.params = data;
 					else request.data = data;
 
 					$http(request).success(success).error(error);
