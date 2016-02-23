@@ -5,6 +5,7 @@ require.config({
     // Alias libraries paths
     paths: {     
         'app': 'config/app',
+        'demo': 'config/demo',
         'settings': 'config/settings',
         'routes': 'config/routes',
         'model': 'config/model',
