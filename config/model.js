@@ -13,6 +13,7 @@ define([],function(){
 			var fields = config.fields;
 			var index = limit=='less'?null:((page - 1) * limit);
 			var data = __data;
+			var __class = __meta.class;
 			if(keyword&&fields){
 				var _d=[];
 				var regex = new RegExp(keyword, 'i');
@@ -29,14 +30,16 @@ define([],function(){
 				}
 				data = _d;
 			}
-			if(index!=null)
+			if(index!=null&&__class!="SystemDefault")
 				data = data.slice(index,index+limit);
 			var meta = __meta;
 			meta.page = page;
 			meta.limit = limit;
-			meta.count = __data.length;
-			meta.last = limit=='less'?1:Math.ceil(meta.count/limit);
-			meta.next =  page<meta.last?page+1:null;
+			if(__class!="SystemDefault"){
+				meta.count = __data.length;
+				meta.last = limit=='less'?1:Math.ceil(meta.count/limit);
+				meta.next =  page<meta.last?page+1:null;
+			}
 			meta.prev =  page>1?page-1:null;
 			return angular.copy({meta:meta,data:data});
 		};
@@ -80,6 +83,11 @@ define([],function(){
 			__meta = meta;
 		}
 		function setData(data){
+			var __class = __meta.class;
+			if(__class=="SystemDefault"){
+				__data = data;
+				return;
+			}
 			for(var i in data){
 				var datum = data[i];
 				if( typeof datum=='object'){
