@@ -5,10 +5,10 @@ define([],function(){
 		var DEFAULT_ITEM = 5;
 		var __meta = {},__data = [],object = {meta:__meta,data:__data};
 		
-		function list(){
+		function list(){			
 			var config = arguments[0]||{};
 			var page = config.page||DEFAULT_PAGE;
-			var limit = config.limit||DEFAULT_ITEM;
+			var limit = __meta.limit||DEFAULT_ITEM;
 			var keyword = config.keyword;
 			var fields = config.fields;
 			var index = limit=='less'?null:((page - 1) * limit);
@@ -82,9 +82,14 @@ define([],function(){
 		function setData(data){
 			for(var i in data){
 				var datum = data[i];
-				if(!datum.hasOwnProperty('id'))
-					datum.id= __data.length;
-				__data.push(datum);
+				if( typeof datum=='object'){
+					if(!datum.hasOwnProperty('id'))
+						datum.id= __data.length;
+					__data.push(datum);
+				}else{
+					__data[i] =  datum;
+				}
+				
 			}
 		}
 		object.GET = function(data){
