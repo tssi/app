@@ -109,6 +109,11 @@ define([],function(){
 		object.DELETE = function(data){
 			return {success:remove(data),error:error()};
 		}
+		object.PUT = function(data){
+			return {success:save(data),error:error()};
+		}
+		object.save = save;
+		object.remove = remove;
 		if(value.hasOwnProperty('meta'))setMeta(value.meta);
 		if(value.hasOwnProperty('data'))setData(value.data);
 		
