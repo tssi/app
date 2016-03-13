@@ -1,8 +1,153 @@
-<hr />
+<style type="text/css">
+.component {vertical-align:middle !important;}
+.sheet-column{width:60px;text-align:center;vertical-align:middle !important;font-size:1.2rem;}
+.sheet-cell{width:60px;}
+.sheet-load{text-transform:uppercase;font-size:1.2rem;text-align:center;}
+.sheet {overflow:hidden !important;}
+.sheet .sheet-header{padding-top:0;padding-bottom:0;border-bottom:0;background:none;z-index:1;}
+.sheet .sheet-header .padding{padding-top:10px;}
+.sheet .sheet-header .table{margin-bottom:1px;}
+.sheet .sheet-header .table td,.sheet .sheet-header .table th{background:white}
+.sheet .sheet-entry{padding-top: 0;border-bottom: none; border-top:0;height:31.23rem;overflow:none;}
+.sheet .sheet-entry .table{margin-top:-1px;}
+.transluscent {background:rgba(255, 255, 255, 0.90) !important;}
+.sheet .sheet-header .table-bordered>thead>tr>td, .sheet .sheet-header .table-bordered>thead>tr>th{border-bottom:0;}
+.code{font-family:Courier;}
+</style>
 <div  ng-controller="PageController" ng-init="init()">
 <div class="row">
+	<div class="col-md-12">
+	<div class="list-group">
+			<div class="list-group-item list-group-header">
+				<div class="btn-group btn-group-sm pull-right" uib-dropdown>
+					<button class="btn btn-primary">1ST</button>
+					<button class="btn btn-default">2ND</button>
+					<button class="btn btn-default disabled">3RD</button>
+					<button class="btn btn-default disabled">4TH</button>
+					
+					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" uib-dropdown-toggle>
+						<span class="glyphicon glyphicon-option-vertical"></span>
+					  </button>
+					  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						<li><a href="#/">Back</a></li>
+						<li><a href="#/">Print</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="#/">Send to CGS</a></li>
+						
+					  </ul>
+				</div>
+				<label class="clear-fix">G8 Maharlika  Science </label>
+			</div>
+			<div class="list-group-canvas sheet">
+				  <div class="list-group-item sheet-header">
+						<div class="transluscent padding"></div>
+						<table class="table table-bordered table-condensed">
+							<thead>
+							<tr>
+								<th class="sheet-rowlumn" rowspan="2">
+									<h3 class="text-center">STUDENTS</h3>
+									<h5 class="sheet-load">8 Boys |  11 Girls</h5>
+								</th>
+								<th colspan="5" class="component text-center">
+									Quiz
+								</th>
+								<th colspan="2" class="component text-center">Project</th>
+								<th class="component text-center">SW</th>
+								<th class="component text-center">REC</th>
+								<th class="component text-center">CON</th>
+								<th colspan="3" class="component text-center">Quarter Exam</th>
+								<th class="sheet-column">
+									<div class="btn-group">
+									<button class="btn btn-xs btn-default"><span class="glyphicon glyphicon-chevron-left"></span></button>
+									<button class="btn btn-xs btn-default"><span class="glyphicon glyphicon-chevron-right"></span></button>
+									</div>
+								</th>
+							</tr>
+							<tr>
+								<td class="sheet-column">
+									<div>Q1</div>
+								</td>
+								<td class="sheet-column">Q2
+								</td>
+								<td class="sheet-column">Q3
+								</td>
+								<td class="sheet-column">SUM
+								</td>
+								<td class="sheet-column">EQV
+								</td>
+								<td class="sheet-column">PJ1</td>
+								<td class="sheet-column">PJ2</td>
+								<td class="sheet-column">SW
+								</td>
+								<td class="sheet-column">REC
+								</td>
+								<td class="sheet-column">CON
+								</td>
+								<td class="sheet-column">PRE
+								</td>
+								<td class="sheet-column">MID
+								</td>
+								<td class="sheet-column">FIN
+								</td>
+								<td class="sheet-column" style="vertical-align:middle" rowspan="2">
+									<div>1ST</div>
+									<div>GRD</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="transluscent">
+									<b class="pull-left">Boys</b>
+									<div class="pull-right">
+										<div class="btn-group">
+										<button class="btn btn-xs btn-default disabled"><span class="glyphicon glyphicon-map-marker"></span> B13,Q1</button>
+										<button class="btn btn-xs btn-default" ng-click="marginTop= marginTop - step"><span class="glyphicon glyphicon-chevron-up"></span></button>
+										<button class="btn btn-xs btn-default" ng-click="marginTop= marginTop + step"><span class="glyphicon glyphicon-chevron-down"></span></button>
+										</div>
+									</div>
+									<div class="clear-fix"></div>
+								</td>
+								<td colspan="13" class="transluscent">
+									<div class="input-group input-group-sm col-sm-12 hide">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-console"></span></span>
+										<input type="text" class="form-control code" />
+									</div>
+								</td>
+							</tr>
+							</thead>
+						</table>
+				  </div>
+				  <div class="list-group-item sheet-entry">
+					<table class="table table-bordered table-condensed" style="margin-top:{{marginTop}}px">
+					<tbody>
+				  	<tr ng-repeat="student in ['Juan Dela Cruz','Andres Bonifacio','Emilio Aguinaldo','Jose Rizal','Juan Dela Cruz','Andres Bonifacio','Emilio Aguinaldo','Jose Rizal'] track by $index">
+							<td>{{student}}</td>
+							<td class="sheet-cell"><input type="text" class="form-control" /></td>
+							<td class="sheet-cell"><input type="text" class="form-control" /></td>
+							<td class="sheet-cell"><input type="text" class="form-control" /></td>
+							<td class="sheet-cell"><input type="text" class="form-control" /></td>
+							<td class="sheet-cell"><input type="text" class="form-control" /></td>
+							<td class="sheet-cell"><input type="text" class="form-control" /></td>
+							<td class="sheet-cell"><input type="text" class="form-control" /></td>
+							<td class="sheet-cell"><input type="text" class="form-control" /></td>
+							<td class="sheet-cell"><input type="text" class="form-control" /></td>
+							<td class="sheet-cell"><input type="text" class="form-control" /></td>
+							<td class="sheet-cell"><input type="text" class="form-control" /></td>
+							<td class="sheet-cell"><input type="text" class="form-control" /></td>
+							<td class="sheet-cell"><input type="text" class="form-control" /></td>
+							<td class="sheet-cell"><input type="text" class="form-control text-right"  readonly="readonly" value="{{85 + $index}}" /></td>
+						</tr>
+					 </tbody>
+					 </table>
+				  </div>
+			 </div>
+		</div>
+	</div>
+</div>
+<hr />
+<hr />
+<div class="row">
 	<div class="col-md-6">
-		<button class="btn btn-primary btn-fab top right fixed"><span class="glyphicon glyphicon-plus"></span></button>
+		<button class="btn btn-primary btn-fab bottom right fixed"><span class="glyphicon glyphicon-plus"></span></button>
 		<div class="list-group">
 			<div class="list-group-item list-group-header">
 				<div class="btn-group btn-group-sm pull-right" uib-dropdown>
@@ -43,7 +188,7 @@
 			 <div class="list-group-item list-group-search-box">
 				<div class="input-group"> 
 					<div class="input-group-btn" ng-click="confirmSearch()"><button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button></div>
-					<input type="text" class="form-control" ng-model="SearchBox" placeholder="Search" focus="true" />
+					<input type="text" class="form-control" ng-model="SearchBox" placeholder="Search" />
 					<div class="input-group-btn" ng-click="cancelSearch()"><button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button></div>
 				</div>
 			  </div>
