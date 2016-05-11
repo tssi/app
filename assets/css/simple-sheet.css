@@ -1,0 +1,14 @@
+.sheet {overflow:hidden !important;}
+.sheet .component {vertical-align:middle !important;}
+.sheet.sheet-column{width:60px;text-align:center;vertical-align:middle !important;font-size:1.2rem;}
+.sheet .sheet-cell{width:60px;}
+.sheet .sheet-load{text-transform:uppercase;font-size:1.2rem;text-align:center;}
+.sheet .sheet-header{padding-top:0;padding-bottom:0;border-bottom:0;background:none;z-index:1;}
+.sheet .sheet-header .padding{padding-top:10px;}
+.sheet .sheet-header .table{margin-bottom:1px;}
+.sheet .sheet-header .table td,.sheet .sheet-header .table th{background:white}
+.sheet .sheet-entry{padding-top: 0;border-bottom: none; border-top:0;height:31.23rem;overflow:none;}
+.sheet .sheet-entry .table{margin-top:-1px;}
+.sheet .sheet-header .table-bordered>thead>tr>td, .sheet .sheet-header .table-bordered>thead>tr>th{border-bottom:0;}
+.sheet  .code{font-family:Courier;}
+.sheet .transluscent {background:rgba(255, 255, 255, 0.90) !important;}
