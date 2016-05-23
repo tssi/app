@@ -1,21 +1,33 @@
 define(function() {
+	var requestCount=0;
 	return {
-		run:function (settings,method,endpoint,data,success,error,$rootScope,$http,$timeout){
+		requestCount:0,
+		run:function (settings,method,endpoint,data,success,error,$rootScope,$http,$timeout,$q){
 				if(settings.DEMO_MODE){
+					requestCount++;
+					var deferred = $q.defer();
+					var promise = deferred.promise;
+					promise.then(function(response){
+						success(response);
+					},function(response){
+						error(response);
+					});
+					
 					$timeout(function(){
 						require([settings.TEST_DIRECTORY+'/'+endpoint],function(response){
 							$rootScope.$apply(function(){
 								var resp = response[method](data);
 								if(success&& settings.TEST_SUCCESS) {
-									success(resp.success);
+								deferred.resolve(resp.success);
 								}
 								if(error && settings.TEST_ERROR) {
-									error(resp.error);
+									deferred.reject(resp.error);
 								}
 							});
+							requestCount--;
 						});
-					},settings.TEST_DELAY);
-					return this;
+					},settings.TEST_DELAY*requestCount);
+					return promise;
 				}else{
 					var url = settings.API_URL + endpoint + '.' + settings.API_EXT;
 					var request ={
@@ -38,7 +50,7 @@ define(function() {
 					}
 					else request.data = data;
 
-					$http(request).success(success).error(error);
+					return $http(request).success(success).error(error);
 				}
 			}
 		};

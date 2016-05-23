@@ -73,6 +73,5 @@ function (root,directives,settings,angularAMD) {
     angularAMD.bootstrap(app);
 	
 	app.settings =  settings;
-  
     return app;
 });
