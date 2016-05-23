@@ -1,6 +1,6 @@
 "use strict";
 define(['settings','demo'], function(settings,demo){
-	var RootController =  function ($scope, $rootScope,$timeout,$cookies,$http) {
+	var RootController =  function ($scope, $rootScope,$timeout,$cookies,$http,$q) {
 		$rootScope.__toggleSideBar = function(){
 			$rootScope.__SIDEBAR_OPEN = !$rootScope.__SIDEBAR_OPEN;
 		}
@@ -29,8 +29,8 @@ define(['settings','demo'], function(settings,demo){
 						$rootScope._APP = response.data;
 					},function error(response){
 						console.log('ERROR:'+response.meta.message);
-					},$rootScope,$http,$timeout)
+					},$rootScope,$http,$timeout,$q);
 	};
-	RootController.$inject = ['$scope', '$rootScope','$timeout','$cookieStore','$http'];
+	RootController.$inject = ['$scope', '$rootScope','$timeout','$cookieStore','$http','$q'];
 	return RootController;
 });

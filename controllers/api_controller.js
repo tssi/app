@@ -1,6 +1,7 @@
 "use strict";
 define(['app','demo'], function(app,demo){
-	 app.register.factory('api',function($http,$timeout,$rootScope){
+	 app.register.factory('api',function($http,$timeout,$rootScope,$q){
+		 
 		return{
 			POST:function(){
 				return this.HTTP('POST',arguments);
@@ -27,7 +28,21 @@ define(['app','demo'], function(app,demo){
 				}else{
 					throw new Error("Incomplete arguments");
 				}
-				return demo.run(app.settings,method,endpoint,data,success,error,$rootScope,$http,$timeout);
+				return demo.run(app.settings,method,endpoint,data,success,error,$rootScope,$http,$timeout,$q);
+			},
+			runTasks:function(tasks){
+				if(tasks.length){
+					runTask(tasks);
+					function runTask(tasks,index){
+						index = index || 0;
+						var task;
+						if(index<tasks.length){
+							task = tasks[index]();
+							task.then(runTask(tasks,index+1));
+						}
+						return task;
+					}
+				}
 			}
 		}
 	});
