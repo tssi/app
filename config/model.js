@@ -51,6 +51,8 @@ define(['settings'],function(settings){
 					for(var i in data){
 						var d  =  data[i];
 						var t = d[field]==match;
+						if(!d.hasOwnProperty(field))
+							t = t && true;
 						if(t){
 							_d.push(d);
 						}
