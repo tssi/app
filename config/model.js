@@ -41,6 +41,24 @@ define(['settings'],function(settings){
 				}
 				data = _d;
 			}
+
+			var regEx =  new RegExp('page|limit|keyword|fields');
+			for(var field in config){
+				var match = config[field];
+				if(!regEx.test(field)){
+					console.log(field,match);
+					var _d=[];
+					for(var i in data){
+						var d  =  data[i];
+						var t = d[field]==match;
+						if(t){
+							_d.push(d);
+						}
+					}
+					data = _d;
+				}
+			}
+
 			if(index!=null&&__class!="SystemDefault")
 				data = data.slice(index,index+limit);
 			var meta = __meta;
