@@ -14,4 +14,26 @@
 .sheet .sheet-entry{padding-top: 0;border-bottom: none; border-top:0;height:31.23rem;overflow:none;}
 .sheet .sheet-entry .table{margin-top:-1px;}
 .sheet .sheet-header .table-bordered>thead>tr>td, .sheet .sheet-header .table-bordered>thead>tr>th{border-bottom:0;}
-
+.simple-typeahead>input{ border-right-color:transparent;}
+.simple-typeahead>input[disabled]{background:transparent;}
+.simple-typeahead>input:focus{ border-color:#ccc; border-right-color:transparent;-webkit-box-shadow: none; box-shadow: none; }
+.simple-typeahead  .btn,.simple-typeahead  .btn:active,.simple-typeahead  .btn:hover{box-shadow:none !important;border-left-color:transparent !important;background:none !important;opacity:1;}
+.simple-typeahead .glyphicon{font-size:1rem;opacity:0.5}
+.simple-typeahead .glyphicon:hover{opacity:1;}
+.simple-typeahead .glyphicon-refresh{
+	   -moz-animation: spin 1.5s infinite linear;
+	   -webkit-animation: spin 1.5s infinite linear;
+	   animation: spin 1.5s infinite linear;
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
