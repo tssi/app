@@ -1,10 +1,21 @@
 "use strict";
-define([],function(){
-	function model(value){
+define(['settings'],function(settings){
+	function model(value,registry){
 		var DEFAULT_PAGE = 1;
 		var DEFAULT_ITEM = 5;
-		var __meta = {},__data = [],object = {meta:__meta,data:__data};
-		
+		var __meta = {},__data = [],__uses=[],object = {meta:__meta,data:__data};
+		var registered = false;
+		if(registry!=undefined){
+			DEMO_REGISTRY[registry.name] = {};
+			if(registry.uses){
+				var models = registry.uses;
+				for(var i in models){
+					var endpoint =  models[i];
+					require([settings.TEST_DIRECTORY+'/'+endpoint]);
+				}
+			}
+			registered = true;
+		}
 		function list(){			
 			var config = arguments[0]||{};
 			var page = config.page||DEFAULT_PAGE;
@@ -30,6 +41,26 @@ define([],function(){
 				}
 				data = _d;
 			}
+
+			var regEx =  new RegExp('page|limit|keyword|fields');
+			for(var field in config){
+				var match = config[field];
+				if(!regEx.test(field)){
+					console.log(field,match);
+					var _d=[];
+					for(var i in data){
+						var d  =  data[i];
+						var t = d[field]==match;
+						if(!d.hasOwnProperty(field))
+							t = t && true;
+						if(t){
+							_d.push(d);
+						}
+					}
+					data = _d;
+				}
+			}
+
 			if(index!=null&&__class!="SystemDefault")
 				data = data.slice(index,index+limit);
 			var meta = __meta;
@@ -65,6 +96,8 @@ define([],function(){
 			if(!saved){
 				__data.push(data);
 			}
+			if(registered)
+				DEMO_REGISTRY[registry.name]=__data;
 			return angular.copy({meta:__meta,data:data});
 		}
 		function remove(data){
@@ -77,6 +110,8 @@ define([],function(){
 					}
 				}
 			}
+			if(registered)
+				DEMO_REGISTRY[registry.name]=__data;
 			return angular.copy({meta:__meta,data:data});
 		}
 		function setMeta(meta){
@@ -99,6 +134,8 @@ define([],function(){
 				}
 				
 			}
+			if(registered)
+				DEMO_REGISTRY[registry.name]=__data;
 		}
 		object.GET = function(data){
 			return {success:list(data),error:error()};
@@ -116,6 +153,7 @@ define([],function(){
 		object.remove = remove;
 		if(value.hasOwnProperty('meta'))setMeta(value.meta);
 		if(value.hasOwnProperty('data'))setData(value.data);
+			
 		
 		return object;
 	}

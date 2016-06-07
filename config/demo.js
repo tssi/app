@@ -5,6 +5,7 @@ define(function() {
 		run:function (settings,method,endpoint,data,success,error,$rootScope,$http,$timeout,$q){
 				if(settings.DEMO_MODE){
 					requestCount++;
+					window.DEMO_REGISTRY=window.DEMO_REGISTRY||{};
 					var deferred = $q.defer();
 					var promise = deferred.promise;
 					promise.then(function(response){
