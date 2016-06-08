@@ -200,6 +200,9 @@ div#school-name {
 	box-shadow: 0 2px 1px rgba(0,0,0,.5);
 }
 
+.btn-round{
+  border-radius:50%;
+}
 
 a.btn-fab>span.glyphicon {
 	margin-top:40%;
