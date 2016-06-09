@@ -46,7 +46,6 @@ define(['settings'],function(settings){
 			for(var field in config){
 				var match = config[field];
 				if(!regEx.test(field)){
-					console.log(field,match);
 					var _d=[];
 					for(var i in data){
 						var d  =  data[i];
