@@ -67,7 +67,7 @@ define(['settings'],function(settings){
 			meta.page = page;
 			meta.limit = limit;
 			if(__class!="SystemDefault"){
-				meta.count = __data.length;
+				meta.count = data.length;
 				meta.last = limit=='less'?1:Math.ceil(meta.count/limit);
 				meta.next =  page<meta.last?page+1:null;
 			}
