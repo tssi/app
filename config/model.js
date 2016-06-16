@@ -59,14 +59,14 @@ define(['settings'],function(settings){
 					data = _d;
 				}
 			}
-
+			var count =  data.length;
 			if(index!=null&&__class!="SystemDefault")
 				data = data.slice(index,index+limit);
 			var meta = __meta;
 			meta.page = page;
 			meta.limit = limit;
 			if(__class!="SystemDefault"){
-				meta.count = data.length;
+				meta.count = count;
 				meta.last = limit=='less'?1:Math.ceil(meta.count/limit);
 				meta.next =  page<meta.last?page+1:null;
 			}
