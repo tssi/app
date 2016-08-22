@@ -8,10 +8,10 @@
 body{ overflow-x:hidden;}
 body.full{ overflow:hidden;}
 .ease{
-	 -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+	 -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
 .blur{
 	filter: blur(3px);
@@ -225,10 +225,10 @@ a.btn-fab:hover>span.glyphicon,a.btn-fab:active>span.glyphicon{
 	opacity:0;
 }
 .btn-fab, .btn-fab span.glyphicon {
-	 -webkit-transition: all 0.4s ease;
-    -moz-transition: all 0.4s ease;
-    -o-transition: all 0.4s ease;
-    transition: all 0.4s ease;
+	 -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .btn-fab.top{ top:1.5rem;z-index:1034;}
@@ -239,12 +239,14 @@ a.btn-fab.fixed.top{ top:3.33rem;}
 .btn-fab.right{right:3rem;}
 .btn-fab.center{right:46.77%;}
 .btn-fab.fixed{position:fixed;}
-.toggled .btn-fab, .hide-fab .btn-fab{ width:0;height:0;opacity:0;padding:0;}
-.toggled .btn-fab span.glyphicon { font-size:0;opacity:0;}
+.toggled .btn-fab, .hide-fab .btn-fab, .blur .btn-fab{ width:0;height:0;opacity:0;padding:0;}
+.toggled .btn-fab span.glyphicon, .blur .btn-fab { font-size:0;opacity:0;}
 .toggled .btn-fab.center , .hide-fab .btn-fab.center{ right:50.77%;}
 .toggled .btn-fab.right, .hide-fab .btn-fab.right{ right:6rem;}
 .toggled .btn-fab.left, .hide-fab .btn-fab.left{ left:6rem;}
 .toggled .btn-fab.top, .hide-fab .btn-fab.top{top:3rem;margin-top:1.5rem;}
+.blur .btn-fab{top:3rem;margin-right:3rem;margin-top:3rem;}
+.toggled .blur .btn-fab{top:3rem;margin-right:0rem;margin-top:3rem;}
 .toggled .btn-fab.bottom{bottom:3rem;margin-bottom:1.5rem;}
 .pagination-goto{margin:20px 0;}
 .table-data{margin-top:3.33rem;}
