@@ -11,5 +11,7 @@ define(function() {
 	TEST_DIRECTORY:'tests',
 	TEST_SUCCESS:true,
 	TEST_ERROR:true,
+	API_URL:'api/',
+	API_EXT:'json',
   };
  });
