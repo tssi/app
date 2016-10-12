@@ -40,7 +40,7 @@
 	}
 	$ul = $xpath->query('//ul[@class="sidebar-nav"]/li/ul')[0];
 	$fragment = $dom->createDocumentFragment();
-	$fragment->appendXml('<li><a href="#">Link</a></li>');
+	$fragment->appendXml('<li><a href="#/">Link</a></li>');
 	$ul->appendChild($fragment);
 	file_put_contents('index.html',$dom->saveHTML());   
 ?>
