@@ -1,0 +1,37 @@
+{
+	"folders":[
+		"config",
+		"controllers",
+		"tests",
+		"vendors",
+		"views",
+		"views/pages",
+		"webroot"
+	],
+	"files":[
+		"config/main.js",
+		"config/routes.js",
+		"config/settings.js",
+		"controllers/page_controller.js",
+		"tests/test.js",
+		"tests/system_defaults.js",
+		"views/pages/home.html",
+		"views/pages/sample.html",
+		"index.html"
+	],
+	"findreplace":{
+		"index.html":{
+			"find":["Simple UI/X Template","assets/","vendors/bower_components/","/app"],
+			"replace":["APP","app/assets/","app/bower_components/","#"]
+		},
+		"config/main.js":{
+			"find":["baseUrl:''","config/settings"],
+			"replace":["baseUrl:'app'","../config/settings"]
+		},
+		"config/settings.js":{
+			"find":["controllers","tests"],
+			"replace":["../controllers","../tests"]
+		}
+	}
+	
+}
