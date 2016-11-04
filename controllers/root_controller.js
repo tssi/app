@@ -1,6 +1,6 @@
 "use strict";
 define(['settings','demo'], function(settings,demo){
-	var RootController =  function ($scope, $rootScope,$timeout,$cookies,$http,$q) {
+	var RootController =  function ($scope, $rootScope,$timeout,$cookies,$http,$q,$location) {
 		$rootScope.__toggleSideBar = function(){
 			$rootScope.__SIDEBAR_OPEN = !$rootScope.__SIDEBAR_OPEN;
 		}
@@ -17,6 +17,11 @@ define(['settings','demo'], function(settings,demo){
 			},settings.APP_TRANSITION_DELAY);
 			
         });
+		$rootScope.$on('$routeChangeError', function (scope,current) {
+			var params = current.params;
+			console.error('Invalid path: /#/'+params.controller+'/'+params.action);
+			$location.path('/#/');
+		});
 		$rootScope.isEmpty =function(obj){
 			 for(var key in obj) {
 				if(obj.hasOwnProperty(key))
@@ -31,6 +36,6 @@ define(['settings','demo'], function(settings,demo){
 						console.log('ERROR:'+response.meta.message);
 					},$rootScope,$http,$timeout,$q);
 	};
-	RootController.$inject = ['$scope', '$rootScope','$timeout','$cookieStore','$http','$q'];
+	RootController.$inject = ['$scope', '$rootScope','$timeout','$cookieStore','$http','$q','$location'];
 	return RootController;
 });
