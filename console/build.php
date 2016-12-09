@@ -4,18 +4,27 @@
 	$config = json_decode(file_get_contents($path),true);
 	$path = dirname(dirname(__FILE__)).DS;
 	foreach($config['files'] as $file){
-		unlink($file);
+		if(file_exists($file))
+			unlink($file);
+	}
+	function recurseRmdir($dir) {
+	  $files = array_diff(scandir($dir), array('.','..'));
+	  foreach ($files as $file) {
+		(is_dir("$dir/$file")) ? recurseRmdir("$dir/$file") : unlink("$dir/$file");
+	  }
+	  return rmdir($dir);
 	}
 	foreach($config['folders'] as $folder){
-		if(count(scandir($folder))==2){
-			rmdir($folder);
-			mkdir($folder);
-		}
+		if(file_exists($folder))
+			recurseRmdir($folder);
+		mkdir($folder);
+		
 		
 	}
 	
 	foreach($config['files'] as $file){
-		copy($path.$file,$file);
+		if(file_exists($path.$file))
+			copy($path.$file,$file);
 	}
 	foreach($config['findreplace'] as $file=>$action){
 		$content = file_get_contents($file);
@@ -25,7 +34,8 @@
 		}
 		
 	}
-	$html = file_get_contents('index.html');
+	$index = dirname(dirname(__FILE__));
+	$html = file_get_contents($index.DS.'index.html');
 	$dom = new DOMDocument('1.0', 'UTF-8');                         // init new DOMDocument
 	$internalErrors = libxml_use_internal_errors(true);
 	$dom->preserveWhiteSpace=false;
@@ -42,5 +52,6 @@
 	$fragment = $dom->createDocumentFragment();
 	$fragment->appendXml('<li><a href="#/">Link</a></li>');
 	$ul->appendChild($fragment);
-	file_put_contents('index.html',$dom->saveHTML());   
+	$index = dirname($index);
+	file_put_contents($index.DS.'index.html',$dom->saveHTML());   
 ?>
