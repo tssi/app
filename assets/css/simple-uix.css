@@ -785,3 +785,16 @@ input[type="number"]{text-align:right;}
  .align-middle {
 	 vertical-align:middle !important;
  }
+ hr.help-bar{
+	 margin-bottom:0px;
+ }
+ hr.help-bar+div{
+	 position: relative;background: #ffffff;top: -10px;padding:0 20px;color: #7b7b7b;display:inline-block;
+ }
+ .btn-help{
+	 color:#7b7b7b;
+	 opacity:0.88;
+ }
+  .btn-help:hover, .btn-help:active{
+	  opacity:1;
+  }

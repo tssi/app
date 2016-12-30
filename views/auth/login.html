@@ -1,11 +1,19 @@
 <div class="row"  ng-controller="LoginController" > 
 	<div class="col-md-4 col-md-offset-4">
-		<h2 class="text-center">Welcome to ZAMA</h2>
+		<h2 class="text-center">{{__SHOW_REG?'Register':'Let\'s do this!'}}</h2>
 		<form action="" class="form-vertical"  ng-show="!__SHOW_REG">
-			<div class=" alert-danger help-text" style="color:#a94442;margin-bottom:5px;padding:1rem;" ng-if="loginMessage">{{loginMessage}}</div>
+			
 			<div class="list-group-item">
-			<div class="form-group"><input type="text" class="form-control" placeholder="Username" ng-model="User.username"/></div>
-			<div class="form-group"><input type="password" class="form-control" placeholder="Password" ng-model="User.password"/></div>
+			<p class="help-text">You know the drill.</p>
+			<div class="loader fade"  ng-class="{'out':!LoggingIn,'in':LoggingIn}" style="margin-bottom:5px;"></div>
+			<div class=" alert-danger help-text" style="color:#a94442;margin-bottom:5px;padding:1rem;border-radius:4px;" ng-show="loginMessage">
+				{{loginMessage}}
+				<a class="btn btn-xs btn-danger pull-right" ng-click="loginMessage=false"><i class="glyphicon glyphicon-remove"></i></a>
+				<div class="clearfix"></div>
+			</div>
+			<div class="form-group"><input type="text"  class="form-control input-lg" placeholder="Username" ng-model="User.username"/></div>
+			<input style="display:none">
+			<div class="form-group"><input type="password"  class="form-control input-lg" placeholder="Password" ng-model="User.password"/></div>
 			<div class="row">
 				<div class="col-md-6"> 
 					<button class="btn btn-default btn-block" ng-click="cancel()" ng-disabled="LoggingIn" type="button">CANCEL</button>
@@ -14,14 +22,34 @@
 					<button class="btn btn-primary btn-block" ng-click="login()"  ng-disabled="LoggingIn" LoggingIntype="button">LOGIN</button>
 				</div>
 			</div>
+			
+			<div class="text-center" style="margin-bottom:10px;" ng-show="!__SHOW_REG">
+				<hr class="help-bar"/>
+					<div>or</div>
+				<div class="row">
+					<div class="col-md-6">
+						<p class="help-text">Start something new.</p>
+						<button class="btn btn-help btn-default btn-xs" ng-class="{'btn-default':!__HOV_REG_BTN,'btn-success':_HOV_REG_BTN}" ng-mouseenter="_HOV_REG_BTN=true" ng-mouseleave="_HOV_REG_BTN=false"type="button" ng-click="__SHOW_REG=true">
+							 &nbsp; R E G I S T E R &nbsp;
+						</button>
+						
+					</div>
+					<div class="col-md-6">
+						<p class="help-text">Forgot something old.</p>
+						<button class="btn btn-help btn-default btn-xs" ng-class="{'btn-default':!__HOV_RES_BTN,'btn-warning':_HOV_RES_BTN}" ng-mouseenter="_HOV_RES_BTN=true" ng-mouseleave="_HOV_RES_BTN=false"type="button">
+							 &nbsp;&nbsp; R &nbsp;E S E&nbsp; T &nbsp;&nbsp;
+						</button>
+
+					</div>
+				</div>
+				
+			</div>
 			</div>
 		</form>
 		<form action="" class="form-vertical" ng-controller="RegisterController">
-			<div class="text-center hide" ng-show="!__SHOW_REG">
-				<hr />
-				No account yet? <br /> <button class="btn btn-success btn-sm" type="button" ng-click="toggleRegister()">Register</button>.
-			</div>
-			<div class="list-group-item" ng-if="__SHOW_REG">
+			
+			<div class="list-group-item" ng-show="__SHOW_REG">
+			<p class="help-text">Introduce yourself.</p>
 			<div class="form-group"><input type="text" class="form-control input-lg" placeholder="Employee No" ng-model="Register.employee_no"/></div>
 			<div class="form-group">
 					<div class="btn-group btn-group-justified">
@@ -31,7 +59,7 @@
 									'btn-default':Register.user_type!=='manager'}"
 								type="button"
 								>
-								MANAGER
+								Coordinator
 							</button>
 						 </div>
 						 <div class="btn-group" role="group" ng-click="Register.user_type='dept-user'">
@@ -40,7 +68,7 @@
 									'btn-default':Register.user_type!=='dept-user'}"
 								type="button"
 								>
-								DEPT USER
+								Adviser
 							</button>
 						 </div>
 						 <div class="btn-group" role="group" ng-click="Register.user_type='sub-user'">
@@ -49,9 +77,10 @@
 									'btn-default':Register.user_type!=='sub-user'}"
 								type="button"
 								>
-								SUB-USER
+								Subj Teacher
 							</button>
 						 </div>
+						 
 					</div>
 			</div>
 			<div class="form-group">
@@ -68,9 +97,17 @@
 					<button class="btn btn-default btn-block" ng-click="cancel()" ng-disabled="Registering" type="button">CANCEL</button>
 				</div>
 				<div class="col-md-6"> 
-					<button class="btn btn-success btn-block" ng-click="register()"  ng-disabled="Registering" type="button">REGISTER</button>
+					<button class="btn btn-success btn-block" ng-click="register()"  ng-disabled="Registering" type="button">CONFIRM</button>
 				</div>
 			</div>
+				<div class="text-center">
+					<hr class="help-bar"/>
+					<div>or</div>
+					<p class="help-text">Go back.</p>
+					<button class="btn btn-help btn-default btn-xs" ng-class="{'btn-default':!__HOV_REG_BTN,'btn-primary':_HOV_REG_BTN}" ng-mouseenter="_HOV_REG_BTN=true" ng-mouseleave="_HOV_REG_BTN=false"type="button" ng-click="$parent.__SHOW_REG=false">
+					 &nbsp; L O G I N &nbsp;
+					</button>
+				</div>
 			</div>
 		</form>
 	</div>

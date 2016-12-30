@@ -3,12 +3,9 @@ define(['app','api'], function (app) {
     
 	app.register.controller('RegisterController',['$scope','$rootScope','$window','$cookies','api', function ($scope,$rootScope,$window,$cookies,api) {
 		$scope.Register = {};
-		$scope.toggleRegister = function(){
-			$rootScope.__SHOW_REG = true;
-		}
+		
 		$scope.cancel = function(){
 			$scope.Register = {};
-			$rootScope.__SHOW_REG = false;
 		}
 		$scope.register = function(){
 			var data =  $scope.Register;
@@ -27,7 +24,7 @@ define(['app','api'], function (app) {
 	
 	
 	app.register.controller('LoginController',['$scope','$rootScope','$window','$cookies','api', function ($scope,$rootScope,$window,$cookies,api) {
-		$rootScope.__SHOW_REG = false;
+		
 		if($window.location.hash=='#/logout'){
 			$rootScope.__SIDEBAR_OPEN = false;
 			$rootScope.__LOGGEDIN=false;
@@ -37,6 +34,7 @@ define(['app','api'], function (app) {
 		if($rootScope.__USER){
 			$window.location.href="#/";
 		}
+		
 		$scope.cancel = function(){
 			$scope.loginMessage = null;
 			$scope.User = {};
