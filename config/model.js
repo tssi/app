@@ -71,6 +71,12 @@ define(['settings'],function(settings){
 				meta.next =  page<meta.last?page+1:null;
 			}
 			meta.prev =  page>1?page-1:null;
+			meta.range = {};
+			meta.range.from = (meta.page-1)*meta.limit+1; 
+			meta.range.to = meta.range.from+(meta.limit-1);
+			if(meta.range.to>meta.count){
+				meta.range.to = meta.count;
+			}
 			return angular.copy({meta:meta,data:data});
 		};
 		function error(){
@@ -97,6 +103,9 @@ define(['settings'],function(settings){
 			}
 			if(registered)
 				DEMO_REGISTRY[registry.name]=__data;
+
+			var p =  (Math.floor(data.id/__meta.limit))+1;
+			list({page:p});
 			return angular.copy({meta:__meta,data:data});
 		}
 		function remove(data){
