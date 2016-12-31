@@ -245,8 +245,8 @@ a.btn-fab.fixed.top{ top:3.33rem;}
 .toggled .btn-fab.right, .hide-fab .btn-fab.right{ right:6rem;}
 .toggled .btn-fab.left, .hide-fab .btn-fab.left{ left:6rem;}
 .toggled .btn-fab.top, .hide-fab .btn-fab.top{top:3rem;margin-top:1.5rem;}
-.blur .btn-fab{top:3rem;margin-right:3rem;margin-top:3rem;}
-.toggled .blur .btn-fab{top:3rem;margin-right:0rem;margin-top:3rem;}
+.blur .btn-fab.top{top:3rem;margin-right:3rem;margin-top:3rem;}
+.toggled .blur .btn-fab.top{top:3rem;margin-right:0rem;margin-top:3rem;}
 .toggled .btn-fab.bottom{bottom:3rem;margin-bottom:1.5rem;}
 .pagination-goto{margin:20px 0;}
 .table-data{margin-top:3.33rem;}
