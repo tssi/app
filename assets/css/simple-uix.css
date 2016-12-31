@@ -798,3 +798,8 @@ input[type="number"]{text-align:right;}
   .btn-help:hover, .btn-help:active{
 	  opacity:1;
   }
+  .btn-ghost{
+	  color:#fff;
+	  border-color:#fff;
+	  background:none;
+  }
