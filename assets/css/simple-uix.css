@@ -114,7 +114,10 @@ body.full{ overflow:hidden;}
 .sidebar-nav li a:focus {
     text-decoration: none;
 }
-
+.sidebar-nav  a[disabled=""]{
+	opacity:0.25;
+	cursor:no-drop;
+}
 .sidebar-nav > .sidebar-brand {
     height: auto;
     font-size: 18px;
