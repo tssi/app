@@ -148,6 +148,7 @@ define(['settings'],function(settings){
 		object.PUT = function(data){
 			return {success:save(data),error:error()};
 		}
+		object.list = list;
 		object.save = save;
 		object.remove = remove;
 		if(value.hasOwnProperty('meta'))setMeta(value.meta);
