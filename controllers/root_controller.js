@@ -8,7 +8,22 @@ define(['settings','demo'], function(settings,demo){
 			$rootScope.__APP_READY = false;
 			$rootScope.__FAB_READY = false;
 		});
-		$rootScope.$on('$routeChangeSuccess', function (scope, next, current) {
+		$rootScope.$on('$routeChangeSuccess', function (scope, current, next) {
+			if(!$rootScope.__LOGGEDIN){
+				$rootScope.__MODULE_NAME ='';
+				try{
+					$rootScope.__USER =  $cookies.get('__USER');
+					$rootScope.__LOGGEDIN = $rootScope.__USER!=undefined;
+				}catch(e){
+					$rootScope.__USER = null;
+					$rootScope.__LOGGEDIN = false;
+				}
+			}
+			
+			
+			if(!$rootScope.__USER&&current.originalPath!='/login'){
+				$location.path('/login');
+			}
 			$timeout(function(){
 				$rootScope.__APP_READY = true;
 				$timeout(function(){

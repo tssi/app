@@ -1,8 +1,14 @@
 "use strict";
 define(['settings'],function(settings){
 	function model(value,registry){
-		var DEFAULT_PAGE = 1;
-		var DEFAULT_ITEM = 5;
+		const DEFAULT_PAGE = 1;
+		const DEFAULT_ITEM = 5;
+		const RANDNAME = (function(){
+				do{
+					name = (Math.floor(Math.random()*Math.pow(32,4))>>>0).toString(32).toUpperCase();
+				}while(DEMO_REGISTRY.__CTR[name]!=undefined);
+				return name;
+			})();
 		var __meta = {},__data = [],__uses=[],object = {meta:__meta,data:__data};
 		var registered = false;
 		if(registry!=undefined){
@@ -16,6 +22,9 @@ define(['settings'],function(settings){
 			}
 			registered = true;
 		}
+		
+		DEMO_REGISTRY.__CTR[RANDNAME] = 0;
+		
 		function list(){			
 			var config = arguments[0]||{};
 			var page = config.page||DEFAULT_PAGE;
@@ -71,6 +80,12 @@ define(['settings'],function(settings){
 				meta.next =  page<meta.last?page+1:null;
 			}
 			meta.prev =  page>1?page-1:null;
+			meta.range = {};
+			meta.range.from = (meta.page-1)*meta.limit+1; 
+			meta.range.to = meta.range.from+(meta.limit-1);
+			if(meta.range.to>meta.count){
+				meta.range.to = meta.count;
+			}
 			return angular.copy({meta:meta,data:data});
 		};
 		function error(){
@@ -78,8 +93,10 @@ define(['settings'],function(settings){
 		};
 		function save(data){
 			var saved = false;
+			var lastId = DEMO_REGISTRY.__CTR[RANDNAME];
 			if(!data.hasOwnProperty('id')){
-				data.id = __data.length;
+				data.id = lastId+1;
+				lastId = data.id;
 			}else{
 				for(var i in __data){
 					var datum = __data[i];
@@ -95,8 +112,17 @@ define(['settings'],function(settings){
 			if(!saved){
 				__data.push(data);
 			}
+			
 			if(registered)
 				DEMO_REGISTRY[registry.name]=__data;
+			DEMO_REGISTRY.__CTR[RANDNAME] = lastId;
+			var indeces = [];
+			for(var i in __data){
+				indeces.push(__data[i].id);
+			}
+			var index=  indeces.indexOf(data.id);
+			var p =  (Math.floor(index/__meta.limit))+1;
+			list({page:p});
 			return angular.copy({meta:__meta,data:data});
 		}
 		function remove(data){
@@ -122,17 +148,21 @@ define(['settings'],function(settings){
 				__data = data;
 				return;
 			}
+			var lastId = DEMO_REGISTRY.__CTR[RANDNAME];
 			for(var i in data){
 				var datum = data[i];
 				if( typeof datum=='object'){
 					if(!datum.hasOwnProperty('id'))
-						datum.id= __data.length;
+						datum.id= lastId+1;
 					__data.push(datum);
 				}else{
 					__data[i] =  datum;
 				}
-				
+				lastId=datum.id;
 			}
+			if(isNaN(parseInt(lastId)))
+				lastId =  data.length-1;
+			DEMO_REGISTRY.__CTR[RANDNAME] = lastId;
 			if(registered)
 				DEMO_REGISTRY[registry.name]=__data;
 		}
