@@ -14,7 +14,13 @@ define(function() {
 					},function(response){
 						error(response);
 					});
-					
+					if(endpoint=='register' ||endpoint=='login'||endpoint=='logout'){
+						if(endpoint=='logout')
+							data = {action:endpoint};
+						else
+							data.action =  endpoint;
+						endpoint = 'users';
+					}
 					$timeout(function(){
 						require([settings.TEST_DIRECTORY+'/'+endpoint],function(response){
 							$rootScope.$apply(function(){

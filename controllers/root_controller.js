@@ -1,6 +1,6 @@
 "use strict";
 define(['settings','demo'], function(settings,demo){
-	var RootController =  function ($scope, $rootScope,$timeout,$cookies,$http,$q,$location) {
+	var RootController =  function ($scope, $rootScope,$timeout,$cookies,$http,$q,$window) {
 		$rootScope.__toggleSideBar = function(){
 			$rootScope.__SIDEBAR_OPEN = !$rootScope.__SIDEBAR_OPEN;
 		}
@@ -9,20 +9,16 @@ define(['settings','demo'], function(settings,demo){
 			$rootScope.__FAB_READY = false;
 		});
 		$rootScope.$on('$routeChangeSuccess', function (scope, current, next) {
-			if(!$rootScope.__LOGGEDIN){
-				$rootScope.__MODULE_NAME ='';
-				try{
-					$rootScope.__USER =  $cookies.get('__USER');
-					$rootScope.__LOGGEDIN = $rootScope.__USER!=undefined;
-				}catch(e){
-					$rootScope.__USER = null;
-					$rootScope.__LOGGEDIN = false;
-				}
+			try{
+				$rootScope.__USER =  JSON.parse($cookies.get('__USER'));
+				$rootScope.__LOGGEDIN = $rootScope.__USER!=undefined;
+			}catch(e){
+				$rootScope.__USER = null;
+				$rootScope.__LOGGEDIN = false;
 			}
 			
-			
 			if(!$rootScope.__USER&&current.originalPath!='/login'){
-				$location.path('/login');
+				$window.location.href="#/login";
 			}
 			$timeout(function(){
 				$rootScope.__APP_READY = true;
@@ -44,13 +40,8 @@ define(['settings','demo'], function(settings,demo){
 			}
 			return true;
 		}
-		demo.run(settings,'GET','system_defaults',null,
-					function success(response){
-						$rootScope._APP = response.data;
-					},function error(response){
-						console.log('ERROR:'+response.meta.message);
-					},$rootScope,$http,$timeout,$q);
+		
 	};
-	RootController.$inject = ['$scope', '$rootScope','$timeout','$cookieStore','$http','$q','$location'];
+	RootController.$inject = ['$scope', '$rootScope','$timeout','$cookies','$http','$q','$window'];
 	return RootController;
 });
