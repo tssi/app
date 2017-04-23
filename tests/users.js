@@ -36,6 +36,11 @@ define(["model"],function($model){
 					}
 					return {success:{data:__USER,message:__MSG}};
 				break;
+				case 'logout':
+					var __USER = {user:null};
+					var __MSG = 'Logout successful!';
+					return {success:{data:__USER,message:__MSG}};
+				break;
 				case 'register':
 					return {success:user.save(data)};
 				break;
