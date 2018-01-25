@@ -28,7 +28,7 @@ define(['settings'],function(settings){
 		function list(){			
 			var config = arguments[0]||{};
 			var page = config.page||DEFAULT_PAGE;
-			var limit = __meta.limit||DEFAULT_ITEM;
+			var limit =config.limit|| __meta.limit||DEFAULT_ITEM;
 			var keyword = config.keyword;
 			var fields = config.fields;
 			var index = limit=='less'?null:((page - 1) * limit);
@@ -71,6 +71,7 @@ define(['settings'],function(settings){
 			var count =  data.length;
 			if(index!=null&&__class!="SystemDefault")
 				data = data.slice(index,index+limit);
+			
 			var meta = __meta;
 			meta.page = page;
 			meta.limit = limit;
