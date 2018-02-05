@@ -147,6 +147,8 @@ define(['settings'],function(settings){
 			var __class = __meta.class;
 			if(__class=="SystemDefault"){
 				__data = data;
+				if(registered)
+					DEMO_REGISTRY[registry.name]=__data;
 				return;
 			}
 			var lastId = DEMO_REGISTRY.__CTR[RANDNAME];
