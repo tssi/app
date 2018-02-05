@@ -120,6 +120,8 @@ define(['settings'],function(settings){
 			var __class = __meta.class;
 			if(__class=="SystemDefault"){
 				__data = data;
+				if(registered)
+					DEMO_REGISTRY[registry.name]=__data;
 				return;
 			}
 			for(var i in data){
