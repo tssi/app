@@ -15,6 +15,7 @@
 		"controllers/page_controller.js",
 		"tests/test.js",
 		"tests/system_defaults.js",
+		"tests/users.js",
 		"views/pages/home.html",
 		"views/pages/sample.html",
 		"index.html"

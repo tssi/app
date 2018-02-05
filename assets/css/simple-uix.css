@@ -114,7 +114,10 @@ body.full{ overflow:hidden;}
 .sidebar-nav li a:focus {
     text-decoration: none;
 }
-
+.sidebar-nav  a[disabled=""]{
+	opacity:0.25;
+	cursor:no-drop;
+}
 .sidebar-nav > .sidebar-brand {
     height: auto;
     font-size: 18px;
@@ -245,8 +248,8 @@ a.btn-fab.fixed.top{ top:3.33rem;}
 .toggled .btn-fab.right, .hide-fab .btn-fab.right{ right:6rem;}
 .toggled .btn-fab.left, .hide-fab .btn-fab.left{ left:6rem;}
 .toggled .btn-fab.top, .hide-fab .btn-fab.top{top:3rem;margin-top:1.5rem;}
-.blur .btn-fab{top:3rem;margin-right:3rem;margin-top:3rem;}
-.toggled .blur .btn-fab{top:3rem;margin-right:0rem;margin-top:3rem;}
+.blur .btn-fab.top{top:3rem;margin-right:3rem;margin-top:3rem;}
+.toggled .blur .btn-fab.top{top:3rem;margin-right:0rem;margin-top:3rem;}
 .toggled .btn-fab.bottom{bottom:3rem;margin-bottom:1.5rem;}
 .pagination-goto{margin:20px 0;}
 .table-data{margin-top:3.33rem;}
@@ -785,3 +788,21 @@ input[type="number"]{text-align:right;}
  .align-middle {
 	 vertical-align:middle !important;
  }
+ hr.help-bar{
+	 margin-bottom:0px;
+ }
+ hr.help-bar+div{
+	 position: relative;background: #ffffff;top: -10px;padding:0 20px;color: #7b7b7b;display:inline-block;
+ }
+ .btn-help{
+	 color:#7b7b7b;
+	 opacity:0.88;
+ }
+  .btn-help:hover, .btn-help:active{
+	  opacity:1;
+  }
+  .btn-ghost{
+	  color:#fff;
+	  border-color:#fff;
+	  background:none;
+  }

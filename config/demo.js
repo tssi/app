@@ -6,6 +6,7 @@ define(function() {
 				if(settings.DEMO_MODE){
 					requestCount++;
 					window.DEMO_REGISTRY=window.DEMO_REGISTRY||{};
+					window.DEMO_REGISTRY.__CTR=window.DEMO_REGISTRY.__CTR||{};
 					var deferred = $q.defer();
 					var promise = deferred.promise;
 					promise.then(function(response){
