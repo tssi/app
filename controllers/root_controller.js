@@ -18,7 +18,7 @@ define(['settings','demo'], function(settings,demo){
 			}
 			
 			if(!$rootScope.__USER&&current.originalPath!='/login'){
-				//$window.location.href="#/login";
+				$window.location.href="#/login";
 			}
 			$timeout(function(){
 				$rootScope.__APP_READY = true;
