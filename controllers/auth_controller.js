@@ -48,6 +48,7 @@ define(['app','api'], function (app) {
 			api.POST('login',data,function(response){
 				$scope.LoggingIn = false;
 				if(response.data){
+					$rootScope.__USER = response.data;
 					$cookies.put('__USER',JSON.stringify(response.data));
 					$window.location.href="#/";
 				}else{

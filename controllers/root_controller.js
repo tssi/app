@@ -40,6 +40,12 @@ define(['settings','demo'], function(settings,demo){
 			}
 			return true;
 		}
+		demo.run(settings,'GET','system_defaults',null,
+					function success(response){
+						$rootScope._APP = response.data;
+					},function error(response){
+						console.log('ERROR:'+response.meta.message);
+					},$rootScope,$http,$timeout,$q);
 		
 	};
 	RootController.$inject = ['$scope', '$rootScope','$timeout','$cookies','$http','$q','$window'];
