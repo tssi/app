@@ -29,7 +29,9 @@ define(['app','api'], function (app) {
 			$rootScope.__USER=null;
 			$cookies.remove('__USER');
 			$cookies.remove('__MENUS');
+			$cookies.remove('__SIDEBAR_MENUS');
 			api.POST('logout',function success(response){
+					$rootScope.$emit('UserLoggedOut');
 					$window.location.href="#/login";
 			});
 		}
@@ -47,14 +49,57 @@ define(['app','api'], function (app) {
 			$scope.loginMessage =null;
 			api.POST('login',data,function(response){
 				$scope.LoggingIn = false;
-				if(response.data){
+				if(response.data.user){
 					$rootScope.__USER = response.data;
 					$cookies.put('__USER',JSON.stringify(response.data));
+					$rootScope.$emit('UserLoggedIn');
 					$window.location.href="#/";
 				}else{
 					$scope.loginMessage = response.message;
 				}
 			});
+		}
+		
+		$rootScope.$on('UserLoggedIn',function(){
+			requestModulesList();
+			
+		});
+		
+		$rootScope.$on('$routeChangeStart', function (scope, next, current) {
+			if($scope.LoggingIn)
+				if(!$rootScope.__SIDEBAR_MENUS)
+					readModuleListCache();
+				else
+					requestModulesList();
+		});
+		
+		function requestModulesList(){
+			api.GET('modules',{limit:'less'},function(response){
+				var modules = response.data;
+				var menus = [];
+				var lastIndex=-1;
+				for(var i in modules){
+					var mod =  modules[i];
+					var granted = $rootScope.__USER.user.access.indexOf(mod.id)!==-1;
+					if(!mod.is_child){
+						//Menu
+						if(mod.is_parent)
+							mod.children=[];
+						if(granted) menus.push(mod);
+						lastIndex++;
+					}else{
+						//Submenu
+						if(granted) menus[lastIndex].children.push(mod);
+					}
+				}
+				$cookies.put('__SIDEBAR_MENUS',JSON.stringify(menus));
+				readModuleListCache();
+			});
+		}
+		function readModuleListCache(){
+				var cache = JSON.parse($cookies.get('__SIDEBAR_MENUS'));
+				$rootScope.__SIDEBAR_MENUS =  cache;
+				
 		}
 	}]);
 });
