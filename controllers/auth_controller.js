@@ -52,6 +52,7 @@ define(['app','api'], function (app) {
 				if(response.data.user){
 					$rootScope.__USER = response.data;
 					$cookies.put('__USER',JSON.stringify(response.data));
+					$rootScope.__LOGGEDIN  = true;
 					$rootScope.$emit('UserLoggedIn');
 					$window.location.href="#/";
 				}else{
