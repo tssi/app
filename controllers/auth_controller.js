@@ -67,7 +67,7 @@ define(['app','api'], function (app) {
 		});
 		
 		$rootScope.$on('$routeChangeStart', function (scope, next, current) {
-			if($scope.LoggingIn)
+			if($rootScope.__LOGGEDIN)
 				if(!$rootScope.__SIDEBAR_MENUS)
 					readModuleListCache();
 				else
