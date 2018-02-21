@@ -98,6 +98,7 @@ define(['app','api'], function (app) {
 			});
 		}
 		function readModuleListCache(){
+			console.log($cookies.get('__SIDEBAR_MENUS'));
 				var cache = JSON.parse($cookies.get('__SIDEBAR_MENUS'));
 				$rootScope.__SIDEBAR_MENUS =  cache;
 				
