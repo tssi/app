@@ -81,6 +81,7 @@ define(['demo','settings'], function(demo,settings){
 			return {
 				restrict:'E',
 				scope:{
+						keyword:'=',
 						endpoint:'=',
 						fields:'=',
 						filters:'=',
@@ -91,7 +92,7 @@ define(['demo','settings'], function(demo,settings){
 				templateUrl:'app/views/templates/simple-searchbox.html?'+Math.random(),
 				link: function($scope,element,attr){
 					function requestAPI(){
-						var data =  {keyword:$scope.SearchKeyword,fields:$scope.fields};
+						var data =  {keyword:$scope.keyword,fields:$scope.fields};
 						if($scope.filters){
 							var filters =  $scope.filters;
 							for(var key in filters){
@@ -113,7 +114,7 @@ define(['demo','settings'], function(demo,settings){
 						$scope.HasSearched = true;
 					}
 					function clearSearch(){
-						$scope.SearchKeyword =null;
+						$scope.keyword =null;
 						$scope.HasSearched = false;
 						if(typeof $scope.onClear =='function') $scope.onClear();
 					}
