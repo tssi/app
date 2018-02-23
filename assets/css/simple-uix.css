@@ -806,3 +806,12 @@ input[type="number"]{text-align:right;}
 	  border-color:#fff;
 	  background:none;
   }
+.align-middle{
+  vertical-align: middle !important;  
+}
+.align-top{
+  vertical-align: top !important;  
+}
+.align-bottom{
+  vertical-align: bottom !important;  
+}
