@@ -7,8 +7,10 @@ define(['settings','demo'], function(settings,demo){
 		$rootScope.$on('$routeChangeStart', function (scope, next, current) {
 			$rootScope.__APP_READY = false;
 			$rootScope.__FAB_READY = false;
-		});
-		$rootScope.$on('$routeChangeSuccess', function (scope, current, next) {
+
+			if($rootScope.__USER) return;
+			
+			//Load user
 			try{
 				$rootScope.__USER =  JSON.parse($cookies.get('__USER'));
 				$rootScope.__LOGGEDIN = $rootScope.__USER!=undefined;
@@ -16,16 +18,24 @@ define(['settings','demo'], function(settings,demo){
 				$rootScope.__USER = null;
 				$rootScope.__LOGGEDIN = false;
 			}
-			
-			if(!$rootScope.__USER&&current.originalPath!='/login'){
-				$window.location.href="#/login";
+			//Load menu
+			if($rootScope.__USER){
+				var menus = JSON.parse($cookies.get('__SIDEBAR_MENUS'));
+				$rootScope.__SIDEBAR_MENUS =  menus;
 			}
+		});
+		$rootScope.$on('$routeChangeSuccess', function (scope, current, next) {
 			$timeout(function(){
 				$rootScope.__APP_READY = true;
 				$timeout(function(){
 					$rootScope.__FAB_READY = true;
 				},settings.FAB_TRANSITION_DELAY);
 			},settings.APP_TRANSITION_DELAY);
+
+			if(!$rootScope.__USER&&current.originalPath!='/login'){
+				$window.location.href="#/login";
+			}
+			
 			
         });
 		$rootScope.$on('$routeChangeError', function (scope,current) {

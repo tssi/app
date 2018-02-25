@@ -1,5 +1,5 @@
 "use strict";
-define([], function(){
+define(['demo','settings'], function(demo,settings){
 	var FocusDirective =  function ($timeout,$parse) {
 			return{
 				link : function(scope, element,attrs) {
@@ -76,9 +76,58 @@ define([], function(){
 			};
 		}
 		MonetaryInputDirective.$inject = ['$filter'];
+		var SimpleSearchboxDirective =  function($rootScope, $http,$timeout,$q){
+
+			return {
+				restrict:'E',
+				scope:{
+						keyword:'=',
+						endpoint:'=',
+						fields:'=',
+						filters:'=',
+						onSuccess:'&',
+						onError:'&',
+						onClear:'=',
+					},
+				templateUrl:'app/views/templates/simple-searchbox.html?'+Math.random(),
+				link: function($scope,element,attr){
+					function requestAPI(){
+						var data =  {keyword:$scope.keyword,fields:$scope.fields};
+						if($scope.filters){
+							var filters =  $scope.filters;
+							for(var key in filters){
+								data[key]=filters[key];
+							}
+						}
+						$scope.Loading =true;
+						demo.run(settings,'GET',$scope.endpoint,data,
+												function(response){
+													$scope.Loading =false;
+													if(typeof $scope.onSuccess() =='function')
+														$scope.onSuccess()(response);
+														
+												},function(response){
+													if(typeof $scope.onError() =='function')
+														$scope.onError()(response);
+												},
+												$rootScope,$http,$timeout,$q);
+						$scope.HasSearched = true;
+					}
+					function clearSearch(){
+						$scope.keyword =null;
+						$scope.HasSearched = false;
+						if(typeof $scope.onClear =='function') $scope.onClear();
+					}
+					$scope.fetchSearch =  requestAPI;
+					$scope.clearSearch =  clearSearch;
+				}
+			}
+		};
+		SimpleSearchboxDirective.$inject = ['$rootScope','$http','$timeout','$q'];
 	return {
 		focus: FocusDirective,
 		autoselect: AutoSelectDirective,
-		monetary: MonetaryInputDirective
+		monetary: MonetaryInputDirective,
+		simpleSearchbox: SimpleSearchboxDirective,
 	};
 });

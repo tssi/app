@@ -52,6 +52,7 @@ define(['app','api'], function (app) {
 				if(response.data.user){
 					$rootScope.__USER = response.data;
 					$cookies.put('__USER',JSON.stringify(response.data));
+					$rootScope.__LOGGEDIN  = true;
 					$rootScope.$emit('UserLoggedIn');
 					$window.location.href="#/";
 				}else{
@@ -66,7 +67,7 @@ define(['app','api'], function (app) {
 		});
 		
 		$rootScope.$on('$routeChangeStart', function (scope, next, current) {
-			if($scope.LoggingIn)
+			if($rootScope.__LOGGEDIN)
 				if(!$rootScope.__SIDEBAR_MENUS)
 					readModuleListCache();
 				else
@@ -101,6 +102,7 @@ define(['app','api'], function (app) {
 			});
 		}
 		function readModuleListCache(){
+			console.log($cookies.get('__SIDEBAR_MENUS'));
 				var cache = JSON.parse($cookies.get('__SIDEBAR_MENUS'));
 				$rootScope.__SIDEBAR_MENUS =  cache;
 				

@@ -1,0 +1,12 @@
+<div class="input-group">
+	<input focus="!keyword" type="text" class="form-control" ng-disabled="HasSearched" placeholder="Search" ng-model="keyword" style="height: 33px;"/>
+	<div class="input-group-btn">
+		<button class="btn btn-default" ng-if="!HasSearched" ng-click="fetchSearch()" ng-disabled="Loading">
+			<span class="glyphicon glyphicon-search"></span>
+		</button>
+	
+		<button class="btn btn-default" ng-if="HasSearched" ng-click="clearSearch()">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	</div>
+</div>
