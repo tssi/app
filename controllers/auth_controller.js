@@ -80,7 +80,7 @@ define(['app','api'], function (app) {
 				var lastIndex=-1;
 				for(var i in modules){
 					var mod =  modules[i];
-					var granted = $rootScope.__USER.user.access.indexOf(mod.id)!==-1;
+					var granted = $rootScope.__USER.user.access.indexOf(mod.id)!==-1 || mod.is_parent;
 					if(!mod.is_child){
 						//Menu
 						if(mod.is_parent)
@@ -89,7 +89,11 @@ define(['app','api'], function (app) {
 						lastIndex++;
 					}else{
 						//Submenu
-						if(granted) menus[lastIndex].children.push(mod);
+						if(granted){
+							menus[lastIndex].children.push(mod);
+						}
+							
+							
 					}
 				}
 				$cookies.put('__SIDEBAR_MENUS',JSON.stringify(menus));
