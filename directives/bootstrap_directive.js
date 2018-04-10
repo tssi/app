@@ -85,6 +85,7 @@ define(['demo','settings'], function(demo,settings){
 						endpoint:'=',
 						fields:'=',
 						filters:'=',
+						placeholder:'=',
 						onSuccess:'&',
 						onError:'&',
 						onClear:'=',
@@ -120,6 +121,8 @@ define(['demo','settings'], function(demo,settings){
 					}
 					$scope.fetchSearch =  requestAPI;
 					$scope.clearSearch =  clearSearch;
+					console.log($scope.placeholder);
+					$scope.placeholder =  $scope.placeholder || 'Search';
 				}
 			}
 		};
