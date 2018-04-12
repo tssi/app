@@ -123,6 +123,8 @@ define(['demo','settings'], function(demo,settings){
 					$scope.clearSearch =  clearSearch;
 					console.log($scope.placeholder);
 					$scope.placeholder =  $scope.placeholder || 'Search';
+					
+					$scope.$on('SimpleSearchBox_FetchSearch',requestAPI);
 				}
 			}
 		};
