@@ -124,7 +124,10 @@ define(['demo','settings'], function(demo,settings){
 					console.log($scope.placeholder);
 					$scope.placeholder =  $scope.placeholder || 'Search';
 					
-					$scope.$on('SimpleSearchBox_FetchSearch',requestAPI);
+					$scope.$on('SimpleSearchBox_FetchSearch',function(evt,filters){
+						$scope.filters = filters;
+						requestAPI();
+					});
 				}
 			}
 		};
