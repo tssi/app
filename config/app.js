@@ -1,8 +1,8 @@
 "use strict";
-define(['root','directives','settings','angularAMD','angular-route', 'angular-cookies','angular-chart', 'ui-bootstrap','ui.tree'], 
+define(['root','directives','settings','angularAMD','angular-route', 'angular-cookies','angular-local-storage','angular-chart', 'ui-bootstrap','ui.tree'], 
 function (root,directives,settings,angularAMD) {
     var app = angular.module("mainModule", 
-        ['ngRoute', 'ngCookies', 'chart.js','ui.bootstrap','ui.tree']);
+        ['ngRoute', 'ngCookies', 'LocalStorageModule','chart.js','ui.bootstrap','ui.tree']);
 	var mainRouter = angularAMD.route({
         templateUrl: function (rp) { 
 			if(!rp.action)  rp.action ='index';

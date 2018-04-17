@@ -3,7 +3,6 @@ define(['app','api'], function (app) {
     
 	app.register.controller('RegisterController',['$scope','$rootScope','$window','$cookies','api', function ($scope,$rootScope,$window,$cookies,api) {
 		$scope.Register = {};
-		
 		$scope.cancel = function(){
 			$scope.Register = {};
 		}
@@ -22,14 +21,14 @@ define(['app','api'], function (app) {
 	}]);
 	
 	
-	app.register.controller('LoginController',['$scope','$rootScope','$window','$cookies','api', function ($scope,$rootScope,$window,$cookies,api) {
+	app.register.controller('LoginController',['$scope','$rootScope','$window','$cookies','api','localStorageService', function ($scope,$rootScope,$window,$cookies,api,$locstor) {
 		$rootScope.__SHOW_REG = false;
 		if($window.location.hash=='#/logout'){
 			$rootScope.__SIDEBAR_OPEN = false;
 			$rootScope.__USER=null;
 			$cookies.remove('__USER');
 			$cookies.remove('__MENUS');
-			$cookies.remove('__SIDEBAR_MENUS');
+			$locstor.remove('__SIDEBAR_MENUS');
 			api.POST('logout',function success(response){
 					$rootScope.$emit('UserLoggedOut');
 					$window.location.href="#/login";
@@ -81,6 +80,7 @@ define(['app','api'], function (app) {
 				var lastIndex=-1;
 				for(var i in modules){
 					var mod =  modules[i];
+					if(!$rootScope.__USER) break;
 					var granted = $rootScope.__USER.user.access.indexOf(mod.id)!==-1 || mod.is_parent;
 					if(!mod.is_child){
 						//Menu
@@ -97,13 +97,13 @@ define(['app','api'], function (app) {
 							
 					}
 				}
-				$cookies.put('__SIDEBAR_MENUS',JSON.stringify(menus));
+				$locstor.set('__SIDEBAR_MENUS',JSON.stringify(menus));
 				readModuleListCache();
 			});
 		}
 		function readModuleListCache(){
-			console.log($cookies.get('__SIDEBAR_MENUS'));
-				var cache = JSON.parse($cookies.get('__SIDEBAR_MENUS'));
+				var sidebar = $locstor.get('__SIDEBAR_MENUS');
+				var cache = JSON.parse(sidebar);
 				$rootScope.__SIDEBAR_MENUS =  cache;
 				
 		}
