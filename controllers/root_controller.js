@@ -1,6 +1,6 @@
 "use strict";
 define(['settings','demo'], function(settings,demo){
-	var RootController =  function ($scope, $rootScope,$timeout,$cookies,$http,$q,$window) {
+	var RootController =  function ($scope, $rootScope,$timeout,$cookies,$http,$q,$window, $locstor) {
 		$rootScope.__toggleSideBar = function(){
 			$rootScope.__SIDEBAR_OPEN = !$rootScope.__SIDEBAR_OPEN;
 		}
@@ -20,7 +20,7 @@ define(['settings','demo'], function(settings,demo){
 			}
 			//Load menu
 			if($rootScope.__USER){
-				var menus = JSON.parse($cookies.get('__SIDEBAR_MENUS'));
+				var menus = JSON.parse($locstor.get('__SIDEBAR_MENUS'));
 				$rootScope.__SIDEBAR_MENUS =  menus;
 			}
 		});
@@ -58,6 +58,6 @@ define(['settings','demo'], function(settings,demo){
 					},$rootScope,$http,$timeout,$q);
 		
 	};
-	RootController.$inject = ['$scope', '$rootScope','$timeout','$cookies','$http','$q','$window'];
+	RootController.$inject = ['$scope', '$rootScope','$timeout','$cookies','$http','$q','$window','localStorageService'];
 	return RootController;
 });
