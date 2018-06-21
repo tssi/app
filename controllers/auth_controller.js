@@ -88,12 +88,14 @@ define(['app','api'], function (app) {
 				for(var i in modules){
 					var mod =  modules[i];
 					if(!$rootScope.__USER) break;
-					var granted = $rootScope.__USER.user.access.indexOf(mod.id)!==-1 ;
+					var granted = $rootScope.__USER.user.access.indexOf(mod.id)!==-1  ;
+
 					if(!mod.is_child){
 						//Menu
 						if(mod.is_parent)
 							mod.children=[];
-						if(granted) menus.push(mod);
+						mod.is_granted = granted;
+						if(granted|| mod.is_parent) menus.push(mod);
 						lastIndex++;
 					}else{
 						//Submenu
