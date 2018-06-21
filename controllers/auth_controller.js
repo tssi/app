@@ -22,6 +22,7 @@ define(['app','api'], function (app) {
 	
 	
 	app.register.controller('LoginController',['$scope','$rootScope','$window','$cookies','api','localStorageService', function ($scope,$rootScope,$window,$cookies,api,$locstor) {
+		var isModuleListRequested;
 		$rootScope.__SHOW_REG = false;
 		if($window.location.hash=='#/logout'){
 			$rootScope.__SIDEBAR_OPEN = false;
@@ -29,9 +30,9 @@ define(['app','api'], function (app) {
 			$cookies.remove('__USER');
 			$cookies.remove('__MENUS');
 			$locstor.remove('__SIDEBAR_MENUS');
+			$window.location.href="#/login";
 			api.POST('logout',function success(response){
 					$rootScope.$emit('UserLoggedOut');
-					$window.location.href="#/login";
 			});
 		}
 		if($rootScope.__USER){
@@ -46,6 +47,7 @@ define(['app','api'], function (app) {
 			var data = $scope.User;
 			$scope.LoggingIn = true;
 			$scope.loginMessage =null;
+			isModuleListRequested = false;
 			api.POST('login',data,function(response){
 				$scope.LoggingIn = false;
 				if(response.data.user){
@@ -60,8 +62,10 @@ define(['app','api'], function (app) {
 			});
 		}
 		
-		$rootScope.$on('UserLoggedIn',function(){
-			requestModulesList();
+		$rootScope.$on('UserLoggedIn',function(evt){
+			if(!isModuleListRequested)
+				requestModulesList('userLoggedIn');
+			isModuleListRequested=true;
 			
 		});
 		
@@ -69,11 +73,14 @@ define(['app','api'], function (app) {
 			if($rootScope.__LOGGEDIN)
 				if(!$rootScope.__SIDEBAR_MENUS)
 					readModuleListCache();
-				else
-					requestModulesList();
+				else if(!isModuleListRequested)
+					requestModulesList('routeStart');
+			isModuleListRequested=true;
 		});
 		
-		function requestModulesList(){
+		function requestModulesList(source){
+			console.log(source,isModuleListRequested);
+			if(isModuleListRequested) return;
 			api.GET('modules',{limit:'less'},function(response){
 				var modules = response.data;
 				var menus = [];
@@ -100,6 +107,8 @@ define(['app','api'], function (app) {
 				$locstor.set('__SIDEBAR_MENUS',JSON.stringify(menus));
 				readModuleListCache();
 			});
+			
+			
 		}
 		function readModuleListCache(){
 				var sidebar = $locstor.get('__SIDEBAR_MENUS');
