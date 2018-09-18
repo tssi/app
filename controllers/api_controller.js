@@ -34,7 +34,7 @@ define(['app','demo'], function(app,demo){
 			},
 			runTasks:function(tasks){
 				if(tasks.length){
-					runTask(tasks);
+					
 					function runTask(tasks,index){
 						index = index || 0;
 						var task;
@@ -44,6 +44,7 @@ define(['app','demo'], function(app,demo){
 						}
 						return task;
 					}
+					runTask(tasks);
 				}
 			}
 		}
