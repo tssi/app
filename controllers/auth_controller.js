@@ -58,6 +58,8 @@ define(['app','api'], function (app) {
 					$window.location.href="#/";
 				}else{
 					$scope.loginMessage = response.message;
+					alert('incorrect user name or password. Please try again');
+					$scope.User = '';
 				}
 			});
 		}
