@@ -316,7 +316,7 @@ a.btn-fab.fixed.top{ top:3.33rem;}
 }
 .list-group-canvas>.list-group-item	{
 	cursor: auto;
-	display: flex;
+	/* display: flex; */
 }
 .list-group-canvas .list-group-item:first-child{
 	border-top:none;
