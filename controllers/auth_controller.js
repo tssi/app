@@ -55,7 +55,11 @@ define(['app','api'], function (app) {
 					$cookies.put('__USER',JSON.stringify(response.data));
 					$rootScope.__LOGGEDIN  = true;
 					$rootScope.$emit('UserLoggedIn');
-					$window.location.href="#/";
+					if(response.data.user.password_changed){
+						$window.location.href="#/faculty/account_info";
+					}else{
+						$window.location.href="#/";	
+					}
 				}else{
 					$scope.loginMessage = response.message;
 					alert('incorrect user name or password. Please try again');
