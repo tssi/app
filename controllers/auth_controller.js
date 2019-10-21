@@ -56,6 +56,7 @@ define(['app','api'], function (app) {
 					$rootScope.__LOGGEDIN  = true;
 					$rootScope.$emit('UserLoggedIn');
 					if(response.data.user.password_changed){
+						alert("Password needs to be changed.");
 						$window.location.href="#/faculty/account_info";
 					}else{
 						$window.location.href="#/";	
