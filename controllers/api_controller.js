@@ -29,7 +29,7 @@ define(['app','demo'], function(app,demo){
 					throw new Error("Incomplete arguments");
 				}
 				data = data||{};
-				if(data.limit=='less') data.limit = 9999;
+				if(data.limit=='less') data.limit = 999999;
 				return demo.run(app.settings,method,endpoint,data,success,error,$rootScope,$http,$timeout,$q);
 			},
 			runTasks:function(tasks){
