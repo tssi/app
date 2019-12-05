@@ -27,9 +27,13 @@ define(['app','api'], function (app) {
 		if($window.location.hash=='#/logout'){
 			$rootScope.__SIDEBAR_OPEN = false;
 			$rootScope.__USER=null;
+			$rootScope.RecentModules = [];
+			$rootScope.ShowRecentModules =false;
+			$rootScope.ActiveMenu =null;
 			$cookies.remove('__USER');
 			$cookies.remove('__MENUS');
 			$locstor.remove('__SIDEBAR_MENUS');
+			$locstor.remove('__RECENT_MENUS');
 			$window.location.href="#/login";
 			api.POST('logout',function success(response){
 					$rootScope.$emit('UserLoggedOut');
@@ -50,6 +54,9 @@ define(['app','api'], function (app) {
 			isModuleListRequested = false;
 			api.POST('login',data,function(response){
 				$scope.LoggingIn = false;
+				$rootScope.RecentModules = [];
+				$rootScope.ShowRecentModules =false;
+				$rootScope.ActiveMenu =null;
 				if(response.data.user){
 					$rootScope.__USER = response.data;
 					$cookies.put('__USER',JSON.stringify(response.data));

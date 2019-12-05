@@ -1,8 +1,48 @@
 "use strict";
 define(['settings','demo'], function(settings,demo){
 	var RootController =  function ($scope, $rootScope,$timeout,$cookies,$http,$q,$window, $locstor) {
+		const MAX_RECENT = 3;
+		$rootScope.initRoot = function(){
+
+			$rootScope.ShowSubMenu = [];
+			var recent = [];
+			try{
+				recent =  JSON.parse($locstor.get('__RECENT_MENUS')) ||[];	
+			}catch{
+				
+			}
+			$rootScope.RecentModules =  recent;
+			
+			if(recent.length>1){
+				$rootScope.ActiveMenu ="RECENT";
+				$rootScope.ShowRecentModules=true;	
+			}
+			
+		}
 		$rootScope.__toggleSideBar = function(){
 			$rootScope.__SIDEBAR_OPEN = !$rootScope.__SIDEBAR_OPEN;
+			if($rootScope.__SIDEBAR_OPEN)
+				$rootScope.ActiveMenu = 'RECENT';
+		}
+		$rootScope.__toggleSubMenu =function(Menu){
+			if($rootScope.ActiveMenu==Menu.id)
+				$rootScope.ActiveMenu = null;
+			else
+				$rootScope.ActiveMenu = Menu.id;
+
+		}
+		$scope.__loadModule = function(Module){
+			
+			$scope.ShowRecentModules=true;
+			if($rootScope.RecentModules.indexOf(Module)===-1)
+				$rootScope.RecentModules.unshift(Module);
+			
+			if($rootScope.RecentModules.length>3)
+				$rootScope.RecentModules.pop();
+			$rootScope.__toggleSideBar();
+			$locstor.set('__RECENT_MENUS',JSON.stringify($rootScope.RecentModules));
+
+			
 		}
 		$rootScope.$on('$routeChangeStart', function (scope, next, current) {
 			$rootScope.__APP_READY = false;
