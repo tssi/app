@@ -50,10 +50,9 @@ define(['settings','demo'], function(settings,demo){
 			var lastActive = new Date($locstor.get('__LAST_ACTIVE'));
 			var currTime =  new Date();
 			var timeDiff = currTime - lastActive;
-			var timeIdle = timeDiff/1000/60;
-			var maxIdle  =	2; //2 mins.
-			
-			if(timeIdle>maxIdle){
+			var timeIdle = timeDiff;
+			var maxIdle  =	settings.MAX_IDLE;
+			if(timeIdle>=maxIdle){
 				alert("Session expired. Please login again.");
 				$locstor.set('__LAST_ACTIVE', new Date());
 				$window.location.href="#/logout";
