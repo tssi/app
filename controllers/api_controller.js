@@ -1,6 +1,7 @@
 "use strict";
 define(['app','demo'], function(app,demo){
-	 app.register.factory('api',function($http,$timeout,$rootScope,$q){
+
+	 app.register.factory('api',function($http,$timeout,$rootScope,$q,localStorageService){
 		 
 		return{
 			POST:function(){
@@ -19,6 +20,7 @@ define(['app','demo'], function(app,demo){
 				var self = this;
 				var endpoint,data,success,error;
 				if(__args.length){
+					localStorageService.set('__LAST_ACTIVE', new Date());
 					if(typeof __args[0] =='string') endpoint = __args[0];
 					if(typeof __args[1] =='object') data = __args[1];
 					if(typeof __args[1] =='function') success = __args[1];
