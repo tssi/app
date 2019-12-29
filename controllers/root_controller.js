@@ -19,6 +19,7 @@ define(['settings','demo'], function(settings,demo){
 				$rootScope.ShowRecentModules=true;	
 			}
 			$rootScope.__SESS_START();
+
 		}
 		$rootScope.__toggleSideBar = function(){
 			$rootScope.__SIDEBAR_OPEN = !$rootScope.__SIDEBAR_OPEN;
@@ -46,19 +47,14 @@ define(['settings','demo'], function(settings,demo){
 			
 		}
 		$rootScope.__SESS_START = function(){
-			$rootScope.promise = $interval(
-					function(){
-						demo.run(settings,'GET','user_sessions',null,
+			demo.run(settings,'GET','user_sessions',null,
 						function success(response){
 							$rootScope._SESS = response.data;
+							$locstor.set('__LAST_ACTIVE', new Date());
 						},function error(response){
 							 $interval.cancel($rootScope.promise);
 							console.log('ERROR:'+response.message);
-						},$rootScope,$http,$timeout,$q);
-
-					},settings.SESS_INTERVAL);
-
-					
+						},$rootScope,$http,$timeout,$q);	
 			}
 		$rootScope.$on('$routeChangeStart', function (scope, next, current) {
 			$rootScope.__APP_READY = false;
@@ -69,9 +65,9 @@ define(['settings','demo'], function(settings,demo){
 			var timeDiff = currTime - lastActive;
 			var timeIdle = timeDiff;
 			var maxIdle  =	settings.MAX_IDLE;
-			
-			if(timeIdle>=maxIdle && locStorActive){
-				alert("Session expired. Please login again.");
+			if(timeIdle>=maxIdle && locStorActive && $rootScope.__USER){
+				if(next.$$route.originalPath!=="/logout")
+					alert("Session expired. Please login again.");
 				$locstor.set('__LAST_ACTIVE', new Date());
 				$window.location.href="#/logout";
 
