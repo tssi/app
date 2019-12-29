@@ -21,7 +21,7 @@ define(['app','api'], function (app) {
 	}]);
 	
 	
-	app.register.controller('LoginController',['$scope','$rootScope','$window','$cookies','api','localStorageService', function ($scope,$rootScope,$window,$cookies,api,$locstor) {
+	app.register.controller('LoginController',['$scope','$rootScope','$window','$cookies','api','localStorageService', '$interval',function ($scope,$rootScope,$window,$cookies,api,$locstor,$interval) {
 		var isModuleListRequested;
 		$rootScope.__SHOW_REG = false;
 		if($window.location.hash=='#/logout'){
@@ -68,6 +68,7 @@ define(['app','api'], function (app) {
 					}else{
 						$window.location.href="#/";	
 					}
+					$rootScope.__SESS_START();
 				}else{
 					$scope.loginMessage = response.message;
 					alert('incorrect user name or password. Please try again');

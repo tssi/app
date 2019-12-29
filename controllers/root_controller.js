@@ -1,9 +1,10 @@
 "use strict";
 define(['settings','demo'], function(settings,demo){
-	var RootController =  function ($scope, $rootScope,$timeout,$cookies,$http,$q,$window, $locstor) {
+	var RootController =  function ($scope, $rootScope,$timeout,$cookies,$http,$q,$window, $locstor,$interval) {
 		const MAX_RECENT = 3;
 		$rootScope.initRoot = function(){
-
+			
+			
 			$rootScope.ShowSubMenu = [];
 			var recent = [];
 			try{
@@ -17,7 +18,7 @@ define(['settings','demo'], function(settings,demo){
 				$rootScope.ActiveMenu ="RECENT";
 				$rootScope.ShowRecentModules=true;	
 			}
-			
+			$rootScope.__SESS_START();
 		}
 		$rootScope.__toggleSideBar = function(){
 			$rootScope.__SIDEBAR_OPEN = !$rootScope.__SIDEBAR_OPEN;
@@ -44,15 +45,32 @@ define(['settings','demo'], function(settings,demo){
 
 			
 		}
+		$rootScope.__SESS_START = function(){
+			$rootScope.promise = $interval(
+					function(){
+						demo.run(settings,'GET','user_sessions',null,
+						function success(response){
+							$rootScope._SESS = response.data;
+						},function error(response){
+							 $interval.cancel($rootScope.promise);
+							console.log('ERROR:'+response.message);
+						},$rootScope,$http,$timeout,$q);
+
+					},settings.SESS_INTERVAL);
+
+					
+			}
 		$rootScope.$on('$routeChangeStart', function (scope, next, current) {
 			$rootScope.__APP_READY = false;
 			$rootScope.__FAB_READY = false;
-			var lastActive = new Date($locstor.get('__LAST_ACTIVE'));
+			var locStorActive = $locstor.get('__LAST_ACTIVE');
+			var lastActive = new Date(locStorActive);
 			var currTime =  new Date();
 			var timeDiff = currTime - lastActive;
 			var timeIdle = timeDiff;
 			var maxIdle  =	settings.MAX_IDLE;
-			if(timeIdle>=maxIdle){
+			
+			if(timeIdle>=maxIdle && locStorActive){
 				alert("Session expired. Please login again.");
 				$locstor.set('__LAST_ACTIVE', new Date());
 				$window.location.href="#/logout";
@@ -108,6 +126,6 @@ define(['settings','demo'], function(settings,demo){
 					},$rootScope,$http,$timeout,$q);
 		
 	};
-	RootController.$inject = ['$scope', '$rootScope','$timeout','$cookies','$http','$q','$window','localStorageService'];
+	RootController.$inject = ['$scope', '$rootScope','$timeout','$cookies','$http','$q','$window','localStorageService','$interval'];
 	return RootController;
 });
