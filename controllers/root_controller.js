@@ -65,6 +65,7 @@ define(['settings','demo'], function(settings,demo){
 			var timeDiff = currTime - lastActive;
 			var timeIdle = timeDiff;
 			var maxIdle  =	settings.MAX_IDLE;
+			console.log($rootScope.__USER,locStorActive);
 			if(timeIdle>=maxIdle && locStorActive && $rootScope.__USER){
 				if(next.$$route.originalPath!=="/logout")
 					alert("Session expired. Please login again.");
