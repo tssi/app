@@ -1,6 +1,6 @@
 "use strict";
 define(['app','api'], function (app) {
-    
+    const COOKIE_EXPIRY = {expires:new Date(new Date().getTime()+(app.settings.COOKIE_EXPIRY))};
 	app.register.controller('RegisterController',['$scope','$rootScope','$window','$cookies','api', function ($scope,$rootScope,$window,$cookies,api) {
 		$scope.Register = {};
 		$scope.cancel = function(){
@@ -12,7 +12,7 @@ define(['app','api'], function (app) {
 			api.POST('register',data,function(response){
 				$scope.Registering = false;
 				if(response.data){
-					$cookies.put('__USER',JSON.stringify(response.data));
+					$cookies.put('__USER',JSON.stringify(response.data),COOKIE_EXPIRY);
 					$window.location.href="#/";
 				}
 			});
@@ -59,7 +59,7 @@ define(['app','api'], function (app) {
 				$rootScope.ActiveMenu =null;
 				if(response.data.user){
 					$rootScope.__USER = response.data;
-					$cookies.put('__USER',JSON.stringify(response.data));
+					$cookies.put('__USER',JSON.stringify(response.data),COOKIE_EXPIRY);
 					$rootScope.__LOGGEDIN  = true;
 					$rootScope.$emit('UserLoggedIn');
 					if(response.data.user.password_changed){
