@@ -344,7 +344,7 @@ a.btn-fab.fixed.top{ top:3.33rem;}
 	border-bottom:none;
 }
 .list-group-search-results{
-	 height: 46.5rem;
+	 height: 67vh;
 	border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
