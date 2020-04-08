@@ -1,0 +1,15 @@
+
+
+.scroll {
+	height:300px;
+	overflow:auto;
+}
+
+.sticky-header {
+	background: white;
+	width: 100%;
+	position: sticky;
+	top: -5px;
+	margin-bottom: 0px;
+	padding-top: 8px;
+}
