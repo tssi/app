@@ -1,7 +1,7 @@
-.custom-alert{
+.custom-alert,.custom-confirm{
 	margin: 0px auto;
     width: 35%;
     padding-top: 20px;
     position: relative;
-    z-index:1030;
+    z-index:9999;
 }
