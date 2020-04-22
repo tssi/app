@@ -1,0 +1,7 @@
+.custom-alert{
+	margin: 0px auto;
+    width: 35%;
+    padding-top: 20px;
+    position: relative;
+    z-index:1030;
+}

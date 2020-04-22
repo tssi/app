@@ -22,7 +22,8 @@ require.config({
 		'api': 'controllers/api_controller',
 		'moment':'vendors/node_modules/moment/moment',
 		'chart':'vendors/node_modules/chart.js/dist/Chart.min',
-		'angular-chart':'vendors/node_modules/angular-chart.js/dist/angular-chart',
+        'angular-chart':'vendors/node_modules/angular-chart.js/dist/angular-chart',
+		'custom-window':'vendors/custom_window',
 		
     },
     // Add angular modules that does not support AMD out of the box, put it in a shim
@@ -35,6 +36,7 @@ require.config({
         'ui-bootstrap': ['angular'],
         'ui.tree': ['angular'],
         'angular-chart': ['angular','chart'],
+        'custom-window': ['angular'],
     },
     // kick start application
     deps: ['app']

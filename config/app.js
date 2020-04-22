@@ -1,5 +1,5 @@
 "use strict";
-define(['root','directives','settings','angularAMD','angular-route', 'angular-cookies','angular-local-storage','angular-chart', 'ui-bootstrap','ui.tree'], 
+define(['root','directives','settings','angularAMD','angular-route', 'angular-cookies','angular-local-storage','angular-chart','custom-window', 'ui-bootstrap','ui.tree'], 
 function (root,directives,settings,angularAMD) {
     var app = angular.module("mainModule", 
         ['ngRoute', 'ngCookies', 'LocalStorageModule','chart.js','ui.bootstrap','ui.tree']);
