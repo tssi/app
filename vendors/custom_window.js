@@ -31,7 +31,7 @@
 
 	}
 
-	window.confirm = function(sMessage, title){
+	/*window.confirm = function(sMessage, title){
 		 var e = window.event || window.confirm.caller.arguments[0];
 		var markup =  '<div class="custom-confirm alert-bar animated pulse" >';
 			markup += '	<div class="alert-wrapper">';
@@ -49,6 +49,6 @@
 			console.log(e);
 		return false;
 
-	}
+	}*/
 
 })(angular);
