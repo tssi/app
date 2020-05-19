@@ -70,8 +70,7 @@ define(['app','api'], function (app) {
 					}
 					$rootScope.__SESS_START();
 				}else{
-					$scope.loginMessage = response.message;
-					alert('incorrect user name or password. Please try again');
+					$scope.loginMessage = response.meta.message;
 					$scope.User = '';
 				}
 			});
