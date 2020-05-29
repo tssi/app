@@ -10,7 +10,7 @@
 .sheet .sheet-header{padding-top:0;padding-bottom:0;border-bottom:0;background:none;z-index:1;height:170px;}
 .sheet .sheet-header .padding{padding-top:10px;}
 .sheet .sheet-header .table{margin-bottom:1px;}
-.sheet .sheet-header .table td,.sheet .sheet-header .table th{background:white}
+.sheet-header .table td, .sheet-header .table th{background:white}
 .sheet .sheet-entry{padding-top: 0;border-bottom: none; border-top:0;height:31.23rem;overflow:none;}
 .sheet .sheet-entry .table{margin-top:-1px;}
 .sheet .sheet-header .table-bordered>thead>tr>td, .sheet .sheet-header .table-bordered>thead>tr>th{border-bottom:0;}
