@@ -3,9 +3,12 @@ define(['settings','demo'], function(settings,demo){
 	var RootController =  function ($scope, $rootScope,$timeout,$cookies,$http,$q,$window, $locstor,$interval) {
 		const MAX_RECENT = 3;
 		$rootScope.initRoot = function(){
-			
-			
 			$rootScope.ShowSubMenu = [];
+			$rootScope.$emit('LoadRecents');
+			$rootScope.__SESS_START();
+
+		}
+		$rootScope.$on('LoadRecents',function(){
 			var recent = [];
 			try{
 				recent =  JSON.parse($locstor.get('__RECENT_MENUS')) ||[];	
@@ -18,9 +21,7 @@ define(['settings','demo'], function(settings,demo){
 				$rootScope.ActiveMenu ="RECENT";
 				$rootScope.ShowRecentModules=true;	
 			}
-			$rootScope.__SESS_START();
-
-		}
+		});
 		$rootScope.__toggleSideBar = function(){
 			$rootScope.__SIDEBAR_OPEN = !$rootScope.__SIDEBAR_OPEN;
 			if($rootScope.__SIDEBAR_OPEN)
@@ -32,8 +33,9 @@ define(['settings','demo'], function(settings,demo){
 			else
 				$rootScope.ActiveMenu = Menu.id;
 
+
 		}
-		$scope.__loadModule = function(Module){
+		$scope.__loadModule = function(Module,toggle){
 			
 			$scope.ShowRecentModules=true;
 			if($rootScope.RecentModules.indexOf(Module)===-1)
@@ -41,7 +43,8 @@ define(['settings','demo'], function(settings,demo){
 			
 			if($rootScope.RecentModules.length>3)
 				$rootScope.RecentModules.pop();
-			$rootScope.__toggleSideBar();
+			if(toggle==undefined)
+				$rootScope.__toggleSideBar();
 			$locstor.set('__RECENT_MENUS',JSON.stringify($rootScope.RecentModules));
 
 			

@@ -33,7 +33,7 @@ define(['app','api'], function (app) {
 			$cookies.remove('__USER');
 			$cookies.remove('__MENUS');
 			$locstor.remove('__SIDEBAR_MENUS');
-			$locstor.remove('__RECENT_MENUS');
+			//$locstor.remove('__RECENT_MENUS');
 			$window.location.href="#/login";
 			api.POST('logout',function success(response){
 					$rootScope.$emit('UserLoggedOut');
@@ -68,6 +68,7 @@ define(['app','api'], function (app) {
 					}else{
 						$window.location.href="#/";	
 					}
+					$rootScope.$emit('LoadRecents');
 					$rootScope.__SESS_START();
 				}else{
 					$scope.loginMessage = response.meta.message;
