@@ -62,7 +62,7 @@ define(['app','api'], function (app) {
 					$cookies.put('__USER',JSON.stringify(response.data),COOKIE_EXPIRY);
 					$rootScope.__LOGGEDIN  = true;
 					$rootScope.$emit('UserLoggedIn');
-					if(response.data.user.password_changed){
+					if(response.data.user.password_changed&&0){
 						alert("Password needs to be changed.");
 						$window.location.href="#/faculty/account_info";
 					}else{
