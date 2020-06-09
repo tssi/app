@@ -33,7 +33,7 @@ define(['app','api'], function (app) {
 			$cookies.remove('__USER');
 			$cookies.remove('__MENUS');
 			$locstor.remove('__SIDEBAR_MENUS');
-			$locstor.remove('__RECENT_MENUS');
+			//$locstor.remove('__RECENT_MENUS');
 			$window.location.href="#/login";
 			api.POST('logout',function success(response){
 					$rootScope.$emit('UserLoggedOut');
@@ -62,12 +62,13 @@ define(['app','api'], function (app) {
 					$cookies.put('__USER',JSON.stringify(response.data),COOKIE_EXPIRY);
 					$rootScope.__LOGGEDIN  = true;
 					$rootScope.$emit('UserLoggedIn');
-					if(response.data.user.password_changed){
+					if(response.data.user.password_changed&&0){
 						alert("Password needs to be changed.");
 						$window.location.href="#/faculty/account_info";
 					}else{
 						$window.location.href="#/";	
 					}
+					$rootScope.$emit('LoadRecents');
 					$rootScope.__SESS_START();
 				}else{
 					$scope.loginMessage = response.meta.message;
