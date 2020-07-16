@@ -15,5 +15,6 @@ define(['app','api','atomic/index'], function (app) {
 			const $selfScope =  $scope;
 			$scope =  this;
 			$rootScope.__MODULE_NAME =  "Atomic Basic Controls";
+			$scope.TextBox = "Hello";
     }]);
 });

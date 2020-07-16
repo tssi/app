@@ -1,13 +1,20 @@
+<!-- Use controller as notation -->
 <div ng-controller="AtomicBasicController as ABC" ng-init="ABC.init()">
+	<!-- Start with a-module -->
 	<a-module>
-		<a-container>
+		<a-container> 
+			 <!-- This is your Header-->
 			<a-header>
-				<h5>Header</h5>
+				<h5>Module</h5>
 			</a-header>
+			 <!-- This is your Canvas with minHeight-->
 			<a-canvas>
 				<a-content>
-					<p>Content</p>
-					
+					<a-row>
+						<a-col>
+							<!-- Your contents Here-->
+						</a-col>
+					</a-row>
 				</a-content>
 			</a-canvas>
 		</a-container>
