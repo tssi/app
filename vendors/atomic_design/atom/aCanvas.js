@@ -6,7 +6,7 @@ define(['app'], function (app) {
 			replace:true,
 			transclude:true,
 			templateUrl:function(elem,attr){
-				return aPath.url('/view/atom/aCol.html');
+				return aPath.url('/view/atom/aCanvas.html');
 			},
 			link: function($scope,elem, attrs) {
 				

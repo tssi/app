@@ -1,5 +1,5 @@
 "use strict";
-define(['app','api','atomic/index','atomic/__docs/index'], function (app) {
+define(['app','api','atomic/index'], function (app) {
     app.register.controller('AtomicBasicController',['$scope','$rootScope','api', 'Atomic',
     	function ($scope,$rootScope,api,atomic) {
 			const $selfScope =  $scope;
