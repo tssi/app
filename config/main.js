@@ -23,7 +23,8 @@ require.config({
 		'moment':'vendors/node_modules/moment/moment',
 		'chart':'vendors/node_modules/chart.js/dist/Chart.min',
         'angular-chart':'vendors/node_modules/angular-chart.js/dist/angular-chart',
-		'custom-window':'vendors/custom_window',
+        'custom-window':'vendors/custom_window',
+		'atomic':'vendors/atomic_design',
 		
     },
     // Add angular modules that does not support AMD out of the box, put it in a shim

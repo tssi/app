@@ -1,0 +1,7 @@
+<div class="btn-group btn-group-period">
+	<button ng-repeat="period in Periods"
+		type="{{SelectedPeriod.id==period.id?'primary':'default'}}"
+		ng-click="setSelectedPeriod(period)">{{period.alias.short}}
+		{{SelectedPeriod.id==period.id?'primary':'default'}}
+	</button>
+</div>

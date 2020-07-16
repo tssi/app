@@ -1,0 +1,7 @@
+<ul class="nav nav-pills">
+	<li ng-repeat="item in Options" 
+		ng-click="setActiveItem(item)" 
+		ng-class="{active:ActiveItem===item}">
+		<a>{{item.id}}</a>
+	</li>
+</ul>			

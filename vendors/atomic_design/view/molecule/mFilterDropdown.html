@@ -1,0 +1,70 @@
+<div class="schoolyear-selector-wrapper"> 
+	<div class="btn-group dropdown schoolyear-selector" ng-class="{open:openDropdown}">
+		<a-button>SY {{ActiveSY}} -  {{ActiveSY+1}}</a-button>
+		<a-button opt-class="dropdown-toggle" ng-click="openDropdown=true">
+			<span class="caret"></span>
+		</a-button>
+		<ul class="dropdown-menu pull-right">
+			<li class="dropdown-header">GRADING PERIOD</li>
+			<li class="dropdown-header">
+				<div class="btn-group btn-group-period" ng-show="ActiveDept.id!=='SH'">
+					<a-button ng-repeat="period in _APP.PERIODS"
+						ng-class="{'btn-primary':SelectedPeriod.id==period.id}" 
+						ng-click="setSelectedPeriod(period)">{{period.alias.short}}</button>
+					</a-button>
+				</div>
+				<div class="btn-group btn-group-period" ng-show="ActiveDept.id=='SH'">
+					<a-button  ng-repeat="period in _APP.PERIODS"
+						ng-class="{'btn-primary':SelectedPeriod.id==period.id}" 
+						ng-click="setSelectedPeriod(period)"
+						ng-if="(SelectedSemester.key=='FRSTSEMS'&&period.id<=2)||(SelectedSemester.key=='SCNDSEMS'&&period.id>2) "
+						>{{period.alias.short}}</button>
+					</a-button>
+					<a-button ng-if="showSem"
+						ng-class="{'btn-primary':SelectedPeriod.id>4}" 
+						ng-click="setSelectedPeriod(SelectedSemester)"
+						>
+						SEM
+					</a-button>
+				</div>
+			</li>
+			<li class="divider" ng-show="ActiveDept.id=='SH'"></li>
+			<li class="dropdown-header" ng-show="ActiveDept.id=='SH'">SEMESTER</li>
+			<li class="dropdown-header" ng-show="ActiveDept.id=='SH'">
+				<div class="btn-group btn-group-sem">
+					<a-button ng-repeat="sem in _APP.SEMESTERS"
+						ng-class="{'btn-primary':SelectedSemester.id==sem.id}" 
+						ng-click="setSelectedSemester(sem)"
+						>{{sem.alias.short}}
+					</a-button>
+				</div>
+			</li>
+			<li class="divider"></li>
+			<li class="dropdown-header">SCHOOL YEAR</li>
+			<li ng-repeat="SchoolYear in _APP.SCHOOL_YEARS | orderBy:'-code'"
+				ng-show="$index<=1"
+				ng-click="setActiveSY(SchoolYear.id)"
+				ng-class="{active:ActiveSY==(SchoolYear.id)}">
+				<a>{{SchoolYear.label}}</a>
+			</li>
+			<li ng-repeat="SchoolYear in _APP.SCHOOL_YEARS | orderBy:'-code'"
+				ng-show="$index>1 && toggleText == 'Less'"
+				ng-click="setActiveSY(SchoolYear.id)"
+				ng-class="{active:ActiveSY==(SchoolYear.id)}">
+				<a>{{SchoolYear.label}}</a>
+			</li>
+			<li><a ng-click="toggleOtherSY()">{{toggleText}}...</a></li>
+			<li class="divider"></li>
+			<li>
+				<a-row is-fluid="true">
+					<a-col size="6">
+						<a-button ng-click="closeFilter()">Cancel</a-button>
+					</a-col>
+					<a-col size="6">
+						<a-button type="primary" ng-click="confirmFilter()">Confirm</a-button>
+					</a-col>
+				</a-row>
+			</li>
+		</ul>
+	</div>
+</div>
