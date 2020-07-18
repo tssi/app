@@ -861,10 +861,8 @@ input[type="number"]{text-align:right;}
 .schoolyear-selector .dropdown-menu .dropdown-input{
   padding: 3px 20px;
 }
-.btn-selected,.btn-selected:focus,.btn-selected:active,.btn-selected:hover{
+.table tr.info td{
   color:#2e6da4;
-  font-weight: bold;
-  border:1px solid #ccc;
 }
 .input-group.a-searchbox{
   margin-right:-25px;

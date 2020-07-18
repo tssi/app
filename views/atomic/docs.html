@@ -27,7 +27,7 @@
 				<a-content>
 					<a-row>
 						<a-col>
-							<a-table headers="ABC.Headers" props="ABC.Props" data="ABC.Data" on-row-click="ABC.getRecord">
+							<a-table headers="ABC.Headers" props="ABC.Props" data="ABC.Data" on-row-click="ABC.getRecord" ng-model="ABC.ActiveItem">
 							</a-table>
 						</a-col>
 					</a-row>
@@ -63,7 +63,7 @@
 		<a-modal-footer>
 			<a-button opt-class="pull-left" ng-click="ABC.closeModal()" > Close</a-button>
 			<a-button ng-click="ABC.clearModal()"> Clear</a-button>
-			<a-button type="primary" ng-click="ABC.closeModal()"> Confirm</a-button>
+			<a-button type="primary" ng-click="ABC.confirmModal()"> Confirm</a-button>
 		</a-modal-footer>
 	</a-modal>
 </div>
