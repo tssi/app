@@ -1,20 +1,21 @@
 "use strict";
 define(['app'], function (app) {
 	app.register.directive('aSearchbox',['AtomicPath',function (aPath) {
-		const DEFAULTS = {prefix:'',type:'text',size:''};
+		const DEFAULTS = {placeholder:['Search','Search...']};
 
 		return {
 			require:'ngModel',
 			restrict: 'E',
 			scope:{
-				aTextboxModel:'=ngModel',
+				ObjModel:'=ngModel',
 			},
+			replace:true,
 			transclude: false,
 			templateUrl:function(elem,attr){
 				return aPath.url('/view/atom/aSearchbox.html');
 			},
 			link: function($scope, elem, attrs,ngModel) {
-				
+				$scope.Placeholder = $scope.Placeholder|| DEFAULTS.placeholder;
 			},
 			controller:function($scope){
 			}

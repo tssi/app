@@ -39,7 +39,8 @@ define(['app'], function (app) {
 						size = 'xs';
 					break;
 				}
-				
+				if(type == 'primary-block')
+					type = 'primary btn-block';
 				if(type)
 					$scope.aType =  DEFAULTS.prefix+type;
 				if(size)

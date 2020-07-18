@@ -16,7 +16,14 @@
 			</a-header>
 			<a-canvas>
 				<a-header>
-					<a-searchbox ng-model="ABC.SearchBox"></a-searchbox>
+					<a-row>
+						<a-col size="11">
+							<a-searchbox ng-model="ABC.SearchBox"></a-searchbox>
+						</a-col>
+						<a-col size="1">
+							<a-button type="primary-block" ng-click="ABC.search()">LOAD</a-button>
+						</a-col>
+					</a-row>
 				</a-header>
 				<a-content>
 					<a-row>

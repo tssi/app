@@ -1,1 +1,8 @@
-<input class="form-control" ng-model="aSearchboxModel"/>
+<div class="input-group  search-box">
+  <span class="input-group-btn">
+    <button class="btn btn-default"   ng-disabled="!ObjModel.id" >
+		<span class="glyphicon" ng-class="{'glyphicon-search':!Model.id, 'glyphicon-remove':ObjModel.id,'glyphicon-refresh':loadingRecords}"></span>
+    </button>
+  </span>
+  <input  class="form-control" type="text" placeholder="{{!ShowBtn?Placeholder[0]:Placeholder[1]}}" ng-model="ObjModel"ng-focus="ShowBtn=true" ng-blur="ShowBtn=ObjModel?true:false" ng-disabled="ObjModel.id"/>
+</div>
