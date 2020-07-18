@@ -1,6 +1,7 @@
 "use strict";
-define(['app','atomic/alive/api',
+define(['app','vendors/bower_components/jquery/dist/jquery','atomic/alive/api',
 		'atomic/atom/aButton',
+		'atomic/atom/aFab',
 		'atomic/atom/aTextbox',
 		'atomic/atom/aLabel',
 		'atomic/atom/aSelect',
@@ -12,10 +13,11 @@ define(['app','atomic/alive/api',
 		'atomic/atom/aRow',
 		'atomic/atom/aCol',
 		'atomic/atom/aModule',
+		'atomic/atom/aModal',
 		'atomic/molecule/mDeptNavpill',
 		'atomic/molecule/mPeriodBtnGroup',
 		'atomic/molecule/mFilterDropdown',
-	], function (app) {
+	], function (app,jquery) {
 	app.register.factory('Atomic',['AtomicAPI','$rootScope',function(aapi,$scope,$rootScope){
 		var atomic={};
 		aapi.init(function(REGISTRY){
@@ -25,7 +27,7 @@ define(['app','atomic/alive/api',
 			atomic.Periods =  REGISTRY.PERIODS;
 			atomic.Sections =  REGISTRY.Sections;
 			atomic.Departments = REGISTRY.Departments;
-
+			
 			//TODO: Load from system defaults
 			atomic.ActiveSY =  REGISTRY.SCHOOL_YEARS[6].id;
 			atomic.ActiveDept = REGISTRY.Departments[1];

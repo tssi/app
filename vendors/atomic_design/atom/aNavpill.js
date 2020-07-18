@@ -11,6 +11,7 @@ define(['app'], function (app) {
 				Options:'=options',
 				confirm:'&'
 			},
+			replace:true,
 			transclude:false,
 			templateUrl:function(elem,attr){
 				return aPath.url('/view/atom/aNavpill.html');

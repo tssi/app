@@ -1,4 +1,6 @@
 <div ng-controller="AtomicBasicController as ABC" ng-init="ABC.init()">
+	<a-fab ng-click="ABC.openModal()">Hello</a-fab>
+	<!-- Module -->
 	<a-module>
 		<a-container>
 			<a-header>
@@ -15,6 +17,26 @@
 			</a-canvas>
 		</a-container>
 	</a-module>
+	<!-- Modal -->
+	<a-modal id="TestModal" title="Sample Dialog">
+		<a-modal-body>
+			<a-row>
+				<a-col size="6">
+					<a-label>Label 1</a-label>
+					<a-textbox ng-model="ABC.Text"/>
+				</a-col>
+				<a-col size="6">
+					<a-label>Label 2</a-label>
+					<a-textbox ng-model="ABC.Text2"/>
+				</a-col>
+			</a-row>
+		</a-modal-body>
+		<a-modal-footer>
+			<a-button opt-class="pull-left" ng-click="ABC.closeModal()" > Close</a-button>
+			<a-button ng-click="ABC.Text=''"> Clear</a-button>
+			<a-button type="primary" ng-click="ABC.closeModal()"> Confirm</a-button>
+		</a-modal-footer>
+	</a-modal>
 </div>
 
 <div ng-controller="AtomicDataController as ADC" ng-init="ADC.init()">
