@@ -4,13 +4,26 @@ define(['app','api','atomic/index'], function (app) {
     	function ($scope,$rootScope,api,atomic,aModal) {
 			const $selfScope =  $scope;
 			$scope =  this;
-			$rootScope.__MODULE_NAME =  "Atomic Basic Controls";
-			$scope.Text = "Text";
-
-			$scope.Headers  = [{label:'A',class:'col-md-1'},'B','C'];
-			$scope.Props = ['a','b','d'];
-			$scope.Data = [{a:"a",b:"b",c:"c",d:"d"},{a:2,b:2,c:2},{a:3,b:3,c:3}];
+			$scope.init = function(){
+				$rootScope.__MODULE_NAME =  "Atomic Basic Controls";
+				$scope.Text = "Text";
+				$scope.Headers = ['ID','Title','Description'];
+				$scope.Props = ['id','title','description'];
+				loadTests(1);
+			}
 			
+			function loadTests(page){
+				var filter = {'limit':5,'page':page};
+				var success = function(response){
+					$scope.Meta =  response.meta;
+					$scope.Data = response.data;
+				}
+				api.GET('test',filter,success);
+			}
+
+			$scope.goToPage = function(page){
+				loadTests(page);
+			}
 			$scope.openModal = function(){
 				aModal.open('TestModal');
 			}
@@ -27,6 +40,7 @@ define(['app','api','atomic/index'], function (app) {
 				$scope.Text =  null;
 				$scope.ModalItem =  null;
 			}
+
     }]);
 
     app.register.controller('AtomicDataController',['$scope','$rootScope','api', 'Atomic',
@@ -39,7 +53,7 @@ define(['app','api','atomic/index'], function (app) {
 				$scope.Input = null;
 			}
 			atomic.ready(function(){
-				console.log(atomic);
+				
 			});
     }]);
 });
