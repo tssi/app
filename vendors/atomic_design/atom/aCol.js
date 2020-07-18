@@ -7,7 +7,7 @@ define(['app'], function (app) {
 			scope:{
 				size:'=?',
 				offset:'=?',
-				align:'=?',
+				align:'@?',
 			},
 			replace:true,
 			transclude:true,
@@ -18,6 +18,9 @@ define(['app'], function (app) {
 				$scope.prefix= DEFAULTS.prefix;
 				$scope.size = $scope.size || DEFAULTS.size; 
 				
+				
+			},
+			controller:function($scope){
 				switch($scope.align){
 					case 'left':
 						$scope.hAlign='text-left';
@@ -29,8 +32,6 @@ define(['app'], function (app) {
 						$scope.hAlign='text-center';
 					break;
 				}
-			},
-			controller:function($scope){
 			}
 		}
 	}]);

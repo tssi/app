@@ -4,13 +4,20 @@
 	<a-module>
 		<a-container>
 			<a-header>
-				<h5 class="pull-left">Basic Interface</h5>
+				
+				<div class="pull-left">
+					<h4>Basic Interface</h4>
+				</div>
 				<div class="pull-right">
 					<a-pager meta="ABC.Meta" on-navigate="ABC.goToPage"></a-pager>
+					<m-filter-dropdown ng-model="ABC.Active"></m-filter-dropdown>
 				</div>
 				<div class="clearfix"></div>
 			</a-header>
 			<a-canvas>
+				<a-header>
+					<a-searchbox ng-model="ABC.SearchBox"></a-searchbox>
+				</a-header>
 				<a-content>
 					<a-row>
 						<a-col>

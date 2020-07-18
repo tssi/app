@@ -40,6 +40,18 @@ define(['app','api','atomic/index'], function (app) {
 				$scope.Text =  null;
 				$scope.ModalItem =  null;
 			}
+			atomic.ready(function(){
+				$scope.ActiveDept = atomic.ActiveDept;	
+				$scope.ActiveSY = atomic.ActiveSY;	
+				$scope.SelectedSem = atomic.SelectedSem;	
+				$scope.SelectedPeriod = atomic.SelectedPeriod;	
+			});
+			$selfScope.$watch('ABC.ActiveDept',function(){
+				$scope.Active = {dept:$scope.ActiveDept,
+								sy:$scope.ActiveSY,
+								sem:$scope.SelectedSem,
+								period:$scope.SelectedPeriod};
+			});
 
     }]);
 

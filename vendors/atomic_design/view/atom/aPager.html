@@ -1,11 +1,11 @@
-<div class="btn-group btn-group-sm">
-	<button class="btn btn-default">
+<div class="btn-group">
+	<a-button>
 		{{FirstItem}} - {{LastItem}} of {{TotalItems}}
-	</button>
-	<button class="btn btn-default" ng-disabled="!PrevPage" ng-click="navigatePage(PrevPage)">
+	</a-button>
+	<a-button ng-disabled="!PrevPage" ng-click="navigatePage(PrevPage)">
 		<span class="glyphicon glyphicon-chevron-left"></span>
-	</button>
-	<button class="btn btn-default" ng-disabled="!NextPage" ng-click="navigatePage(NextPage)">
+	</a-button>
+	<a-button ng-disabled="!NextPage" ng-click="navigatePage(NextPage)">
 		<span class="glyphicon glyphicon-chevron-right"></span>
-	</button>
+	</a-button>
 </div>

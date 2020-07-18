@@ -835,3 +835,34 @@ input[type="number"]{text-align:right;}
 .align-bottom{
   vertical-align: bottom !important;  
 }
+.schoolyear-selector-wrapper {
+  display: inline-block;
+}
+.schoolyear-selector .dropdown-menu{
+  min-width: 0px;
+}
+.schoolyear-selector .dropdown-menu .btn-group{
+  display:flex;
+}
+.schoolyear-selector .dropdown-menu .btn-group>.btn{
+  flex:1;
+}
+.schoolyear-selector .dropdown-menu .btn-group>.btn-nav{
+  flex:none;
+}
+.schoolyear-selector .dropdown-menu .filter-regular>li.dropdown-header,
+.schoolyear-selector .dropdown-menu .filter-regular>li:last-child{
+  margin-top:10px;
+}
+.schoolyear-selector .dropdown-menu .filter-footer{
+  padding-top: 4px;
+  padding-bottom: 8px;
+}
+.schoolyear-selector .dropdown-menu .dropdown-input{
+  padding: 3px 20px;
+}
+.btn-selected,.btn-selected:focus,.btn-selected:active,.btn-selected:hover{
+  color:#2e6da4;
+  font-weight: bold;
+  border:1px solid #ccc;
+}

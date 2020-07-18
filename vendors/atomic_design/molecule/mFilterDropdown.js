@@ -4,7 +4,7 @@ define(['app',
 		'atomic/molecule/mDeptNavpill',
 		'atomic/molecule/mPeriodBtnGroup',
 	], function (app) {
-	app.register.directive('mFilterDropdown',['$rootScope','AtomicPath',function ($rootScope,aPath) {
+	app.register.directive('mFilterDropdown',['$rootScope','AtomicPath','Atomic',function ($rootScope,aPath,atomic) {
 		return {
 			restrict: 'E',
 			scope:{
@@ -12,21 +12,35 @@ define(['app',
 				showSem:'=?',
 				update:'&'
 			},
-			transclude:false,
+			replace:true,
+			transclude:true,
 			templateUrl:function(elem,attr){
 				return aPath.url('/view/molecule/mFilterDropdown.html');
 			},
-			link: function($scope,elem, attrs) {
+			link: function($scope,elem, attrs,ctrl,transclude) {
+				transclude(function(clone){
+					$scope.isOverloaded = clone.length>1;
+				});
+
+				atomic.ready(function(){
+					
+					$scope._APP =  $rootScope._APP;
+					$scope._APP.Departments =  atomic.Departments;
+					$scope.mFilterDropdownCtrl.Active ={
+									dept:atomic.ActiveDept,
+									sy:atomic.ActiveSY,
+									sem:atomic.SelectedSem,
+									period:atomic.SelectedPeriod
+								};
+					
+				});
 
 			},
 			bindToController:true,
 			controllerAs:'mFilterDropdownCtrl',
 			controller:function($scope){
 				$scope.$watch("mFilterDropdownCtrl.Active",function(val){
-					if(val && !$scope._APP){
-						$scope._APP =  $rootScope._APP;
-					}
-					console.log(val);
+					
 					var active =  val||{dept:null,sy:null,sem:null,period:null};
 						$scope.ActiveDept =  active.dept;
 						$scope.ActiveSY =  active.sy;
@@ -45,6 +59,9 @@ define(['app',
 				$scope.setSelectedPeriod = function(period){
 					$scope.SelectedPeriod = period;
 				}
+				$scope.setActiveDept = function(dept){
+					$scope.ActiveDept = dept;
+				}
 				$scope.toggleOtherSY = function(){
 					$scope.toggleDropdown = true;
 					$scope.toggleText = $scope.toggleText == 'More'?'Less':'More';
@@ -60,7 +77,6 @@ define(['app',
 									
 								};
 					$scope.mFilterDropdownCtrl.Active = active;
-					console.log($scope._APP);
 					$scope.openDropdown = false;
 				}
 
