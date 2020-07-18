@@ -38,13 +38,13 @@ function (root,directives,settings,angularAMD) {
     }))
 	.when("/login", angularAMD.route({
         templateUrl: function (rp) {
-			return "app/views/auth/login."+settings.VIEW_EXTENSION;
+			return require.toUrl( settings.VIEWS_DIRECTORY+"/auth/login."+settings.VIEW_EXTENSION);
 		},
 		controllerUrl: "controllers/auth_controller"            
     }))
 	.when("/logout", angularAMD.route({
         templateUrl: function (rp) {
-			return "app/views/auth/login."+settings.VIEW_EXTENSION;
+			return require.toUrl( settings.VIEWS_DIRECTORY+"/auth/login."+settings.VIEW_EXTENSION);
 		},
 		controllerUrl: "controllers/auth_controller"            
     }))
