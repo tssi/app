@@ -2,11 +2,13 @@
 define(['app'], function (app) {
 	app.register.directive('aTable',['AtomicPath',function (aPath) {
 		return {
+			require:'ngModel',
 			restrict: 'E',
 			scope:{
 				headers:"=",
 				props:"=",
 				data:"=",
+				activeItem:'=ngModel',
 				onRowClick:'&?'
 			},
 			templateUrl:function(elem,attr){
@@ -20,8 +22,13 @@ define(['app'], function (app) {
 					$scope.Headers =  $scope.headers;
 					$scope.Props = $scope.props;
 					$scope.Items = $scope.data;
+					$scope.activeItem = {};
 				});
-				$scope.rowClicked = function(item){
+				$scope.$watch('activeItem',function(item){
+					console.log(item);
+				});
+				$scope.setActiveItem = function(item){
+					$scope.activeItem  = item;
 					var item  = angular.copy(item);
 					$scope.onRowClick()(item);
 				}

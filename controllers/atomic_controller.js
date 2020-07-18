@@ -1,5 +1,5 @@
 "use strict";
-define(['app','api','atomic/index'], function (app) {
+define(['app','api','atomic/bomb'], function (app) {
     app.register.controller('AtomicBasicController',['$scope','$rootScope','api','aModal',
     	function ($scope,$rootScope,api,aModal) {
 			const $selfScope =  $scope;
@@ -28,6 +28,10 @@ define(['app','api','atomic/index'], function (app) {
 				aModal.open('TestModal');
 			}
 			$scope.closeModal = function(){
+				aModal.close('TestModal');
+				$scope.ActiveItem = null;
+			}
+			$scope.confirmModal = function(){
 				aModal.close('TestModal');
 			}
 

@@ -1,5 +1,5 @@
 "use strict";
-define(['app','atomic/index'], function (app) {
+define(['app'], function (app) {
 	app.register.directive('mDeptNavpill',['$rootScope','Atomic','AtomicPath',function ($rootScope,atomic,aPath) {
 		
 		return{

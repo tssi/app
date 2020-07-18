@@ -8,6 +8,31 @@
 			<div class="filter-overload" ng-transclude></div>
 			<li class="divider" ng-show="isOverloaded"></li>
 			<div class="filter-regular">
+				<li class="dropdown-header ">SECTIONS</li>
+				<li class="dropdown-header ">
+				 	&nbsp;Grade 11
+					<span class="glyphicon glyphicon-plus pull-right"></span>
+				</li>
+				<li class="dropdown-header ">
+					&nbsp;Grade 12
+					<span class="glyphicon glyphicon-minus pull-right"></span>
+					<pre>{{  _APP|json}}</pre>
+				</li>
+
+				<li class="dropdown-header sticky-header" ng-repeat-start="YearLevel in _APP.YearLevels" ng-click="setActiveYearLevel(YearLevel)">
+					<div class="pull-left">
+						{{YearLevel.description}}
+					</div>
+					<div class="pull-right">
+						<span class="glyphicon glyphicon-chevron-down"></span>
+					</div>
+					<div class="clearfix"></div>
+				</li>
+				<li ng-repeat-end ng-repeat="sect in _APP.Sections | filter:{year_level_id:YearLevel.id}"
+				ng-show="ActiveYearLevel"
+				ng-if="ActiveYearLevel.id===sect.year_level_id">
+					<a ng-click="setActiveSection(sect)">{{sect.name}}</a>
+				</li>
 				<li class="dropdown-header ">GRADING PERIOD</li>
 				<li class="dropdown-input">
 					<div class="btn-group btn-group-period" ng-show="ActiveDept.id!=='SH'">
@@ -41,20 +66,31 @@
 						</a-button>
 					</div>
 				</li>
-				<li class="dropdown-header">SCHOOL YEAR</li>
-				<li  class="dropdown-input">
+				<li class="dropdown-header">ACTIVE SY</li>
+				<li class="dropdown-input">
 					<div class="btn-group">
 						<a-button>{{ActiveSY}} -  {{ActiveSY+1}}</a-button>
-						<a-button opt-class="btn-nav">
+						<a-button opt-class="btn-nav" ng-click="toggleOtherSY()">
+							<span class="glyphicon" ng-class="{'glyphicon-chevron-down':!toggleDropdown,' glyphicon-chevron-up':toggleDropdown}"></span>
+						</a-button>
+					</div>
+				</li>
+				<li></li>
+			</div>
+			<div class="filter-regular filter-more" ng-show="toggleDropdown">
+				<li class="dropdown-header">SCHOOL YEARS</li>
+				<li class="dropdown-input">
+					<div class="btn-group">
+						<a-button>{{ActiveSY}} -  {{ActiveSY+1}}</a-button>
+						<a-button opt-class="btn-nav" ng-disabled="ActiveSY==_APP.ACTIVE_SY" ng-click="setActiveSY(ActiveSY+1)">
 							<span class="glyphicon glyphicon-chevron-left"></span>
 						</a-button>
-						<a-button opt-class="btn-nav">
+						<a-button opt-class="btn-nav" ng-disabled="ActiveSY==_APP.START_SY" ng-click="setActiveSY(ActiveSY-1)">
 							<span class="glyphicon glyphicon-chevron-right"></span>
 						</a-button>
 					</div>
 				</li>
-				<li class="divider"></li>
-				<li class="dropdown-header">DEPARMENTS</li>
+				<li class="dropdown-header">DEPARTMENTS</li>
 				<li class="dropdown-input">
 					<div class="btn-group">
 						<a-button ng-repeat="dept in _APP.Departments"
@@ -64,13 +100,13 @@
 						</a-button>
 					</div>
 				</li>
-
-				<li class="divider"></li>
-			</div>
+				<li></li>
+			</div>	
+			<li class="divider"></li>
 			<li class="filter-footer">
 				<a-row is-fluid="true">
 					<a-col size="6"  align="center">
-						<a-button ng-click="closeFilter()">Cancel</a-button>
+						<a-button ng-click="closeFilter()">Close</a-button>
 					</a-col>
 					<a-col size="6" align="center">
 						<a-button type="primary" ng-click="confirmFilter()">Confirm</a-button>

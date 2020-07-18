@@ -1,6 +1,5 @@
 "use strict";
 define(['app',
-		'atomic/index',
 		'atomic/molecule/mDeptNavpill',
 		'atomic/molecule/mPeriodBtnGroup',
 	], function (app) {
@@ -26,13 +25,15 @@ define(['app',
 					
 					$scope._APP =  $rootScope._APP;
 					$scope._APP.Departments =  atomic.Departments;
+					$scope._APP.Sections =  atomic.Sections;
+					$scope._APP.YearLevels =  atomic.YearLevels;
 					$scope.mFilterDropdownCtrl.Active ={
 									dept:atomic.ActiveDept,
 									sy:atomic.ActiveSY,
 									sem:atomic.SelectedSem,
 									period:atomic.SelectedPeriod
 								};
-					
+					console.log("API..",$scope._APP);
 				});
 
 			},
@@ -63,9 +64,10 @@ define(['app',
 					$scope.ActiveDept = dept;
 				}
 				$scope.toggleOtherSY = function(){
-					$scope.toggleDropdown = true;
+					$scope.toggleDropdown = !$scope.toggleDropdown;
 					$scope.toggleText = $scope.toggleText == 'More'?'Less':'More';
 				}
+
 				$scope.closeFilter = function(){
 					$scope.openDropdown = false;
 				}
