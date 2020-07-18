@@ -18,6 +18,10 @@ define(['app'], function (app) {
 				$scope.Placeholder = $scope.Placeholder|| DEFAULTS.placeholder;
 			},
 			controller:function($scope){
+				$scope.clear = function(){
+					$scope.ObjModel=null;
+					$scope.ShowBtn =null;
+				}
 			}
 		}
 	}]);

@@ -3,6 +3,9 @@ define(['app'], function (app) {
 	app.register.directive('aHeader',['AtomicPath',function (aPath) {
 		return {
 			restrict: 'E',
+			scope:{
+				isMain:'=',
+			},
 			replace:true,
 			transclude:true,
 			templateUrl:function(elem,attr){

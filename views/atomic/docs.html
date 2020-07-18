@@ -3,8 +3,7 @@
 	<!-- Module -->
 	<a-module>
 		<a-container>
-			<a-header>
-				
+			<a-header is-main="true">
 				<div class="pull-left">
 					<h4>Basic Interface</h4>
 				</div>
@@ -14,17 +13,17 @@
 				</div>
 				<div class="clearfix"></div>
 			</a-header>
-			<a-canvas>
-				<a-header>
+			<a-header>
 					<a-row>
 						<a-col size="11">
 							<a-searchbox ng-model="ABC.SearchBox"></a-searchbox>
 						</a-col>
 						<a-col size="1">
-							<a-button type="primary-block" ng-click="ABC.search()">LOAD</a-button>
+							<a-button type="primary-block" ng-disabled="!ABC.SearchBox" ng-click="ABC.search()">LOAD</a-button>
 						</a-col>
 					</a-row>
 				</a-header>
+			<a-canvas>
 				<a-content>
 					<a-row>
 						<a-col>

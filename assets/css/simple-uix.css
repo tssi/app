@@ -866,6 +866,12 @@ input[type="number"]{text-align:right;}
   font-weight: bold;
   border:1px solid #ccc;
 }
-.input-group.search-box{
+.input-group.a-searchbox{
   margin-right:-25px;
+}
+.list-group-header.a-header-main{
+  z-index: 5 !important;
+}
+.btn-group.a-pager{
+  margin-right: 5px;
 }
