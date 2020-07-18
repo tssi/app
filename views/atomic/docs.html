@@ -10,7 +10,8 @@
 				<a-content>
 					<a-row>
 						<a-col>
-						Content Here
+							<a-table headers="ABC.Headers" props="ABC.Props" data="ABC.Data" on-row-click="ABC.getRecord">
+							</a-table>
 						</a-col>
 					</a-row>
 				</a-content>
@@ -22,18 +23,29 @@
 		<a-modal-body>
 			<a-row>
 				<a-col size="6">
-					<a-label>Label 1</a-label>
-					<a-textbox ng-model="ABC.Text"/>
+					<div class="form-group">
+						<a-label>Label 1</a-label>
+						<a-textbox ng-model="ABC.Text"/>
+					</div>
 				</a-col>
 				<a-col size="6">
-					<a-label>Label 2</a-label>
-					<a-textbox ng-model="ABC.Text2"/>
+					<div class="form-group">
+						<a-label>Label 2</a-label>
+						<a-textbox ng-model="ABC.Text2"/>
+					</div>
+				</a-col>
+			</a-row>
+			<a-row>
+				<a-col>
+
+					<a-label>Test Selected Row</a-label>
+					<pre>{{ABC.ModalItem|json}}</pre>
 				</a-col>
 			</a-row>
 		</a-modal-body>
 		<a-modal-footer>
 			<a-button opt-class="pull-left" ng-click="ABC.closeModal()" > Close</a-button>
-			<a-button ng-click="ABC.Text=''"> Clear</a-button>
+			<a-button ng-click="ABC.clearModal()"> Clear</a-button>
 			<a-button type="primary" ng-click="ABC.closeModal()"> Confirm</a-button>
 		</a-modal-footer>
 	</a-modal>
