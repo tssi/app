@@ -30,6 +30,7 @@ define(['app','vendors/bower_components/jquery/dist/jquery','atomic/alive/api',
 			atomic.Periods =  REGISTRY.PERIODS;
 			atomic.Sections =  REGISTRY.Sections;
 			atomic.Departments = REGISTRY.Departments;
+			atomic.YearLevels = REGISTRY.YearLevels;
 			
 			//TODO: Load from system defaults
 			atomic.ActiveSY =  REGISTRY.SCHOOL_YEARS[6].id;
@@ -47,7 +48,7 @@ define(['app','vendors/bower_components/jquery/dist/jquery','atomic/alive/api',
 	app.register.factory("AtomicPath",[function(){
 		return {
 			url:function(file){
-				return require.toUrl("vendors/atomic_design/"+file);
+				return require.toUrl("vendors/atomic_design/"+file+'?rand='+Math.random());
 			}
 		};
 	}]);

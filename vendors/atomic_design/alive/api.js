@@ -27,10 +27,8 @@ define(['app','api'], function (app,api) {
 					requestYearLevels().then(function(){
 						requestSections().then( function(){
 							angular.forEach($rootScope._APP,function(value,key){
-								console.log(key);
-								REGISRTY[key]=value;
+								REGISRTY[key]= angular.copy(value);
 							});
-							console.log(REGISRTY);
 							callback(REGISRTY);
 						});
 					});

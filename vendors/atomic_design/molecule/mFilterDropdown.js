@@ -22,10 +22,11 @@ define(['app',
 				});
 
 				atomic.ready(function(){
-					
+
 					$scope._APP =  $rootScope._APP;
 					$scope._APP.Departments =  atomic.Departments;
 					$scope._APP.Sections =  atomic.Sections;
+					
 					$scope._APP.YearLevels =  atomic.YearLevels;
 					$scope.mFilterDropdownCtrl.Active ={
 									dept:atomic.ActiveDept,
@@ -62,6 +63,12 @@ define(['app',
 				}
 				$scope.setActiveDept = function(dept){
 					$scope.ActiveDept = dept;
+				}
+
+				$scope.setActiveYearLevel = function(level){
+					if($scope.ActiveYearLevel == level) level = null;
+					$scope.ActiveYearLevel =  level;
+
 				}
 				$scope.toggleOtherSY = function(){
 					$scope.toggleDropdown = !$scope.toggleDropdown;

@@ -4,34 +4,30 @@
 		<a-button opt-class="dropdown-toggle" ng-click="openDropdown=true">
 			<span class="glyphicon glyphicon-filter"></span>
 		</a-button>
-		<ul class="dropdown-menu pull-right">
+		<ul class="dropdown-menu  pull-right">
 			<div class="filter-overload" ng-transclude></div>
 			<li class="divider" ng-show="isOverloaded"></li>
 			<div class="filter-regular">
-				<li class="dropdown-header ">SECTIONS</li>
-				<li class="dropdown-header ">
-				 	&nbsp;Grade 11
-					<span class="glyphicon glyphicon-plus pull-right"></span>
+				<li class="dropdown-header">SECTIONS</li>
+				<li class="dropdown-header dropdown-subheader" ng-repeat-start="yearLevel in _APP.YearLevels  | filter:{department_id:ActiveDept.id}" >
+						<div class="btn-group btn-group-sm">
+						<a-button>&nbsp;{{yearLevel.description}}</a-button>
+						<a-button opt-class="btn-nav" ng-click="setActiveYearLevel(yearLevel)">
+							<span class="glyphicon"
+								  ng-class="{'glyphicon-plus':yearLevel.id!==ActiveYearLevel.id,
+									'glyphicon-minus':yearLevel.id===ActiveYearLevel.id}"
+							></span>
+						</a-button>
+						</div>
 				</li>
-				<li class="dropdown-header ">
-					&nbsp;Grade 12
-					<span class="glyphicon glyphicon-minus pull-right"></span>
-					<pre>{{  _APP|json}}</pre>
-				</li>
-
-				<li class="dropdown-header sticky-header" ng-repeat-start="YearLevel in _APP.YearLevels" ng-click="setActiveYearLevel(YearLevel)">
-					<div class="pull-left">
-						{{YearLevel.description}}
-					</div>
-					<div class="pull-right">
-						<span class="glyphicon glyphicon-chevron-down"></span>
-					</div>
-					<div class="clearfix"></div>
-				</li>
-				<li ng-repeat-end ng-repeat="sect in _APP.Sections | filter:{year_level_id:YearLevel.id}"
-				ng-show="ActiveYearLevel"
-				ng-if="ActiveYearLevel.id===sect.year_level_id">
-					<a ng-click="setActiveSection(sect)">{{sect.name}}</a>
+				<li ng-repeat-end>
+					<ul ng-show="ActiveYearLevel">
+						<li ng-repeat="sect in _APP.Sections | filter:{year_level_id:yearLevel.id}" 
+						ng-show="ActiveYearLevel"
+						ng-if="ActiveYearLevel.id===sect.year_level_id">
+							<a ng-click="setActiveSection(sect)">{{sect.name}}</a>
+						</li>
+					</ul>
 				</li>
 				<li class="dropdown-header ">GRADING PERIOD</li>
 				<li class="dropdown-input">
