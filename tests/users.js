@@ -34,12 +34,12 @@ define(["model"],function($model){
 							__MSG = 'Login successful!';
 						}
 					}
-					return {success:{data:__USER,message:__MSG}};
+					return {success:{data:__USER,meta:{message:__MSG}}};
 				break;
 				case 'logout':
 					var __USER = {user:null};
 					var __MSG = 'Logout successful!';
-					return {success:{data:__USER,message:__MSG}};
+					return {success:{data:__USER,meta:{message:__MSG}}};
 				break;
 				case 'register':
 					return {success:user.save(data)};
