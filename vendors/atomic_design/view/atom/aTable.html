@@ -8,7 +8,7 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="(row,Item) in Items track by $index"
-			ng-class="{info:hoverItem==row || activeItem.id==Item.id}"
+			ng-class="{info:hoverItem==row || (activeItem.id==Item.id && activeItem.id)}"
 			ng-mouseover="hoverItem=row" ng-mouseleave="hoverItem=null"
 			ng-click="setActiveItem(Item)">
 			<td ng-repeat="prop in Props track by $index">{{Item[prop]}}</td>
