@@ -8,9 +8,10 @@
 			<div class="filter-overload" ng-transclude></div>
 			<li class="divider" ng-show="isOverloaded"></li>
 			<div class="filter-regular">
-				<li class="dropdown-header">SECTIONS</li>
-				<li class="dropdown-header dropdown-subheader" ng-repeat-start="yearLevel in _APP.YearLevels  | filter:{department_id:ActiveDept.id}" >
-						<div class="btn-group btn-group-sm">
+				<li class="dropdown-header"
+				ng-if="oFilterDropdownCtrl.showSection">SECTIONS</li>
+				<li class="dropdown-input dropdown-subheader" ng-if="oFilterDropdownCtrl.showSection" ng-repeat-start="yearLevel in _APP.YearLevels  | filter:{department_id:ActiveDept.id}" >
+						<div class="btn-group">
 						<a-button>&nbsp;{{yearLevel.description}}</a-button>
 						<a-button opt-class="btn-nav" ng-click="setActiveYearLevel(yearLevel)">
 							<span class="glyphicon"
@@ -20,12 +21,35 @@
 						</a-button>
 						</div>
 				</li>
-				<li ng-repeat-end>
+				<li class="dropdown-submenu" ng-repeat-end ng-if="oFilterDropdownCtrl.showSection&& yearLevel.id== ActiveYearLevel.id" >
 					<ul ng-show="ActiveYearLevel">
-						<li ng-repeat="sect in _APP.Sections | filter:{year_level_id:yearLevel.id}" 
+						<li class="dropdown-header" ng-hide="ActiveSections.length">
+							<a-button ng-disabled="true" type="default-block" size="sm">
+								NO SECTIONS AVAILABLE
+							</a-button>
+						</li>
+						<li ng-show="ActiveSections.length">
+							<div class="btn-group btn-group-sm">
+								<a-button is-active="sanaAll" ng-click="toggleAll()">ALL</a-button>
+								<a-button
+									opt-class="btn-nav" 
+									ng-disabled="currentPage==1 || sanaAll==true"
+									ng-click="setCurrentPage(-1)">
+									<span class="glyphicon glyphicon-chevron-left"></span>
+								</a-button>
+								<a-button opt-class="btn-nav" ng-disabled="currentPage==lastPage || sanaAll==true"ng-click="setCurrentPage(1)">
+									<span class="glyphicon glyphicon-chevron-right"></span>
+								</a-button>
+							</div>
+						</li>
+						<li ng-repeat="section in ActiveSections | 
+						startFrom:(currentPage-1)*entryLimit |
+						limitTo:entryLimit" 
+						ng-class="{active:section.id==ActiveSection.id}"
 						ng-show="ActiveYearLevel"
-						ng-if="ActiveYearLevel.id===sect.year_level_id">
-							<a ng-click="setActiveSection(sect)">{{sect.name}}</a>
+						ng-if="ActiveYearLevel.id===section.year_level_id"
+						ng-click="setActiveSection(section)">
+							<a>{{section.name}}</a>
 						</li>
 					</ul>
 				</li>
@@ -44,7 +68,7 @@
 							ng-if="(SelectedSemester.key=='FRSTSEMS'&&period.id<=2)||(SelectedSemester.key=='SCNDSEMS'&&period.id>2) "
 							>{{period.alias.short}}</button>
 						</a-button>
-						<a-button ng-if="showSem"
+						<a-button ng-if="oFilterDropdownCtrl.showSem"
 							ng-class="{'btn-primary':SelectedPeriod.id>4}" 
 							ng-click="setSelectedPeriod(SelectedSemester)"
 							>

@@ -3,18 +3,20 @@ define(['app',
 		'atomic/molecule/mDeptNavpill',
 		'atomic/molecule/mPeriodBtnGroup',
 	], function (app) {
-	app.register.directive('mFilterDropdown',['$rootScope','AtomicPath','Atomic',function ($rootScope,aPath,atomic) {
+	app.register.directive('oFilterDropdown',['$rootScope','AtomicPath','Atomic',function ($rootScope,aPath,atomic) {
+		const  DEFAULTS = {entryLimit:10};
 		return {
 			restrict: 'E',
 			scope:{
 				Active:'=ngModel',
 				showSem:'=?',
+				showSection:'=?',
 				update:'&'
 			},
 			replace:true,
 			transclude:true,
 			templateUrl:function(elem,attr){
-				return aPath.url('/view/molecule/mFilterDropdown.html');
+				return aPath.url('/view/organism/oFilterDropdown.html');
 			},
 			link: function($scope,elem, attrs,ctrl,transclude) {
 				transclude(function(clone){
@@ -28,29 +30,29 @@ define(['app',
 					$scope._APP.Sections =  atomic.Sections;
 					
 					$scope._APP.YearLevels =  atomic.YearLevels;
-					$scope.mFilterDropdownCtrl.Active ={
+					$scope.oFilterDropdownCtrl.Active ={
 									dept:atomic.ActiveDept,
 									sy:atomic.ActiveSY,
 									sem:atomic.SelectedSem,
 									period:atomic.SelectedPeriod
 								};
-					console.log("API..",$scope._APP);
+
 				});
 
 			},
 			bindToController:true,
-			controllerAs:'mFilterDropdownCtrl',
+			controllerAs:'oFilterDropdownCtrl',
 			controller:function($scope){
-				$scope.$watch("mFilterDropdownCtrl.Active",function(val){
-					
+				$scope.$watch("oFilterDropdownCtrl.Active",function(val){
 					var active =  val||{dept:null,sy:null,sem:null,period:null};
 						$scope.ActiveDept =  active.dept;
 						$scope.ActiveSY =  active.sy;
 						$scope.SelectedPeriod =  active.period;
 						$scope.SelectedSemester =  active.sem;
+					$scope.currentPage = 1;
 				});
 				$scope.toggleText='More';
-
+				
 				$scope.setActiveSY = function(sy){
 					$scope.ActiveSY =  sy;
 				}
@@ -68,7 +70,33 @@ define(['app',
 				$scope.setActiveYearLevel = function(level){
 					if($scope.ActiveYearLevel == level) level = null;
 					$scope.ActiveYearLevel =  level;
+					$scope.currentPage = 1;
+					$scope.sanaAll = false;
+					var entryLimit = $scope.entryLimit = DEFAULTS.entryLimit;
+					var sections = $scope._APP.Sections;
+					var yearlevel = $scope.ActiveYearLevel;
+					var activeSections = [];
+					for(var i in sections){
+						var section = sections[i];
+						if(section.year_level_id==yearlevel.id){
+							activeSections.push(section);
+						}
+					}
+					$scope.ActiveSections = activeSections;
+					$scope.lastPage =  Math.ceil(activeSections.length/entryLimit);
+				}
+				$scope.toggleAll = function(){
+					$scope.sanaAll = !$scope.sanaAll;
+					$scope.entryLimit = $scope.sanaAll?null: DEFAULTS.entryLimit;
+					$scope.currentPage=1;
+					
+				}
+				$scope.setCurrentPage = function(change){
+					$scope.currentPage += change;
+				}
 
+				$scope.setActiveSection = function(sect){
+					$scope.ActiveSection =  sect;
 				}
 				$scope.toggleOtherSY = function(){
 					$scope.toggleDropdown = !$scope.toggleDropdown;
@@ -85,11 +113,24 @@ define(['app',
 									period:$scope.SelectedPeriod
 									
 								};
-					$scope.mFilterDropdownCtrl.Active = active;
+					if($scope.showSection){
+						active.section =  $scope.ActiveSection;
+					}
+					$scope.oFilterDropdownCtrl.Active = active;
 					$scope.openDropdown = false;
 				}
 
 			}
 		}
 	}]);
+	app.register.filter('startFrom', function () {
+		return function (input, start) {
+			if (input) {
+				start = +start;
+				return input.slice(start);
+			}
+			return [];
+		};
+	});
+
 });

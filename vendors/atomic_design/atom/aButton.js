@@ -7,6 +7,7 @@ define(['app'], function (app) {
 			restrict: 'E',
 			scope:{
 				type:'@?',
+				isActive:'=?',
 				size:'@?',
 				optClass:'@?'
 
@@ -41,6 +42,8 @@ define(['app'], function (app) {
 				}
 				if(type == 'primary-block')
 					type = 'primary btn-block';
+				if(type == 'default-block')
+					type = 'default btn-block';
 				if(type)
 					$scope.aType =  DEFAULTS.prefix+type;
 				if(size)

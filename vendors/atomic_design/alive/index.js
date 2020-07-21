@@ -19,7 +19,7 @@ define(['app','vendors/bower_components/jquery/dist/jquery','atomic/alive/api',
 		'atomic/atom/aSearchbox',
 		'atomic/molecule/mDeptNavpill',
 		'atomic/molecule/mPeriodBtnGroup',
-		'atomic/molecule/mFilterDropdown',
+		'atomic/organism/oFilterDropdown',
 	], function (app) {
 	app.register.factory('Atomic',['AtomicAPI','$rootScope',function(aapi,$scope,$rootScope){
 		var atomic={};
