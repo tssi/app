@@ -18,7 +18,7 @@ define(['app'], function (app) {
 				
 			},
 			controller:function($scope){
-				$scope.$watchGroup(['headers','props'],function(){
+				$scope.$watchGroup(['headers','props','data'],function(){
 					$scope.Headers =  $scope.headers;
 					$scope.Props = $scope.props;
 					$scope.Items = $scope.data;
