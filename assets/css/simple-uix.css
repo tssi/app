@@ -886,10 +886,14 @@ ul.dropdown-menu .dropdown-header.dropdown-subheader {
 .dropdown-submenu ul.has-sticky{
   margin-top:3px;
 }
+.dropdown-submenu ul.has-sticky li{
+  padding:0px 20px;
+}
 .dropdown-submenu ul.has-sticky li.sticky-header{
   position:sticky;
+  padding:0px;
   top:0px;
-  backgroun:#fff;
+  background:#fff;
 }
 .dropdown-submenu ul li.sticky-header>div{
   padding-top:0px;

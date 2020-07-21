@@ -87,6 +87,7 @@ define(['app',
 						}
 					}
 					$scope.ActiveSections = activeSections;
+					$scope.ActiveSection = null;
 					$scope.lastPage =  Math.ceil(activeSections.length/entryLimit);
 				}
 				$scope.toggleAll = function(){
@@ -100,7 +101,9 @@ define(['app',
 				}
 
 				$scope.setActiveSection = function(sect){
+					if($scope.ActiveSection ==sect) sect = null;
 					if(sect=='all'){
+
 						var sections = $scope.ActiveSections;
 						var ids = [];
 						for(var i in sections){
@@ -114,6 +117,10 @@ define(['app',
 						allSections.name = "All "+allSections.year_level;
 						allSections.alias = allSections.name;
 						allSections.description = allSections.name;
+
+						if($scope.ActiveSection)
+							if($scope.ActiveSection.id=='all')
+								return $scope.ActiveSection=null;
 						$scope.ActiveSection = allSections;
 					}else{
 						$scope.ActiveSection =  sect;
@@ -154,7 +161,14 @@ define(['app',
 					if(active.period)
 						if(active.period.alias.full!=preview[1])
 							preview.push(active.period.alias.full);
-					if(active.section)
+					
+					active.section =  active.section ||{};
+					if( active.year_level)
+						preview.push(active.year_level.description);	
+					if(active.section.id=='all')
+						preview.pop();
+							
+					if(active.section.id)
 							preview.push(active.section.alias);
 					$scope.dropdownPreview = preview.join(" | ");
 				}
