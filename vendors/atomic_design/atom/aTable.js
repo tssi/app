@@ -18,14 +18,14 @@ define(['app'], function (app) {
 				
 			},
 			controller:function($scope){
-				$scope.$watchGroup(['headers','props','data'],function(){
+				$scope.$watchGroup(['headers','props'],function(){
 					$scope.Headers =  $scope.headers;
 					$scope.Props = $scope.props;
 					$scope.Items = $scope.data;
 					$scope.activeItem = {};
 				});
 				$scope.$watch('activeItem',function(item){
-					console.log(item);
+					$scope.activeItem = item;
 				});
 				$scope.setActiveItem = function(item){
 					$scope.activeItem  = item;
