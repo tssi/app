@@ -22,7 +22,7 @@ define(['app'], function (app) {
 				$scope.size = DEFAULTS.size;
 			},
 			controller:function($scope){
-
+				function updateUI(){
 				var type = $scope.type||DEFAULTS.type;
 				var size =  DEFAULTS.size;
 
@@ -50,6 +50,9 @@ define(['app'], function (app) {
 					$scope.aSize =  DEFAULTS.prefix+size;
 				
 				$scope.aClass = $scope.optClass;
+				}
+				updateUI();
+				$scope.$watch('type',updateUI);
 
 			}
 		}

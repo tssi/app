@@ -840,6 +840,7 @@ input[type="number"]{text-align:right;}
 }
 .schoolyear-selector .dropdown-menu{
   min-width: 0px;
+  margin-right: -1px;
 }
 .schoolyear-selector .dropdown-menu .btn-group{
   display:flex;
@@ -868,8 +869,8 @@ input[type="number"]{text-align:right;}
 .list-group-header.a-header-main{
   z-index: 5 !important;
 }
-.btn-group.a-pager{
-  margin-right: 5px;
+.btn-group.a-pager,.schoolyear-selector-wrapper{
+  margin-left: 10px;
 }
 ul.dropdown-menu .dropdown-header.dropdown-subheader {
   margin-top:0px;
@@ -878,6 +879,21 @@ ul.dropdown-menu .dropdown-header.dropdown-subheader {
   list-style: none;
   padding:0;
   margin:0;
+  max-height: 200px;
+  overflow: auto;
+  padding: 0;
+}
+.dropdown-submenu ul.has-sticky{
+  margin-top:3px;
+}
+.dropdown-submenu ul.has-sticky li.sticky-header{
+  position:sticky;
+  top:0px;
+  backgroun:#fff;
+}
+.dropdown-submenu ul li.sticky-header>div{
+  padding-top:0px;
+
 }
 .dropdown-submenu ul>li>a,
 .dropdown-submenu ul>li>.btn-group{
@@ -907,3 +923,5 @@ ul.dropdown-menu .dropdown-header.dropdown-subheader {
   background-color: #337ab7;
   outline: 0;
 }
+.filter-regular{display:flex;}
+.filter-minor,.filter-major{flex:1;}

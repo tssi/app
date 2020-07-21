@@ -11,7 +11,8 @@ define(['app',
 				Active:'=ngModel',
 				showSem:'=?',
 				showSection:'=?',
-				update:'&'
+				update:'&',
+				dropdownPreview:'@?'
 			},
 			replace:true,
 			transclude:true,
@@ -22,6 +23,7 @@ define(['app',
 				transclude(function(clone){
 					$scope.isOverloaded = clone.length>1;
 				});
+
 
 				atomic.ready(function(){
 
@@ -50,6 +52,7 @@ define(['app',
 						$scope.SelectedPeriod =  active.period;
 						$scope.SelectedSemester =  active.sem;
 					$scope.currentPage = 1;
+					renderPreview(active);
 				});
 				$scope.toggleText='More';
 				
@@ -96,7 +99,24 @@ define(['app',
 				}
 
 				$scope.setActiveSection = function(sect){
-					$scope.ActiveSection =  sect;
+					if(sect=='all'){
+						var sections = $scope.ActiveSections;
+						var ids = [];
+						for(var i in sections){
+							var section =  sections[i];
+							ids.push(section.id);
+						}
+						var allSections = angular.copy(sections[0]);
+						allSections.id = 'all';
+						allSections.ids = ids;
+						allSections.program_id = null;
+						allSections.name = "All "+allSections.year_level;
+						allSections.alias = allSections.name;
+						allSections.description = allSections.name;
+						$scope.ActiveSection = allSections;
+					}else{
+						$scope.ActiveSection =  sect;
+					}
 				}
 				$scope.toggleOtherSY = function(){
 					$scope.toggleDropdown = !$scope.toggleDropdown;
@@ -113,13 +133,30 @@ define(['app',
 									period:$scope.SelectedPeriod
 									
 								};
-					if($scope.showSection){
+					if($scope.oFilterDropdownCtrl.showSection){
 						active.section =  $scope.ActiveSection;
 					}
 					$scope.oFilterDropdownCtrl.Active = active;
 					$scope.openDropdown = false;
+					renderPreview(active);
 				}
-
+				function renderPreview(active){
+					if($scope.oFilterDropdownCtrl.dropdownPreview) return;
+					var preview = [];
+					if(active.sy)
+						preview .push("SY "+ active.sy + " - "+ active.sy);
+					if(active.sem)
+						preview.push(active.sem.alias.full);
+					if(active.period)
+						if(active.period.alias.full!=preview[1])
+							preview.push(active.period.alias.full);
+					if(active.section)
+							preview.push(active.section.alias);
+					$scope.dropdownPreview = preview.join(" | ");
+				}
+				$scope.$watch('oFilterDropdownCtrl.dropdownPreview',function(value){
+					$scope.dropdownPreview = value;
+				});
 			}
 		}
 	}]);

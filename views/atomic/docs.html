@@ -9,7 +9,18 @@
 				</div>
 				<div class="pull-right">
 					<a-pager meta="ABC.Meta" on-navigate="ABC.goToPage"></a-pager>
-					<o-filter-dropdown ng-model="ABC.Active" show-sem="true" show-section="true"></o-filter-dropdown>
+					<o-filter-dropdown ng-model="ABC.Active" dropdown-preview="{{'SY ' + ABC.Active.sy + ' - '+(ABC.Active.sy+1)}}">
+						<li class="dropdown-header">HELLO</li>
+						<li class="dropdown-input">
+							<div class="btn-group">
+								<a-button>Hello</a-button>
+								<a-button>Hello 1</a-button>
+							</div>
+						</li>
+					</o-filter-dropdown>
+					<o-filter-dropdown ng-model="ABC.Active" show-sem="true" show-section="true">
+					</o-filter-dropdown>
+
 				</div>
 				<div class="clearfix"></div>
 			</a-header>
@@ -18,7 +29,7 @@
 						<a-col size="11">
 							<a-searchbox ng-model="ABC.SearchBox"></a-searchbox>
 						</a-col>
-						<a-col size="1">
+						<a-col size="1" style="padding-left:0px">
 							<a-button type="primary-block" ng-disabled="!ABC.SearchBox" ng-click="ABC.search()">LOAD</a-button>
 						</a-col>
 					</a-row>
@@ -26,9 +37,12 @@
 			<a-canvas>
 				<a-content>
 					<a-row>
-						<a-col>
+						<a-col size="6">
 							<a-table headers="ABC.Headers" props="ABC.Props" data="ABC.Data" on-row-click="ABC.getRecord" ng-model="ABC.ActiveItem">
 							</a-table>
+						</a-col>
+						<a-col size="6">
+							<pre>{{ABC.Active|json}}</pre>
 						</a-col>
 					</a-row>
 				</a-content>
