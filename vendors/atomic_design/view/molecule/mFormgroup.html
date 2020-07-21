@@ -1,9 +1,9 @@
 <div class="form-group">
-	<a-label>{{ObjLabel}}</a-label>
-	<a-textbox  ng-if="!ObjOptions" ng-model="ObjModel"/>
-	<select a-select
-		ng-if="ObjOptions"
-		ng-options="item as item[ObjOptionLabel] group by item[ObjOptionGroup] for item in ObjOptions track by $index" ng-model="ObjModel">
-		<option value="">Select {{ObjLabel}}</option>
+	<a-label>{{mFormgroupCtrl.ObjLabel}}</a-label>
+	<a-textbox  ng-if="!mFormgroupCtrl.ObjOptions" ng-model="mFormgroupCtrl.ObjModel"/>
+	<select ng-if="mFormgroupCtrl.ObjOptions"  a-select
+		ng-model="mFormgroupCtrl.ObjModel"
+		ng-options="oItem.id as oItem[ObjOptionLabel] group by  oItem[mFormgroupCtrl.ObjOptionGroup] for oItem in mFormgroupCtrl.ObjOptions">
+		<option value="">Select {{mFormgroupCtrl.ObjLabel}}</option>
 	</select>
 </div>

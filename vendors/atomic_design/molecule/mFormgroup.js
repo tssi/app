@@ -14,11 +14,20 @@ define(['app'], function (app) {
 			},
 			replace:true,
 			transclude:false,
+			bindToController:true,
+			controllerAs:'mFormgroupCtrl',
 			templateUrl:function(elem,attr){
 				return aPath.url('/view/molecule/mFormgroup.html');
 			},
 			link: function($scope,elem, attrs) {
-				$scope.ObjOptionLabel = $scope.ObjOptionLabel|| DEFAULTS.optionLabel;
+				$scope.ObjOptionLabel = $scope.mFormgroupCtrl.ObjOptionLabel|| DEFAULTS.optionLabel
+			},
+			controller:function($scope){
+				$scope.$watch('mFormgroupCtrl.ObjModel',function(value){
+
+					$scope.ObjModel = value;
+
+				});
 			}
 		}
 	}]);
