@@ -10,6 +10,7 @@ define(['app',
 			scope:{
 				Active:'=ngModel',
 				showSem:'=?',
+				showYearLevel:'=?',
 				showSection:'=?',
 				update:'&',
 				dropdownPreview:'@?'
@@ -135,6 +136,9 @@ define(['app',
 								};
 					if($scope.oFilterDropdownCtrl.showSection){
 						active.section =  $scope.ActiveSection;
+					}
+					if($scope.oFilterDropdownCtrl.showYearLevel){
+						active.year_level =  $scope.ActiveYearLevel;
 					}
 					$scope.oFilterDropdownCtrl.Active = active;
 					$scope.openDropdown = false;

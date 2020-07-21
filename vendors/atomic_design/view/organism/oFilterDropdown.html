@@ -12,6 +12,14 @@
 			<div class="filter-regular">
 				<div class="filter-minor">
 					<li class="dropdown-header"
+					ng-if="oFilterDropdownCtrl.showYearLevel">YEAR LEVELS</li>
+					<li class="dropdown-input dropdown-subheader" ng-if="oFilterDropdownCtrl.showYearLevel"  >
+							<div class="btn-group">
+							<a-button ng-repeat="yearLevel in _APP.YearLevels  | filter:{department_id:ActiveDept.id}" is-active="yearLevel.id==ActiveYearLevel.id" ng-click="setActiveYearLevel(yearLevel)">&nbsp;{{yearLevel.description}}</a-button>
+							
+							</div>
+					</li>
+					<li class="dropdown-header"
 					ng-if="oFilterDropdownCtrl.showSection">SECTIONS</li>
 					<li class="dropdown-input dropdown-subheader" ng-if="oFilterDropdownCtrl.showSection" ng-repeat-start="yearLevel in _APP.YearLevels  | filter:{department_id:ActiveDept.id}" >
 							<div class="btn-group">
@@ -45,7 +53,7 @@
 									</a-button>
 								</div>
 							</li>
-							<li ng-class="{active:ActiveSection.id=='all'}">
+							<li ng-show="ActiveSections.length" ng-class="{active:ActiveSection.id=='all'}">
 								<a ng-click="setActiveSection('all')">All {{yearLevel.description}}</a>
 							</li>
 							<li ng-repeat="section in ActiveSections | 
