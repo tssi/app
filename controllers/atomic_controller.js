@@ -9,6 +9,9 @@ define(['app','api','atomic/bomb'], function (app) {
 				$scope.Text = "Text";
 				$scope.Headers = ['ID','Title','Description'];
 				$scope.Props = ['id','title','description'];
+				$scope.Options = [{id:1, name:"Option 1",alias:'O1', group:"Odd"},
+									{id:2, name:"Option 2",alias:'O2',group:"Even"},
+									{id:2, name:"Option 3",alias:'O3',group:"Odd"}];
 				loadTests(1);
 			}
 			

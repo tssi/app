@@ -9,18 +9,8 @@
 				</div>
 				<div class="pull-right">
 					<a-pager meta="ABC.Meta" on-navigate="ABC.goToPage"></a-pager>
-					<o-filter-dropdown ng-model="ABC.Active" dropdown-preview="{{'SY ' + ABC.Active.sy + ' - '+(ABC.Active.sy+1)}}">
-						<li class="dropdown-header">HELLO</li>
-						<li class="dropdown-input">
-							<div class="btn-group">
-								<a-button>Hello</a-button>
-								<a-button>Hello 1</a-button>
-							</div>
-						</li>
-					</o-filter-dropdown>
 					<o-filter-dropdown ng-model="ABC.Active" show-sem="true" show-year-level="true" show-section="true">
 					</o-filter-dropdown>
-
 				</div>
 				<div class="clearfix"></div>
 			</a-header>
@@ -37,12 +27,9 @@
 			<a-canvas>
 				<a-content>
 					<a-row>
-						<a-col size="6">
+						<a-col>
 							<a-table headers="ABC.Headers" props="ABC.Props" data="ABC.Data" on-row-click="ABC.getRecord" ng-model="ABC.ActiveItem">
 							</a-table>
-						</a-col>
-						<a-col size="6">
-							<pre>{{ABC.Active|json}}</pre>
 						</a-col>
 					</a-row>
 				</a-content>
@@ -54,15 +41,13 @@
 		<a-modal-body>
 			<a-row>
 				<a-col size="6">
-					<div class="form-group">
-						<a-label>Label 1</a-label>
-						<a-textbox ng-model="ABC.Text"/>
-					</div>
+						<m-formgroup label="Text" ng-model="ABC.Text" ></m-formgroup>
 				</a-col>
 				<a-col size="6">
 					<div class="form-group">
-						<a-label>Label 2</a-label>
-						<a-textbox ng-model="ABC.Text2"/>
+						<m-formgroup label="Simple Option" ng-model="ABC.Option" options="ABC.Options"></m-formgroup>
+						<m-formgroup label="Alias Option" ng-model="ABC.Option" options="ABC.Options" option-label="alias" ></m-formgroup>
+						<m-formgroup label="Grouped Option" ng-model="ABC.Option" options="ABC.Options" option-label="alias" option-group="group" ></m-formgroup>
 					</div>
 				</a-col>
 			</a-row>
