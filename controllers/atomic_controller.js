@@ -1,5 +1,6 @@
 "use strict";
-define(['app','api','atomic/bomb'], function (app) {
+define(['app','api','atomic/bomb','controllers/example_controller'], function (app) {
+
     app.register.controller('AtomicBasicController',['$scope','$rootScope','api','aModal',
     	function ($scope,$rootScope,api,aModal) {
 			const $selfScope =  $scope;
