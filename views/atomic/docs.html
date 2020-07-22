@@ -27,9 +27,12 @@
 			<a-canvas>
 				<a-content>
 					<a-row>
-						<a-col>
+						<a-col size="6">
 							<a-table headers="ABC.Headers" props="ABC.Props" data="ABC.Data" on-row-click="ABC.getRecord" ng-model="ABC.ActiveItem">
 							</a-table>
+						</a-col>
+						<a-col size="6">
+							<pre>{{ABC.Active | json}}</pre>
 						</a-col>
 					</a-row>
 				</a-content>
@@ -72,6 +75,7 @@
 		<a-container>
 			<a-header>
 				<h5>Data Interface</h5>
+				<o-filter-dropdown ng-model="ABC.Active"></o-filter-dropdown>
 			</a-header>
 			<a-canvas>
 				<a-content>

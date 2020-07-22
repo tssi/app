@@ -33,12 +33,16 @@ define(['app',
 					$scope._APP.Sections =  atomic.Sections;
 					
 					$scope._APP.YearLevels =  atomic.YearLevels;
-					$scope.oFilterDropdownCtrl.Active ={
+					var active = {
 									dept:atomic.ActiveDept,
 									sy:atomic.ActiveSY,
 									sem:atomic.SelectedSem,
 									period:atomic.SelectedPeriod
 								};
+					if(active.period.id>4)
+						active.period.id = active.period.id/10;
+						active.esp =  parseFloat(active.sy+'.'+active.period.id);
+					$scope.oFilterDropdownCtrl.Active =active;
 
 				});
 
@@ -47,9 +51,10 @@ define(['app',
 			controllerAs:'oFilterDropdownCtrl',
 			controller:function($scope){
 				$scope.$watch("oFilterDropdownCtrl.Active",function(val){
-					var active =  val||{dept:null,sy:null,sem:null,period:null};
+					var active =  val||{dept:null,sy:null,sem:null,period:null,esp:null};
 						$scope.ActiveDept =  active.dept;
 						$scope.ActiveSY =  active.sy;
+						$scope.ActiveESP =  active.esp;
 						$scope.SelectedPeriod =  active.period;
 						$scope.SelectedSemester =  active.sem;
 					$scope.currentPage = 1;
@@ -141,6 +146,9 @@ define(['app',
 									period:$scope.SelectedPeriod
 									
 								};
+					if(active.period.id>4)
+						active.period.id = active.period.id/10;
+					active.esp =  parseFloat(active.sy+'.'+active.period.id);
 					if($scope.oFilterDropdownCtrl.showSection){
 						active.section =  $scope.ActiveSection;
 					}
