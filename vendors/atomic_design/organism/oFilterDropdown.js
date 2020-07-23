@@ -25,9 +25,15 @@ define(['app',
 					$scope.isOverloaded = clone.length>1;
 				});
 
+				
 
-				atomic.ready(function(){
-
+			},
+			bindToController:true,
+			controllerAs:'oFilterDropdownCtrl',
+			controller:function($scope){
+				console.log("CONTROLLER");
+				function bindData(){
+					console.log("atomic bind");
 					$scope._APP =  $rootScope._APP;
 					$scope._APP.Departments =  atomic.Departments;
 					$scope._APP.Sections =  atomic.Sections;
@@ -42,15 +48,14 @@ define(['app',
 					if(active.period.id>4)
 						active.period.id = active.period.id/10;
 						active.esp =  parseFloat(active.sy+'.'+active.period.id);
-					$scope.oFilterDropdownCtrl.Active =active;
+					$scope.oFilterDropdownCtrl.Active = active;
+				}
 
-				});
+				atomic.ready(bindData).fuse();
 
-			},
-			bindToController:true,
-			controllerAs:'oFilterDropdownCtrl',
-			controller:function($scope){
-				$scope.$watch("oFilterDropdownCtrl.Active",function(val){
+				$scope.$watch("oFilterDropdownCtrl.Active",buildActive);
+
+				function buildActive(val){
 					var active =  val||{dept:null,sy:null,sem:null,period:null,esp:null};
 						$scope.ActiveDept =  active.dept;
 						$scope.ActiveSY =  active.sy;
@@ -59,7 +64,7 @@ define(['app',
 						$scope.SelectedSemester =  active.sem;
 					$scope.currentPage = 1;
 					renderPreview(active);
-				});
+				}
 				$scope.toggleText='More';
 				
 				$scope.setActiveSY = function(sy){

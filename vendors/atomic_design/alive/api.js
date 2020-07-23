@@ -1,7 +1,7 @@
 "use strict";
 define(['app','api'], function (app,api) {
 	app.register.factory('AtomicAPI',function ($rootScope,api) {
-		const REGISRTY = {};
+		const REGISRTY = {ready:false};
 		const data = {limit:'less'};
 
 		function requestSections(){
@@ -29,10 +29,14 @@ define(['app','api'], function (app,api) {
 							angular.forEach($rootScope._APP,function(value,key){
 								REGISRTY[key]= angular.copy(value);
 							});
+							REGISRTY.ready = true;
 							callback(REGISRTY);
 						});
 					});
 				});
+			},
+			isReady:function(){
+				return REGISRTY.ready;
 			}
 		}
 	});

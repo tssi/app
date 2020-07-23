@@ -43,6 +43,13 @@ define(['app','vendors/bower_components/jquery/dist/jquery','atomic/alive/api',
 		});
 		atomic.ready = function(callback){
 			$scope.$on('atomicReady',callback);
+			return atomic;
+		}
+		atomic.fuse = function(){
+			var isReady = aapi.isReady();
+			if(isReady)
+				$scope.$emit('atomicReady');
+			return isReady;
 		}
 		return atomic;
 	}]);
