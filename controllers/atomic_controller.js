@@ -8,21 +8,26 @@ define(['app','api','atomic/bomb','controllers/example_controller'], function (a
 			$scope.init = function(){
 				$rootScope.__MODULE_NAME =  "Atomic Basic Controls";
 				$scope.Text = "Text";
-				$scope.Headers = ['ID','Title','Description'];
-				$scope.Props = ['id','title','description'];
+				$scope.Headers = ['ID','Level','Description'];
+				$scope.Props = ['id','year_level','description'];
 				$scope.Options = [{id:1, name:"Option 1",alias:'O1', group:"Odd"},
 									{id:2, name:"Option 2",alias:'O2',group:"Even"},
 									{id:2, name:"Option 3",alias:'O3',group:"Odd"}];
+				$scope.SearchBy = ['description','year_level'];
 				loadTests(1);
 			}
 			
-			function loadTests(page){
+			function loadTests(page,search){
 				var filter = {'limit':5,'page':page};
+				if(search){
+					filter.keyword =  search.keyword;
+					filter.fields = search.fields;
+				}
 				var success = function(response){
 					$scope.Meta =  response.meta;
 					$scope.Data = response.data;
 				}
-				api.GET('test',filter,success);
+				api.GET('sections',filter,success);
 			}
 
 			$scope.goToPage = function(page){
@@ -50,7 +55,10 @@ define(['app','api','atomic/bomb','controllers/example_controller'], function (a
 			}
 			
 			$scope.search = function(){
-				console.log($scope.SearchBox);
+				var keyword = $scope.SearchBox;
+				var fields = $scope.Props;
+				var search = {keyword:keyword,fields:fields};
+				loadTests(1,search);
 			}
 
     }]);

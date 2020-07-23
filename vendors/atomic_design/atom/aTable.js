@@ -8,6 +8,8 @@ define(['app'], function (app) {
 				headers:"=",
 				props:"=",
 				data:"=",
+				searchBy:'=',
+				searchWord:'=',
 				activeItem:'=ngModel',
 				onRowClick:'&?'
 			},
@@ -31,6 +33,26 @@ define(['app'], function (app) {
 					$scope.activeItem  = item;
 					var item  = angular.copy(item);
 					$scope.onRowClick()(item);
+				}
+				$scope.$watch('searchWord',function(){
+					$scope.searchFilter={};
+					for(var i in  $scope.searchBy){
+						var field = $scope.searchBy[i];
+						$scope.searchFilter[field]=$scope.searchWord;
+					}
+				});
+				$scope.UIItems = [];
+				$scope.searchLocal = function(item){
+					var isMatched = !$scope.searchWord;
+					if($scope.searchWord){
+						var SWORD = $scope.searchWord.toUpperCase();
+						for(var i in  $scope.searchBy){
+							var field = $scope.searchBy[i];
+							if(item[field])
+								isMatched = isMatched || item[field].toUpperCase().includes(SWORD);
+						}
+					}
+					return isMatched;
 				}
 			}
 		}

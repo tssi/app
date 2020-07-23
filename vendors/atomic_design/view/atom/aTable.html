@@ -7,11 +7,21 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="(row,Item) in Items track by $index"
+		<tr ng-repeat="(row,Item) in (UIItems = ( Items | filter:searchLocal )  ) track by $index"
 			ng-class="{info:hoverItem==row || (activeItem.id==Item.id && activeItem.id)}"
 			ng-mouseover="hoverItem=row" ng-mouseleave="hoverItem=null"
 			ng-click="setActiveItem(Item)">
 			<td ng-repeat="prop in Props track by $index">{{Item[prop]}}</td>
 		</tr>
+		<tr ng-show="!searchWord && !UIItems.length">
+			<td colspan="{{Headers.length}}">
+				<span class="glyphicon glyphicon-refresh animate spin"></span>
+				Loading...
+			</td>
+		</tr>
+		<tr ng-show="searchWord && !UIItems.length">
+			<td  colspan="{{Headers.length}}">
+				No Records for <b><i>{{searchWord}}</i></b>.
+		</td></tr>
 	</tbody>
 </table>

@@ -20,7 +20,7 @@
 							<a-searchbox ng-model="ABC.SearchBox"></a-searchbox>
 						</a-col>
 						<a-col size="1" style="padding-left:0px">
-							<a-button type="primary-block" ng-disabled="!ABC.SearchBox" ng-click="ABC.search()">LOAD</a-button>
+							<a-button type="default-block" is-active="ABC.SearchBox" ng-disabled="!ABC.SearchBox" ng-click="ABC.search()">LOAD</a-button>
 						</a-col>
 					</a-row>
 				</a-header>
@@ -28,7 +28,7 @@
 				<a-content>
 					<a-row>
 						<a-col size="6">
-							<a-table headers="ABC.Headers" props="ABC.Props" data="ABC.Data" on-row-click="ABC.getRecord" ng-model="ABC.ActiveItem">
+							<a-table headers="ABC.Headers" props="ABC.Props" data="ABC.Data" search-by="ABC.SearchBy"  search-word="ABC.SearchBox" on-row-click="ABC.getRecord" ng-model="ABC.ActiveItem">
 							</a-table>
 						</a-col>
 						<a-col size="6">
