@@ -1,5 +1,16 @@
 <table class="table table-bordered">
 	<thead>
+		<tr ng-show="searchWord">
+			<td class="text-center" colspan="{{Headers.length}}" style="padding:0;padding-top:10px">
+				<h5 class="list-group-item-heading">
+					Search result(s) for <b><i>{{searchWord}}</i></b>.
+				</h5>
+				<p>Click
+					<span class="glyphicon glyphicon-search"></span> to search all or
+					<span class="glyphicon glyphicon-remove"></span> to clear.
+				</p>
+			</td>
+		</tr>
 		<tr>
 			<th ng-repeat="hdr in Headers" ng-class="hdr.class">
 				{{hdr.label?hdr.label:hdr}}
@@ -21,7 +32,7 @@
 		</tr>
 		<tr ng-show="searchWord && !UIItems.length">
 			<td  colspan="{{Headers.length}}">
-				No Records for <b><i>{{searchWord}}</i></b>.
+				<span class="glyphicon glyphicon-ban-circle"></span> No Records on this page for <b><i>{{searchWord}}</i></b>.
 		</td></tr>
 	</tbody>
 </table>

@@ -9,7 +9,8 @@ define(['app'], function (app) {
 			scope:{
 				ObjModel:'=ngModel',
 				onSearch:'&?',
-				onClear:'&?'
+				onClear:'&?',
+				isLarge:'=?',
 			},
 			replace:true,
 			transclude: false,
@@ -20,6 +21,10 @@ define(['app'], function (app) {
 				$scope.Placeholder = $scope.Placeholder|| DEFAULTS.placeholder;
 			},
 			controller:function($scope){
+				
+				if($scope.isLarge)
+					$scope.inputSize =  'input-group-lg';
+				
 				$scope.clear = function(){
 					$scope.ObjModel=null;
 					$scope.ShowBtn =null;
