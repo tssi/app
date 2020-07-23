@@ -48,8 +48,13 @@ define(['app'], function (app) {
 						var SWORD = $scope.searchWord.toUpperCase();
 						for(var i in  $scope.searchBy){
 							var field = $scope.searchBy[i];
-							if(item[field])
-								isMatched = isMatched || item[field].toUpperCase().includes(SWORD);
+							if(item[field]){
+								var value =  item[field];
+								if( typeof value == "string")
+									isMatched = isMatched || value.toUpperCase().includes(SWORD);
+								else if( typeof value == "number")
+									isMatched = isMatched || (value+"").indexOf(SWORD) == 0;
+							}
 						}
 					}
 					return isMatched;
