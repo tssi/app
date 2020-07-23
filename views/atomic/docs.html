@@ -16,11 +16,8 @@
 			</a-header>
 			<a-header>
 					<a-row>
-						<a-col size="11">
-							<a-searchbox ng-model="ABC.SearchBox"></a-searchbox>
-						</a-col>
-						<a-col size="1" style="padding-left:0px">
-							<a-button type="default-block" is-active="ABC.SearchBox" ng-disabled="!ABC.SearchBox" ng-click="ABC.search()">LOAD</a-button>
+						<a-col>
+							<a-searchbox ng-model="ABC.SearchBox" on-search="ABC.search" on-clear="ABC.clearSearch"></a-searchbox>
 						</a-col>
 					</a-row>
 				</a-header>

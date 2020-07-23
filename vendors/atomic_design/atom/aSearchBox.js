@@ -8,6 +8,8 @@ define(['app'], function (app) {
 			restrict: 'E',
 			scope:{
 				ObjModel:'=ngModel',
+				onSearch:'&?',
+				onClear:'&?'
 			},
 			replace:true,
 			transclude: false,
@@ -21,6 +23,15 @@ define(['app'], function (app) {
 				$scope.clear = function(){
 					$scope.ObjModel=null;
 					$scope.ShowBtn =null;
+					$scope.searchActive = false;
+					if($scope.onClear)
+						$scope.onClear()();
+				}
+				$scope.search = function(){
+					$scope.searchActive = true;
+					var keyword = $scope.ObjModel;
+					if($scope.onSearch)
+						$scope.onSearch()(keyword);
 				}
 			}
 		}

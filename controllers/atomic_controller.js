@@ -54,11 +54,13 @@ define(['app','api','atomic/bomb','controllers/example_controller'], function (a
 				$scope.ModalItem =  null;
 			}
 			
-			$scope.search = function(){
-				var keyword = $scope.SearchBox;
+			$scope.search = function(keyword){
 				var fields = $scope.Props;
 				var search = {keyword:keyword,fields:fields};
 				loadTests(1,search);
+			}
+			$scope.clearSearch = function(){
+				loadTests(1);
 			}
 
     }]);

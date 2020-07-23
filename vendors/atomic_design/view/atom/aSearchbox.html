@@ -1,13 +1,13 @@
 <div class="input-group a-searchbox">
   <span class="input-group-btn">
-    <button class="btn btn-default"   ng-disabled="!ObjModel" >
+    <a-button ng-click="search()" ng-disabled="!ObjModel||searchActive" >
 		<span class="glyphicon" ng-class="{'glyphicon-search':!Model.id, 'glyphicon-remove':ObjModel.id,'glyphicon-refresh':loadingRecords}"></span>
-    </button>
+    </a-button>
   </span>
-  <input  class="form-control" type="text" placeholder="{{!ShowBtn?Placeholder[0]:Placeholder[1]}}" ng-model="ObjModel"ng-focus="ShowBtn=true" ng-blur="ShowBtn=ObjModel?true:false" ng-disabled="ObjModel.id"/>
+  <input  class="form-control" type="text" placeholder="{{!ShowBtn?Placeholder[0]:Placeholder[1]}}" ng-model="ObjModel" ng-focus="ShowBtn=true" ng-blur="ShowBtn=ObjModel?true:false" ng-disabled="ObjModel.id||searchActive"/>
   <span class="input-group-btn" ng-if="ShowBtn">
-    <button class="btn btn-default"  ng-disabled="!ObjModel"  ng-click="clear()">
-		<span class="glyphicon glyphicon-remove"></span>
-    </button>
+    <a-button ng-disabled="!ObjModel&&!searchActive"  ng-click="clear()">
+		  <span class="glyphicon glyphicon-remove"></span>
+    </a-button>
   </span>
 </div>
