@@ -31,9 +31,7 @@ define(['app',
 			bindToController:true,
 			controllerAs:'oFilterDropdownCtrl',
 			controller:function($scope){
-				console.log("CONTROLLER");
 				function bindData(){
-					console.log("atomic bind");
 					$scope._APP =  $rootScope._APP;
 					$scope._APP.Departments =  atomic.Departments;
 					$scope._APP.Sections =  atomic.Sections;
@@ -168,7 +166,7 @@ define(['app',
 					if($scope.oFilterDropdownCtrl.dropdownPreview) return;
 					var preview = [];
 					if(active.sy)
-						preview .push("SY "+ active.sy + " - "+ active.sy);
+						preview .push("SY "+ active.sy + " - "+ (active.sy+1));
 					if(active.sem)
 						preview.push(active.sem.alias.full);
 					if(active.period)
