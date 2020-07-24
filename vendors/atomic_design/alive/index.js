@@ -34,10 +34,16 @@ define(['app','vendors/bower_components/jquery/dist/jquery','atomic/alive/api',
 			atomic.YearLevels = REGISTRY.YearLevels;
 			
 			//TODO: Load from system defaults
-			atomic.ActiveSY =  REGISTRY.SCHOOL_YEARS[6].id;
-			atomic.ActiveDept = REGISTRY.Departments[1];
-			atomic.SelectedSem =  REGISTRY.SEMESTERS[0];
-			atomic.SelectedPeriod =  REGISTRY.PERIODS[0];
+			atomic.ActiveSY =  REGISTRY.ACTIVE_SY;
+			atomic.ActiveDept = REGISTRY.Departments[0];
+			for(var i in atomic.Departments){
+				var dept = atomic.Departments[i];
+				var id =  dept.id;
+				if(id==REGISTRY.__USER.user.department_id)
+					atomic.ActiveDept = dept;
+			}
+			atomic.SelectedSem =  REGISTRY.DEFAULT_.SEMESTER;
+			atomic.SelectedPeriod =  REGISTRY.DEFAULT_.PERIOD;
 
 			$scope.$emit('atomicReady');
 		});

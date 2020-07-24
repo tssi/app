@@ -29,6 +29,7 @@ define(['app','api'], function (app,api) {
 							angular.forEach($rootScope._APP,function(value,key){
 								REGISRTY[key]= angular.copy(value);
 							});
+							REGISRTY.__USER = $rootScope.__USER;
 							REGISRTY.ready = true;
 							callback(REGISRTY);
 						});
