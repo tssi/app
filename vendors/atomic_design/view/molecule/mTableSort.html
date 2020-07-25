@@ -28,7 +28,7 @@
 		</tr>
 	</thead>
 	<tbody ui-tree-nodes ng-model="SortItems">
-		<tr ui-tree-node ng-repeat="(row,Item) in (UIItems = (SortItems | uniqueItem:'id')) track by $index">
+		<tr ui-tree-node ng-repeat="(row,Item) in (UIItems = (SortItems | uniqueItem:'id'))">
 			<td class="align-middle {{Headers[$index].class}}"  ng-repeat="prop in Props track by $index" >
 			<a-textbox ng-model="Item[prop]" ng-disabled="true"></a-textbox>
 			</td>
