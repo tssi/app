@@ -1,9 +1,9 @@
 "use strict";
 define(['app',
-		'atomic/molecule/mDeptNavpill',
-		'atomic/molecule/mPeriodBtnGroup',
+		'atomic/molecule/mNavpillDept',
+		'atomic/molecule/mBtnGroupPeriod',
 	], function (app) {
-	app.register.directive('oFilterDropdown',['$rootScope','AtomicPath','Atomic',function ($rootScope,aPath,atomic) {
+	var oDropdownFilter = ['$rootScope','AtomicPath','Atomic',function ($rootScope,aPath,atomic) {
 		const  DEFAULTS = {entryLimit:10};
 		return {
 			restrict: 'E',
@@ -18,7 +18,7 @@ define(['app',
 			replace:true,
 			transclude:true,
 			templateUrl:function(elem,attr){
-				return aPath.url('/view/organism/oFilterDropdown.html');
+				return aPath.url('/view/organism/oDropdownFilter.html');
 			},
 			link: function($scope,elem, attrs,ctrl,transclude) {
 				transclude(function(clone){
@@ -188,7 +188,10 @@ define(['app',
 				});
 			}
 		}
-	}]);
+	}];
+	app.register.directive('oDropdownFilter',oDropdownFilter);
+	app.register.directive('oFilterDropdown',oDropdownFilter);
+
 	app.register.filter('startFrom', function () {
 		return function (input, start) {
 			if (input) {
