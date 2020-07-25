@@ -1,5 +1,6 @@
 "use strict";
 define(['app','vendors/bower_components/jquery/dist/jquery','atomic/alive/api',
+		'atomic/alive/path',
 		'atomic/atom/aButton',
 		'atomic/atom/aFab',
 		'atomic/atom/aTextbox',
@@ -58,16 +59,5 @@ define(['app','vendors/bower_components/jquery/dist/jquery','atomic/alive/api',
 			return isReady;
 		}
 		return atomic;
-	}]);
-	app.register.factory("AtomicPath",[function(){
-		return {
-			url:function(file){
-				var path =require.config().toUrl("vendors/atomic_design"+file+'?rand='+Math.random());
-				var parent = require.config().toUrl("").split("/");
-				if(parent.length>1)
-					path  =  parent[0]+'/'+path;
-				return path;
-			}
-		};
 	}]);
 });
