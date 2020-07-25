@@ -1,0 +1,63 @@
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th ng-repeat="hdr in Headers" ng-class="hdr.class">
+				{{hdr.label?hdr.label:hdr}}
+			</th>
+			<th>
+				<a-button type="primary" ng-click="confirmEdit()">
+					<a-glyph icon="floppy-disk"></a-glyph>
+				</a-button>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="{{Headers.length+1}}">
+				<div class="help-text">
+				Click
+				<a-button size="xs" ng-disabled="true">
+					<a-glyph icon="plus"></a-glyph>
+				</a-button>
+				to add an item.
+				Click 
+				<a-button size="xs" ng-disabled="true">
+					<a-glyph icon="floppy-disk"></a-glyph>
+				</a-button>
+				to confirm.
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td ng-repeat="prop in Props track by $index">
+				<a-textbox ng-if="!Inputs[$index].options" ng-model="NewItem[Inputs[$index].field]"></a-textbox>
+				<select ng-if="Inputs[$index].options"  a-select
+					ng-model="NewItem[Inputs[$index].field]"
+					ng-options="oItem.id as oItem[Inputs[$index].optionLabel] group by  oItem[Inputs[$index].optionsGroup] for oItem in Inputs[$index].options">
+					<option value="">Select {{Inputs[$index].optionLabel}}</option>
+				</select>
+			</td>
+			<td class="text-center">
+				<a-button type="success" ng-click="addItem(NewItem)">
+					<a-glyph icon="plus"></a-glyph>
+				</a-button>
+			</td>
+		</tr>
+		<tr ng-repeat="(row,Item) in (UIItems = ( EditItems )  ) track by $index">
+			<td ng-repeat="prop in Props track by $index">
+				<a-textbox ng-if="!Inputs[$index].options" ng-model="Item[Inputs[$index].field]"></a-textbox>
+				<select ng-if="Inputs[$index].options"  a-select
+					ng-model="Item[Inputs[$index].field]"
+					ng-options="oItem.id as oItem[Inputs[$index].optionLabel] group by  oItem[Inputs[$index].optionsGroup] for oItem in Inputs[$index].options">
+					<option value="">Select {{Inputs[$index].optionLabel}}</option>
+				</select>
+			</td>
+			<td class="text-center">
+				<a-button type="danger" ng-click="deleteItem($index)">
+					<a-glyph icon="remove"></a-glyph>
+				</a-button>
+			</td>
+
+		</tr>
+	</tbody>
+</table>
