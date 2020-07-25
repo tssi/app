@@ -1,8 +1,14 @@
 <table class="table table-bordered" ui-tree>
 	<thead>
 		<tr>
-			<th ng-repeat="hdr in Headers" ng-class="hdr.class">
-				{{hdr.label?hdr.label:hdr}}
+			<th colspan="{{Headers.length}}">
+				<div class="help-text">
+				Click
+				<a-button size="xs" ng-disabled="true">
+					<a-glyph icon="sort"></a-glyph>
+				</a-button>
+				and drag to sort.
+				</div>
 			</th>
 			<th class="text-center">
 				<a-button type="primary"  ng-click="confirmSort()">
@@ -10,24 +16,18 @@
 				</a-button>
 			</th>
 		</tr>
+		<tr>
+			<th ng-repeat="hdr in Headers" ng-class="hdr.class">
+				{{hdr.label?hdr.label:hdr}}
+			</th>
+			<th>
+				<a-button ng-click="initEdit()">
+					<a-glyph icon="pencil"></a-glyph>
+				</a-button>
+			</th>
+		</tr>
 	</thead>
 	<tbody ui-tree-nodes ng-model="SortItems">
-		<tr>
-			<td colspan="{{Headers.length+1}}">
-				<div class="help-text">
-				Click
-				<a-button size="xs" ng-disabled="true">
-					<a-glyph icon="sort"></a-glyph>
-				</a-button>
-				and drag to sort.
-				Click 
-				<a-button size="xs" ng-disabled="true">
-					<a-glyph icon="floppy-disk"></a-glyph>
-				</a-button>
-				to confirm.
-				</div>
-			</td>
-		</tr>
 		<tr ui-tree-node ng-repeat="(row,Item) in (UIItems = (SortItems | uniqueItem:'id')) track by $index">
 			<td class="align-middle {{Headers[$index].class}}"  ng-repeat="prop in Props track by $index" >
 			{{Item[prop]}}</td>

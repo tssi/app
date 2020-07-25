@@ -13,6 +13,7 @@ define(['app'], function (app) {
 			},
 			link: function($scope,elem, attrs) {
 				$scope.TickList= [];
+				$scope.TickItems = [];
 				$scope.ToggleAll  =false;
 				
 			},
@@ -39,6 +40,7 @@ define(['app'], function (app) {
 					});
 
 					$scope.Items = $scope.data;
+					$scope.TickItems =  angular.copy($scope.data);
 				});
 				$scope.toggleTick = function(index){
 					if(index=='all') {
@@ -53,7 +55,11 @@ define(['app'], function (app) {
 						$scope.Items[i].__tagged = state;
 					}
 					
-					
+				}
+				$scope.confirmTick = function(){
+					var items  = angular.copy($scope.TickItems);
+					if($scope.onTickSave)
+						$scope.onTickSave()(items);
 				}
 
 			}

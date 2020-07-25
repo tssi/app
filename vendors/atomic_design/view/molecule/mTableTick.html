@@ -1,21 +1,41 @@
 <table class="table table-bordered">
 	<thead>
 		<tr>
-			<th class="text-center">
-				<a-button size="sm" ng-click="toggleTick('all')">
+			<th>
+				<a-button type="primary" ng-click="confirmTick()">
+					<a-glyph icon="floppy-disk"></a-glyph>
+				</a-button>
+			</th>
+			<th colspan="{{Headers.length}}">
+				<div class="help-text">
+				Click
+				<a-button size="xs" ng-disabled="true">
+					<a-glyph icon="tag"></a-glyph>
+				</a-button>
+				to tag an item or <a-button size="xs" ng-disabled="true">
+					<a-glyph icon="tags"></a-glyph>
+				</a-button> to toggle all.
+				</div>
+			</th>
+			
+		</tr>
+		<tr>
+			<th>
+				<a-button  ng-click="toggleTick('all')">
 					<a-glyph ng-hide="ToggleAll" icon="tags"></a-glyph>
 					<a-glyph ng-show="ToggleAll"icon="ban-circle"></a-glyph>
 				</a-button>
 			</th>
-			<th ng-repeat="hdr in Headers" ng-class="hdr.class">
+			<th class="align-middle" ng-repeat="hdr in Headers" ng-class="hdr.class">
 				{{hdr.label?hdr.label:hdr}}
 			</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="(row,Item) in Items track by $index" ng-class="{info:TickList[$index]}">
+		
+		<tr ng-repeat="(row,Item) in TickItems track by $index" ng-class="{info:TickList[$index]}">
 			<td class="text-center">
-				<a-button size="sm" ng-click="toggleTick($index)" is-active="TickList[$index]">
+				<a-button  ng-click="toggleTick($index)" is-active="TickList[$index]">
 					<a-glyph icon="tag"></a-glyph>
 				</a-button>
 			</td>

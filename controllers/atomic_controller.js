@@ -13,6 +13,7 @@ define(['app','api','atomic/bomb','controllers/example_controller'], function (a
 				$scope.Options = [{id:1, name:"Option 1",alias:'O1', group:"Odd"},
 									{id:2, name:"Option 2",alias:'O2',group:"Even"},
 									{id:2, name:"Option 3",alias:'O3',group:"Odd"}];
+				$scope.Inputs = [{field:'id'},{field:'year_level',options:$scope.Options},{field:'description'}];
 				$scope.SearchBy = ['description','year_level'];
 				loadTests(1);
 			}
@@ -66,7 +67,12 @@ define(['app','api','atomic/bomb','controllers/example_controller'], function (a
 			$scope.applySort = function(items){
 				$scope.Data = items;
 			}
-
+			$scope.applyEdit =  function(items){
+				$scope.Data = items;
+			}
+			$scope.applyTick = function(items){
+				$scope.Data = items;
+			}
     }]);
 
     app.register.controller('AtomicDataController',['$scope','$rootScope','api', 'Atomic',

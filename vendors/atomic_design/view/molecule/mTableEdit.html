@@ -1,8 +1,14 @@
 <table class="table table-bordered">
 	<thead>
 		<tr>
-			<th ng-repeat="hdr in Headers" ng-class="hdr.class">
-				{{hdr.label?hdr.label:hdr}}
+			<th colspan="{{Headers.length}}">
+				<div class="help-text">
+				Click
+				<a-button size="xs" ng-disabled="true">
+					<a-glyph icon="plus"></a-glyph>
+				</a-button>
+				to add an item.
+				</div>
 			</th>
 			<th>
 				<a-button type="primary" ng-click="confirmEdit()">
@@ -10,24 +16,18 @@
 				</a-button>
 			</th>
 		</tr>
+		<tr>
+			<th ng-repeat="hdr in Headers" ng-class="hdr.class">
+				{{hdr.label?hdr.label:hdr}}
+			</th>
+			<th>
+				<a-button ng-click="initSort()">
+					<a-glyph icon="sort"></a-glyph>
+				</a-button>
+			</th>
+		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td colspan="{{Headers.length+1}}">
-				<div class="help-text">
-				Click
-				<a-button size="xs" ng-disabled="true">
-					<a-glyph icon="plus"></a-glyph>
-				</a-button>
-				to add an item.
-				Click 
-				<a-button size="xs" ng-disabled="true">
-					<a-glyph icon="floppy-disk"></a-glyph>
-				</a-button>
-				to confirm.
-				</div>
-			</td>
-		</tr>
 		<tr>
 			<td ng-repeat="prop in Props track by $index">
 				<a-textbox ng-if="!Inputs[$index].options" ng-model="NewItem[Inputs[$index].field]"></a-textbox>

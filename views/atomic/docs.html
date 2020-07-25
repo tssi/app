@@ -27,7 +27,7 @@
 						<a-col size="6">
 							<a-table headers="ABC.Headers" props="ABC.Props" data="ABC.Data" search-by="ABC.SearchBy"  search-word="ABC.SearchBox" on-row-click="ABC.getRecord" ng-model="ABC.ActiveItem">
 							</a-table>
-							<m-table-tick headers="ABC.Headers" props="ABC.Props" data="ABC.Data" >
+							<m-table-tick headers="ABC.Headers" props="ABC.Props" data="ABC.Data" on-tick-save="ABC.applyTick" >
 							</m-table-tick>
 						</a-col>
 						<a-col size="6">
