@@ -63,6 +63,10 @@ define(['app','api','atomic/bomb','controllers/example_controller'], function (a
 				loadTests(1);
 			}
 
+			$scope.applySort = function(items){
+				$scope.Data = items;
+			}
+
     }]);
 
     app.register.controller('AtomicDataController',['$scope','$rootScope','api', 'Atomic',

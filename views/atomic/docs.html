@@ -31,6 +31,8 @@
 							</m-table-tick>
 						</a-col>
 						<a-col size="6">
+							<m-table-sort headers="ABC.Headers" props="ABC.Props" data="ABC.Data" on-sort-save="ABC.applySort" >
+							</m-table-sort>
 							<pre>{{ABC.Active | json}}</pre>
 						</a-col>
 					</a-row>
