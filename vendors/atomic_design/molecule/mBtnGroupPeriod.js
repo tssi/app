@@ -27,5 +27,5 @@ define(['app'], function (app) {
 		}
 	}];
 	app.register.directive('mPeriodBtnGroup',mBtnGroupPeriod);
-	app.register.directive('mBtnGroupPeriod',mBtnGroupPeriod);
+	app.register.directive('mBtngroupPeriod',mBtnGroupPeriod);
 });
