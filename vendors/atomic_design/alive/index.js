@@ -23,7 +23,7 @@ define(['app','vendors/bower_components/jquery/dist/jquery','atomic/alive/api',
 		'atomic/molecule/mFormgroup',
 		'atomic/organism/oDropdownFilter',
 	], function (app) {
-	app.register.factory('Atomic',['AtomicAPI','$rootScope',function(aapi,$scope,$rootScope){
+	app.register.factory('Atomic',['AtomicAPI','$rootScope',function(aapi,$scope){
 		var atomic={};
 		aapi.init(function(REGISTRY){
 			// Loaded from SystemDefaults and API response
