@@ -17,10 +17,10 @@ define(['app','vendors/bower_components/jquery/dist/jquery','atomic/alive/api',
 		'atomic/atom/aTable',
 		'atomic/atom/aPager',
 		'atomic/atom/aSearchbox',
-		'atomic/molecule/mDeptNavpill',
-		'atomic/molecule/mPeriodBtnGroup',
+		'atomic/molecule/mNavpillDept',
+		'atomic/molecule/mBtnGroupPeriod',
 		'atomic/molecule/mFormgroup',
-		'atomic/organism/oFilterDropdown',
+		'atomic/organism/oDropdownFilter',
 	], function (app) {
 	app.register.factory('Atomic',['AtomicAPI','$rootScope',function(aapi,$scope,$rootScope){
 		var atomic={};
