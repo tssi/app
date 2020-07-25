@@ -9,8 +9,8 @@
 				</div>
 				<div class="pull-right">
 					<a-pager meta="ABC.Meta" on-navigate="ABC.goToPage"></a-pager>
-					<o-filter-dropdown ng-model="ABC.Active" show-sem="true" show-year-level="true" show-section="true">
-					</o-filter-dropdown>
+					<o-dropdown-filter ng-model="ABC.Active" show-sem="true" show-year-level="true" show-section="true">
+					</o-dropdown-filter>
 				</div>
 				<div class="clearfix"></div>
 			</a-header>
@@ -72,7 +72,7 @@
 		<a-container>
 			<a-header>
 				<h5>Data Interface</h5>
-				<o-filter-dropdown ng-model="ABC.Active"></o-filter-dropdown>
+				<o-dropdown-filter ng-model="ABC.Active"></o-dropdown-filter>
 			</a-header>
 			<a-canvas>
 				<a-content>

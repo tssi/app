@@ -1,6 +1,6 @@
 "use strict";
 define(['app'], function (app) {
-	var mBtnGroupPeriod = ['$rootScope','Atomic','AtomicPath',function ($rootScope,atomic,aPath) {
+	app.register.directive('mBtngroupPeriod',['$rootScope','Atomic','AtomicPath',function ($rootScope,atomic,aPath) {
 		return{
 			restrict: 'E',
 			require:"ngModel",
@@ -25,7 +25,12 @@ define(['app'], function (app) {
 			}
 
 		}
-	}];
-	app.register.directive('mPeriodBtnGroup',mBtnGroupPeriod);
-	app.register.directive('mBtngroupPeriod',mBtnGroupPeriod);
+	}]);
+	app.register.directive('mPeriodBtnGroup',[function () {
+		return {
+			restrict: 'E',
+			replace:true,
+			template:'<div>ERROR<!-- Use <m-btngroup-period> instead --></div>',
+		}
+	}]);
 });

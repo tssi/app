@@ -1,6 +1,6 @@
 "use strict";
 define(['app'], function (app) {
-	var mNavpillDept = ['$rootScope','Atomic','AtomicPath',function ($rootScope,atomic,aPath) {
+	const mNavpillDept = ['$rootScope','Atomic','AtomicPath',function ($rootScope,atomic,aPath) {
 		
 		return{
 			restrict: 'E',
@@ -19,6 +19,12 @@ define(['app'], function (app) {
 			}
 		}
 	}];
-	app.register.directive('mDeptNavPill',mNavpillDept);
 	app.register.directive('mNavpillDept',mNavpillDept);
+	app.register.directive('mDeptNavPill',[function () {
+		return {
+			restrict: 'E',
+			replace:true,
+			template:'<div>ERROR<!-- Use <m-navpill-dept> instead --></div>',
+		}
+	}]);
 });

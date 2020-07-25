@@ -1,9 +1,6 @@
 "use strict";
-define(['app',
-		'atomic/molecule/mNavpillDept',
-		'atomic/molecule/mBtnGroupPeriod',
-	], function (app) {
-	var oDropdownFilter = ['$rootScope','AtomicPath','Atomic',function ($rootScope,aPath,atomic) {
+define(['app'], function (app) {
+	app.register.directive('oDropdownFilter',['$rootScope','AtomicPath','Atomic',function ($rootScope,aPath,atomic) {
 		const  DEFAULTS = {entryLimit:10};
 		return {
 			restrict: 'E',
@@ -188,10 +185,7 @@ define(['app',
 				});
 			}
 		}
-	}];
-	app.register.directive('oDropdownFilter',oDropdownFilter);
-	app.register.directive('oFilterDropdown',oDropdownFilter);
-
+	}]);
 	app.register.filter('startFrom', function () {
 		return function (input, start) {
 			if (input) {
@@ -201,5 +195,11 @@ define(['app',
 			return [];
 		};
 	});
-
+	app.register.directive('oFilterDropdown',[function () {
+		return {
+			restrict: 'E',
+			replace:true,
+			template:'<div>ERROR<!-- Use <o-dropdown-filter> instead --></div>',
+		}
+	}]);
 });
