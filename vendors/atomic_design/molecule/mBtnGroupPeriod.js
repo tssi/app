@@ -1,6 +1,6 @@
 "use strict";
 define(['app'], function (app) {
-	app.register.directive('mPeriodBtnGroup',['$rootScope','Atomic','AtomicPath',function ($rootScope,atomic,aPath) {
+	var mBtnGroupPeriod = ['$rootScope','Atomic','AtomicPath',function ($rootScope,atomic,aPath) {
 		return{
 			restrict: 'E',
 			require:"ngModel",
@@ -9,14 +9,13 @@ define(['app'], function (app) {
 			},
 			transclude:false,
 			templateUrl:function(elem,attr){
-				return aPath.url('/view/molecule/mPeriodBtnGroup.html');
+				return aPath.url('/view/molecule/mBtnGroupPeriod.html');
 			},
 			link: function($scope,elem, attrs) {
 				atomic.ready(function(){
 					$scope.Periods = atomic.Periods;
 					console.log( atomic.Periods);
 				});
-				console.log($scope.SelectedPeriod);
 			},
 			controller:function($scope){
 
@@ -26,5 +25,7 @@ define(['app'], function (app) {
 			}
 
 		}
-	}]);
+	}];
+	app.register.directive('mPeriodBtnGroup',mBtnGroupPeriod);
+	app.register.directive('mBtnGroupPeriod',mBtnGroupPeriod);
 });
