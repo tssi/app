@@ -8,12 +8,12 @@ define(['app','api','atomic/bomb','controllers/example_controller'], function (a
 			$scope.init = function(){
 				$rootScope.__MODULE_NAME =  "Atomic Basic Controls";
 				$scope.Text = "Text";
-				$scope.Headers = ['ID','Level','Description'];
-				$scope.Props = ['id','year_level','description'];
+				$scope.Headers = ['ID','Level','Description','Tagged'];
+				$scope.Props = ['id','year_level','description','__tagged'];
 				$scope.Options = [{id:1, name:"Option 1",alias:'O1', group:"Odd"},
 									{id:2, name:"Option 2",alias:'O2',group:"Even"},
 									{id:2, name:"Option 3",alias:'O3',group:"Odd"}];
-				$scope.Inputs = [{field:'id'},{field:'year_level',options:$scope.Options},{field:'description'}];
+				$scope.Inputs = [{field:'id',disabled:true},{field:'year_level',options:$scope.Options},{field:'description'},{field:'__tagged'}];
 				$scope.SearchBy = ['description','year_level'];
 				loadTests(1);
 			}

@@ -8,6 +8,7 @@ define(['app'], function (app) {
 				props:"=",
 				data:"=",
 				onSortSave:"&?",
+				allowEdit:'=?'
 			},
 			templateUrl:function(elem,attr){
 				return aPath.url('/view/molecule/mTableSort.html');
@@ -35,9 +36,11 @@ define(['app'], function (app) {
 						
 						$scope.Headers[i] = hdr;
 					});
-
+					$scope.UIItems = undefined;
 					$scope.Items = $scope.data;
-					$scope.SortItems = angular.copy($scope.data);
+				});
+				$scope.$watch('Items',function(items){
+					$scope.SortItems =  items;
 				});
 				$scope.confirmSort = function(){
 					var items  = $filter("uniqueItem")($scope.SortItems,'id');

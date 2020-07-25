@@ -9,7 +9,8 @@ define(['app'], function (app) {
 				props:"=",
 				inputs:'=',
 				data:"=",
-				onEditSave:'&?'
+				onEditSave:'&?',
+				allowSort:'=?'
 				
 			},
 			templateUrl:function(elem,attr){

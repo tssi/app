@@ -1,7 +1,7 @@
 <table class="table table-bordered" ui-tree>
 	<thead>
 		<tr>
-			<th colspan="{{Headers.length}}">
+			<td colspan="{{Headers.length}}">
 				<div class="help-text">
 				Click
 				<a-button size="xs" ng-disabled="true">
@@ -9,7 +9,7 @@
 				</a-button>
 				and drag to sort.
 				</div>
-			</th>
+			</td>
 			<th class="text-center">
 				<a-button type="primary"  ng-click="confirmSort()">
 					<a-glyph icon="floppy-disk"></a-glyph>
@@ -21,7 +21,7 @@
 				{{hdr.label?hdr.label:hdr}}
 			</th>
 			<th>
-				<a-button ng-click="initEdit()">
+				<a-button ng-click="initEdit()" ng-show="allowEdit">
 					<a-glyph icon="pencil"></a-glyph>
 				</a-button>
 			</th>
@@ -30,7 +30,8 @@
 	<tbody ui-tree-nodes ng-model="SortItems">
 		<tr ui-tree-node ng-repeat="(row,Item) in (UIItems = (SortItems | uniqueItem:'id')) track by $index">
 			<td class="align-middle {{Headers[$index].class}}"  ng-repeat="prop in Props track by $index" >
-			{{Item[prop]}}</td>
+			<a-textbox ng-model="Item[prop]" ng-disabled="true"></a-textbox>
+			</td>
 			<td class="text-center">
 				<span  ui-tree-handle>
 					<a-button ng-disabled="true">

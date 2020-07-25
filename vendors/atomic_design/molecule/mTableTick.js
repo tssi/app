@@ -7,6 +7,7 @@ define(['app'], function (app) {
 				headers:"=",
 				props:"=",
 				data:"=",
+				onTickSave:'&?'
 			},
 			templateUrl:function(elem,attr){
 				return aPath.url('/view/molecule/mTableTick.html');
@@ -47,12 +48,12 @@ define(['app'], function (app) {
 						var state = $scope.ToggleAll = !$scope.ToggleAll;
 						for(var i in $scope.Items){
 							$scope.TickList[i]=state;
-							$scope.Items[i].__tagged =state; 
+							$scope.TickItems[i].__tagged =state; 
 						}
 					}else{
 						var state = !$scope.TickList[index];
 						$scope.TickList[index] = state; 	
-						$scope.Items[i].__tagged = state;
+						$scope.TickItems[index].__tagged = state;
 					}
 					
 				}
