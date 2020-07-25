@@ -1,6 +1,6 @@
 "use strict";
 define(['app'], function (app) {
-	app.register.directive('mDeptNavpill',['$rootScope','Atomic','AtomicPath',function ($rootScope,atomic,aPath) {
+	var mNavpillDept = ['$rootScope','Atomic','AtomicPath',function ($rootScope,atomic,aPath) {
 		
 		return{
 			restrict: 'E',
@@ -10,7 +10,7 @@ define(['app'], function (app) {
 			},
 			transclude:false,
 			templateUrl:function(elem,attr){
-				return aPath.url('/view/molecule/mDeptNavPill.html');
+				return aPath.url('/view/molecule/mNavPillDept.html');
 			},
 			link: function($scope,elem, attrs) {
 				atomic.ready(function(){
@@ -18,5 +18,7 @@ define(['app'], function (app) {
 				});
 			}
 		}
-	}]);
+	}];
+	app.register.directive('mDeptNavPill',mNavpillDept);
+	app.register.directive('mNavpillDept',mNavpillDept);
 });
