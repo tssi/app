@@ -5,28 +5,38 @@
 				{{hdr.label?hdr.label:hdr}}
 			</th>
 			<th class="text-center">
-				<a-button type="success" size="sm" ng-click="confirmSort()">
+				<a-button type="primary"  ng-click="confirmSort()">
 					<a-glyph icon="floppy-disk"></a-glyph>
 				</a-button>
 			</th>
 		</tr>
 	</thead>
 	<tbody ui-tree-nodes ng-model="SortItems">
+		<tr>
+			<td colspan="{{Headers.length+1}}">
+				<div class="help-text">
+				Click
+				<a-button size="xs" ng-disabled="true">
+					<a-glyph icon="sort"></a-glyph>
+				</a-button>
+				and drag to sort.
+				Click 
+				<a-button size="xs" ng-disabled="true">
+					<a-glyph icon="floppy-disk"></a-glyph>
+				</a-button>
+				to confirm.
+				</div>
+			</td>
+		</tr>
 		<tr ui-tree-node ng-repeat="(row,Item) in (UIItems = (SortItems | uniqueItem:'id')) track by $index">
 			<td class="align-middle {{Headers[$index].class}}"  ng-repeat="prop in Props track by $index" >
 			{{Item[prop]}}</td>
 			<td class="text-center">
 				<span  ui-tree-handle>
-					<a-button size="sm" ng-disabled="true">
+					<a-button ng-disabled="true">
 						<a-glyph icon="sort"></a-glyph>
 					</a-button>	
 				</span>
-			</td>
-		</tr>
-		<tr ng-show="!Items.length">
-			<td colspan="{{Headers.length+1}}">
-				<span class="glyphicon glyphicon-refresh animate spin"></span>
-				Loading...
 			</td>
 		</tr>
 	</tbody>
