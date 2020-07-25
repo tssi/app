@@ -22,8 +22,6 @@ define(['app'], function (app) {
 					$scope.isOverloaded = clone.length>1;
 				});
 
-				
-
 			},
 			bindToController:true,
 			controllerAs:'oFilterDropdownCtrl',
@@ -46,7 +44,8 @@ define(['app'], function (app) {
 					$scope.oFilterDropdownCtrl.Active = active;
 				}
 
-				atomic.ready(bindData).fuse();
+				if(atomic.ready(bindData).fuse())
+					$rootScope.$on('$routeChangeSuccess',bindData);
 
 				$scope.$watch("oFilterDropdownCtrl.Active",buildActive);
 
@@ -160,6 +159,7 @@ define(['app'], function (app) {
 					renderPreview(active);
 				}
 				function renderPreview(active){
+					
 					if($scope.oFilterDropdownCtrl.dropdownPreview) return;
 					var preview = [];
 					if(active.sy)
@@ -178,11 +178,19 @@ define(['app'], function (app) {
 							
 					if(active.section.id)
 							preview.push(active.section.alias);
-					$scope.dropdownPreview = preview.join(" | ");
+					$scope.oFilterDropdownCtrl.preview = preview.join(" | ");
+
 				}
 				$scope.$watch('oFilterDropdownCtrl.dropdownPreview',function(value){
-					$scope.dropdownPreview = value;
+					$scope.oFilterDropdownCtrl.preview = value;
 				});
+				$scope.$watch('oFilterDropdownCtrl.preview',function(value){
+					var active = $scope.oFilterDropdownCtrl.Active;
+					if(value==undefined && active){
+						renderPreview(active);
+					}
+				});
+					
 			}
 		}
 	}]);

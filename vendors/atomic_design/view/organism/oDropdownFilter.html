@@ -1,7 +1,7 @@
 <div class="schoolyear-selector-wrapper"> 
 	<div class="btn-group dropdown schoolyear-selector" ng-class="{open:openDropdown}">
 		<a-button>
-			<span>{{dropdownPreview?dropdownPreview:'Loading...'}}</span>
+			<span>{{oFilterDropdownCtrl.preview?oFilterDropdownCtrl.preview:'Loading...'}}</span>
 		</a-button>
 		<a-button opt-class="dropdown-toggle" ng-click="openDropdown=true">
 			<span class="glyphicon glyphicon-filter"></span>
