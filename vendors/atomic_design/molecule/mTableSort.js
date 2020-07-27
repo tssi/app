@@ -1,6 +1,7 @@
 "use strict";
 define(['app'], function (app) {
-	app.register.directive('mTableSort',['AtomicPath','$filter',function (aPath,$filter) {
+	app.register.directive('mTableSort',['AtomicPath','aTable','$filter',function (aPath,aTable,$filter) {
+		const DEFAULTS = {optionLabel:'name',autoBind:true};
 		return {
 			restrict: 'E',
 			scope:{
@@ -8,47 +9,49 @@ define(['app'], function (app) {
 				props:"=",
 				data:"=",
 				onSortSave:"&?",
-				allowEdit:'=?'
+				allowEdit:'=?',
+				onInitEdit:'&?',
+				autoBind:'=?'
 			},
 			templateUrl:function(elem,attr){
 				return aPath.url('/view/molecule/mTableSort.html');
 			},
 			link: function($scope,elem, attrs) {
 				$scope.SortItems= [];
+				if($scope.onInitEdit) $scope.allowEdit = true;
+				$scope.autoBind = $scope.autoBind || DEFAULTS.autoBind;
+				console.log($scope.autoBind);
 			},
 			controller:function($scope){
 				$scope.$watchGroup(['headers','props','data'],function(){
-					$scope.Headers =  $scope.headers;
+					$scope.Headers =  aTable.colHeaders($scope.headers,$scope.props);
 					$scope.Props = $scope.props;
-					var colClass ="";
-					if(typeof $scope.Headers[0]=="string"){
-						var propsLen = $scope.props.length;
-						if(propsLen<5){
-							var size= (12/propsLen)
-							colClass = ' col-md-'+size+' col-sm-'+size;
-						}
-					}
-
-					angular.forEach($scope.Headers, function(hdr,i){
-						if(typeof hdr == 'string'){
-							hdr = {label:hdr,class:colClass};
-						}
-						
-						$scope.Headers[i] = hdr;
-					});
 					$scope.UIItems = undefined;
 					$scope.Items = $scope.data;
+					$scope.SortItems =  angular.copy($scope.Items);
 				});
-				$scope.$watch('Items',function(items){
-					$scope.SortItems =  items;
-				});
+				$scope.$watch('SortItems',function(items){
+					if($scope.autoBind){
+						if(aTable.isArrayEqual($scope.Items,$scope.SortItems) && $scope.Items!=undefined){
+							return false;
+						}
+						else if($scope.Items){
+								$scope.confirmSort();
+						}
+					}
+				},true);
 				$scope.confirmSort = function(){
-					var items  = $filter("uniqueItem")($scope.SortItems,'id');
+					var items  = angular.copy($scope.SortItems);
 					 	$scope.Items =items;
 					if($scope.onSortSave)
 						$scope.onSortSave()(items);
 				}
-				
+				$scope.initEdit = function(){
+					var items  = angular.copy($scope.SortItems);
+					if($scope.onInitEdit)
+						$scope.onInitEdit()(items);
+
+				}
 			}
 		}
 	}]);
