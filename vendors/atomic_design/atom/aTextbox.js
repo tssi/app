@@ -8,7 +8,8 @@ define(['app'], function (app) {
 			restrict: 'E',
 			scope:{
 				aTextboxModel:'=ngModel',
-				isDisabled:'=?ngDisabled'
+				isDisabled:'=?ngDisabled',
+				aPlaceholder:'=?placeholder'
 			},
 			transclude: false,
 			templateUrl:function(elem,attr){
