@@ -66,7 +66,7 @@ define(['app'], function (app) {
 		var aTable = {
 			colHeaders:function(headers,props){
 				var colClass ="";
-				if(typeof headers=="string"){
+				if(typeof headers[0]=="string"){
 					var propsLen = props.length;
 					if(propsLen<5){
 						var size= (12/propsLen)
@@ -82,7 +82,7 @@ define(['app'], function (app) {
 					headers[i] = hdr;
 				});
 				return headers;
-			}
+			},
 			isEqual:function(a,b){
 					// Create arrays of property names
 				    var aProps = Object.getOwnPropertyNames(a);

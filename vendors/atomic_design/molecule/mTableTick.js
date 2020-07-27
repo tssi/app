@@ -22,6 +22,7 @@ define(['app'], function (app) {
 			controller:function($scope){
 				$scope.$watchGroup(['headers','props','data'],function(){
 					$scope.Headers =  aTable.colHeaders($scope.headers,$scope.props);
+					console.log($scope.Headers);
 					$scope.Props = $scope.props;
 					$scope.Items = $scope.data;
 					$scope.TickItems =  angular.copy($scope.data);
