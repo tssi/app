@@ -122,6 +122,52 @@ define(['app'], function (app) {
 					isEqual = isEqual && aTable.isEqual(a,b);
 				}
 				return isEqual;
+			},
+			scroll:function(elem,dir){
+				var child = angular.element(elem[0].querySelector('.table-entry-data'))[0];
+				var goTo = child.scrollHeight;
+				if(typeof dir == "number"){
+					var nth =  dir+1;
+					var row = angular.element(elem[0].querySelector('.table-entry-data tbody>tr:nth-child('+nth+')'))[0];
+					var rH = row.clientHeight;
+					var rO = row.offsetTop;
+					var sT = child.scrollTop;
+					var dy = (rO-sT)>rH?1:-1;
+
+					goTo = sT + (rH*dy);
+
+				}
+					
+				return new Promise(function(resolve,reject){
+					(function scrollTo(element, to, duration) {
+						
+					    var start = element.scrollTop,
+					        change = to - start,
+					        currentTime = 0,
+					        increment = 20;
+					        
+					    var animateScroll = function(){        
+					        currentTime += increment;
+					        var val = easeInOutQuad(currentTime, start, change, duration);
+					        element.scrollTop = val;
+					        if(currentTime < duration) {
+					            setTimeout(animateScroll, increment);
+					        }else{
+					        	resolve();
+					        }
+					    };
+					    animateScroll();
+					    function easeInOutQuad(t, b, c, d) {
+						  t /= d/2;
+							if (t < 1) return c/2*t*t + b;
+							t--;
+							return -c/2 * (t*(t-2) - 1) + b;
+						};
+					})(child,goTo,300);
+				});
+				
+
+				
 			}
 
 		};

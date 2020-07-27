@@ -30,6 +30,7 @@ define(['app'], function (app) {
 				$scope.NewItem = {};
 				if($scope.onInitSort) $scope.allowSort = true;
 				$scope.autoBind = $scope.autoBind || DEFAULTS.autoBind; 
+				$scope.elem = elem;
 			},
 			controller:function($scope){
 				$scope.$watchGroup(['headers','props','data'],function(){
@@ -42,9 +43,18 @@ define(['app'], function (app) {
 				$scope.addItem = function(item){
 					$scope.EditItems.push(item);
 					$scope.NewItem = {};
+					aTable.scroll($scope.elem,'bottom');
 				}
 				$scope.deleteItem = function(index){
-					$scope.EditItems.splice(index,1);
+					//return $scope.EditItems.splice(index,1);
+					$scope.DisableLine = index;
+					aTable.scroll($scope.elem,index).then(function(){
+						$scope.$apply(function(){
+							$scope.DisableLine = null;
+							$scope.EditItems.splice(index,1);
+						});
+					});
+					
 				}
 				$scope.$watch('EditItems',function(items){
 					if($scope.autoBind){

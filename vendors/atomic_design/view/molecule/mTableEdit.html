@@ -1,76 +1,95 @@
-<table class="table table-bordered">
-	<thead>
-		<tr ng-if="!autoBind">
-			<td colspan="{{Headers.length}}">
-				<div class="help-text">
-				Click
-				<a-button size="xs" ng-disabled="true">
-					<a-glyph icon="plus"></a-glyph>
-				</a-button>
-				to add an item.
-				</div>
-			</td>
-			<th>
-				<a-button type="primary" ng-click="confirmEdit()">
-					<a-glyph icon="floppy-disk"></a-glyph>
-				</a-button>
-			</th>
-		</tr>
-		<tr>
-			<th class="align-middle {{hdr.class}}" ng-repeat="hdr in Headers" >
-				{{hdr.label?hdr.label:hdr}}
-			</th>
-			<th>
-				<a-button ng-click="initSort()" ng-disabled="!EditItems.length" ng-show="allowSort">
-					<a-glyph icon="sort"></a-glyph>
-				</a-button>
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td ng-repeat="prop in Props track by $index">
-				<a-textbox
-				ng-if="!Inputs[$index].options" 
-				ng-model="NewItem[Inputs[$index].field]"
-				ng-disabled="Inputs[$index].disabled"
-				placeholder="Inputs[$index].placeholder"></a-textbox>
-				<select
-				 a-select
-				 	ng-if="Inputs[$index].options" 
-					ng-model="NewItem[Inputs[$index].field]"
-					ng-options="oItem.id as oItem[Inputs[$index].optionLabel] group by  oItem[Inputs[$index].optionsGroup] for oItem in Inputs[$index].options">
-					<option value="">Select {{Inputs[$index].field}}</option>
-				</select>
-			</td>
-			<td class="text-center">
-				<a-button type="success" ng-click="addItem(NewItem)">
-					<a-glyph icon="plus"></a-glyph>
-				</a-button>
-			</td>
-		</tr>
-		<tr ng-repeat="(row,Item) in EditItems track by $index">
-			<td ng-repeat="prop in Props track by $index">
-				<a-textbox
-				ng-if="!Inputs[$index].options"
-				ng-disabled="Inputs[$index].disabled"
-				ng-model="Item[Inputs[$index].field]"
-				placeholder="Inputs[$index].placeholder"></a-textbox>
-				<select
-					a-select
-					ng-if="Inputs[$index].options" 
-					ng-disabled="Inputs[$index].disabled"
-					ng-model="Item[Inputs[$index].field]"
-					ng-options="oItem.id as oItem[Inputs[$index].optionLabel] group by  oItem[Inputs[$index].optionsGroup] for oItem in Inputs[$index].options">
-					<option value="">Select {{Inputs[$index].optionLabel}}</option>
-				</select>
-			</td>
-			<td class="text-center">
-				<a-button type="danger" ng-click="deleteItem($index)">
-					<a-glyph icon="remove"></a-glyph>
-				</a-button>
-			</td>
-
-		</tr>
-	</tbody>
-</table>
+<div class="table-entry">
+	<div class="table-wrapper table-entry-header" style="position:relative;z-index:3;">
+		<table class="table table-bordered" style="margin-bottom:0px;">
+			<thead>
+				<tr ng-if="!autoBind">
+					<td colspan="{{Headers.length}}">
+						<div class="help-text">
+						Click
+						<a-button size="xs" ng-disabled="true">
+							<a-glyph icon="plus"></a-glyph>
+						</a-button>
+						to add an item.
+						</div>
+					</td>
+					<th>
+						<a-button type="primary" ng-click="confirmEdit()">
+							<a-glyph icon="floppy-disk"></a-glyph>
+						</a-button>
+					</th>
+				</tr>
+				<tr>
+					<th class="align-middle {{hdr.class}}" ng-repeat="hdr in Headers" >
+						{{hdr.label?hdr.label:hdr}}
+					</th>
+					<th>
+						<a-button ng-click="initSort()" ng-disabled="!EditItems.length" ng-show="allowSort">
+							<a-glyph icon="sort"></a-glyph>
+						</a-button>
+					</th>
+				</tr>
+				<tr>
+					<td class="align-middle {{Headers[$index].class}}" ng-repeat="prop in Props track by $index">
+						<a-textbox
+						ng-if="!Inputs[$index].options" 
+						ng-model="NewItem[Inputs[$index].field]"
+						ng-disabled="Inputs[$index].disabled"
+						placeholder="Inputs[$index].placeholder"></a-textbox>
+						<select
+						 a-select
+						 	ng-if="Inputs[$index].options" 
+							ng-model="NewItem[Inputs[$index].field]"
+							ng-options="oItem.id as oItem[Inputs[$index].optionLabel] group by  oItem[Inputs[$index].optionsGroup] for oItem in Inputs[$index].options">
+							<option value="">Select {{Inputs[$index].field}}</option>
+						</select>
+					</td>
+					<td class="text-center">
+						<a-button type="success" ng-click="addItem(NewItem)">
+							<a-glyph icon="plus"></a-glyph>
+						</a-button>
+					</td>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="table-wrapper table-entry-data"  style="position:relative;z-index:2;max-height:200px;overflow:auto;">
+		<table class="table table-bordered" style="margin-top:-55px;margin-bottom:0px;">
+			<thead style="border:none;opacity:0;">
+				<tr>
+					<th class="align-middle {{hdr.class}}" ng-repeat="hdr in Headers" >
+						{{hdr.label?hdr.label:hdr}}
+					</th>
+					<th>
+						<a-button type="success">
+							<a-glyph icon="plus"></a-glyph>
+						</a-button>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(row,Item) in EditItems track by $index">
+					<td class="align-middle {{Headers[$index].class}}" ng-repeat="prop in Props track by $index">
+						<a-textbox
+						ng-if="!Inputs[$index].options"
+						ng-disabled="Inputs[$index].disabled"
+						ng-model="Item[Inputs[$index].field]"
+						placeholder="Inputs[$index].placeholder"></a-textbox>
+						<select
+							a-select
+							ng-if="Inputs[$index].options" 
+							ng-disabled="Inputs[$index].disabled"
+							ng-model="Item[Inputs[$index].field]"
+							ng-options="oItem.id as oItem[Inputs[$index].optionLabel] group by  oItem[Inputs[$index].optionsGroup] for oItem in Inputs[$index].options">
+							<option value="">Select {{Inputs[$index].optionLabel}}</option>
+						</select>
+					</td>
+					<td class="text-center">
+						<a-button type="danger" ng-disabled="DisableLine==$index" ng-click="deleteItem($index)">
+							<a-glyph icon="remove"></a-glyph>
+						</a-button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
