@@ -41,9 +41,14 @@ define(['app'], function (app) {
 					$scope.EditItems =  angular.copy($scope.Items);
 				});
 				$scope.addItem = function(item){
+					$scope.DisableLine = 'add';
 					$scope.EditItems.push(item);
 					$scope.NewItem = {};
-					aTable.scroll($scope.elem,'bottom');
+					aTable.scroll($scope.elem,'bottom').then(function(){
+						$scope.$apply(function(){
+							$scope.DisableLine = null;
+						});
+					});
 				}
 				$scope.deleteItem = function(index){
 					//return $scope.EditItems.splice(index,1);

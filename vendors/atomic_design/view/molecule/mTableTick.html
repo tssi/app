@@ -1,67 +1,74 @@
-<table class="table table-bordered">
-	<thead>
-		<tr ng-if="!autoBind">
-			<th>
-				<a-button type="primary" ng-click="confirmTick()">
-					<a-glyph icon="floppy-disk"></a-glyph>
-				</a-button>
-			</th>
-			<td colspan="{{Headers.length}}">
-				<div class="help-text">
-				Click
-				<a-button size="xs" ng-disabled="true">
-					<a-glyph icon="tag"></a-glyph>
-				</a-button>
-				to tag an item or <a-button size="xs" ng-disabled="true">
-					<a-glyph icon="tags"></a-glyph>
-				</a-button> to toggle all.
-				</div>
-			</td>
-			
-		</tr>
-		<tr>
-			<th>
-				<a-button ng-click="toggleTick('all')" ng-disabled="!TickItems.length">
-					<a-glyph ng-hide="ToggleAll" icon="tags"></a-glyph>
-					<a-glyph ng-show="ToggleAll"icon="ban-circle"></a-glyph>
-				</a-button>
-			</th>
-			<th class="align-middle {{hdr.class}}" ng-repeat="hdr in Headers">
-				{{hdr.label?hdr.label:hdr}}
-			</th>
+<div class="table-entry">
+	<div class="table-wrapper table-entry-header" style="position:relative;z-index:3;">
+		<table class="table table-bordered" style="margin-bottom:0px;">
+			<thead>
+				<tr ng-if="!autoBind">
+					<th>
+						<a-button type="primary" ng-click="confirmTick()">
+							<a-glyph icon="floppy-disk"></a-glyph>
+						</a-button>
+					</th>
+					<td colspan="{{Headers.length}}">
+						<div class="help-text">
+						Click
+						<a-button size="xs" ng-disabled="true">
+							<a-glyph icon="tag"></a-glyph>
+						</a-button>
+						to tag an item or <a-button size="xs" ng-disabled="true">
+							<a-glyph icon="tags"></a-glyph>
+						</a-button> to toggle all.
+						</div>
+					</td>
+					
+				</tr>
+				<tr>
+					<th>
+						<a-button ng-click="toggleTick('all')" ng-disabled="!TickItems.length">
+							<a-glyph ng-hide="ToggleAll" icon="tags"></a-glyph>
+							<a-glyph ng-show="ToggleAll"icon="ban-circle"></a-glyph>
+						</a-button>
+					</th>
+					<th class="align-middle {{hdr.class}}" ng-repeat="hdr in Headers">
+						{{hdr.label?hdr.label:hdr}}
+					</th>
 
-		</tr>
+				</tr>
 
-		<tr ng-if="autoBind" ng-show="TickItems.length">
-			<td colspan="{{Headers.length +1}}">
-				<div class="help-text">
-				Click
-				<a-button size="xs" ng-disabled="true">
-					<a-glyph icon="tag"></a-glyph>
-				</a-button>
-				to tag an item or <a-button size="xs" ng-disabled="true">
-					<a-glyph icon="tags"></a-glyph>
-				</a-button> to toggle all.
-				</div>
-			</td>
-		</tr>
-	</thead>
-	<tbody>
-		
-		<tr ng-repeat="(row,Item) in TickItems track by $index" ng-class="{info:Item.__tagged}">
-			<td class="text-center">
-				<a-button  ng-click="toggleTick(row)" is-active="Item.__tagged">
-					<a-glyph icon="tag"></a-glyph>
-				</a-button>
-			</td>
-			<td class="align-middle" ng-repeat="prop in Props track by $index">
-			{{Item[prop]}}</td>
-		</tr>
-		<tr ng-show="!TickItems.length">
-			<td colspan="{{Headers.length+1}}">
-				<span class="glyphicon glyphicon-ban-circle"></span>
-				No records.
-			</td>
-		</tr>
-	</tbody>
-</table>
+				<tr ng-if="autoBind" ng-show="TickItems.length">
+					<td colspan="{{Headers.length +1}}">
+						<div class="help-text">
+						Click
+						<a-button size="xs" ng-disabled="true">
+							<a-glyph icon="tag"></a-glyph>
+						</a-button>
+						to tag an item or <a-button size="xs" ng-disabled="true">
+							<a-glyph icon="tags"></a-glyph>
+						</a-button> to toggle all.
+						</div>
+					</td>
+				</tr>
+			</thead>
+		</table>
+		</div>
+		<div class="table-wrapper table-entry-data"  style="position:relative;z-index:2;max-height:200px;overflow:auto;">
+			<table class="table table-bordered" >
+				<tbody>
+					<tr ng-repeat="(row,Item) in TickItems track by $index" ng-class="{info:Item.__tagged}">
+						<td class="text-center">
+							<a-button  ng-click="toggleTick(row)" is-active="Item.__tagged">
+								<a-glyph icon="tag"></a-glyph>
+							</a-button>
+						</td>
+						<td class="align-middle {{Headers[$index].class}} {{(Item[prop]|typeof)=='number'?'text-right':''}} " ng-repeat="prop in Props track by $index">
+						{{Item[prop]}}</td>
+					</tr>
+					<tr ng-show="!TickItems.length">
+						<td colspan="{{Headers.length+1}}">
+							<span class="glyphicon glyphicon-ban-circle"></span>
+							No records.
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+</div>

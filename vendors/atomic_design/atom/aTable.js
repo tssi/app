@@ -173,4 +173,9 @@ define(['app'], function (app) {
 		};
 		return aTable;
 	}]);
+	app.register.filter('typeof', function() {
+	  return function(obj) {
+	    return typeof obj
+	  };
+	});
 });
