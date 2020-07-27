@@ -1,6 +1,6 @@
 <table class="table table-bordered" ui-tree>
 	<thead>
-		<tr>
+		<tr ng-if="!autoBind">
 			<td colspan="{{Headers.length}}">
 				<div class="help-text">
 				Click
@@ -17,7 +17,7 @@
 			</th>
 		</tr>
 		<tr>
-			<th ng-repeat="hdr in Headers" ng-class="hdr.class">
+			<th  class="align-middle" ng-repeat="hdr in Headers" ng-class="hdr.class">
 				{{hdr.label?hdr.label:hdr}}
 			</th>
 			<th>
@@ -26,9 +26,20 @@
 				</a-button>
 			</th>
 		</tr>
+		<tr ng-show="autoBind">
+			<td colspan="{{Headers.length+1}}">
+				<div class="help-text">
+				Click
+				<a-button size="xs" ng-disabled="true">
+					<a-glyph icon="sort"></a-glyph>
+				</a-button>
+				and drag to sort.
+				</div>
+			</td>
+		</tr>
 	</thead>
 	<tbody ui-tree-nodes ng-model="SortItems">
-		<tr ui-tree-node ng-repeat="(row,Item) in (UIItems = (SortItems | uniqueItem:'id'))">
+		<tr ui-tree-node ng-repeat="(row,Item) in SortItems">
 			<td class="align-middle {{Headers[$index].class}}"  ng-repeat="prop in Props track by $index" >
 			<a-textbox ng-model="Item[prop]" ng-disabled="true"></a-textbox>
 			</td>
