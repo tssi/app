@@ -16,6 +16,11 @@ define(['app','atomic/bomb','api'],function(app){
 				//Props are the properties of your data
 				$scope.Props = ['id','year_level','description'];
 				$scope.ActiveSection = null;
+				var TestStatuses = [{id:'ACT',name:'Active'},{id:'INA',name:'Inactive'}];
+				$scope.TestHeaders = ['ID','Name','Status'];
+				$scope.TestProps = ['id','name','status'];
+				$scope.TestData  = [];
+				$scope.TestInputs = [{field:'id',placeholder:'(Auto No.)', disabled:true},{field:'name'},{field:'status',options:TestStatuses}];
 				loadSections(1);
 			}
 			function loadSections(page){
@@ -54,6 +59,19 @@ define(['app','atomic/bomb','api'],function(app){
 					loadSections($scope.CurrentPage);
 				}
 				api.POST("sections",data,success);
+			}
+
+			$scope.sortMode = function(items){
+				$scope.Mode ='SortItems';
+				$scope.TestData = items;
+			}
+			$scope.editMode = function(items){
+				$scope.Mode ='EditItems';
+				$scope.TestData = items;
+			}
+			$scope.updateItems =function(items){
+				
+				
 			}
 		}]);
 

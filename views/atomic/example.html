@@ -13,6 +13,7 @@ You can change the alias to any name but use the acronymn of the controller  for
 				</div>
 				<div class="pull-right">
 					<a-pager meta="EXC.Meta" on-navigate="EXC.gotoPage"></a-pager>
+					<o-dropdown-filter ng-model="EXC.Active"></o-dropdown-filter>
 				</div>
 				<div class="clearfix"></div>
 			</a-header>
@@ -39,7 +40,16 @@ You can change the alias to any name but use the acronymn of the controller  for
 					<m-formgroup label="Name" ng-model="EXC.ActiveSection.name"> </m-formgroup>
 				</a-col>
 			</a-row>
-			
+			<a-row>
+				<a-col>
+					<div ng-show="EXC.Mode=='EditItems'||EXC.Mode=='Add'" >
+						<m-table-edit headers="EXC.TestHeaders" props="EXC.TestProps" data="EXC.TestData" inputs="EXC.TestInputs" on-init-sort="EXC.sortMode" ></m-table-edit>
+					</div>
+					<div ng-show="EXC.Mode=='SortItems'">
+						<m-table-sort  headers="EXC.TestHeaders" props="EXC.TestProps" data="EXC.TestData"  on-init-edit="EXC.editMode"  ></m-table-sort>
+					</div>
+				</a-col>
+			</a-row>
 		</a-modal-body>
 		<a-modal-footer>
 			<a-button opt-class="pull-left" ng-click="EXC.closeModal()">Close</a-button>
