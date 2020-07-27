@@ -21,6 +21,8 @@ define(['app','atomic/bomb','api'],function(app){
 				$scope.TestProps = ['id','name','status'];
 				$scope.TestData  = [];
 				$scope.TestInputs = [{field:'id',placeholder:'(Auto No.)', disabled:true},{field:'name'},{field:'status',options:TestStatuses}];
+				$scope.Tabs = [{id:'editor',name:'Editor'},{id:'checklist',name:'Checklist'}];
+				$scope.ActiveTab = 'editor';
 				loadSections(1);
 			}
 			function loadSections(page){
