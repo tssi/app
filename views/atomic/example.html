@@ -43,11 +43,16 @@ You can change the alias to any name but use the acronymn of the controller  for
 			<a-row>
 				<a-col>
 					<div ng-show="EXC.Mode=='EditItems'||EXC.Mode=='Add'" >
-						<m-table-edit headers="EXC.TestHeaders" props="EXC.TestProps" data="EXC.TestData" inputs="EXC.TestInputs" on-init-sort="EXC.sortMode" ></m-table-edit>
+						<m-table-edit headers="EXC.TestHeaders" props="EXC.TestProps" data="EXC.TestData" inputs="EXC.TestInputs" on-edit-save="EXC.updateItems"   on-init-sort="EXC.sortMode" ></m-table-edit>
 					</div>
 					<div ng-show="EXC.Mode=='SortItems'">
-						<m-table-sort  headers="EXC.TestHeaders" props="EXC.TestProps" data="EXC.TestData"  on-init-edit="EXC.editMode"  ></m-table-sort>
+						<m-table-sort  headers="EXC.TestHeaders" props="EXC.TestProps" data="EXC.TestData" on-sort-save="EXC.updateItems"  on-init-edit="EXC.editMode"  ></m-table-sort>
 					</div>
+				</a-col>
+			</a-row>
+			<a-row>
+				<a-col>
+					<m-table-tick  headers="EXC.TestHeaders" props="EXC.TestProps" data="EXC.TestData" on-tick-save="EXC.updateItems" ></m-table-tick>
 				</a-col>
 			</a-row>
 		</a-modal-body>

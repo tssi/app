@@ -70,7 +70,7 @@ define(['app','atomic/bomb','api'],function(app){
 				$scope.TestData = items;
 			}
 			$scope.updateItems =function(items){
-				
+				$scope.TestData = items;
 				
 			}
 		}]);
