@@ -21,17 +21,18 @@
 		</tr>
 		<tr>
 			<th>
-				<a-button ng-click="toggleTick('all')">
+				<a-button ng-click="toggleTick('all')" ng-disabled="!TickItems.length">
 					<a-glyph ng-hide="ToggleAll" icon="tags"></a-glyph>
 					<a-glyph ng-show="ToggleAll"icon="ban-circle"></a-glyph>
 				</a-button>
 			</th>
-			<th class="align-middle" ng-repeat="hdr in Headers" ng-class="hdr.class">
+			<th class="align-middle {{hdr.class}}" ng-repeat="hdr in Headers">
 				{{hdr.label?hdr.label:hdr}}
 			</th>
+
 		</tr>
 
-		<tr ng-if="autoBind">
+		<tr ng-if="autoBind" ng-show="TickItems.length">
 			<td colspan="{{Headers.length +1}}">
 				<div class="help-text">
 				Click
@@ -58,8 +59,8 @@
 		</tr>
 		<tr ng-show="!TickItems.length">
 			<td colspan="{{Headers.length+1}}">
-				<span class="glyphicon glyphicon-refresh animate spin"></span>
-				Loading...
+				<span class="glyphicon glyphicon-ban-circle"></span>
+				No records.
 			</td>
 		</tr>
 	</tbody>
