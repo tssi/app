@@ -1,6 +1,6 @@
 "use strict";
 define(['app','atomic/index/api'],function(app){
-	app.register.factory('Atomic',['AtomicAPI','$scope',function(aapi,$scope){
+	app.register.factory('Atomic',['AtomicAPI','$scope','$timeout',function(aapi,$scope,$timeout){
 		var atomic={};
 
 		aapi.init(function(REGISTRY){
@@ -23,8 +23,9 @@ define(['app','atomic/index/api'],function(app){
 			}
 			atomic.SelectedSem =  REGISTRY.DEFAULT_.SEMESTER;
 			atomic.SelectedPeriod =  REGISTRY.DEFAULT_.PERIOD;
-
-			$scope.$emit('atomicReady');
+			$timeout(function() {
+				$scope.$emit('atomicReady');
+			},300);
 		});
 		atomic.ready = function(callback){
 			$scope.$on('atomicReady',callback);
