@@ -12,22 +12,36 @@
 			</td>
 		</tr>
 		<tr>
-			<th ng-repeat="hdr in Headers" ng-class="hdr.class">
-				{{hdr.label?hdr.label:hdr}}
+			<th ng-repeat="hdr in Headers" ng-class="hdr.class"ng-click="sortItemsBy(Props[$index])"  ng-mouseenter="setShowSort(Props[$index])" ng-mouseleave="setShowSort(null)">
+				<div class="pull-left" >{{hdr.label?hdr.label:hdr}}</div>
+				<div class="pull-right" style="opacity:{{(__SortField==Props[$index]||ShowSort==Props[$index])?1:0;}};">
+					<a-glyph icon="{{__SortField==Props[$index]?'chevron-'+__SortDir:'chevron-down'}}"></a-glyph>
+					<a-button size="xs" style="border:none;display:none;" ng-click="setSortBy(Props[$index])">
+						...
+					</a-button>
+				</div>
+				<div class="clearfix"></div>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="(row,Item) in (UIItems = ( Items | filter:searchLocal )  ) track by $index"
+		<tr ng-repeat="(row,Item) in (UIItems = ( Items | filter:searchLocal | orderBy:orderLocal )  ) track by $index"
 			ng-class="{info:hoverItem==row || (activeItem.id==Item.id && activeItem.id)}"
 			ng-mouseover="hoverItem=row" ng-mouseleave="hoverItem=null"
 			ng-click="setActiveItem(Item)">
-			<td ng-repeat="prop in Props track by $index">{{Item[prop]}}</td>
+			<td class="align-middle {{Headers[$index].class}} {{(Item[prop]|typeof)=='number'&&$index>0?'text-right':''}} {{ShowSort==prop?'active':''}}" ng-repeat="prop in Props track by $index">
+				{{Item[prop]}}
+			</td>
 		</tr>
-		<tr ng-show="!searchWord && !UIItems.length">
+		<tr ng-show="!searchWord && !UIItems.length && isPreload">
 			<td colspan="{{Headers.length}}">
 				<span class="glyphicon glyphicon-refresh animate spin"></span>
 				Loading...
+			</td>
+		</tr>
+		<tr ng-show="!searchWord && !UIItems.length && !isPreload">
+			<td colspan="{{Headers.length}}">
+				<a-glyph icon="ban-circle"></a-glyph> No records.
 			</td>
 		</tr>
 		<tr ng-show="searchWord && !UIItems.length">

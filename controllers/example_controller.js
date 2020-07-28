@@ -31,6 +31,8 @@ define(['app','atomic/bomb','api'],function(app){
 					$scope.Meta = response.meta;
 					$scope.Data =  response.data;
 					$scope.CurrentPage =  $scope.Meta.page;
+
+					
 				}
 				api.GET("sections",filter,success);
 			}
@@ -75,6 +77,8 @@ define(['app','atomic/bomb','api'],function(app){
 				$scope.TestData = items;
 				
 			}
+
+
 		}]);
 
 });

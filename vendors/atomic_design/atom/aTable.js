@@ -1,6 +1,7 @@
 "use strict";
 define(['app'], function (app) {
 	app.register.directive('aTable',['AtomicPath','aTable',function (aPath,aTable) {
+		const DEFAULT =  {preload:true};
 		return {
 			require:'ngModel',
 			restrict: 'E',
@@ -11,13 +12,15 @@ define(['app'], function (app) {
 				searchBy:'=',
 				searchWord:'=',
 				activeItem:'=ngModel',
-				onRowClick:'&?'
+				onRowClick:'&?',
+				isPreload:'=?',
+				onColClick:'&?'
 			},
 			templateUrl:function(elem,attr){
 				return aPath.url('/view/atom/aTable.html');
 			},
 			link: function($scope,elem, attrs) {
-				
+				$scope.isPreload =  $scope.isPreload || DEFAULT.preload;
 			},
 			controller:function($scope){
 				$scope.$watchGroup(['headers','props','data'],function(){
@@ -25,6 +28,16 @@ define(['app'], function (app) {
 					$scope.Props = $scope.props;
 					$scope.Items = $scope.data;
 					$scope.activeItem = {};
+					var sortDir = $scope.sortDir=='asc'?'down':'up';
+					var sortField  = $scope.sortBy;
+					
+					$scope.__SortDir = sortDir;
+					$scope.__SortField =sortField;
+					$scope.ShowSort = sortField;
+					console.log(sortDir,sortField);
+					if(sortField)
+						$scope.sortItemsBy(sortField);
+					
 				});
 				$scope.$watch('activeItem',function(item){
 					$scope.activeItem = item;
@@ -58,6 +71,47 @@ define(['app'], function (app) {
 						}
 					}
 					return isMatched;
+				}
+				$scope.sortItemsBy = function(field){
+					
+					if($scope.sortGlobal) {
+						$scope.sortGlobal  =false;
+						return;
+					}
+					var currDir = $scope.__SortDir;
+					var newDir = currDir!='up'?'up':null;
+					if($scope.__SortField!=field){
+						newDir='up';
+					}
+					$scope.__SortField = field;
+					$scope.__SortDir = newDir;
+					if(!newDir)
+						$scope.__SortField = null;
+					$scope.orderLocal = newDir?'-'+field:null;
+				}
+				$scope.setShowSort = function(field){
+					$scope.ShowSort = field;
+				}
+				$scope.setSortBy = function(field){
+					
+
+					var currDir = $scope.__SortDir;
+					var newDir = currDir!='up'?'asc':'desc';
+					if($scope.__SortField!=field){
+						newDir='asc';
+					}
+					$scope.sortGlobal  =true;
+					$scope.sortBy = field;
+					$scope.sortDir = newDir;
+
+					console.log("setSortBy",field,newDir);
+					$scope.__SortField = field;
+					
+					$scope.__SortDir =  newDir=='asc'?'up':'down';
+					if($scope.onColClick){
+						$scope.onColClick()(field,newDir);
+					}
+						
 				}
 			}
 		}
