@@ -38,7 +38,8 @@ define(['app','api'], function (app,api) {
 			},
 			isReady:function(){
 				return REGISRTY.ready;
-			}
+			},
+			http:api
 		}
 	});
 });
