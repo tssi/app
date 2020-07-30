@@ -17,10 +17,10 @@ define(['app','atomic/bomb','api'],function(app){
 				$scope.Props = ['id','year_level','description'];
 				$scope.ActiveSection = null;
 				var TestStatuses = [{id:'ACT',name:'Active'},{id:'INA',name:'Inactive'}];
-				$scope.TestHeaders = ['ID','Name','Status'];
-				$scope.TestProps = ['id','name','status'];
+				$scope.TestHeaders = [{label:'Name',class:'col-md-9'},{label:'Year Level',class:'col-md-3'}];
+				$scope.TestProps = ['student','year_level'];
 				$scope.TestData  = [];
-				$scope.TestInputs = [{field:'id',placeholder:'(Auto No.)', disabled:true},{field:'name'},{field:'status',options:TestStatuses}];
+				$scope.TestInputs = [{field:'name',type:'student'},{field:'year_level'}];
 				$scope.Tabs = [{id:'editor',name:'Editor'},{id:'checklist',name:'Checklist'}];
 				$scope.ActiveTab = 'editor';
 				loadSections(1);

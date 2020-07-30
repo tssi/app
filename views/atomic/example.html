@@ -7,7 +7,7 @@ You can change the alias to any name but use the acronymn of the controller  for
 	<a-fab ng-click="EXC.openModal()"></a-fab>
 	<a-module>
 		<a-container>
-			<a-header>
+			<a-header is-main="true">
 				<div class="pull-left">
 					<h4>Example</h4>
 				</div>
@@ -44,7 +44,7 @@ You can change the alias to any name but use the acronymn of the controller  for
 			<a-row ng-show="EXC.ActiveTab=='editor'">
 				<a-col>
 					<div ng-show="EXC.Mode=='EditItems'||EXC.Mode=='Add'" >
-						<m-table-edit headers="EXC.TestHeaders" props="EXC.TestProps" data="EXC.TestData" inputs="EXC.TestInputs" on-edit-save="EXC.updateItems"   on-init-sort="EXC.sortMode" ></m-table-edit>
+						<m-table-edit headers="EXC.TestHeaders" props="EXC.TestProps" data="EXC.TestData" inputs="EXC.TestInputs" on-edit-save="EXC.updateItems"  ></m-table-edit>
 					</div>
 					<div ng-show="EXC.Mode=='SortItems'">
 						<m-table-sort  headers="EXC.TestHeaders" props="EXC.TestProps" data="EXC.TestData" on-sort-save="EXC.updateItems"  on-init-edit="EXC.editMode"  ></m-table-sort>
