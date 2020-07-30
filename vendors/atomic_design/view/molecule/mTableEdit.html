@@ -29,7 +29,14 @@
 					</th>
 				</tr>
 				<tr>
-					<td class="align-middle {{Headers[$index].class}}" ng-repeat="prop in Props track by $index">
+					<td ng-if="Props.indexOf('student')>-1" colspan="{{Props.length}}">
+						<a-row>
+							<a-col>
+								<m-search-student ng-model="NewItem.student"></m-search-student>
+							</a-col>
+						</a-row>
+					</td>
+					<td ng-if="Props.indexOf('student')==-1" class="align-middle {{Headers[$index].class}}" ng-repeat="prop in Props track by $index">
 						<a-textbox
 						ng-if="!Inputs[$index].options" 
 						ng-model="NewItem[Inputs[$index].field]"
@@ -70,13 +77,23 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="(row,Item) in EditItems track by $index">
-					<td class="align-middle {{Headers[$index].class}}" ng-repeat="prop in Props track by $index">
+					<td ng-if="Props.indexOf('student')>-1" class="align-middle {{Headers[$index].class}}" ng-repeat="prop in Props track by $index">
+						<a-textbox
+						ng-if="$index!=Props.indexOf('student')"
+						ng-disabled="true"
+						ng-model="Item.student[prop]"></a-textbox>
+						<a-textbox
+						ng-if="$index==Props.indexOf('student')"
+						ng-disabled="true"
+						ng-model="Item.student[Inputs[$index].field]"></a-textbox>
+					</td>
+					<td  ng-if="Props.indexOf('student')==-1" class="align-middle {{Headers[$index].class}}" ng-repeat="prop in Props track by $index">
 						<a-textbox
 						ng-if="!Inputs[$index].options"
 						ng-disabled="Inputs[$index].disabled"
 						ng-model="Item[Inputs[$index].field]"
 						placeholder="Inputs[$index].placeholder"
-						type="Inputs[$index].type"></a-textbox>
+						type="Inputs[$index].type !='student'"></a-textbox>
 						<select
 							a-select
 							ng-if="Inputs[$index].options" 

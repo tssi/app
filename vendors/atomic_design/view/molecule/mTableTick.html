@@ -59,7 +59,15 @@
 								<a-glyph icon="tag"></a-glyph>
 							</a-button>
 						</td>
-						<td class="align-middle {{Headers[$index].class}} {{(Item[prop]|typeof)=='number'?'text-right':''}} " ng-repeat="prop in Props track by $index">
+						<td ng-if="Props.indexOf('student')>-1" class="align-middle {{Headers[$index].class}}" ng-repeat="prop in Props track by $index">
+							<span ng-if="$index!==Props.indexOf('student')">
+								{{Item.student[prop]}}
+							</span>
+							<span ng-if="$index==Props.indexOf('student')">
+								{{Item.student.name}}
+							</span>
+						</td>
+						<td ng-if="Props.indexOf('student')==-1" class="align-middle {{Headers[$index].class}} {{(Item[prop]|typeof)=='number'?'text-right':''}} " ng-repeat="prop in Props track by $index">
 						{{Item[prop]}}</td>
 					</tr>
 					<tr ng-show="!TickItems.length">

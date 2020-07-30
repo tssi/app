@@ -46,8 +46,18 @@
 		<table class="table table-bordered" ui-tree>
 			<tbody ui-tree-nodes ng-model="SortItems">
 				<tr ui-tree-node ng-repeat="(row,Item) in SortItems">
-					<td class="align-middle {{Headers[$index].class}}"  ng-repeat="prop in Props track by $index" >
-					<a-textbox ng-model="Item[prop]" ng-disabled="true"></a-textbox>
+					<td ng-if="Props.indexOf('student')>-1" class="align-middle {{Headers[$index].class}}" ng-repeat="prop in Props track by $index">
+						<a-textbox
+						ng-if="$index!=Props.indexOf('student')"
+						ng-disabled="true"
+						ng-model="Item.student[prop]"></a-textbox>
+						<a-textbox
+						ng-if="$index==Props.indexOf('student')"
+						ng-disabled="true"
+						ng-model="Item.student.name"></a-textbox>
+					</td>
+					<td ng-if="Props.indexOf('student')==-1" class="align-middle {{Headers[$index].class}}"  ng-repeat="prop in Props track by $index" >
+						<a-textbox ng-model="Item[prop]" ng-disabled="true"></a-textbox>
 					</td>
 					<td class="text-center">
 						<span  ui-tree-handle>
