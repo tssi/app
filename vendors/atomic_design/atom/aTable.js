@@ -3,7 +3,7 @@ define(['app'], function (app) {
 	app.register.directive('aTable',['AtomicPath','aTable',function (aPath,aTable) {
 		const DEFAULT =  {preload:true};
 		return {
-			require:'ngModel',
+			require:'?ngModel',
 			restrict: 'E',
 			scope:{
 				headers:"=",
@@ -11,7 +11,7 @@ define(['app'], function (app) {
 				data:"=",
 				searchBy:'=',
 				searchWord:'=',
-				activeItem:'=ngModel',
+				activeItem:'=?ngModel',
 				onRowClick:'&?',
 				isPreload:'=?',
 				onColClick:'&?'
@@ -20,6 +20,7 @@ define(['app'], function (app) {
 				return aPath.url('/view/atom/aTable.html');
 			},
 			link: function($scope,elem, attrs) {
+				$scope.hasModel = attrs.ngModel!=undefined;
 				$scope.isPreload =  $scope.isPreload || DEFAULT.preload;
 			},
 			controller:function($scope){
@@ -43,9 +44,11 @@ define(['app'], function (app) {
 					$scope.activeItem = item;
 				});
 				$scope.setActiveItem = function(item){
+					if(!$scope.hasModel) return;
 					$scope.activeItem  = item;
 					var item  = angular.copy(item);
-					$scope.onRowClick()(item);
+					if($scope.onRowClick)
+						$scope.onRowClick()(item);
 				}
 				$scope.$watch('searchWord',function(){
 					$scope.searchFilter={};
