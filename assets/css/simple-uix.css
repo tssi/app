@@ -930,3 +930,4 @@ ul.dropdown-menu .dropdown-header.dropdown-subheader {
 .filter-regular{display:flex;}
 .filter-minor,.filter-major{flex:1;}
 .angular-ui-tree-handle>button.btn[disabled]{opacity:1;}
+.simple-typeahead>input[disabled]{ border: 1px solid #ccc;border-right: none;}

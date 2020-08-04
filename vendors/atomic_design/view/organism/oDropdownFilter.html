@@ -10,7 +10,7 @@
 			<div class="filter-overload" ng-transclude></div>
 			<li class="divider" ng-show="isOverloaded"></li>
 			<div class="filter-regular">
-				<div class="filter-minor">
+				<div class="filter-minor" ng-if="oFilterDropdownCtrl.showSectionUI=='list' || oFilterDropdownCtrl.showYearLevel">
 					<li class="dropdown-header"
 					ng-if="oFilterDropdownCtrl.showYearLevel">YEAR LEVELS</li>
 					<li class="dropdown-input dropdown-subheader" ng-if="oFilterDropdownCtrl.showYearLevel"  >
@@ -20,8 +20,8 @@
 							</div>
 					</li>
 					<li class="dropdown-header"
-					ng-if="oFilterDropdownCtrl.showSection">SECTIONS</li>
-					<li class="dropdown-input dropdown-subheader" ng-if="oFilterDropdownCtrl.showSection" ng-repeat-start="yearLevel in _APP.YearLevels  | filter:{department_id:ActiveDept.id}" >
+					ng-if="oFilterDropdownCtrl.showSection && oFilterDropdownCtrl.showSectionUI=='list'">SECTIONS</li>
+					<li class="dropdown-input dropdown-subheader" ng-if="oFilterDropdownCtrl.showSection && oFilterDropdownCtrl.showSectionUI=='list'" ng-repeat-start="yearLevel in _APP.YearLevels  | filter:{department_id:ActiveDept.id}" >
 							<div class="btn-group">
 							<a-button>&nbsp;{{yearLevel.description}}</a-button>
 							<a-button opt-class="btn-nav" ng-click="setActiveYearLevel(yearLevel)">
@@ -32,7 +32,9 @@
 							</a-button>
 							</div>
 					</li>
-					<li class="dropdown-submenu" ng-repeat-end ng-if="oFilterDropdownCtrl.showSection&& yearLevel.id== ActiveYearLevel.id" >
+					<li class="dropdown-submenu" ng-repeat-end ng-if="oFilterDropdownCtrl.showSection&& 
+					oFilterDropdownCtrl.showSectionUI=='list' &&
+					yearLevel.id== ActiveYearLevel.id" >
 						<ul class="has-sticky" ng-show="ActiveYearLevel">
 							<li class="dropdown-header" ng-hide="ActiveSections.length">
 								<a-button ng-disabled="true" type="default-block" size="sm">
@@ -44,11 +46,12 @@
 									<a-button is-active="sanaAll" ng-click="toggleAll()">ALL</a-button>
 									<a-button
 										opt-class="btn-nav" 
+										 type="danger" 
 										ng-disabled="currentPage==1 || sanaAll==true"
 										ng-click="setCurrentPage(-1)">
 										<span class="glyphicon glyphicon-chevron-left"></span>
 									</a-button>
-									<a-button opt-class="btn-nav" ng-disabled="currentPage==lastPage || sanaAll==true"ng-click="setCurrentPage(1)">
+									<a-button opt-class="btn-nav" type="success" ng-disabled="currentPage==lastPage || sanaAll==true"ng-click="setCurrentPage(1)">
 										<span class="glyphicon glyphicon-chevron-right"></span>
 									</a-button>
 								</div>
@@ -69,6 +72,11 @@
 					</li>
 				</div>
 				<div class="filter-minor">
+					<li class="dropdown-header"
+					ng-if="oFilterDropdownCtrl.showSection && oFilterDropdownCtrl.showSectionUI=='search'">SECTIONS</li>
+					<li class="dropdown-input dropdown-subheader" ng-if="oFilterDropdownCtrl.showSection && oFilterDropdownCtrl.showSectionUI=='search'" >
+						<m-search-entity ng-model="oFilterDropdownCtrl.SearchSection" endpoint="'sections'" search-fields="'name'" obj-fields="SectSearchObj" display-field="'name'">
+					</li>
 					<li class="dropdown-header ">GRADING PERIOD</li>
 					<li class="dropdown-input">
 						<div class="btn-group btn-group-period" ng-show="ActiveDept.id!=='SH'">

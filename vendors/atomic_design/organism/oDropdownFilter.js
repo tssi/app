@@ -1,7 +1,7 @@
 "use strict";
 define(['app'], function (app) {
 	app.register.directive('oDropdownFilter',['$rootScope','AtomicPath','Atomic',function ($rootScope,aPath,atomic) {
-		const  DEFAULTS = {entryLimit:10};
+		const  DEFAULTS = {entryLimit:10,showSectionUI:'search'};
 		return {
 			restrict: 'E',
 			scope:{
@@ -9,6 +9,7 @@ define(['app'], function (app) {
 				showSem:'=?',
 				showYearLevel:'=?',
 				showSection:'=?',
+				showSectionUI:'@?',
 				update:'&',
 				dropdownPreview:'@?'
 			},
@@ -21,11 +22,12 @@ define(['app'], function (app) {
 				transclude(function(clone){
 					$scope.isOverloaded = clone.length>1;
 				});
-
 			},
 			bindToController:true,
 			controllerAs:'oFilterDropdownCtrl',
 			controller:function($scope){
+				$scope.oFilterDropdownCtrl.showSectionUI = $scope.showSectionUI || DEFAULTS.showSectionUI;
+				$scope.SectSearchObj = ['id','name','alias','department_id','program_id','year_level'];
 				function bindData(){
 					$scope._APP =  $rootScope._APP;
 					$scope._APP.Departments =  atomic.Departments;
@@ -103,8 +105,13 @@ define(['app'], function (app) {
 				$scope.setCurrentPage = function(change){
 					$scope.currentPage += change;
 				}
-
+				$scope.$watch('oFilterDropdownCtrl.SearchSection',function(section){
+					if(section){
+						$scope.setActiveSection(section);	
+					} 
+				});
 				$scope.setActiveSection = function(sect){
+					console.log(sect);
 					if($scope.ActiveSection ==sect) sect = null;
 					if(sect=='all'){
 
