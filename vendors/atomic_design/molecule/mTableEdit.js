@@ -1,7 +1,7 @@
 "use strict";
 define(['app'], function (app) {
 	app.register.directive('mTableEdit',['AtomicPath','aTable',function (aPath,aTable) {
-		const DEFAULTS = {optionLabel:'name',autoBind:true};
+		const DEFAULTS = {optionLabel:'name',autoBind:true,allowAdd:true};
 		return {
 			restrict: 'E',
 			scope:{
@@ -13,6 +13,7 @@ define(['app'], function (app) {
 				allowSort:'=?',
 				onInitSort:'&?',
 				autoBind:'=?',
+				allowAdd:'=?',
 			},
 			templateUrl:function(elem,attr){
 				return aPath.url('/view/molecule/mTableEdit.html');
@@ -36,7 +37,7 @@ define(['app'], function (app) {
 				$scope.$watchGroup(['headers','props','data'],function(){
 					$scope.Headers =  aTable.colHeaders($scope.headers,$scope.props);
 					$scope.Props = $scope.props;
-
+					$scope.AllowAdd =  $scope.allowAdd || DEFAULTS.allowAdd;
 					$scope.Items = $scope.data;
 					$scope.EditItems =  angular.copy($scope.Items);
 				});
