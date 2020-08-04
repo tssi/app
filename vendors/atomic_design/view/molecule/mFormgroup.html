@@ -1,8 +1,9 @@
 <div class="form-group">
 	<a-label>{{mFormgroupCtrl.ObjLabel}}</a-label>
-	<a-textbox  ng-if="!mFormgroupCtrl.ObjOptions" ng-model="mFormgroupCtrl.ObjModel"/>
+	<a-textbox  ng-if="!mFormgroupCtrl.ObjOptions" ng-model="mFormgroupCtrl.ObjModel" ng-disabled="mFormgroupCtrl.ObjDisabled"/>
 	<select ng-if="mFormgroupCtrl.ObjOptions"  a-select
 		ng-model="mFormgroupCtrl.ObjModel"
+		ng-disabled="mFormgroupCtrl.ObjDisabled"
 		ng-options="oItem.id as oItem[ObjOptionLabel] group by  oItem[mFormgroupCtrl.ObjOptionGroup] for oItem in mFormgroupCtrl.ObjOptions">
 		<option value="">Select {{mFormgroupCtrl.ObjLabel}}</option>
 	</select>

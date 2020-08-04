@@ -7,6 +7,7 @@ define(['app'], function (app) {
 			require:"ngModel",
 			scope:{
 				ObjModel:'=ngModel',
+				ObjDisabled:'=?ngDisabled',
 				ObjLabel:'@label',
 				ObjOptions:'=?options',
 				ObjOptionLabel:'@?optionLabel',
