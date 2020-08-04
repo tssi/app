@@ -1,7 +1,7 @@
 "use strict";
 define(['app'], function (app) {
 	app.register.directive('aTable',['AtomicPath','aTable',function (aPath,aTable) {
-		const DEFAULT =  {preload:true};
+		const DEFAULT =  {preload:true,allowAdd:true};
 		return {
 			require:'?ngModel',
 			restrict: 'E',
@@ -14,7 +14,8 @@ define(['app'], function (app) {
 				activeItem:'=?ngModel',
 				onRowClick:'&?',
 				isPreload:'=?',
-				onColClick:'&?'
+				onColClick:'&?',
+				allowAdd:'=?',
 			},
 			templateUrl:function(elem,attr){
 				return aPath.url('/view/atom/aTable.html');
@@ -22,6 +23,7 @@ define(['app'], function (app) {
 			link: function($scope,elem, attrs) {
 				$scope.hasModel = attrs.ngModel!=undefined;
 				$scope.isPreload =  $scope.isPreload || DEFAULT.preload;
+				$scope.allowAdd =  $scope.allowAdd || DEFAULT.allowAdd;
 			},
 			controller:function($scope){
 				$scope.$watchGroup(['headers','props','data'],function(){

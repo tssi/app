@@ -2,7 +2,7 @@
 	<div class="table-wrapper table-entry-header" style="position:relative;z-index:3;">
 		<table class="table table-bordered" style="margin-bottom:0px;">
 			<thead>
-				<tr ng-if="!autoBind">
+				<tr ng-if="!autoBind && allowAdd">
 					<td colspan="{{Headers.length}}">
 						<div class="help-text">
 						Click
@@ -22,13 +22,17 @@
 					<th class="align-middle {{hdr.class}}" ng-repeat="hdr in Headers" >
 						{{hdr.label?hdr.label:hdr}}
 					</th>
-					<th>
+					<th ng-class="{'col-md-1':!allowAdd}">
 						<a-button ng-click="initSort()" ng-disabled="!EditItems.length" ng-show="allowSort">
 							<a-glyph icon="sort"></a-glyph>
 						</a-button>
+						<a-button ng-show="!allowAdd&& !allowSort" ng-disabled="true" style="opacity:0;">
+							<a-glyph icon="plus"></a-glyph>
+						</a-button>
+
 					</th>
 				</tr>
-				<tr>
+				<tr ng-if="allowAdd">
 					<td ng-if="Props.indexOf('student')>-1" colspan="{{Props.length}}">
 						<a-row>
 							<a-col>
