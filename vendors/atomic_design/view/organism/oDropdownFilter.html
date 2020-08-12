@@ -77,8 +77,8 @@
 					<li class="dropdown-input dropdown-subheader" ng-if="oFilterDropdownCtrl.showSection && oFilterDropdownCtrl.showSectionUI=='search'" >
 						<m-search-entity ng-model="oFilterDropdownCtrl.SearchSection" endpoint="'sections'" search-fields="'name'" obj-fields="SectSearchObj" display-field="'name'">
 					</li>
-					<li class="dropdown-header ">GRADING PERIOD</li>
-					<li class="dropdown-input">
+					<li class="dropdown-header " ng-if="oFilterDropdownCtrl.showPeriod">GRADING PERIOD</li>
+					<li class="dropdown-input"  ng-if="oFilterDropdownCtrl.showPeriod">
 						<div class="btn-group btn-group-period" ng-show="ActiveDept.id!=='SH'">
 							<a-button ng-repeat="period in _APP.PERIODS"
 								ng-class="{'btn-primary':SelectedPeriod.id==period.id}" 

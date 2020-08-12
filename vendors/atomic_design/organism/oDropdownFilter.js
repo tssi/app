@@ -1,12 +1,13 @@
 "use strict";
 define(['app'], function (app) {
 	app.register.directive('oDropdownFilter',['$rootScope','AtomicPath','Atomic',function ($rootScope,aPath,atomic) {
-		const  DEFAULTS = {entryLimit:10,showSectionUI:'search'};
+		const  DEFAULTS = {entryLimit:10,showPeriod:true,showSectionUI:'search'};
 		return {
 			restrict: 'E',
 			scope:{
 				Active:'=ngModel',
 				showSem:'=?',
+				showPeriod:'=?',
 				showYearLevel:'=?',
 				showSection:'=?',
 				showSectionUI:'@?',
@@ -27,6 +28,7 @@ define(['app'], function (app) {
 			controllerAs:'oFilterDropdownCtrl',
 			controller:function($scope){
 				$scope.oFilterDropdownCtrl.showSectionUI = $scope.showSectionUI || DEFAULTS.showSectionUI;
+				$scope.oFilterDropdownCtrl.showPeriod = $scope.showPeriod || DEFAULTS.showPeriod;
 				$scope.SectSearchObj = ['id','name','alias','department_id','program_id','year_level'];
 				function bindData(){
 					$scope._APP =  $rootScope._APP;
@@ -40,9 +42,14 @@ define(['app'], function (app) {
 									sem:atomic.SelectedSem,
 									period:atomic.SelectedPeriod
 								};
-					if(active.period.id>4)
-						active.period.id = active.period.id/10;
+					if(!$scope.oFilterDropdownCtrl.showPeriod)
+						delete active.period;
+					
+					if(active.period){
+						if(active.period.id>4)
+							active.period.id = active.period.id/10;
 						active.esp =  parseFloat(active.sy+'.'+active.period.id);
+					}
 					$scope.oFilterDropdownCtrl.Active = active;
 				}
 
@@ -56,7 +63,8 @@ define(['app'], function (app) {
 						$scope.ActiveDept =  active.dept;
 						$scope.ActiveSY =  active.sy;
 						$scope.ActiveESP =  active.esp;
-						$scope.SelectedPeriod =  active.period;
+						if($scope.oFilterDropdownCtrl.showPeriod)
+							$scope.SelectedPeriod =  active.period;
 						$scope.SelectedSemester =  active.sem;
 					$scope.currentPage = 1;
 					renderPreview(active);
@@ -111,7 +119,7 @@ define(['app'], function (app) {
 					} 
 				});
 				$scope.setActiveSection = function(sect){
-					console.log(sect);
+					
 					if($scope.ActiveSection ==sect) sect = null;
 					if(sect=='all'){
 
@@ -152,9 +160,13 @@ define(['app'], function (app) {
 									period:$scope.SelectedPeriod
 									
 								};
-					if(active.period.id>4)
-						active.period.id = active.period.id/10;
-					active.esp =  parseFloat(active.sy+'.'+active.period.id);
+					if(!$scope.oFilterDropdownCtrl.showPeriod)
+						delete active.period;
+					if(active.period){
+						if(active.period.id>4)
+							active.period.id = active.period.id/10;
+						active.esp =  parseFloat(active.sy+'.'+active.period.id);
+					}
 					if($scope.oFilterDropdownCtrl.showSection){
 						active.section =  $scope.ActiveSection;
 					}
