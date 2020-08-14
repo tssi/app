@@ -1,7 +1,7 @@
 "use strict";
 define(['app'], function (app) {
-	app.register.directive('mTableEdit',['AtomicPath','aTable',function (aPath,aTable) {
-		const DEFAULTS = {optionLabel:'name',autoBind:true,allowAdd:true};
+	app.register.directive('mTableEdit',['$filter','AtomicPath','aTable',function ($filter,aPath,aTable) {
+		const DEFAULTS = {optionLabel:'name',autoBind:true,allowAdd:true,dateFormat:'yyyy-MM-dd'};
 		return {
 			restrict: 'E',
 			scope:{
@@ -39,6 +39,16 @@ define(['app'], function (app) {
 					$scope.Props = $scope.props;
 					$scope.AllowAdd =  $scope.allowAdd || DEFAULTS.allowAdd;
 					$scope.Items = $scope.data;
+
+					//Convert data string to date
+					angular.forEach($scope.inputs,function(field,i){
+						if(field.type=='date'){
+							angular.forEach($scope.Items,function(item,j){
+								var ffld = field.field;
+								$scope.Items[j][ffld] = new Date(item[ffld]);
+							});
+						}
+					});
 					$scope.EditItems =  angular.copy($scope.Items);
 				});
 				$scope.addItem = function(item){
@@ -75,6 +85,17 @@ define(['app'], function (app) {
 				$scope.confirmEdit = function(){
 					var items  = angular.copy($scope.EditItems);
 						$scope.Items = items;
+						angular.forEach($scope.inputs,function(field,i){
+							if(field.type=='date'){
+								angular.forEach(items,function(item,j){
+									var ffld = field.field;
+									var date  =item[ffld];
+									var format =  DEFAULTS.dateFormat;
+									items[j][ffld] = $filter('date')(date,format);
+								});
+							}
+						});
+					console.log(items);
 					if($scope.onEditSave)
 						$scope.onEditSave()(items);
 				}
