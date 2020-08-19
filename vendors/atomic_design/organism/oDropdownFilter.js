@@ -11,8 +11,9 @@ define(['app'], function (app) {
 				showYearLevel:'=?',
 				showSection:'=?',
 				showSectionUI:'@?',
-				update:'&',
-				dropdownPreview:'@?'
+				dropdownPreview:'@?',
+				liveUpdate:'=?',
+
 			},
 			replace:true,
 			transclude:true,
@@ -76,6 +77,10 @@ define(['app'], function (app) {
 				}
 				$scope.setSelectedSemester = function(sem){
 					$scope.SelectedSemester =  sem;
+					//Fix selected period when switching between semester
+					var flag =  sem.id==25?-2:2;
+					var index = ($scope.SelectedPeriod.id-1)+flag;
+					$scope.setSelectedPeriod(atomic.Periods[index])
 
 				}
 				$scope.setSelectedPeriod = function(period){
@@ -154,6 +159,17 @@ define(['app'], function (app) {
 					$scope.openDropdown = false;
 				}
 				$scope.confirmFilter = function(){
+					var active = mutateActive();
+					$scope.oFilterDropdownCtrl.Active = active;
+					$scope.openDropdown = false;
+					renderPreview(active);
+				}
+				$scope.$watchGroup(['ActiveDept','ActiveSY',
+									'SelectedSemester','SelectedPeriod',
+									'ActiveSection','ActiveYearLevel'],function(){
+							 $scope.oFilterDropdownCtrl.liveUpdate =  mutateActive();
+				});
+				function mutateActive(){
 					var active =  {dept:$scope.ActiveDept,
 									sy:$scope.ActiveSY,
 									sem:$scope.SelectedSemester,
@@ -173,9 +189,7 @@ define(['app'], function (app) {
 					if($scope.oFilterDropdownCtrl.showYearLevel){
 						active.year_level =  $scope.ActiveYearLevel;
 					}
-					$scope.oFilterDropdownCtrl.Active = active;
-					$scope.openDropdown = false;
-					renderPreview(active);
+					return active;
 				}
 				function renderPreview(active){
 					
