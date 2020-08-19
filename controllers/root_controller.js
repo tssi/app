@@ -62,34 +62,36 @@ define(['settings','demo'], function(settings,demo){
 		$rootScope.$on('$routeChangeStart', function (scope, next, current) {
 			$rootScope.__APP_READY = false;
 			$rootScope.__FAB_READY = false;
+			
+			if(!$rootScope.__USER){
+				//Load user
+				try{
+					$rootScope.__USER =  JSON.parse($cookies.get('__USER'));
+					$rootScope.__LOGGEDIN = $rootScope.__USER!=undefined;
+				}catch(e){
+					$rootScope.__USER = null;
+					$rootScope.__LOGGEDIN = false;
+				}
+			}
+			//Load menu
+			if($rootScope.__USER){
+				var menus = JSON.parse($locstor.get('__SIDEBAR_MENUS'));
+				$rootScope.__SIDEBAR_MENUS =  menus;
+			}
+
 			var locStorActive = $locstor.get('__LAST_ACTIVE');
 			var lastActive = new Date(locStorActive);
 			var currTime =  new Date();
 			var timeDiff = currTime - lastActive;
 			var timeIdle = timeDiff;
 			var maxIdle  =	settings.MAX_IDLE;
-			console.log($rootScope.__USER,locStorActive);
+			
 			if(timeIdle>=maxIdle && locStorActive && $rootScope.__USER){
 				if(next.$$route.originalPath!=="/logout")
 					alert("Session expired. Please login again.");
 				$locstor.set('__LAST_ACTIVE', new Date());
 				$window.location.href="#/logout";
 
-			}
-			if($rootScope.__USER) return;
-			
-			//Load user
-			try{
-				$rootScope.__USER =  JSON.parse($cookies.get('__USER'));
-				$rootScope.__LOGGEDIN = $rootScope.__USER!=undefined;
-			}catch(e){
-				$rootScope.__USER = null;
-				$rootScope.__LOGGEDIN = false;
-			}
-			//Load menu
-			if($rootScope.__USER){
-				var menus = JSON.parse($locstor.get('__SIDEBAR_MENUS'));
-				$rootScope.__SIDEBAR_MENUS =  menus;
 			}
 		});
 		$rootScope.$on('$routeChangeSuccess', function (scope, current, next) {
@@ -99,7 +101,7 @@ define(['settings','demo'], function(settings,demo){
 					$rootScope.__FAB_READY = true;
 				},settings.FAB_TRANSITION_DELAY);
 			},settings.APP_TRANSITION_DELAY);
-
+			
 			if(!$rootScope.__USER&&current.originalPath!='/login'){
 				$window.location.href="#/login";
 			}
