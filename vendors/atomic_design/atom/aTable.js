@@ -183,6 +183,13 @@ define(['app'], function (app) {
 			scroll:function(elem,dir){
 				var child = angular.element(elem[0].querySelector('.table-entry-data'))[0];
 				var goTo = child.scrollHeight;
+				var isScrollable = goTo > child.clientHeight;
+				var isWindows = true||navigator.platform.match("Win")!==null;
+				if(isWindows){
+					var hdr = angular.element(elem[0].querySelector('.table-entry-header'));
+					hdr.css('padding-right',isScrollable?'17px':null);
+				}
+
 				if(typeof dir == "number"){
 					var nth =  dir+1;
 					var row = angular.element(elem[0].querySelector('.table-entry-data tbody>tr:nth-child('+nth+')'))[0];
@@ -193,6 +200,9 @@ define(['app'], function (app) {
 
 					goTo = sT + (rH*dy);
 
+				}else if(dir=="top"){
+					goTo = 0;
+					console.log(dir);
 				}
 					
 				return new Promise(function(resolve,reject){

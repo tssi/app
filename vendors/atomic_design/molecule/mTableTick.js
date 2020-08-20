@@ -25,7 +25,16 @@ define(['app'], function (app) {
 					console.log($scope.Headers);
 					$scope.Props = $scope.props;
 					$scope.Items = $scope.data;
+					
+					var firstRun = $scope.TickItems==undefined;
+
 					$scope.TickItems =  angular.copy($scope.data);
+					
+					if(firstRun){
+						setTimeout(function(){
+							aTable.scroll($scope.elem,'top');
+						},300);
+					}
 				});
 				$scope.toggleTick = function(index){
 					if(index=='all') {

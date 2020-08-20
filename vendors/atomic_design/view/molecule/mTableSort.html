@@ -22,8 +22,8 @@
 					<th  class="align-middle" ng-repeat="hdr in Headers" ng-class="hdr.class">
 						{{hdr.label?hdr.label:hdr}}
 					</th>
-					<th>
-						<a-button ng-click="initEdit()" ng-show="allowEdit">
+					<th ng-show="allowEdit">
+						<a-button ng-click="initEdit()">
 							<a-glyph icon="pencil"></a-glyph>
 						</a-button>
 					</th>

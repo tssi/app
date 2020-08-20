@@ -19,8 +19,9 @@ define(['app'], function (app) {
 			link: function($scope,elem, attrs) {
 				$scope.SortItems= [];
 				if($scope.onInitEdit) $scope.allowEdit = true;
+				$scope.isWindows =  navigator.platform.match("Win")!==null;
 				$scope.autoBind = $scope.autoBind || DEFAULTS.autoBind;
-				console.log($scope.autoBind);
+				$scope.elem = elem;
 			},
 			controller:function($scope){
 				$scope.$watchGroup(['headers','props','data'],function(){
@@ -28,7 +29,15 @@ define(['app'], function (app) {
 					$scope.Props = $scope.props;
 					$scope.UIItems = undefined;
 					$scope.Items = $scope.data;
+					var firstRun = $scope.SortItems==undefined;
+					
 					$scope.SortItems =  angular.copy($scope.Items);
+
+					if(firstRun){
+						setTimeout(function(){
+							aTable.scroll($scope.elem,'top');
+						},300);
+					}
 				});
 				$scope.$watch('SortItems',function(items){
 					if($scope.autoBind){

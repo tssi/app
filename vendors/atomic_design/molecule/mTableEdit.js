@@ -32,6 +32,7 @@ define(['app'], function (app) {
 				if($scope.onInitSort) $scope.allowSort = true;
 				$scope.autoBind = $scope.autoBind || DEFAULTS.autoBind; 
 				$scope.elem = elem;
+
 			},
 			controller:function($scope){
 				$scope.$watchGroup(['headers','props','data'],function(){
@@ -49,7 +50,15 @@ define(['app'], function (app) {
 							});
 						}
 					});
+					var firstRun = $scope.EditItems==undefined;
 					$scope.EditItems =  angular.copy($scope.Items);
+					
+					if(firstRun){
+						setTimeout(function(){
+							aTable.scroll($scope.elem,'top');
+						},300);
+					}
+
 				});
 				$scope.addItem = function(item){
 					$scope.DisableLine = 'add';
