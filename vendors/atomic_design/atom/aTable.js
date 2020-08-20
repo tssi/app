@@ -184,7 +184,7 @@ define(['app'], function (app) {
 				var child = angular.element(elem[0].querySelector('.table-entry-data'))[0];
 				var goTo = child.scrollHeight;
 				var isScrollable = goTo > child.clientHeight;
-				var isWindows = true||navigator.platform.match("Win")!==null;
+				var isWindows = navigator.platform.match("Win")!==null;
 				if(isWindows){
 					var hdr = angular.element(elem[0].querySelector('.table-entry-header'));
 					hdr.css('padding-right',isScrollable?'17px':null);
