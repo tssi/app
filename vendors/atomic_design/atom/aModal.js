@@ -5,7 +5,8 @@ define(['app','vendors/bootstrap'], function (app) {
 			restrict: 'E',
 			scope:{
 				id:'@',
-				title:'@'
+				title:'@',
+				isLarge:'=?',
 			},
 			replace:true,
 			transclude:true,
@@ -16,7 +17,13 @@ define(['app','vendors/bootstrap'], function (app) {
 				$scope.ResolveData = $scope.data;
 				$scope.aModalId = $scope.id;
 				$scope.aModalTitle = $scope.title;
-				
+				if($scope.isLarge){
+					$scope.OptClass = 'modal-lg';
+				}
+				$scope.$watch('title',function(val){
+					$scope.aModalTitle = val;
+				});
+				console.log($scope.aModalTitle,'Letter');
 			},
 		}
 	}]);
