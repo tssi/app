@@ -19,16 +19,18 @@ define(['app','api'], function (app,api) {
 			 	REGISRTY['YearLevels'] =  response.data;
 			});
 		}
-		
+		function registerRegistry(){
+			angular.forEach($rootScope._APP,function(value,key){
+				REGISRTY[key]= angular.copy(value);
+			});
+		}
 		
 		return {
 			init:function(callback){
 				requestDepartments().then(function(){
 					requestYearLevels().then(function(){
 						requestSections().then( function(){
-							angular.forEach($rootScope._APP,function(value,key){
-								REGISRTY[key]= angular.copy(value);
-							});
+							registerRegistry();
 							REGISRTY.__USER = $rootScope.__USER;
 							REGISRTY.ready = true;
 							callback(REGISRTY);
