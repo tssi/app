@@ -23,7 +23,6 @@ define(['app','vendors/bootstrap'], function (app) {
 				$scope.$watch('title',function(val){
 					$scope.aModalTitle = val;
 				});
-				console.log($scope.aModalTitle,'Letter');
 			},
 		}
 	}]);
