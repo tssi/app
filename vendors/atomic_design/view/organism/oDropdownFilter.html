@@ -125,10 +125,10 @@
 						<li class="dropdown-input">
 							<div class="btn-group">
 								<a-button>{{ActiveSY}} -  {{ActiveSY+1}}</a-button>
-								<a-button opt-class="btn-nav" ng-disabled="ActiveSY==_APP.ACTIVE_SY" ng-click="setActiveSY(ActiveSY+1)">
+								<a-button opt-class="btn-nav" ng-disabled="ActiveSY==_APP.START_SY" ng-click="setActiveSY(ActiveSY-1)">
 									<span class="glyphicon glyphicon-chevron-left"></span>
 								</a-button>
-								<a-button opt-class="btn-nav" ng-disabled="ActiveSY==_APP.START_SY" ng-click="setActiveSY(ActiveSY-1)">
+								<a-button opt-class="btn-nav" ng-disabled="ActiveSY>=_APP.ACTIVE_SY" ng-click="setActiveSY(ActiveSY+1)">
 									<span class="glyphicon glyphicon-chevron-right"></span>
 								</a-button>
 							</div>

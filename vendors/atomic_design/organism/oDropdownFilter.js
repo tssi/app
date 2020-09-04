@@ -58,6 +58,14 @@ define(['app'], function (app) {
 					$rootScope.$on('$routeChangeSuccess',bindData);
 
 				$scope.$watch("oFilterDropdownCtrl.Active",buildActive);
+				$rootScope.$watch('_APP.ACTIVE_SY',function(value){
+					atomic.ActiveSY =  value;
+					atomic.ready(bindData).fuse();
+				});
+				$rootScope.$watch('_CONF.ACTIVE_SY',function(value){
+					atomic.ActiveSY =  value;
+					atomic.ready(bindData).fuse();
+				});
 
 				function buildActive(val){
 					var active =  val||{dept:null,sy:null,sem:null,period:null,esp:null};
