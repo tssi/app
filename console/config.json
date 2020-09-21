@@ -28,7 +28,7 @@
 		},
 		"config/app.js":{
 			"find":["settings.VIEWS_DIRECTORY+\"\/auth\/login."],
-			"replace":["\"\/app\/views\/auth\/login."]
+			"replace":["\"app\/views\/auth\/login."]
 		},
 		"config/main.js":{
 			"find":["baseUrl:''","config/settings","config/app"],
