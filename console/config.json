@@ -9,6 +9,7 @@
 		"webroot"
 	],
 	"files":[
+		"config/app.js",
 		"config/main.js",
 		"config/routes.js",
 		"config/settings.js",
@@ -24,6 +25,10 @@
 		"index.html":{
 			"find":["Simple UI/X Template","assets/","vendors/bower_components/","/app"],
 			"replace":["APP","app/assets/","app/bower_components/","#"]
+		},
+		"config/app.js":{
+			"find":["settings.VIEWS_DIRECTORY+\"\/auth\/login."],
+			"replace":["\"\/app\/views\/auth\/login."]
 		},
 		"config/main.js":{
 			"find":["baseUrl:''","config/settings"],
