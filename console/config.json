@@ -31,8 +31,8 @@
 			"replace":["\"\/app\/views\/auth\/login."]
 		},
 		"config/main.js":{
-			"find":["baseUrl:''","config/settings"],
-			"replace":["baseUrl:'app'","../config/settings"]
+			"find":["baseUrl:''","config/settings","config/app"],
+			"replace":["baseUrl:'app'","../config/settings","../config/app"]
 		},
 		"config/settings.js":{
 			"find":["controllers","tests"],
