@@ -80,6 +80,7 @@ define(['app'], function (app) {
 				}
 				$scope.toggleText='More';
 				
+				
 				$scope.setActiveSY = function(sy){
 					$scope.ActiveSY =  sy;
 				}
@@ -200,17 +201,21 @@ define(['app'], function (app) {
 					return active;
 				}
 				function renderPreview(active){
-					
 					if($scope.oFilterDropdownCtrl.dropdownPreview) return;
 					var preview = [];
 					if(active.sy)
 						preview .push("SY "+ active.sy + " - "+ (active.sy+1));
 					if(active.sem)
-						preview.push(active.sem.alias.full);
+						if(active.dept.id=='SH')
+							preview.push(active.sem.alias.full);
 					if(active.period)
-						if(active.period.alias.full!=preview[1])
-							preview.push(active.period.alias.full);
-					
+						if(active.period.alias.full!=preview[1]){
+							var disp = active.period.alias.full;
+							console.log(active.dept.id);
+							if(active.dept.id!='SH')
+								disp = active.period.alias.desc;
+							preview.push(disp);
+						}
 					active.section =  active.section ||{};
 					if( active.year_level)
 						preview.push(active.year_level.description);	

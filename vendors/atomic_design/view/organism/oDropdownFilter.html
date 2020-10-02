@@ -82,7 +82,7 @@
 						<div class="btn-group btn-group-period" ng-show="ActiveDept.id!=='SH'">
 							<a-button ng-repeat="period in _APP.PERIODS"
 								ng-class="{'btn-primary':SelectedPeriod.id==period.id}" 
-								ng-click="setSelectedPeriod(period)">{{period.alias.short}}</button>
+								ng-click="setSelectedPeriod(period)">{{period.alias.desc}}</button>
 							</a-button>
 						</div>
 						<div class="btn-group btn-group-period" ng-show="ActiveDept.id=='SH'">
