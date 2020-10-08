@@ -51,20 +51,28 @@ define(['app'], function (app) {
 							active.period.id = active.period.id/10;
 						active.esp =  parseFloat(active.sy+'.'+active.period.id);
 					}
+
 					$scope.oFilterDropdownCtrl.Active = active;
 				}
 
 				if(atomic.ready(bindData).fuse())
 					$rootScope.$on('$routeChangeSuccess',bindData);
+				$rootScope.$on('$routeChangeSuccess',function(){
+					console.log(atomic);
+				});
 
 				$scope.$watch("oFilterDropdownCtrl.Active",buildActive);
 				$rootScope.$watch('_APP.ACTIVE_SY',function(value){
-					atomic.ActiveSY =  value;
-					atomic.ready(bindData).fuse();
+					if(value){
+						atomic.ActiveSY =  value;
+						atomic.ready(bindData).fuse();
+					}
 				});
 				$rootScope.$watch('_CONF.ACTIVE_SY',function(value){
-					atomic.ActiveSY =  value;
-					atomic.ready(bindData).fuse();
+					if(value){
+						atomic.ActiveSY =  value;
+						atomic.ready(bindData).fuse();
+					}
 				});
 
 				function buildActive(val){
