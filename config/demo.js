@@ -44,7 +44,7 @@ define(function() {
 						  dataType: settings.API_EXT,
 						  headers: {
 						   'X-Requested-With': 'XMLHttpRequest',
-						   'Content-Type': 'application'+settings.API_EXT,
+						   'Content-Type': 'application/'+settings.API_EXT,
 						   'Accepts': 'application/'+settings.API_EXT
 							}
 						};
