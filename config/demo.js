@@ -37,7 +37,7 @@ define(function() {
 					},settings.TEST_DELAY*requestCount);
 					return promise;
 				}else{
-					var url = settings.API_URL + endpoint + '.' + settings.API_EXT;
+					var url = settings.API_HOST+settings.API_URL + endpoint + '.' + settings.API_EXT;
 					var request ={
 						  method: method,
 						  url: url,
