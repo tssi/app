@@ -6,6 +6,7 @@ define(['app'], function (app) {
 			require:'?ngModel',
 			restrict: 'E',
 			scope:{
+				isSticky:'=?',
 				headers:"=",
 				props:"=",
 				data:"=",
@@ -22,6 +23,8 @@ define(['app'], function (app) {
 			link: function($scope,elem, attrs) {
 				$scope.hasModel = attrs.ngModel!=undefined;
 				$scope.isPreload =  $scope.isPreload || DEFAULT.preload;
+				$scope.$$aTable =  angular.element(elem[0])[0].children[0];
+				
 				
 			},
 			controller:function($scope){
@@ -38,7 +41,11 @@ define(['app'], function (app) {
 					if(sortField)
 						$scope.sortItemsBy(sortField);
 
-					
+					if($scope.isSticky){
+						var width = angular.element($scope.$$aTable).prop('offsetWidth')+'px';
+						$scope.stickyWidth = width;
+						$scope.stickyHeight =  '70vh';
+					}
 				});
 				$scope.$watch('activeItem',function(item){
 					$scope.activeItem = item;

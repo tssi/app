@@ -1,0 +1,31 @@
+div.sticky-table{
+  	overflow:auto;
+  	width:300px;
+  	height:80vh;
+}
+.sticky-table td,
+.sticky-table th {
+  background: #fff;
+  width: 100px;
+
+}
+
+
+.sticky-table table {
+  table-layout: fixed;
+  width:100%;
+}
+.sticky-table td:first-child, .sticky-table th:first-child {
+  position:sticky;
+  left:0;
+  z-index:1;
+
+  
+}
+
+.sticky-table thead tr th {
+  position:sticky;
+  border:1px solid #ddd;
+  top:-1px;
+}
+.sticky-table th:first-child,.sticky-table  th:last-child {z-index:2;}
