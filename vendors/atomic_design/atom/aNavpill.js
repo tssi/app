@@ -26,7 +26,8 @@ define(['app'], function (app) {
 			controller:function($scope){
 
 				$scope.setActiveItem = function(item){
-					$scope.ActiveItem = item.id;
+					if(!item.disable)
+						$scope.ActiveItem = item.id;
 				}
 			}
 		}

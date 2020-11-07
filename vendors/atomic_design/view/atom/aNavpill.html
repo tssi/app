@@ -1,7 +1,8 @@
-<ul class="nav nav-pull" style="margin-bottom: 10px;">
+<ul class="nav nav-pills" style="margin-bottom: 10px;">
 	<li ng-repeat="item in Options" 
 		ng-click="setActiveItem(item)" 
-		ng-class="{active:ActiveItem===item.id}">
+		ng-class="{active:ActiveItem===item.id,disabled:item.disable}"
+		ng-disabled="item.disable">
 		<a>{{item[aNavLabel]}}</a>
 	</li>
 </ul>			
