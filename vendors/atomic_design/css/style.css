@@ -7,9 +7,13 @@ div.sticky-table{
 .sticky-table th {
   background: #fff;
   width: 100px;
-
+  width:70px;
+  vertical-align: middle;
 }
-
+.sticky-table th>div.pull-right{
+  position:absolute;
+  right:0;bottom:0;
+}
 
 .sticky-table table {
   table-layout: fixed;
@@ -19,7 +23,7 @@ div.sticky-table{
   position:sticky;
   left:0;
   z-index:1;
-
+  width:200px;
   
 }
 
@@ -27,5 +31,7 @@ div.sticky-table{
   position:sticky;
   border:1px solid #ddd;
   top:-1px;
+  vertical-align: middle;
+  text-align: center;
 }
 .sticky-table th:first-child,.sticky-table  th:last-child {z-index:2;}
