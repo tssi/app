@@ -7,8 +7,9 @@ div.sticky-table{
 .sticky-table th {
   background: #fff;
   width: 100px;
-  width:70px;
-  vertical-align: middle;
+  width:90px;
+  text-align: right;
+
 }
 .sticky-table th>div.pull-right{
   position:absolute;
@@ -24,6 +25,7 @@ div.sticky-table{
   left:0;
   z-index:1;
   width:200px;
+  text-align: left;
   
 }
 
