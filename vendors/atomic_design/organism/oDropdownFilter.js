@@ -60,7 +60,10 @@ define(['app'], function (app) {
 				$rootScope.$on('$routeChangeSuccess',function(){
 					console.log(atomic);
 				});
-
+				$scope.$watch("oFilterDropdownCtrl.Active.openDropdown",function(openDD){
+					console.log(openDD);
+					$scope.openDropdown=openDD;
+				});
 				$scope.$watch("oFilterDropdownCtrl.Active",buildActive);
 				$rootScope.$watch('_APP.ACTIVE_SY',function(value){
 					if(value){
