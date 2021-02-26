@@ -35,7 +35,7 @@ define(['app'], function (app) {
 
 			},
 			controller:function($scope){
-				$scope.$watchGroup(['headers','props','data'],function(){
+				$scope.$watchGroup(['headers','props','data','inputs'],function(){
 					$scope.Headers =  aTable.colHeaders($scope.headers,$scope.props);
 					$scope.Props = $scope.props;
 					$scope.AllowAdd =  $scope.allowAdd || DEFAULTS.allowAdd;
