@@ -104,7 +104,7 @@
 							ng-disabled="Inputs[$index].disabled"
 							ng-model="Item[Inputs[$index].field]"
 							ng-options="oItem.id as oItem[Inputs[$index].optionLabel] group by  oItem[Inputs[$index].optionsGroup] for oItem in Inputs[$index].options">
-							<option value="">Select {{Inputs[$index].optionLabel}}</option>
+							<option value="">Select {{Inputs[$index].field}}</option>
 						</select>
 					</td>
 					<td class="text-center">

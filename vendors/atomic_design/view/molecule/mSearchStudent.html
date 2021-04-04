@@ -1,4 +1,4 @@
-<div class="input-group simple-typeahead">
+<div class="input-group simple-typeahead {{IsLarge?'input-group-lg':null}}">
 	<input  id="{{'searchStudent-'+ELEM_ID}}" class="form-control" type="text" placeholder="{{!ShowBtn?Placeholder[0]:Placeholder[1]}}" ng-model="ObjModel" uib-typeahead="student as student.name for student in  getResults($viewValue,Filter)" typeahead-loading="loadingRecords" typeahead-editable="false" typeahead-no-results="noStudents" typeahead-wait-ms="250" ng-focus="ShowBtn=true" ng-blur="ShowBtn=ObjModel.id?true:false" ng-disabled="ObjModel.id" autocomplete="off" />
 
 	<div class="input-group-btn">

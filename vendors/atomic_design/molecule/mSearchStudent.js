@@ -17,6 +17,7 @@ define(['app'], function (app) {
 					scope:{
 						ObjModel:'=ngModel',
 						Filter:'=?filter',
+						IsLarge:'=?isLarge'
 					},
 					templateUrl:function(elem,attr){
 						return aPath.url('/view/molecule/mSearchStudent.html');
