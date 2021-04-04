@@ -4,6 +4,7 @@ define(['app'], function (app) {
 		function ($rootScope,aPath,aApi,atomic) {
 			const  DEFAULT = {
 								elemID:1000,
+								allowCreate:false,
 								endpoint:'students',
 								display:'full_name',
 								objFields:['id','first_name','middle_name','last_name'],
@@ -21,6 +22,7 @@ define(['app'], function (app) {
 						SearchFields:'=?searchFields',
 						ObjectFields:'=?objFields',
 						DisplayField:'=?displayField',
+						AllowCreate:'=?allowCreate'
 					},
 					templateUrl:function(elem,attr){
 						return aPath.url('/view/molecule/mSearchEntity.html');
@@ -36,6 +38,7 @@ define(['app'], function (app) {
 						$scope.Placeholder = DEFAULT.placeholder;
 						$scope.Fields = $scope.SearchFields||DEFAULT.searchFields;
 						$scope.ObjectFields =$scope.ObjectFields|| DEFAULT.objFields;
+						$scope.AllowCreate =$scope.AllowCreate|| DEFAULT.allowCreate;
 						$scope.ELEM_ID = DEFAULT.elemID++;
 
 					},
@@ -78,33 +81,37 @@ define(['app'], function (app) {
 								input.nextSibling.style.width = div.offsetWidth+'px';
 								var display = $scope.Display||{};
 								var tokens = display.length?display.split(' '):display;
-								var source = response.data.map(function(item){
-									var id =  item.id;
-									var name = [];
-									if(tokens.length){
-										for(var i in tokens){
-											var token = tokens[i];
-											if(item.hasOwnProperty(token)){
-												name.push(item[token]);
+								var source;
+								if(response.data){
+									source = response.data.map(function(item){
+										var id =  item.id;
+										var name = [];
+										if(tokens.length){
+											for(var i in tokens){
+												var token = tokens[i];
+												if(item.hasOwnProperty(token)){
+													name.push(item[token]);
+												}
 											}
+											name = name.join(' ');
+										}else{
+											name =  item.name;
 										}
-										name = name.join(' ');
-									}else{
-										name =  item.name;
-									}
-									//Minimum object fields
-									var obj = {
-										name:name,
-										id:id
-									}
-									
-									//Additional fields for the object
-									for(var i in objFields){
-										var key=objFields[i];
-										obj[key]=item[key];
-									}
-									return obj;
-								  });
+										//Minimum object fields
+										var obj = {
+											name:name,
+											id:id
+										}
+										
+										//Additional fields for the object
+										for(var i in objFields){
+											var key=objFields[i];
+											obj[key]=item[key];
+										}
+										return obj;
+									  });
+								}
+								
 								return source;
 							});
 						}
