@@ -1,6 +1,6 @@
 <div class="form-group">
 	<a-label>{{mFormgroupCtrl.ObjLabel}}</a-label>
-	<a-textbox  ng-if="!mFormgroupCtrl.ObjOptions" ng-model="mFormgroupCtrl.ObjModel" ng-disabled="mFormgroupCtrl.ObjDisabled"/>
+	<a-textbox  ng-if="!mFormgroupCtrl.ObjOptions" ng-model="mFormgroupCtrl.ObjModel" ng-disabled="mFormgroupCtrl.ObjDisabled" type="mFormgroupCtrl.ObjType"/>
 	<select ng-if="mFormgroupCtrl.ObjOptions"  a-select
 		ng-model="mFormgroupCtrl.ObjModel"
 		ng-disabled="mFormgroupCtrl.ObjDisabled"

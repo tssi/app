@@ -9,6 +9,7 @@ define(['app'], function (app) {
 				ObjModel:'=ngModel',
 				ObjDisabled:'=?ngDisabled',
 				ObjLabel:'@label',
+				ObjType:'=?type',
 				ObjOptions:'=?options',
 				ObjOptionLabel:'@?optionLabel',
 				ObjOptionGroup:'@?optionGroup'
