@@ -27,6 +27,7 @@ define(['app','vendors/bower_components/jquery/dist/jquery','atomic/alive/api',
 		'atomic/molecule/mTableEdit',
 		'atomic/molecule/mSearchStudent',
 		'atomic/molecule/mSearchEntity',
+		'atomic/molecule/mFileupload',
 		'atomic/organism/oDropdownFilter'
 	], function (app) {
 	app.register.factory('Atomic',['AtomicAPI','$rootScope',function(aapi,$scope){
