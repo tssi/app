@@ -1,7 +1,9 @@
-<label class="thumbnail btn btn-default ng-cloak" style="cursor:pointer;" for="SchoolLogo">
-	<img src="" alt="" class="FilePreview"/>
+<label class="thumbnail btn btn-default ng-cloak" style="cursor:pointer;" for="{{'fileInput-'+ELEM_ID}}">
+	<div ng-show="FileType=='image'">
+		<img src="" alt="" class="FilePreview img-responsive"/>
+	</div>
 	<div class="caption">
-	  <center>Update student picture minimum of 200x200 pixel.</center>
+	  <center>Upload {{Caption}}</center>
 	</div>
 </label>
-<input class="form-control hide" id="SchoolLogo" type="file"  accept="image/*"/ ng-model="FileInput">
+<input class="form-control hide" id="{{'fileInput-'+ELEM_ID}}" type="file"  accept="{{FileTypes}}"/ ng-model="FileInput">
