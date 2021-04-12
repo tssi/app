@@ -63,7 +63,9 @@ define(['app'], function (app) {
 						   	var type = this.response.type;
 						   	var size = this.response.size;
 						   	$scope.FileSize = size;
+						   	console.log(type, size,this.response);
 						    switch(type){
+						    	case 'image/*':
 						    	case 'image/png':
 						    	case 'image/jpeg':
 							    	$scope.$apply(function(){
@@ -82,6 +84,7 @@ define(['app'], function (app) {
 
 				}
 				function validateImage(file){
+					console.log(file);
 					var validations =  $scope.FileValidations;
 					var img = new Image();
 					var objectUrl = _URL.createObjectURL(file);
@@ -184,7 +187,8 @@ define(['app'], function (app) {
 
 				$scope.$watch('FilePreview',function(preview){
 					$scope.FileSize = 0;
-					if(!preview)
+					console.log(preview, new Date());
+					if(!preview || typeof preview =='number')
 						return $scope.FileType = null;
 					
 					validateURL(preview);
