@@ -215,9 +215,11 @@ define(['app'], function (app) {
 						  transformRequest: angular.identity,
 						  headers: {'Content-Type': undefined}
 						};
+					
 					$http.post($scope.FileUploadUrl, fd, hdr)
 					.success(function() {
-					
+						var fileInput = angular.element(document.getElementById('fileInput-'+$scope.ELEM_ID));
+						fileInput.val(null);
 					}).error(function() {
 					
 
