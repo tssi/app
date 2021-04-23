@@ -1,7 +1,7 @@
 "use strict";
 define(['app'], function (app) {
 	app.register.directive('mTableEdit',['$filter','AtomicPath','aTable',function ($filter,aPath,aTable) {
-		const DEFAULTS = {optionLabel:'name',autoBind:true,allowAdd:true,dateFormat:'yyyy-MM-dd'};
+		const DEFAULTS = {optionLabel:'name',autoBind:true,allowAdd:true,dateFormat:'yyyy-MM-dd',maxHeight:200};
 		return {
 			restrict: 'E',
 			scope:{
@@ -14,6 +14,7 @@ define(['app'], function (app) {
 				onInitSort:'&?',
 				autoBind:'=?',
 				allowAdd:'=?',
+				maxHeight:'@?'
 			},
 			templateUrl:function(elem,attr){
 				return aPath.url('/view/molecule/mTableEdit.html');
@@ -31,6 +32,7 @@ define(['app'], function (app) {
 				$scope.NewItem = {};
 				if($scope.onInitSort) $scope.allowSort = true;
 				$scope.autoBind = $scope.autoBind || DEFAULTS.autoBind; 
+				$scope.maxHeight = $scope.maxHeight || DEFAULTS.maxHeight;
 				$scope.elem = elem;
 
 			},

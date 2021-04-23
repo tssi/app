@@ -1,7 +1,7 @@
 "use strict";
 define(['app'], function (app) {
 	app.register.directive('mTableSort',['AtomicPath','aTable','$filter',function (aPath,aTable,$filter) {
-		const DEFAULTS = {optionLabel:'name',autoBind:true};
+		const DEFAULTS = {optionLabel:'name',autoBind:true,maxHeight:200};
 		return {
 			restrict: 'E',
 			scope:{
@@ -11,7 +11,8 @@ define(['app'], function (app) {
 				onSortSave:"&?",
 				allowEdit:'=?',
 				onInitEdit:'&?',
-				autoBind:'=?'
+				autoBind:'=?',
+				maxHeight:'@?'
 			},
 			templateUrl:function(elem,attr){
 				return aPath.url('/view/molecule/mTableSort.html');
@@ -21,6 +22,7 @@ define(['app'], function (app) {
 				if($scope.onInitEdit) $scope.allowEdit = true;
 				$scope.isWindows =  navigator.platform.match("Win")!==null;
 				$scope.autoBind = $scope.autoBind || DEFAULTS.autoBind;
+				$scope.maxHeight = $scope.maxHeight || DEFAULTS.maxHeight;
 				$scope.elem = elem;
 			},
 			controller:function($scope){

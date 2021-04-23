@@ -42,7 +42,7 @@
 			</thead>
 		</table>
 	</div>
-	<div class="table-wrapper table-entry-data"  style="position:relative;z-index:2;max-height:200px;overflow:auto;">
+	<div class="table-wrapper table-entry-data"  style="position:relative;z-index:2;max-height:{{maxHeight}}px;overflow:auto;">
 		<table class="table table-bordered" ui-tree>
 			<tbody ui-tree-nodes ng-model="SortItems">
 				<tr ui-tree-node ng-repeat="(row,Item) in SortItems">
