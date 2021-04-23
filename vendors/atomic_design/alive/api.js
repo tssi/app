@@ -14,6 +14,11 @@ define(['app','api'], function (app,api) {
 			 	REGISRTY['Departments'] =  response.data;
 			});
 		}
+		function requestPrograms(){
+			return api.GET("programs",data,function(response){
+			 	REGISRTY['Programs'] =  response.data;
+			});
+		}
 		function requestYearLevels(){
 			return api.GET("year_levels",data,function(response){
 			 	REGISRTY['YearLevels'] =  response.data;
@@ -28,12 +33,14 @@ define(['app','api'], function (app,api) {
 		return {
 			init:function(callback){
 				requestDepartments().then(function(){
-					requestYearLevels().then(function(){
-						requestSections().then( function(){
-							registerRegistry();
-							REGISRTY.__USER = $rootScope.__USER;
-							REGISRTY.ready = true;
-							callback(REGISRTY);
+					requestPrograms().then(function(){
+						requestYearLevels().then(function(){
+							requestSections().then( function(){
+								registerRegistry();
+								REGISRTY.__USER = $rootScope.__USER;
+								REGISRTY.ready = true;
+								callback(REGISRTY);
+							});
 						});
 					});
 				});

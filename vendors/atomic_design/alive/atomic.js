@@ -10,6 +10,7 @@ define(['app','atomic/index/api'],function(app){
 			atomic.Periods =  REGISTRY.PERIODS;
 			atomic.Sections =  REGISTRY.Sections;
 			atomic.Departments = REGISTRY.Departments;
+			atomic.Programs = REGISTRY.Programs;
 			atomic.YearLevels = REGISTRY.YearLevels;
 			
 			//TODO: Load from system defaults
