@@ -39,6 +39,7 @@ define(['app','vendors/bower_components/jquery/dist/jquery','atomic/alive/api',
 			atomic.Periods =  REGISTRY.PERIODS;
 			atomic.Sections =  REGISTRY.Sections;
 			atomic.Departments = REGISTRY.Departments;
+			atomic.Programs = REGISTRY.Programs;
 			atomic.YearLevels = REGISTRY.YearLevels;
 			
 			//TODO: Load from system defaults
