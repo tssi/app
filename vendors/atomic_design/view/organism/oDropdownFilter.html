@@ -80,13 +80,13 @@
 					<li class="dropdown-header " ng-if="oFilterDropdownCtrl.showPeriod">GRADING PERIOD</li>
 					<li class="dropdown-input"  ng-if="oFilterDropdownCtrl.showPeriod">
 						<div class="btn-group btn-group-period" ng-show="ActiveDept.id!=='SH'">
-							<a-button ng-repeat="period in _APP.PERIODS"
+							<a-button ng-repeat="period in _APP.PERIODS | filter:filterFNALGRD"
 								ng-class="{'btn-primary':SelectedPeriod.id==period.id}" 
 								ng-click="setSelectedPeriod(period)">{{period.alias.desc}}</button>
 							</a-button>
 						</div>
 						<div class="btn-group btn-group-period" ng-show="ActiveDept.id=='SH'">
-							<a-button  ng-repeat="period in _APP.PERIODS"
+							<a-button  ng-repeat="period in _APP.PERIODS | filter:filterFNALGRD"
 								ng-class="{'btn-primary':SelectedPeriod.id==period.id}" 
 								ng-click="setSelectedPeriod(period)"
 								ng-if="(SelectedSemester.key=='FRSTSEMS'&&period.id<=2)||(SelectedSemester.key=='SCNDSEMS'&&period.id>2) "

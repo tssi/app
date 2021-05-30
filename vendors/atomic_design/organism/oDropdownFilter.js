@@ -1,7 +1,7 @@
 "use strict";
 define(['app'], function (app) {
 	app.register.directive('oDropdownFilter',['$rootScope','AtomicPath','Atomic',function ($rootScope,aPath,atomic) {
-		const  DEFAULTS = {entryLimit:10,showPeriod:true,showSectionUI:'search'};
+		const  DEFAULTS = {entryLimit:10,showPeriod:true,showSectionUI:'search',};
 		return {
 			restrict: 'E',
 			scope:{
@@ -13,6 +13,7 @@ define(['app'], function (app) {
 				showSectionUI:'@?',
 				dropdownPreview:'@?',
 				liveUpdate:'=?',
+				showFinal:'=?'
 
 			},
 			replace:true,
@@ -31,6 +32,10 @@ define(['app'], function (app) {
 				$scope.oFilterDropdownCtrl.showSectionUI = $scope.showSectionUI || DEFAULTS.showSectionUI;
 				$scope.oFilterDropdownCtrl.showPeriod = $scope.showPeriod || DEFAULTS.showPeriod;
 				$scope.SectSearchObj = ['id','name','alias','department_id','program_id','year_level'];
+
+				if(!$scope.showFinal)
+					$scope.filterFNALGRD = {id:'!5'};
+				
 				function bindData(){
 					$scope._APP =  $rootScope._APP;
 					$scope._APP.Departments =  atomic.Departments;
