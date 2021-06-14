@@ -1,6 +1,3 @@
-<input ng-if="aType!='date'" class="form-control" type="{{aType}}" ng-disabled="isDisabled"  ng-model="aTextboxModel" placeholder="{{aPlaceholder}}" />
 
+<input class="form-control" type="{{aType}}" ng-disabled="isDisabled"  ng-model="aTextboxModel" placeholder="{{aPlaceholder}}" />
 
-<input ng-show="aType=='date' && !aTextboxFocused" class="form-control" type="text" ng-disabled="isDisabled"  ng-focus="aTextboxFocused=true" ng-model="aTextboxFauxDateModel" ng-value="aTextboxModel|date:'dd/MMM/y' " placeholder="dd/mm/yyyy" />
-
-<input ng-show="aType=='date' && aTextboxFocused" class="form-control" type="date" ng-disabled="isDisabled"  focus="aTextboxFocused" ng-blur="aTextboxFocused=false" ng-model="aTextboxModel" placeholder="{{aPlaceholder}}" />
