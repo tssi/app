@@ -1,0 +1,16 @@
+<div class="btn-group dropdown"  ng-class="{'open':openDropdown}">
+  <button class="btn btn-default">{{DropdownItem?ActiveOptGrp+' '+DropdownItem.name:DropdownLabel}}</button>
+  <button class="btn btn-default  dropdown-toggle" ng-click="openDropdown=!openDropdown">
+       <span class="caret"></span>
+   </button>
+  <ul class="dropdown-menu pull-right">
+    <li ng-click="setActiveOptGrp(optGrp)" class="dropdown-header" ng-repeat-start="optGrp in DropdownOptions| orderBy:'id' | groupBy:'year_level'">
+        <div class="pull-left">{{optGrp}}</div>
+       <div class="pull-right"> <span class="caret"></span></div>
+       <div class="clearfix"></div>
+    </li>
+    <li ng-show="ActiveOptGrp===optGrp" ng-repeat-end ng-repeat="optItem in DropdownOptions | filter:{'year_level':optGrp}" ng-class="{active:optItem.id==DropdownItem.id}">
+        <a ng-click="setDropdownItem(optItem)">{{optItem.name}}</a>
+    </li>
+  </ul>
+</div>
