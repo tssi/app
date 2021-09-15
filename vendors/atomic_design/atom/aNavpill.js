@@ -10,12 +10,16 @@ define(['app'], function (app) {
 				ActiveItem:'=ngModel',
 				Options:'=options',
 				label:'=?',
-				confirm:'&'
+				confirm:'&',
+				type:'@?'
 			},
 			replace:true,
 			transclude:false,
 			templateUrl:function(elem,attr){
-				return aPath.url('/view/atom/aNavpill.html');
+				var url = aPath.url('/view/atom/aNavpill.html');
+				if(attr.type=='button')
+					 url = aPath.url('/view/atom/aButtonGroup.html');
+				return url;
 			},
 			link: function($scope,elem, attrs,ngModel) {
 

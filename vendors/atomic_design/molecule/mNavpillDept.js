@@ -7,10 +7,11 @@ define(['app'], function (app) {
 			require:"ngModel",
 			scope:{
 				Department:'=ngModel',
+				Type:'=?type'
 			},
 			transclude:false,
 			templateUrl:function(elem,attr){
-				return aPath.url('/view/molecule/mNavPillDept.html');
+				return  aPath.url('/view/molecule/mNavPillDept.html');
 			},
 			link: function($scope,elem, attrs) {
 				atomic.ready(function(){

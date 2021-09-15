@@ -1,0 +1,8 @@
+<div class="btn-group">
+	<a-button ng-repeat="item in Options"  
+		type="default" is-active="ActiveItem===item.id"
+		ng-click="setActiveItem(item)">
+		{{item[aNavLabel]}}
+	</a-button>
+	
+</div>
