@@ -12,7 +12,7 @@ define(['settings','demo'], function(settings,demo){
 			var recent = [];
 			try{
 				recent =  JSON.parse($locstor.get('__RECENT_MENUS')) ||[];	
-			}catch{
+			}catch(e){
 				
 			}
 			$rootScope.RecentModules =  recent;
