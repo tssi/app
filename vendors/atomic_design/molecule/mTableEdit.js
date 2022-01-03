@@ -41,7 +41,8 @@ define(['app'], function (app) {
 					$scope.Headers =  aTable.colHeaders($scope.headers,$scope.props);
 					$scope.Props = $scope.props;
 					$scope.AllowAdd =  $scope.allowAdd || DEFAULTS.allowAdd;
-					$scope.Items = $scope.data;
+					$scope.Items = $scope.data || [];  
+
 
 					//Convert data string to date
 					angular.forEach($scope.inputs,function(field,i){
