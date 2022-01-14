@@ -20,7 +20,7 @@ define(['app'], function (app) {
 				return aPath.url('/view/molecule/mTableEdit.html');
 			},
 			link: function($scope,elem, attrs) {
-				var inputs = $scope.inputs;
+				/*var inputs = $scope.inputs;
 				for(var i in inputs){
 					var input  =  inputs[i];
 					if(input.options){
@@ -29,11 +29,13 @@ define(['app'], function (app) {
 					inputs[i]=input;
 				}
 				$scope.Inputs = inputs;
+				*/
 				$scope.NewItem = {};
 				if($scope.onInitSort) $scope.allowSort = true;
 				$scope.autoBind = $scope.autoBind || DEFAULTS.autoBind; 
 				$scope.maxHeight = $scope.maxHeight || DEFAULTS.maxHeight;
 				$scope.elem = elem;
+
 
 			},
 			controller:function($scope){
@@ -41,7 +43,17 @@ define(['app'], function (app) {
 					$scope.Headers =  aTable.colHeaders($scope.headers,$scope.props);
 					$scope.Props = $scope.props;
 					$scope.AllowAdd =  $scope.allowAdd || DEFAULTS.allowAdd;
-					$scope.Items = $scope.data || [];  
+					$scope.Items = $scope.data || [];
+
+					var inputs = $scope.inputs;
+					for(var i in inputs){
+						var input  =  inputs[i];
+						if(input.options){
+							input.optionLabel = inputs.optionLabel||DEFAULTS.optionLabel;
+						}
+						inputs[i]=input;
+					}
+					$scope.Inputs =  inputs; 
 
 
 					//Convert data string to date
