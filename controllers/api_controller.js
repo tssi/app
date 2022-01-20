@@ -32,6 +32,7 @@ define(['app','demo'], function(app,demo){
 				}
 				data = data||{};
 				if(data.limit=='less') data.limit = 999999;
+				if(data.limit=='list') data.limit = 9696;
 				return demo.run(app.settings,method,endpoint,data,success,error,$rootScope,$http,$timeout,$q);
 			},
 			runTasks:function(tasks){
