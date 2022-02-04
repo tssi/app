@@ -6,7 +6,7 @@ define(['app'], function (app) {
 								elemID:1000,
 								endpoint:'students',
 								display:'full_name',
-								objFields:['sno','lrn','gender','year_level','section','department_id','section_id'],
+								objFields:['sno','lrn','gender','year_level','section','department_id','year_level_id','section_id'],
 								searchFields:['full_name', 'middle_name'],
 								placeholder:['Student','Search student...'],};
 			var $elem,div,input;
