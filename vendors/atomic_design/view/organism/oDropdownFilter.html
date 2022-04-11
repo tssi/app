@@ -2,6 +2,7 @@
 	<div class="btn-group dropdown schoolyear-selector" ng-class="{open:openDropdown}">
 		<a-button>
 			<span>{{oFilterDropdownCtrl.preview?oFilterDropdownCtrl.preview:'Loading...'}}</span>
+			
 		</a-button>
 		<a-button opt-class="dropdown-toggle" ng-click="openDropdown=true">
 			<span class="glyphicon glyphicon-filter"></span>
@@ -85,7 +86,7 @@
 								ng-click="setSelectedPeriod(period)">{{period.alias.desc}}</button>
 							</a-button>
 						</div>
-						<div class="btn-group btn-group-period" ng-show="ActiveDept.id=='SH'">
+						<div class="btn-group btn-group-period" ng-show="ActiveDept.id=='SH' ">
 							<a-button  ng-repeat="period in _APP.PERIODS | filter:filterFNALGRD"
 								ng-class="{'btn-primary':SelectedPeriod.id==period.id}" 
 								ng-click="setSelectedPeriod(period)"
@@ -100,8 +101,8 @@
 							</a-button>
 						</div>
 					</li>
-					<li class="dropdown-header" ng-show="ActiveDept.id=='SH'">SEMESTER</li>
-					<li class="dropdown-input" ng-show="ActiveDept.id=='SH'">
+					<li class="dropdown-header" ng-show="ActiveDept.id=='SH' || oFilterDropdownCtrl.showSemAlways">SEMESTER</li>
+					<li class="dropdown-input" ng-show="ActiveDept.id=='SH'  || oFilterDropdownCtrl.showSemAlways ">
 						<div class="btn-group btn-group-sem">
 							<a-button ng-repeat="sem in _APP.SEMESTERS"
 								ng-class="{'btn-primary':SelectedSemester.id==sem.id}" 

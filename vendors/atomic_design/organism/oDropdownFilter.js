@@ -13,7 +13,8 @@ define(['app'], function (app) {
 				showSectionUI:'@?',
 				dropdownPreview:'@?',
 				liveUpdate:'=?',
-				showFinal:'=?'
+				showFinal:'=?',
+				showSemAlways:'=?'
 
 			},
 			replace:true,
@@ -222,7 +223,7 @@ define(['app'], function (app) {
 					if(active.sy)
 						preview .push("SY "+ active.sy + " - "+ (active.sy+1));
 					if(active.sem)
-						if(active.dept.id=='SH')
+						if(active.dept.id=='SH' || $scope.oFilterDropdownCtrl.showSemAlways)
 							preview.push(active.sem.alias.full);
 					if(active.period)
 						if(active.period.alias.full!=preview[1]){
