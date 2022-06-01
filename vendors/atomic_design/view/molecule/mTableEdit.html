@@ -22,7 +22,7 @@
 					<th class="align-middle {{hdr.class}}" ng-repeat="hdr in Headers" >
 						{{hdr.label?hdr.label:hdr}}
 					</th>
-					<th ng-class="{'col-md-1':!AllowAdd}">
+					<th ng-class="{'col-md-1':!AllowAdd}" ng-show="AllowAdd || AllowDelete">
 						<a-button ng-click="initSort()" ng-disabled="!EditItems.length" ng-show="allowSort">
 							<a-glyph icon="sort"></a-glyph>
 						</a-button>
@@ -66,13 +66,13 @@
 		</table>
 	</div>
 	<div class="table-wrapper table-entry-data"  style="position:relative;z-index:2;max-height:{{maxHeight}}px;overflow:auto;">
-		<table class="table table-bordered" style="margin-top:-55px;margin-bottom:0px;">
+		<table class="table table-bordered" style="margin-top:{{offsetY}}px;margin-bottom:0px;">
 			<thead style="border:none;opacity:0;">
 				<tr>
 					<th class="align-middle {{hdr.class}}" ng-repeat="hdr in Headers" >
 						{{hdr.label?hdr.label:hdr}}
 					</th>
-					<th>
+					<th ng-class="{'col-md-1':!AllowAdd}" ng-show="AllowAdd || AllowDelete">
 						<a-button type="success">
 							<a-glyph icon="plus"></a-glyph>
 						</a-button>
@@ -107,7 +107,7 @@
 							<option value="">Select {{Inputs[$index].field}}</option>
 						</select>
 					</td>
-					<td class="text-center">
+					<td class="text-center" ng-show="AllowDelete">
 						<a-button type="danger" ng-disabled="DisableLine==$index" ng-click="deleteItem($index)">
 							<a-glyph icon="remove"></a-glyph>
 						</a-button>

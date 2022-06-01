@@ -1,7 +1,7 @@
 "use strict";
 define(['app'], function (app) {
 	app.register.directive('mTableEdit',['$filter','AtomicPath','aTable',function ($filter,aPath,aTable) {
-		const DEFAULTS = {optionLabel:'name',autoBind:true,allowAdd:true,dateFormat:'yyyy-MM-dd',maxHeight:200};
+		const DEFAULTS = {optionLabel:'name',autoBind:true,allowAdd:true,allowDel:true,dateFormat:'yyyy-MM-dd',maxHeight:200};
 		return {
 			restrict: 'E',
 			scope:{
@@ -14,6 +14,7 @@ define(['app'], function (app) {
 				onInitSort:'&?',
 				autoBind:'=?',
 				allowAdd:'=?',
+				allowDel:'=?',
 				maxHeight:'@?'
 			},
 			templateUrl:function(elem,attr){
@@ -42,9 +43,14 @@ define(['app'], function (app) {
 				$scope.$watchGroup(['headers','props','data','inputs'],function(){
 					$scope.Headers =  aTable.colHeaders($scope.headers,$scope.props);
 					$scope.Props = $scope.props;
-					$scope.AllowAdd =  $scope.allowAdd || DEFAULTS.allowAdd;
+					if($scope.allowAdd===undefined)
+						$scope.allowAdd =  DEFAULTS.allowAdd;
+					if($scope.allowDel===undefined)
+						$scope.allowDel =  DEFAULTS.allowDel;
+					$scope.AllowAdd =  $scope.allowAdd;
+					$scope.AllowDelete =  $scope.allowDel;
 					$scope.Items = $scope.data || [];
-
+					$scope.offsetY =  !$scope.allowAdd&&!$scope.allowDel?-40:-55;
 					var inputs = $scope.inputs;
 					for(var i in inputs){
 						var input  =  inputs[i];
