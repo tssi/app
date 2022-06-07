@@ -5,6 +5,8 @@
 		ng-model="mFormgroupCtrl.ObjModel"
 		ng-disabled="mFormgroupCtrl.ObjDisabled"
 		ng-options="oItem.id as oItem[ObjOptionLabel] group by  oItem[mFormgroupCtrl.ObjOptionGroup] for oItem in mFormgroupCtrl.ObjOptions">
-		<option value="">Select {{mFormgroupCtrl.ObjLabel}}</option>
+		<option value="">
+		{{mFormgroupCtrl.ObjType=='yesno'?'Has':'Select'}} {{mFormgroupCtrl.ObjLabel}}{{mFormgroupCtrl.ObjType=='yesno'?'?':''}}
+	</option>
 	</select>
 </div>

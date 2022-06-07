@@ -23,6 +23,9 @@ define(['app'], function (app) {
 			},
 			link: function($scope,elem, attrs) {
 				$scope.ObjOptionLabel = $scope.mFormgroupCtrl.ObjOptionLabel|| DEFAULTS.optionLabel
+				if($scope.mFormgroupCtrl.ObjType=='yesno'){
+					$scope.mFormgroupCtrl.ObjOptions = [{id:'Y',name:'Yes'},{id:'N',name:'No'}];
+				}
 			},
 			controller:function($scope){
 				$scope.$watch('mFormgroupCtrl.ObjModel',function(value){
