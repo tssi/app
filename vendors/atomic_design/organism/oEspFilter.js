@@ -6,7 +6,7 @@ define(['app'], function (app) {
 			restrict: 'E',
 			require:"ngModel",
 			scope:{
-				SelectedESP:'=ngModel',
+				Active:'=ngModel',
 				showFinal:'=?',
 				showSem:'=?',
 				activePeriods:'=?',
@@ -37,7 +37,7 @@ define(['app'], function (app) {
 							active.period.id = active.period.id/10;
 						active.esp =  parseFloat(active.sy+'.'+active.period.id);
 					}
-					$scope.liveUpdate = active;
+					$scope.Active = active;
 					$scope.SelectedESP =  active.esp;
 
 					var periods = atomic.Periods;
@@ -53,9 +53,9 @@ define(['app'], function (app) {
 								periodObj =  pObj;
 							}
 						});
-						$scope.liveUpdate.sy =  sy;
-						$scope.liveUpdate.period = periodObj;
-						$scope.liveUpdate.esp =  esp;
+						$scope.Active.sy =  sy;
+						$scope.Active.period = periodObj;
+						$scope.Active.esp =  esp;
 						
 					});
 					$scope.$watchGroup(['SelectedSY','SelectedPeriod'],function(){
