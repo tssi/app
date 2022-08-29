@@ -1,11 +1,15 @@
 "use strict";
 define(['app'], function (app) {
 	app.register.directive('oEspFilter',['$rootScope','Atomic','AtomicPath',function ($rootScope,atomic,aPath) {
+		const  DEFAULTS = {showFinal:true,showSem:true,activePeriods:[1,2,3,4],};
 		return{
 			restrict: 'E',
 			require:"ngModel",
 			scope:{
 				SelectedESP:'=ngModel',
+				showFinal:'=?',
+				showSem:'=?',
+				activePeriods:'=?',
 				liveUpdate:'=?'
 			},
 			transclude:false,
@@ -13,7 +17,12 @@ define(['app'], function (app) {
 				return aPath.url('/view/organism/oEspFilter.html');
 			},
 			link: function($scope,elem, attrs) {
+				 // Setup defaults
+				$scope.UIFinal =  $scope.showFinal   && DEFAULTS.showFinal;
+				$scope.UISem =  $scope.showSem   && DEFAULTS.showSem;
+				$scope.UIPeriods = $scope.activePeriods ||  DEFAULTS.activePeriods;
 
+				
 				function bindData(){
 					$scope._APP =  $rootScope._APP;
 					var active = {
@@ -28,16 +37,9 @@ define(['app'], function (app) {
 							active.period.id = active.period.id/10;
 						active.esp =  parseFloat(active.sy+'.'+active.period.id);
 					}
-					
+					$scope.liveUpdate = active;
 					$scope.SelectedESP =  active.esp;
-					$scope.SelectedSY =active.sy;
-					$scope.SelectedPeriod =active.period;
-				}
 
-				
-
-				atomic.ready(function(){
-					bindData();
 					var periods = atomic.Periods;
 					$scope.$watch('SelectedESP',function(esp){
 						var espArr = (esp+'').split('.');
@@ -62,6 +64,16 @@ define(['app'], function (app) {
 						var esp =  sy+'.'+period;
 						$scope.SelectedESP = esp;
 					});
+				}
+				if(atomic.ready(bindData).fuse())
+					$rootScope.$on('$routeChangeSuccess',bindData);
+
+				$scope.$watch('activePeriods',function(periods){
+					if(periods){
+						$scope.UIPeriods = periods;
+						$scope.UIFinal =  $scope.showFinal;
+						$scope.UISem =  $scope.showSem;
+					}
 				});
 				
 			},
