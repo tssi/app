@@ -47,6 +47,11 @@ define(['app'], function (app) {
 				$scope.setSelectedPeriod = function(period){
 					$scope.SelectedPeriod =  period;
 				}
+				$scope.toggleSEMUI =function(){
+					$scope.toggleSEM = !$scope.toggleSEM;
+					$scope.activePeriods = !$scope.toggleSEM?[1,2]:[3,4,5];
+					
+				}
 				
 			}
 

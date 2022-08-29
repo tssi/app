@@ -41,6 +41,7 @@ define(['app'], function (app) {
 					$scope.SelectedESP =  active.esp;
 
 					var periods = atomic.Periods;
+						periods = periods.concat(atomic.Semesters);
 					$scope.$watch('SelectedESP',function(esp){
 						var espArr = (esp+'').split('.');
 						var sy =  parseInt(espArr[0]);

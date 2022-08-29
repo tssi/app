@@ -3,4 +3,8 @@
 		type="{{SelectedPeriod.id==period.id?'primary':'default'}}"
 		ng-click="setSelectedPeriod(period)">{{period.alias.desc}}
 	</a-button>
+	<a-button ng-click="toggleSEMUI()" ng-if="showSem">
+		<a-glyph ng-if="!toggleSEM" icon="chevron-right"></a-glyph>
+		<a-glyph ng-if="toggleSEM" icon="chevron-left"></a-glyph>
+	</a-button>
 </div>
