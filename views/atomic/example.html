@@ -6,29 +6,50 @@ You can change the alias to any name but use the acronymn of the controller  for
 	<!-- Add the basic UI elements -->
 	<a-fab ng-click="EXC.openModal()"></a-fab>
 	<a-module>
-		<a-container>
-			<a-header is-main="true">
-				<div class="pull-left">
-					<h4>Example</h4>
-				</div>
-				<div class="pull-right">
-					<a-pager meta="EXC.Meta" on-navigate="EXC.gotoPage"></a-pager>
-					<o-dropdown-filter ng-model="EXC.Active"></o-dropdown-filter>
-				</div>
-				<div class="clearfix"></div>
-			</a-header>
-			<a-canvas>
-				<!-- Add your contents inside a-content -->
-				<a-content>
-					<a-row>
-						<!-- a-col size attribute  is optional default is 12-->
-						<a-col>
-							<a-table headers="EXC.Headers" props="EXC.Props" data="EXC.Data" ng-model="EXC.ActiveSection"  on-row-click="EXC.openModal" is-sticky="true"></a-table>
-						</a-col>
-					</a-row>
-				</a-content>
-			</a-canvas>
-		</a-container>
+		<a-row>
+			<a-col size="6">
+				<a-container>
+					<a-header is-main="true">
+						<div class="pull-left">
+							<h4>Example</h4>
+						</div>
+						<div class="pull-right">
+							<o-dropdown-filter ng-model="EXC.Active"></o-dropdown-filter>
+							<o-esp-filter ng-model="EXC.Active.esp" live-update="EXC.Active"></o-esp-filter>
+						</div>
+						<div class="clearfix"></div>
+					</a-header>
+					<a-canvas>
+						<!-- Add your contents inside a-content -->
+					</a-canvas>
+				</a-container>
+			</a-col>
+			<a-col size="6">
+				<a-container>
+					<a-header is-main="true">
+						<div class="pull-left">
+							<h4>Example</h4>
+						</div>
+						<div class="pull-right">
+							<a-pager meta="EXC.Meta" on-navigate="EXC.gotoPage"></a-pager>
+							<o-dropdown-filter ng-model="EXC.Active"></o-dropdown-filter>
+						</div>
+						<div class="clearfix"></div>
+					</a-header>
+					<a-canvas>
+						<!-- Add your contents inside a-content -->
+						<a-content>
+							<a-row>
+								<!-- a-col size attribute  is optional default is 12-->
+								<a-col>
+									<a-table headers="EXC.Headers" props="EXC.Props" data="EXC.Data" ng-model="EXC.ActiveSection"  on-row-click="EXC.openModal" is-sticky="true"></a-table>
+								</a-col>
+							</a-row>
+						</a-content>
+					</a-canvas>
+				</a-container>
+			</a-col>
+		</a-row>
 	</a-module>
 	<a-modal id="ExampleModal" title="Section">
 		<a-modal-body>

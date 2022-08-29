@@ -26,6 +26,32 @@ define(['app'], function (app) {
 
 		}
 	}]);
+	app.register.directive('mBtngroupSy',['$rootScope','Atomic','AtomicPath',function ($rootScope,atomic,aPath) {
+		return{
+			restrict: 'E',
+			require:"ngModel",
+			scope:{
+				SelectedSY:'=ngModel',
+			},
+			transclude:false,
+			templateUrl:function(elem,attr){
+				return aPath.url('/view/molecule/mBtnGroupSY.html');
+			},
+			link: function($scope,elem, attrs) {
+				atomic.ready(function(){
+					$scope.SchoolYears = atomic.SchoolYears;
+					console.log( atomic.SchoolYears);
+				});
+			},
+			controller:function($scope){
+
+				$scope.setSelectedSY = function(sy){
+					$scope.SelectedSY =  sy;
+				}
+			}
+
+		}
+	}]);
 	app.register.directive('mPeriodBtnGroup',[function () {
 		return {
 			restrict: 'E',

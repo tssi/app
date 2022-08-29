@@ -1,0 +1,28 @@
+<div class="btn-group btn-group-sy">
+	<a-button ng-repeat="sy in SchoolYears | orderBy:'-code'" 
+		type="{{SelectedSY==sy.id?'success':'default'}}"
+		ng-show="$index<1" 
+		ng-click="setSelectedSY(sy.id)">
+		<span ng-if="SelectedSY!==sy.id">
+			{{sy.id}}
+		</span>
+		<span ng-if="SelectedSY===sy.id">
+			SY {{sy.label}}
+		</span>
+	</a-button>
+	<a-button ng-repeat="sy in SchoolYears | orderBy:'-code'"
+		type="{{SelectedSY==sy.id?'danger':'default'}}"
+		ng-show="$index>0 && (toggleOldSY || SelectedSY===sy.id)" 
+		ng-click="setSelectedSY(sy.id)">
+		<span ng-if="SelectedSY!==sy.id">
+			{{sy.id}}
+		</span>
+		<span ng-if="SelectedSY===sy.id">
+			SY {{sy.label}}
+		</span>
+	</a-button>
+	<a-button ng-click="toggleOldSY=!toggleOldSY">
+		<a-glyph ng-if="!toggleOldSY" icon="chevron-right"></a-glyph>
+		<a-glyph ng-if="toggleOldSY" icon="chevron-left"></a-glyph>
+	</a-button>
+</div>
