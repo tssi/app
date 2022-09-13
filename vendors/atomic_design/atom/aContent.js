@@ -3,6 +3,9 @@ define(['app'], function (app) {
 	app.register.directive('aContent',['AtomicPath',function (aPath) {
 		return {
 			restrict: 'E',
+			scope:{
+				OptClass:'@?optClass'
+			},
 			replace:true,
 			transclude:true,
 			templateUrl:function(elem,attr){
