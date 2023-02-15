@@ -33,6 +33,7 @@ define(['app'], function (app) {
 					if(firstRun){
 						setTimeout(function(){
 							aTable.scroll($scope.elem,'top');
+							aTable.stickyHeader($scope.elem);
 						},300);
 					}
 				});

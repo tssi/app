@@ -187,6 +187,17 @@ define(['app'], function (app) {
 				}
 				return isEqual;
 			},
+			stickyHeader:function(elem){
+
+				var entry = angular.element(elem[0].querySelector('.table-entry-data'));
+				var header = angular.element(elem[0].querySelector('.table-entry-header'));
+				entry.on('scroll',function(evt){
+					 var offsetLeft = entry.prop('scrollLeft');
+					 var offsetTop = entry.prop('scrollTop');
+					 header.prop('scrollLeft',offsetLeft);
+					
+				});	
+			},
 			scroll:function(elem,dir){
 				var child = angular.element(elem[0].querySelector('.table-entry-data'))[0];
 				var goTo = child.scrollHeight;
