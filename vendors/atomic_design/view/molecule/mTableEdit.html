@@ -1,5 +1,5 @@
 <div class="table-entry">
-	<div class="table-wrapper table-entry-header" style="position:relative;z-index:3;">
+	<div class="table-wrapper table-entry-header" style="position:relative;z-index:3;overflow: hidden;">
 		<table class="table table-bordered" style="margin-bottom:0px;">
 			<thead>
 				<tr ng-if="!autoBind && AllowAdd">
@@ -19,7 +19,7 @@
 					</th>
 				</tr>
 				<tr>
-					<th class="align-middle {{hdr.class}}" ng-repeat="hdr in Headers" >
+					<th class="align-middle {{hdr.class}}" ng-repeat="hdr in Headers track by $index" >
 						{{hdr.label?hdr.label:hdr}}
 					</th>
 					<th ng-class="{'col-md-1':!AllowAdd}" ng-show="AllowAdd || AllowDelete">
@@ -69,7 +69,7 @@
 		<table class="table table-bordered" style="margin-top:{{offsetY}}px;margin-bottom:0px;">
 			<thead style="border:none;opacity:0;">
 				<tr>
-					<th class="align-middle {{hdr.class}}" ng-repeat="hdr in Headers" >
+					<th class="align-middle {{hdr.class}}" ng-repeat="hdr in Headers track by $index" >
 						{{hdr.label?hdr.label:hdr}}
 					</th>
 					<th ng-class="{'col-md-1':!AllowAdd}" ng-show="AllowAdd || AllowDelete">
