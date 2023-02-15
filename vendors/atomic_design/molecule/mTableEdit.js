@@ -118,8 +118,10 @@ define(['app'], function (app) {
 				},true);
 				$scope.$watch('activeRow',function(index){
 					$scope.ActiveIndex = index;
+					aTable.scroll($scope.elem,index);
 				});
 				$scope.$watch('disableInput',function(flag){
+					aTable.scroll($scope.elem,'top');
 					$scope.DisableInput = flag;
 				});
 
