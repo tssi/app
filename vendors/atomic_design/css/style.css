@@ -37,3 +37,12 @@ div.sticky-table{
   text-align: center;
 }
 .sticky-table th:first-child,.sticky-table  th:last-child {z-index:2;}
+div.table-entry table>thead th,
+div.table-entry table>tbody td
+{
+  overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 150px;
+      min-width: 90px;
+}
