@@ -1,5 +1,5 @@
 "use strict";
-define(['app'], function (app) {
+define(['app','exceljs'], function (app,exceljs) {
 	app.register.directive('mFileupload',['$rootScope','$http','Atomic','AtomicPath',function ($rootScope,$http,atomic,aPath) {
 		const DEFAULT = {elemID:1000,accept:'any'};
 		const _URL = window.URL || window.webkitURL;
@@ -8,8 +8,8 @@ define(['app'], function (app) {
 			require:"ngModel",
 			scope:{
 				FileModel:'=ngModel',
-				FileUploadUrl:'@uploadUrl',
-				FilePreview:'=preview',
+				FileUploadUrl:'@?uploadUrl',
+				FilePreview:'=?preview',
 				FileAccept:'@?accept',
 				FileValidations:'=?validate'
 			},
@@ -41,8 +41,10 @@ define(['app'], function (app) {
 							break;
 						case 'excel': // .xls Excel 97-2003
 							types.push('.xls');
+							types.push('.xlsx');
 							types.push('application/vnd.ms-excel');
-							captions.push('Excel (.xls)');
+							types.push('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+							captions.push('Excel (.xls,.xlsx)');
 							break;
 						case 'any':
 							types.push('*/*');
@@ -63,7 +65,7 @@ define(['app'], function (app) {
 						   	var type = this.response.type;
 						   	var size = this.response.size;
 						   	$scope.FileSize = size;
-						   	console.log(type, size,this.response);
+						   	//console.log(type, size,this.response);
 						    switch(type){
 						    	case 'image/*':
 						    	case 'image/png':
@@ -84,7 +86,6 @@ define(['app'], function (app) {
 
 				}
 				function validateImage(file){
-					console.log(file);
 					var validations =  $scope.FileValidations;
 					var img = new Image();
 					var objectUrl = _URL.createObjectURL(file);
@@ -142,7 +143,58 @@ define(['app'], function (app) {
 					};
 					img.src = objectUrl;
 				}
+				function validateExcel(file){
+					$scope.FileModel =null;
+					const WB = {filename:file.name,activeSheet:1,worksheets:[],data:[]};
+					function loadWorksheet(id){
+						var worksheet = workbook.getWorksheet(id);
+						var wsData = [];
+						worksheet.eachRow(function(row, rowNumber) {
+						  	wsData.push(row.values);
+						});
+						WB.data=wsData;
+						$scope.FileModel= WB;
+						
+						
+					}
+					var success =  function(){
+						workbook.eachSheet(function(worksheet, sheetId) {
+						 	var ws = {id:sheetId, name:worksheet.name};
+						 	WB.worksheets.push(ws);
+						});
+						$scope.$apply(function(){
+							loadWorksheet(WB.activeSheet);	
+						});
+						
+						$scope.$watch('FileModel.activeSheet',function(id){
+							if(id)
+								loadWorksheet(id);
+						});
+						
+					}
+					var error =  function(){
+						alert("Invalid Excel file. Try again!");
+					}
 
+					const workbook = new exceljs.Workbook();
+					workbook.xlsx.load(file).then(success,error);
+					
+					$scope.$on('LoadWorksheet',function(wsObj){
+						loadWorksheet(wsObj.id);
+					});
+
+				}
+
+				function readFile(file){
+					$scope.FileModel= file;
+					var reader = new FileReader();
+						reader.onload = function (loadEvent) {
+							$scope.$apply(function () {
+								$scope.PreviewFile(loadEvent.target.result);
+							});
+						}
+						reader.readAsDataURL(file);
+				}
 				function formatBytes(bytes, decimals = 2) {
 				    if (bytes === 0) return '0 Bytes';
 
@@ -166,9 +218,14 @@ define(['app'], function (app) {
 									$scope.FileType = 'image';
 									validateImage(file);
 								break;
+								case 'application/vnd.ms-excel':
+								case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+									$scope.FileType = 'excel';
+									validateExcel(file);
+								break;
 								default:
 									$scope.FileType = file.type;
-									$scope.FileModel =  file;
+									readFile(file);
 								break;
 							}
 							
@@ -187,15 +244,13 @@ define(['app'], function (app) {
 
 				$scope.$watch('FilePreview',function(preview){
 					$scope.FileSize = 0;
-					console.log(preview, new Date());
 					if(!preview || typeof preview =='number')
 						return $scope.FileType = null;
-					
 					validateURL(preview);
 					
 				});
 				$scope.PreviewFile = function(preview){
-
+					
 					switch($scope.FileType){
 						case 'image':
 							elem[0].querySelector('img.FilePreview').src = preview;

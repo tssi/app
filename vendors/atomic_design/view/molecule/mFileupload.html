@@ -5,5 +5,9 @@
 	<div class="caption">
 	  <center>Upload {{Caption}}</center>
 	</div>
+	<div ng-show="FileType=='excel'">
+		<span ng-show="!FileModel">Reading file...</span>
+		<span ng-show="FileModel">File: {{FileModel.filename}}</span>
+	</div>
 </label>
 <input class="form-control hide" id="{{'fileInput-'+ELEM_ID}}" type="file"  accept="{{FileTypes}}"/ ng-model="FileInput">
