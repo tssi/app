@@ -15,7 +15,10 @@ define(['app'], function (app) {
 				autoBind:'=?',
 				allowAdd:'=?',
 				allowDel:'=?',
-				maxHeight:'@?'
+				maxHeight:'@?',
+				activeRow:'=?',
+				disableInput:'=?'
+
 			},
 			templateUrl:function(elem,attr){
 				return aPath.url('/view/molecule/mTableEdit.html');
@@ -113,6 +116,13 @@ define(['app'], function (app) {
 						}
 					}
 				},true);
+				$scope.$watch('activeRow',function(index){
+					$scope.ActiveIndex = index;
+				});
+				$scope.$watch('disableInput',function(flag){
+					$scope.DisableInput = flag;
+				});
+
 				$scope.confirmEdit = function(){
 					var items  = angular.copy($scope.EditItems);
 						$scope.Items = items;
