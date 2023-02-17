@@ -1,5 +1,5 @@
 <div class="table-entry">
-	<div class="table-wrapper table-entry-header" style="position:relative;z-index:3;overflow: hidden;">
+	<div class="table-wrapper table-entry-header" style="position:relative;z-index:3;overflow-x: hidden;">
 		<table class="table table-bordered" style="margin-bottom:0px;">
 			<thead>
 				<tr ng-if="!autoBind && AllowAdd">
@@ -41,8 +41,12 @@
 						</a-row>
 					</td>
 					<td ng-if="Props.indexOf('student')==-1" class="align-middle {{Headers[$index].class}}" ng-repeat="prop in Props track by $index">
+						
+						<m-search-entity ng-if="Inputs[$index].search"ng-model="NewItem.subject" endpoint="Inputs[$index].search.endpoint" search-fields="Inputs[$index].search.fields" obj-fields="Inputs[$index].search.objFields" display-field="'name'" filter="Inputs[$index].search.filter" ></m-search-entity>
+							
+						
 						<a-textbox
-						ng-if="!Inputs[$index].options" 
+						ng-if="!Inputs[$index].options && !Inputs[$index].search" 
 						ng-model="NewItem[Inputs[$index].field]"
 						ng-disabled="Inputs[$index].disabled"
 						placeholder="Inputs[$index].placeholder"
@@ -92,8 +96,16 @@
 						ng-model="Item.student[Inputs[$index].field]"></a-textbox>
 					</td>
 					<td  ng-if="Props.indexOf('student')==-1" class="align-middle {{Headers[$index].class}}" ng-repeat="prop in Props track by $index">
+					
+
 						<a-textbox
-						ng-if="!Inputs[$index].options"
+						ng-if="Inputs[$index].search"
+						ng-disabled="true"
+						ng-model="Item[Inputs[$index].field].name"
+						p></a-textbox>
+
+						<a-textbox
+						ng-if="!Inputs[$index].options && !Inputs[$index].search"
 						ng-disabled="Inputs[$index].disabled ||DisableInput"
 						ng-model="Item[Inputs[$index].field]"
 						placeholder="Inputs[$index].placeholder"
