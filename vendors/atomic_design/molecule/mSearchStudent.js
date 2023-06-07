@@ -17,7 +17,9 @@ define(['app'], function (app) {
 					scope:{
 						ObjModel:'=ngModel',
 						Filter:'=?filter',
-						IsLarge:'=?isLarge'
+						IsLarge:'=?isLarge',
+						objFields:'=?objFields'
+
 					},
 					templateUrl:function(elem,attr){
 						return aPath.url('/view/molecule/mSearchStudent.html');
@@ -32,7 +34,7 @@ define(['app'], function (app) {
 						$scope.Display = DEFAULT.display;
 						$scope.Placeholder = DEFAULT.placeholder;
 						$scope.Fields = DEFAULT.searchFields;
-						$scope.ObjectFields = DEFAULT.objFields;
+						$scope.ObjectFields = $scope.objFields||DEFAULT.objFields;
 						$scope.ELEM_ID = DEFAULT.elemID++;
 
 					},
