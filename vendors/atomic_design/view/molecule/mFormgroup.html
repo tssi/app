@@ -1,7 +1,11 @@
 <div class="form-group">
 	<a-label>{{mFormgroupCtrl.ObjLabel}}</a-label>
 	<a-textbox  ng-if="!mFormgroupCtrl.ObjOptions" ng-model="mFormgroupCtrl.ObjModel" ng-disabled="mFormgroupCtrl.ObjDisabled" type="mFormgroupCtrl.ObjType"/>
-	<select ng-if="mFormgroupCtrl.ObjOptions"  a-select
+
+	<div ng-if="mFormgroupCtrl.ObjOptions && mFormgroupCtrl.ObjType==='btn-group'">
+	 <a-navpill   ng-model="mFormgroupCtrl.ObjModel" options="mFormgroupCtrl.ObjOptions" label="mFormgroupCtrl.ObjOptionLabel" type="button" align="justified"></a-navpill>
+	</div>
+	<select ng-if="mFormgroupCtrl.ObjOptions && mFormgroupCtrl.ObjType!=='btn-group'"  a-select
 		ng-model="mFormgroupCtrl.ObjModel"
 		ng-disabled="mFormgroupCtrl.ObjDisabled"
 		ng-options="oItem.id as oItem[ObjOptionLabel] group by  oItem[mFormgroupCtrl.ObjOptionGroup] for oItem in mFormgroupCtrl.ObjOptions">
@@ -9,4 +13,5 @@
 		{{mFormgroupCtrl.ObjType=='yesno'?'Has':'Select'}} {{mFormgroupCtrl.ObjLabel}}{{mFormgroupCtrl.ObjType=='yesno'?'?':''}}
 	</option>
 	</select>
+
 </div>
