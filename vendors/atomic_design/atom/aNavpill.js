@@ -24,7 +24,7 @@ define(['app'], function (app) {
 			link: function($scope,elem, attrs,ngModel) {
 
 				$scope.aNavLabel = $scope.label||DEFAULTS.label;
-
+				$scope.justified=attrs.align=='justified';
 			},
 			
 			controller:function($scope){

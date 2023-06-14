@@ -22,7 +22,8 @@ define(['app'], function (app) {
 						SearchFields:'=?searchFields',
 						ObjectFields:'=?objFields',
 						DisplayField:'=?displayField',
-						AllowCreate:'=?allowCreate'
+						AllowCreate:'=?allowCreate',
+						IsLarge:'=?isLarge'
 					},
 					templateUrl:function(elem,attr){
 						return aPath.url('/view/molecule/mSearchEntity.html');
