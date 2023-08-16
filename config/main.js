@@ -1,9 +1,8 @@
 require.config({
-    baseUrl:'',
-	urlArgs :(function(){for(var s = Math.random()+'',c = 0x123456,i=0;i<s.length;i++)c += (s.charCodeAt(i)*(i + 1));return c;}()),
-	waitSeconds: 60,
-    // Alias libraries paths
-    paths: {     
+    "baseUrl":"",
+	"urlArgs" :"",
+	"waitSeconds": 60,
+    "paths": {     
         'app': 'config/app',
         'demo': 'config/demo',
         'settings': 'config/settings',
@@ -25,10 +24,11 @@ require.config({
         'angular-chart':'vendors/node_modules/angular-chart.js/dist/angular-chart',
         'custom-window':'vendors/custom_window',
 		'atomic':'vendors/atomic_design',
+        'exceljs':'../vendors/node_modules/exceljs/dist/exceljs',
 		
     },
     // Add angular modules that does not support AMD out of the box, put it in a shim
-    shim: {
+    "shim": {
 		'angular' : {exports : 'angular'},
         'angular-route': ['angular'],
 		'angular-cookies': ['angular'],         
