@@ -11,6 +11,7 @@ define(['app'], function (app) {
 				isDisabled:'=?ngDisabled',
 				aPlaceholder:'=?placeholder',
 				aType:'=?type',
+				aSize:'=?size',
 			},
 			transclude: false,
 			templateUrl:function(elem,attr){

@@ -10,6 +10,7 @@ define(['app'], function (app) {
 				ObjDisabled:'=?ngDisabled',
 				ObjLabel:'@label',
 				ObjType:'=?type',
+				ObjSize:'=?size',
 				ObjOptions:'=?options',
 				ObjOptionLabel:'@?optionLabel',
 				ObjOptionGroup:'@?optionGroup'
