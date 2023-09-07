@@ -74,9 +74,26 @@ define(['settings','demo'], function(settings,demo){
 				}
 			}
 			//Load menu
-			if($rootScope.__USER){
+			if($rootScope.__USER && !$rootScope.__SIDEBAR_MENUS ){
 				var menus = JSON.parse($locstor.get('__SIDEBAR_MENUS'));
 				$rootScope.__SIDEBAR_MENUS =  menus;
+				var allowedItems =[];
+				menus.map(function(menu){
+					menu.children.map(function(child){
+						allowedItems.push(child.link);
+					})
+				});
+				$rootScope.allowedItems =  allowedItems;
+				
+			}
+			if($rootScope.allowedItems){
+				if(!next.params.controller) return;
+				var link =  next.params.controller+'/'+next.params.action;
+				if($scope.allowedItems.indexOf(link)==-1){
+					alert('Location '+link+' not allowed');
+					$window.location.href='#/';
+					
+				}
 			}
 
 			var locStorActive = $locstor.get('__LAST_ACTIVE');
