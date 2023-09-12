@@ -40,7 +40,7 @@ define(['settings','demo'], function(settings,demo){
 			$scope.ShowRecentModules=true;
 			if(!$rootScope.RecentModules)
 				$rootScope.$emit('LoadRecents');
-			
+
 			if($rootScope.RecentModules.indexOf(Module)===-1)
 				$rootScope.RecentModules.unshift(Module);
 			
@@ -91,7 +91,10 @@ define(['settings','demo'], function(settings,demo){
 			}
 			if($rootScope.allowedItems){
 				if(!next.params.controller) return;
-				var link =  next.params.controller+'/'+next.params.action;
+				var link =  next.params.controller;
+					if(next.params.action)
+						link+='/'+next.params.action;
+					
 				if($scope.allowedItems.indexOf(link)==-1){
 					alert('Location '+link+' not allowed');
 					$window.location.href='#/';
