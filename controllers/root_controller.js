@@ -38,6 +38,9 @@ define(['settings','demo'], function(settings,demo){
 		$scope.__loadModule = function(Module,toggle){
 			
 			$scope.ShowRecentModules=true;
+			if(!$rootScope.RecentModules)
+				$rootScope.$emit('LoadRecents');
+			
 			if($rootScope.RecentModules.indexOf(Module)===-1)
 				$rootScope.RecentModules.unshift(Module);
 			
