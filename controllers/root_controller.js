@@ -80,7 +80,7 @@ define(['settings','demo'], function(settings,demo){
 			if($rootScope.__USER && !$rootScope.__SIDEBAR_MENUS ){
 				var menus = JSON.parse($locstor.get('__SIDEBAR_MENUS'));
 				$rootScope.__SIDEBAR_MENUS =  menus;
-				var allowedItems =[];
+				var allowedItems =['account'];
 				menus.map(function(menu){
 					menu.children.map(function(child){
 						allowedItems.push(child.link);

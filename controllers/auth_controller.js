@@ -33,6 +33,8 @@ define(['app','api'], function (app) {
 			$cookies.remove('__USER');
 			$cookies.remove('__MENUS');
 			$locstor.remove('__SIDEBAR_MENUS');
+			$rootScope.allowedItems = [];
+			$rootScope.__SIDEBAR_MENUS = [];
 			//$locstor.remove('__RECENT_MENUS');
 			$window.location.href="#/login";
 			api.POST('logout',function success(response){
@@ -131,6 +133,13 @@ define(['app','api'], function (app) {
 				var sidebar = $locstor.get('__SIDEBAR_MENUS');
 				var cache = JSON.parse(sidebar);
 				$rootScope.__SIDEBAR_MENUS =  cache;
+				var allowedItems =['account'];
+				cache.map(function(menu){
+					menu.children.map(function(child){
+						allowedItems.push(child.link);
+					})
+				});
+				$rootScope.allowedItems =  allowedItems;
 				
 		}
 	}]);
