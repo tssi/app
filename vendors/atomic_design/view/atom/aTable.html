@@ -28,6 +28,7 @@
 	<tbody>
 		<tr ng-repeat="(row,Item) in (UIItems = ( Items | filter:searchLocal | orderBy:orderLocal )  ) track by $index"
 			ng-class="{info:hoverItem==row || (activeItem.id==Item.id && activeItem.id)}"
+			class="{{Item.class}}"
 			ng-mouseover="hoverItem=row" ng-mouseleave="hoverItem=null"
 			ng-click="setActiveItem(Item)">
 			<td class="align-middle {{Headers[$index].class}} {{(Item[prop]|typeof)=='number'&&$index>0?'text-right':''}} {{ShowSort==prop?'active':''}}" ng-repeat="prop in Props track by $index">
