@@ -106,7 +106,7 @@
 
 						<a-textbox
 						ng-if="!Inputs[$index].options && !Inputs[$index].search"
-						ng-disabled="Inputs[$index].disabled ||DisableInput"
+						ng-disabled="(Inputs[$index].disabled &&Inputs[$index].enableIf!==Item.id ) ||DisableInput"
 						ng-model="Item[Inputs[$index].field]"
 						placeholder="Inputs[$index].placeholder"
 						type="Inputs[$index].type"></a-textbox>
