@@ -24,6 +24,12 @@ body.full{ overflow:hidden;}
     padding-left: 0;
 }
 
+@media (max-width: 767px) {
+  .navbar-right-container {
+      float: right;
+      margin-right: 10px; /* Adjust as needed */
+  }
+}
 
 
 #sidebar-wrapper {
@@ -185,6 +191,60 @@ body.full{ overflow:hidden;}
         margin-right: 0;
     }
 }
+#main-top-bar{
+  display:block;
+  width:100%;
+}
+#profile-dropdown{
+  margin-right:10px;
+}
+@media (max-width: 767px) {
+  #main-top-bar {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width:auto;
+  }
+  
+  .navbar-toggle {
+      order: 1; /* Ensure the menu button is on the left */
+  }
+
+  .navbar-brand {
+      order: 2;
+      flex-grow: 1; /* Ensures that the brand can grow to push the profile to the edge */
+  }
+
+  #profile-dropdown {
+      order: 3; /* Ensure the profile dropdown is on the right */
+      margin-right: -5px; /* Or whatever spacing you prefer */
+      margin-top: 0;
+      margin-bottom: 0;
+  }
+
+  #profile-dropdown .dropdown {
+      position: static;
+      z-index: 99;
+  }
+
+  #profile-dropdown .dropdown-toggle {
+      padding: 15px; /* Adjust the padding to align the dropdown text vertically */
+  }
+
+  #profile-dropdown .dropdown-menu {
+      position: absolute;
+      right: 0;
+      left: auto; /* Align the dropdown menu to the right */
+      width: 100%;
+      background: #fff;
+      border: 1px solid #ccc;
+  }
+  #profile-dropdown .dropdown-menu>li>a{
+      color:#333;
+  }
+}
+
 #navbar-toggle{
 	border-radius: 0px;
 	padding-bottom:0px;
