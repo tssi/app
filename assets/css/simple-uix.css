@@ -44,6 +44,17 @@ body.full{ overflow:hidden;}
     background: rgba(43,42,42,0.98);
 }
 
+#app-version{
+  position: absolute;
+  bottom: 0;
+  color: darkgrey;
+  text-align: center;
+  display: block;
+  width: 100%;
+  font-size: 12px;
+  margin-bottom: 5%;
+}
+
 #wrapper.toggled #sidebar-wrapper {
     width: 250px;
 }
