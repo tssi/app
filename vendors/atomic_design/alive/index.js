@@ -2,6 +2,7 @@
 define(['app','vendors/bower_components/jquery/dist/jquery','atomic/alive/api',
 		'atomic/alive/path',
 		'atomic/atom/aButton',
+		'atomic/atom/aCard',
 		'atomic/atom/aFab',
 		'atomic/atom/aGlyph',
 		'atomic/atom/aTextbox',
