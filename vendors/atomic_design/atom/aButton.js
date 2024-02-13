@@ -9,13 +9,17 @@ define(['app'], function (app) {
 				type:'@?',
 				isActive:'=?',
 				size:'@?',
-				optClass:'@?'
+				optClass:'@?',
+				urlLink:'@?link'
 
 			},
 			replace:true,
 			transclude: true,
 			templateUrl:function(elem,attr){
-				return aPath.url('/view/atom/aButton.html');
+				let templateUrl = '/view/atom/aButton.html';
+				if(attr.link)
+					templateUrl = '/view/atom/aButtonLink.html';
+				return aPath.url(templateUrl);
 			},
 			link: function($scope, elem, attrs) {
 				$scope.type = DEFAULTS.type;
