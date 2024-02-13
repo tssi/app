@@ -46,3 +46,8 @@ div.table-entry table>tbody td
       max-width: 150px;
       min-width: 90px;
 }
+
+
+.card{padding-top:20px;}
+.card .card-counter{font-size:46px;}
+.card .card-title {display: inline-block;padding:5px;font-size:14px;}
