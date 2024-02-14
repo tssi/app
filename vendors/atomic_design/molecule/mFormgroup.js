@@ -13,7 +13,8 @@ define(['app'], function (app) {
 				ObjSize:'=?size',
 				ObjOptions:'=?options',
 				ObjOptionLabel:'@?optionLabel',
-				ObjOptionGroup:'@?optionGroup'
+				ObjOptionGroup:'@?optionGroup',
+				ObjHideLabel:'=?hideLabel'
 			},
 			replace:true,
 			transclude:false,
