@@ -8,8 +8,8 @@ define(['app'],function(app){
 					cacheBreak='?rand='+Math.random();
 				var path =require.config().toUrl("vendors/atomic_design"+file+cacheBreak);
 				var parent = require.config().toUrl("").split("/");
-				if(parent.length>1)
-					path  =  parent[0]+'/'+path;
+				/*if(parent.length>1)
+					path  =  parent[0]+'/'+path;*/
 				return path;
 			}
 		};
