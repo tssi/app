@@ -184,6 +184,43 @@ define(['app','exceljs'], function (app,exceljs) {
 					});
 
 				}
+				function validatePDF(file){
+					$scope.FileSize = file.size;
+					var S =  $scope.FileSize;
+					var valid =true;
+					var errors = [];
+					var validations =  $scope.FileValidations;
+					if( typeof validations == 'object'){
+						var validate = Object.keys(validations);
+						for(var i in validate){
+							switch(validate[i]){
+								
+								case 'maxSize':
+									var validS = validations.maxSize>S;
+									valid = valid  && validS;
+									if(!validS)
+										errors.push(' Max File size:' + formatBytes(validations.maxSize,0));
+								break;
+							}
+						}
+						
+					}
+					if(valid){
+						
+						$scope.FileModel = file;
+						$scope.FileModel.filename =  file.name;
+						var reader = new FileReader();
+						reader.onload = function (loadEvent) {
+							$scope.$apply(function () {
+								$scope.PreviewFile(loadEvent.target.result);
+							});
+						}
+						reader.readAsDataURL(file);
+						
+					}else{
+						alert(errors.join('\n'));
+					}
+				}
 
 				function readFile(file){
 					$scope.FileModel= file;
@@ -222,6 +259,10 @@ define(['app','exceljs'], function (app,exceljs) {
 								case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
 									$scope.FileType = 'excel';
 									validateExcel(file);
+								break;
+								case 'application/pdf':
+									$scope.FileType = 'pdf';
+									validatePDF(file);
 								break;
 								default:
 									$scope.FileType = file.type;
@@ -270,13 +311,20 @@ define(['app','exceljs'], function (app,exceljs) {
 						  transformRequest: angular.identity,
 						  headers: {'Content-Type': undefined}
 						};
-					
+					$scope.FileUploadSucess = false;
+					$scope.FileUploadError = false;
+					$scope.FileUploadStarted = true;
 					$http.post($scope.FileUploadUrl, fd, hdr)
 					.success(function() {
 						var fileInput = angular.element(document.getElementById('fileInput-'+$scope.ELEM_ID));
 						fileInput.val(null);
+						$scope.FileUploadStarted = false;
+						$scope.FileUploadSucess = true;
+						$scope.FileModel.success =true;
 					}).error(function() {
-					
+						$scope.FileUploadStarted = false;
+						$scope.FileUploadError = true;
+						$scope.FileModel.success =false;
 
 					});
 				});

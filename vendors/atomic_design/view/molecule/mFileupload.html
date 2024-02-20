@@ -1,13 +1,24 @@
-<label class="thumbnail btn btn-default ng-cloak" style="cursor:pointer;" for="{{'fileInput-'+ELEM_ID}}">
+<label class="thumbnail btn btn-default ng-cloak" ng-disabled="FileUploadStarted"  style="cursor:pointer;" for="{{'fileInput-'+ELEM_ID}}">
 	<div ng-show="FileType=='image'">
 		<img src="" alt="" class="FilePreview img-responsive"/>
 	</div>
-	<div class="caption">
-	  <center>Upload {{Caption}}</center>
+	<div class="caption" ng-show="!FileModel">
+	  <center>
+	  	<a-glyph icon="folder-open"></a-glyph>
+	  	&nbsp; Browse {{Caption}}
+		</center>
 	</div>
 	<div ng-show="FileType=='excel'">
 		<span ng-show="!FileModel">Reading file...</span>
 		<span ng-show="FileModel">File: {{FileModel.filename}}</span>
+	</div>
+	<div ng-show="FileType=='pdf'">
+		<span ng-show="!FileModel">Reading pdf...</span>
+		<span ng-show="FileModel">
+			<a-glyph icon="open-file"></a-glyph> 
+			<span ng-show="FileUploadStarted">Uploading </span>
+		 	File: {{FileModel.filename}}
+			</span>
 	</div>
 </label>
 <input class="form-control hide" id="{{'fileInput-'+ELEM_ID}}" type="file"  accept="{{FileTypes}}"/ ng-model="FileInput">
