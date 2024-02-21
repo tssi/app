@@ -247,6 +247,7 @@ define(['app','exceljs'], function (app,exceljs) {
 				fileInput.bind('change', function(changeEvent) {
 					$scope.$apply(function() {
 						if(fileInput[0].files){
+							$scope.ReadingFile =true;
 							var file = fileInput[0].files[0];
 							$scope.FileSize= file.size;
 							switch(file.type){
@@ -269,6 +270,7 @@ define(['app','exceljs'], function (app,exceljs) {
 									readFile(file);
 								break;
 							}
+							$scope.ReadingFile=false;
 							
 						}
 					});

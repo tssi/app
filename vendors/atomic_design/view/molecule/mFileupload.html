@@ -9,13 +9,14 @@
 		</center>
 	</div>
 	<div ng-show="FileType=='excel'">
-		<span ng-show="!FileModel">Reading file...</span>
+		<span ng-show="ReadingFile">Reading file...</span>
 		<span ng-show="FileModel">File: {{FileModel.filename}}</span>
 	</div>
 	<div ng-show="FileType=='pdf'">
-		<span ng-show="!FileModel">Reading pdf...</span>
+		<span ng-show="ReadingFile">Reading pdf...</span>
 		<span ng-show="FileModel">
-			<a-glyph icon="open-file"></a-glyph> 
+			<a-glyph icon="open-file" ng-show="!FileModel.success"></a-glyph> 
+			<a-glyph icon="ok" ng-show="FileModel.success"></a-glyph> 
 			<span ng-show="FileUploadStarted">Uploading </span>
 		 	File: {{FileModel.filename}}
 			</span>
