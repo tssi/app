@@ -1,12 +1,15 @@
 <div class="input-group simple-typeahead" ng-class="{'input-group-lg':IsLarge}">
-	<input  id="{{ElementId}}" class="form-control" type="text" placeholder="{{!ShowBtn?Placeholder[0]:Placeholder[1]}}" ng-model="ObjModel" uib-typeahead="student as student.name for student in  getResults($viewValue,Filter)" typeahead-loading="loadingRecords" typeahead-editable="AllowCreate" typeahead-no-results="noStudents" typeahead-wait-ms="250" ng-focus="ShowBtn=true" ng-blur="ShowBtn=ObjModel.id?true:false" ng-disabled="ObjModel.id" autocomplete="off" />
-
+	<input  id="{{ElementId}}" class="form-control" type="text" placeholder="{{!ShowBtn?Placeholder[0]:Placeholder[1]}}" ng-model="ObjModel" uib-typeahead="student as student.name for student in  getResults($viewValue,Filter)" typeahead-loading="loadingRecords" typeahead-editable="AllowCreate" typeahead-no-results="noStudents" typeahead-wait-ms="250" ng-focus="ShowBtn=true" ng-blur="ShowBtn=ObjModel.id||AllowCreate?true:false" ng-disabled="ObjModel.id || CreatedId" autocomplete="off"  />
 	<div class="input-group-btn">
 		<button class="btn btn-default" ng-show="!ShowBtn"  style="border-top-right-radius:5px;border-bottom-right-radius:5px;background-color:white !important">
 			&nbsp;
 		</button>
-		<button class="btn btn-default"  ng-show="ShowBtn"   ng-disabled="!ObjModel.id" ng-click="clearSearch()">
-			<span class="glyphicon" ng-class="{'glyphicon-search':!Model.id, 'glyphicon-remove':ObjModel.id,'glyphicon-refresh':loadingRecords}"></span>
+		<button class="btn btn-default"  ng-show="ShowBtn"   ng-disabled="!ObjModel.id && !AllowCreate" ng-click="handleClick()">
+			<span class="glyphicon glyphicon-search" ng-if="uiSearch"></span>
+			<span class="glyphicon glyphicon-refresh" ng-if="uiLoading"></span>
+			<span class="glyphicon glyphicon-plus" ng-if="uiCreate"></span>
+			<span class="glyphicon glyphicon-remove" ng-if="uiClear"></span>
+
 		</button>
 	</div>
 </div>

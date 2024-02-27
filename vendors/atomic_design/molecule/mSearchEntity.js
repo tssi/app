@@ -1,7 +1,7 @@
 "use strict";
 define(['app'], function (app) {
-	app.register.directive('mSearchEntity',['$rootScope','AtomicPath','AtomicAPI','Atomic','api',
-		function ($rootScope,aPath,aApi,atomic) {
+	app.register.directive('mSearchEntity',['$rootScope','$timeout','AtomicPath','AtomicAPI','Atomic','api',
+		function ($rootScope,$timeout,aPath,aApi,atomic) {
 			const  DEFAULT = {
 								elemID:1000,
 								allowCreate:false,
@@ -26,6 +26,8 @@ define(['app'], function (app) {
 						AllowCreate:'=?allowCreate',
 						IsLarge:'=?isLarge',
 						PlaceholderText:'@?placeholder',
+						CreatedId:'=?createdId'
+
 
 					},
 					templateUrl:function(elem,attr){
@@ -33,9 +35,9 @@ define(['app'], function (app) {
 					},
 					link:function($scope, elem){
 						console.log(elem);
-						$elem = angular.element(elem[0]);
-						$scope.UIdiv = $elem.find('div')[0];
-						$scope.UIinput = $elem.find('input')[0];
+						$scope.UIelem = angular.element(elem[0]);
+						$scope.UIdiv =	$scope.UIelem.find('div')[0];
+						$scope.UIinput = $scope.UIelem.find('input')[0];
 
 						$scope.Endpoint = $scope.Endpoint||DEFAULT.endpoint;
 						$scope.Display = $scope.DisplayField||DEFAULT.display;
@@ -58,23 +60,55 @@ define(['app'], function (app) {
 					controller:function($scope){
 						$scope.$watch('ObjModel',function(value){
 							if(!value) return;
-							if(value.id){
+							console.log(value,$scope.AllowCreate);
+							if(value.id || $scope.AllowCreate){
 								$scope.ShowBtn=true;
 							}else{
 								$scope.ShowBtn=false;
 							}
+							console.log($scope.ShowBtn);
 						});
 						$scope.$watch('ShowBtn',function(value){
 							console.log(value);
 						});
 						$scope.updateShowBtn = function(model){
-							console.log(model);
+							console.log(model,new Date());
 							$scope.ShowBtn=model.id?true:false
 						}
-						$scope.clearSearch  = function(){
-							$scope.ObjModel = {id:null,name:null};
-							$scope.ShowBtn=false;
+						$scope.handleClick  = function(){
+							if($scope.uiClear){
+								$scope.ObjModel = {id:null, name:null};
+								$scope.ShowBtn=false;
+							}
+							$scope.ObjModelOptions={};
+							if($scope.uiCreate){
+								$scope.CreatedId = null;
+								$scope.ObjModelOptions = {getterSetter:true};
+								let name = $scope.ObjModel.name || $scope.ObjModel;
+								let obj =angular.copy($scope.Filter);
+									obj[$scope.DisplayField] = name;
+								let success = function(response){
+									obj.id = response.data.id;
+									$scope.CreatedId = obj.id;
+									$scope.loadingRecords = false;
+								}; 
+								let error = function(response){
+									console.log(response);
+									alert(response.message);
+								}; 
+								aApi.http.POST($scope.Endpoint,obj,success,error);
+							}
 						}
+						$scope.$watchGroup(['loadingRecords','ObjModel','CreatedId'],function(values){
+							let allowAdd = $scope.AllowCreate;
+							let loadRec = values[0];
+							let objMod = values[1];
+							$scope.uiLoading =loadRec;
+							$scope.uiSearch =!loadRec && !objMod; 
+							$scope.uiClear = objMod.id || values[3]; 
+							$scope.uiCreate = allowAdd  && !values[3] && (objMod || objMod.name!=null) && !objMod.id && !loadRec;
+
+						});
 						$scope.getResults = function(value,filter){
 							filter = filter || {}
 							var fields =  $scope.Fields;
@@ -83,9 +117,9 @@ define(['app'], function (app) {
 							for(var field in filter){
 								data[field] = filter[field];
 							}
-							var dropdown = $elem.find('ul')[0];
+							var dropdown = $scope.UIelem.find('ul')[0];
 								dropdown.style['min-width']='100%';
-								console.log(dropdown,'SK');
+								//console.log(dropdown,'SK');
 							return aApi.http.GET($scope.Endpoint,data,function(response){
 							
 							}).then(function(response){
