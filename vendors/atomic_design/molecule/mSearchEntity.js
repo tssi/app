@@ -9,8 +9,9 @@ define(['app'], function (app) {
 								display:'full_name',
 								objFields:['id','first_name','middle_name','last_name'],
 								searchFields:['first_name','middle_name','last_name'],
-								placeholder:['Search','Search'],};
-			var $elem,div,input;
+								placeholder:['Search','Search by'],};
+			var $elem,div,input,elemIDCtr;
+			elemIDCtr = DEFAULT.elemID;
 			return{
 					required:'ngModel',
 					restrict: 'E',
@@ -23,24 +24,35 @@ define(['app'], function (app) {
 						ObjectFields:'=?objFields',
 						DisplayField:'=?displayField',
 						AllowCreate:'=?allowCreate',
-						IsLarge:'=?isLarge'
+						IsLarge:'=?isLarge',
+						PlaceholderText:'@?placeholder',
+
 					},
 					templateUrl:function(elem,attr){
 						return aPath.url('/view/molecule/mSearchEntity.html');
 					},
 					link:function($scope, elem){
+						console.log(elem);
 						$elem = angular.element(elem[0]);
-						div = $elem.find('div')[0];
-						input = $elem.find('input')[0];
-						
-						
+						$scope.UIdiv = $elem.find('div')[0];
+						$scope.UIinput = $elem.find('input')[0];
+
 						$scope.Endpoint = $scope.Endpoint||DEFAULT.endpoint;
 						$scope.Display = $scope.DisplayField||DEFAULT.display;
-						$scope.Placeholder = DEFAULT.placeholder;
+						$scope.Placeholder = angular.copy(DEFAULT.placeholder);
+						
+						// By pass placholder text
+						if($scope.PlaceholderText){
+							$scope.Placeholder[0] = $scope.PlaceholderText;
+						}
 						$scope.Fields = $scope.SearchFields||DEFAULT.searchFields;
+						// Add placeholder helper
+						$scope.Placeholder[1] += ' '+$scope.Fields.join(', ');
 						$scope.ObjectFields =$scope.ObjectFields|| DEFAULT.objFields;
 						$scope.AllowCreate =$scope.AllowCreate|| DEFAULT.allowCreate;
-						$scope.ELEM_ID = DEFAULT.elemID++;
+						$scope.ELEM_ID = elemIDCtr++;
+						$scope.ElementId = 'searchEntity-'+elemIDCtr;
+						console.log(elemIDCtr);
 
 					},
 					controller:function($scope){
@@ -79,7 +91,7 @@ define(['app'], function (app) {
 							}).then(function(response){
 								if(!app.settings.DEMO_MODE)
 									response =  response.data;
-								input.nextSibling.style.width = div.offsetWidth+'px';
+								$scope.UIinput.nextSibling.style.width = $scope.UIdiv.offsetWidth+'px';
 								var display = $scope.Display||{};
 								var tokens = display.length?display.split(' '):display;
 								var source;
