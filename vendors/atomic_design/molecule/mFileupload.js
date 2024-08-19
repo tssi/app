@@ -221,7 +221,34 @@ define(['app','exceljs'], function (app,exceljs) {
 						alert(errors.join('\n'));
 					}
 				}
-
+				function validateCSV(file){
+					 if (file) {
+				        const reader = new FileReader();
+				        
+				        reader.onload = function(e) {
+				            const text = e.target.result;
+				            const parsedData = parseCSV(text);
+				            $scope.$apply(function () {
+				            	$scope.PreviewFile(parsedData);
+				        	});
+				        };
+				        
+				        reader.readAsText(file);
+				    }
+				}
+				function parseCSV(text) {
+				    const lines = text.split('\n');
+				    const headers = lines[0].split(',').map(header => header.trim());
+				    const data = lines.slice(1).map(line => {
+				        const values = line.split(',').map(value => value.trim());
+				        const obj = {};
+				        headers.forEach((header, index) => {
+				            obj[header] = values[index];
+				        });
+				        return obj;
+				    });
+				    return data;
+				}
 				function readFile(file){
 					$scope.FileModel= file;
 					var reader = new FileReader();
@@ -250,6 +277,7 @@ define(['app','exceljs'], function (app,exceljs) {
 							$scope.ReadingFile =true;
 							var file = fileInput[0].files[0];
 							$scope.FileSize= file.size;
+							console.log(file);
 							switch(file.type){
 								case 'image/png':
 								case 'image/jpeg':
@@ -265,7 +293,12 @@ define(['app','exceljs'], function (app,exceljs) {
 									$scope.FileType = 'pdf';
 									validatePDF(file);
 								break;
+								case 'text/csv':
+									$scope.FileType = 'csv';
+									validateCSV(file);
+								break;
 								default:
+									console.log(file);
 									$scope.FileType = file.type;
 									readFile(file);
 								break;
@@ -293,10 +326,17 @@ define(['app','exceljs'], function (app,exceljs) {
 					
 				});
 				$scope.PreviewFile = function(preview){
-					
 					switch($scope.FileType){
 						case 'image':
 							elem[0].querySelector('img.FilePreview').src = preview;
+						break;
+						case 'csv':
+							
+							$scope.FileModel =  preview;
+							console.log($scope.FileModel);
+						break;
+						default:
+							console.log($scope.FileType,preview);
 						break;
 					}
 				}
