@@ -11,6 +11,7 @@ define(['app'], function (app) {
 				onSearch:'&?',
 				onClear:'&?',
 				isLarge:'=?',
+				Placeholder:'=?placeholder',
 			},
 			replace:true,
 			transclude: false,
