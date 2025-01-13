@@ -3,7 +3,7 @@
 	<a-textbox  ng-if="!mFormgroupCtrl.ObjOptions &&  mFormgroupCtrl.ObjType!='display'" ng-model="mFormgroupCtrl.ObjModel" size="mFormgroupCtrl.ObjSize" ng-disabled="mFormgroupCtrl.ObjDisabled" type="mFormgroupCtrl.ObjType"/>
 	<div ng-if="mFormgroupCtrl.ObjType==='display'" class="form-control {{mFormgroupCtrl.ObjSize}}" disabled>{{mFormgroupCtrl.ObjModel}}</div>
 	<div ng-if="mFormgroupCtrl.ObjOptions && mFormgroupCtrl.ObjType==='btn-group'">
-	 <a-navpill   ng-model="mFormgroupCtrl.ObjModel" options="mFormgroupCtrl.ObjOptions" label="mFormgroupCtrl.ObjOptionLabel" type="button" align="justified"></a-navpill>
+	 <a-navpill   ng-model="mFormgroupCtrl.ObjModel" options="mFormgroupCtrl.ObjOptions" label="mFormgroupCtrl.ObjOptionLabel" type="button" align="justified" size="mFormgroupCtrl.ObjSize"></a-navpill>
 	</div>
 	<select ng-if="mFormgroupCtrl.ObjOptions && mFormgroupCtrl.ObjType!=='btn-group'"  a-select
 		ng-model="mFormgroupCtrl.ObjModel"
@@ -11,8 +11,8 @@
 		ng-options="oItem.id as oItem[ObjOptionLabel] group by  oItem[mFormgroupCtrl.ObjOptionGroup] disable when oItem.disabled  for oItem in mFormgroupCtrl.ObjOptions"
 		class="form-control {{mFormgroupCtrl.ObjSize}}" >
 		<option value="">
-		{{mFormgroupCtrl.ObjType=='yesno'?'Has':'Select'}} {{mFormgroupCtrl.ObjLabel}}{{mFormgroupCtrl.ObjType=='yesno'?'?':''}}
-	</option>
+			{{mFormgroupCtrl.ObjSelectPrefix}}
+		</option>
 	</select>
 
 </div>

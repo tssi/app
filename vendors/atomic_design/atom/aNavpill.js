@@ -9,6 +9,7 @@ define(['app'], function (app) {
 			scope:{
 				ActiveItem:'=ngModel',
 				Options:'=options',
+				ObjSize:'=?size',
 				label:'=?',
 				confirm:'&',
 				type:'@?'

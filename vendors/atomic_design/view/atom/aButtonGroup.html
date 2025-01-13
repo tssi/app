@@ -1,13 +1,14 @@
-<div class="btn-group" ng-class="{'btn-group-justified':justified}">
+<div class="btn-group {{ObjSize}}" ng-class="{'btn-group-justified':justified}">
 	<a-button ng-repeat="item in Options"   ng-if="!justified" 
 		type="default" is-active="ActiveItem===item.id"
-		ng-click="setActiveItem(item)" ng-disabled="item.disable">
+		ng-click="setActiveItem(item)" ng-disabled="item.disable" size="{{ObjSize}}">
 		{{item[aNavLabel]}}
 	</a-button>
-	<div class="btn-group" ng-repeat="item in Options" ng-if="justified">
+	<div class="btn-group {{ObjSize}}" ng-repeat="item in Options" ng-if="justified">
 		<a-button
 			type="default" is-active="ActiveItem===item.id"
 			ng-click="setActiveItem(item)" ng-disabled="item.disable">
+			
 			{{item[aNavLabel]}}
 		</a-button>
 	</div>

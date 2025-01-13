@@ -14,7 +14,8 @@ define(['app'], function (app) {
 				ObjOptions:'=?options',
 				ObjOptionLabel:'@?optionLabel',
 				ObjOptionGroup:'@?optionGroup',
-				ObjHideLabel:'=?hideLabel'
+				ObjHideLabel:'=?hideLabel',
+				ObjSelectPrefix:'@?selectPrefix'
 			},
 			replace:true,
 			transclude:false,
@@ -25,8 +26,20 @@ define(['app'], function (app) {
 			},
 			link: function($scope,elem, attrs) {
 				$scope.ObjOptionLabel = $scope.mFormgroupCtrl.ObjOptionLabel|| DEFAULTS.optionLabel
-				if($scope.mFormgroupCtrl.ObjType=='yesno'){
+				var isYesNo = $scope.mFormgroupCtrl.ObjType=='yesno';
+				if(isYesNo){
 					$scope.mFormgroupCtrl.ObjOptions = [{id:'Y',name:'Yes'},{id:'N',name:'No'}];
+				}
+				if($scope.mFormgroupCtrl.ObjSelectPrefix==undefined){
+					var selectPrefix =isYesNo?'Has ':'Select ';
+					var selectLabel = $scope.mFormgroupCtrl.ObjOptionLabel;
+					if(selectLabel) 
+						selectPrefix += selectLabel;
+					else
+						selectPrefix += $scope.mFormgroupCtrl.ObjLabel;
+					if(isYesNo)
+						selectPrefix += ' ?';
+					$scope.mFormgroupCtrl.ObjSelectPrefix = selectPrefix;
 				}
 			},
 			controller:function($scope){
