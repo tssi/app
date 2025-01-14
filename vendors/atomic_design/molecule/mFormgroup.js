@@ -15,7 +15,8 @@ define(['app'], function (app) {
 				ObjOptionLabel:'@?optionLabel',
 				ObjOptionGroup:'@?optionGroup',
 				ObjHideLabel:'=?hideLabel',
-				ObjSelectPrefix:'@?selectPrefix'
+				ObjSelectPrefix:'@?selectPrefix',
+				ObjPlaceholder:'@?placeholder'
 			},
 			replace:true,
 			transclude:false,
