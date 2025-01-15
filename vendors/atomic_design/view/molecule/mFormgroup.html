@@ -1,7 +1,7 @@
 <div class="form-group">
 	<a-label ng-if="!mFormgroupCtrl.ObjHideLabel">{{mFormgroupCtrl.ObjLabel}}
-{{mFormgroupCtrl}}
-		<span ng-if="mFormgroupCtrl.ObjRequired">*</span></a-label>
+		<span ng-if="mFormgroupCtrl.ObjRequired">*</span>
+	</a-label>
 		
 	<a-textbox  ng-if="!mFormgroupCtrl.ObjOptions &&  mFormgroupCtrl.ObjType!='display'" ng-model="mFormgroupCtrl.ObjModel" size="mFormgroupCtrl.ObjSize" ng-disabled="mFormgroupCtrl.ObjDisabled" type="mFormgroupCtrl.ObjType" placeholder="mFormgroupCtrl.ObjPlaceholder" required="mFormgroupCtrl.ObjRequired"/>
 	<div ng-if="mFormgroupCtrl.ObjType==='display'" class="form-control {{mFormgroupCtrl.ObjSize}}" disabled>{{mFormgroupCtrl.ObjModel}}</div>
