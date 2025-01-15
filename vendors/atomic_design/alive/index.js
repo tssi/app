@@ -51,11 +51,15 @@ define(['app','vendors/bower_components/jquery/dist/jquery','atomic/alive/api',
 			for(var i in atomic.Departments){
 				var dept = atomic.Departments[i];
 				var id =  dept.id;
-				if(id==REGISTRY.__USER.user.department_id)
-					atomic.ActiveDept = dept;
+				if(REGISTRY.__USER){
+					if(id==REGISTRY.__USER.user.department_id)
+						atomic.ActiveDept = dept;
+				}
 			}
-			atomic.SelectedSem =  REGISTRY.DEFAULT_.SEMESTER;
-			atomic.SelectedPeriod =  REGISTRY.DEFAULT_.PERIOD;
+			if(REGISTRY.DEFAULT_){
+				atomic.SelectedSem =  REGISTRY.DEFAULT_.SEMESTER;
+				atomic.SelectedPeriod =  REGISTRY.DEFAULT_.PERIOD;
+			}
 
 			$scope.$emit('atomicReady');
 		});
