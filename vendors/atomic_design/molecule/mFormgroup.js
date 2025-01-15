@@ -16,7 +16,9 @@ define(['app'], function (app) {
 				ObjOptionGroup:'@?optionGroup',
 				ObjHideLabel:'=?hideLabel',
 				ObjSelectPrefix:'@?selectPrefix',
+				ObjRequired:'=?ngRequired',
 				ObjPlaceholder:'@?placeholder'
+
 			},
 			replace:true,
 			transclude:false,
