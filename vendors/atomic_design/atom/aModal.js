@@ -7,6 +7,7 @@ define(['app','vendors/bootstrap'], function (app) {
 				id:'@',
 				title:'@',
 				isLarge:'=?',
+				hasClose:'=?'
 			},
 			replace:true,
 			transclude:true,
@@ -17,6 +18,7 @@ define(['app','vendors/bootstrap'], function (app) {
 				$scope.ResolveData = $scope.data;
 				$scope.aModalId = $scope.id;
 				$scope.aModalTitle = $scope.title;
+				$scope.aModalHasClose = $scope.hasClose;
 				if($scope.isLarge){
 					$scope.OptClass = 'modal-lg';
 				}
@@ -31,6 +33,7 @@ define(['app','vendors/bootstrap'], function (app) {
 			restrict: 'E',
 			scope:{
 				title:'=',
+				hasCloseButton:'=?'
 			},
 			replace:true,
 			templateUrl:function(elem,attr){
