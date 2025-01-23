@@ -4,11 +4,16 @@ define(['app'], function (app) {
 		const DEFAULTS = {prefix:'',type:'text',size:''};
 
 		return {
+			require:'ngModel',
 			restrict: 'A',
-			link: function($scope,elem, attrs) {
-				elem.addClass("form-control");
+			link: function($scope,elem, attrs,ngModel) {
+				 ngModel.$validators.invalidDropdown = function (modelValue) {
+			      return !!modelValue; // Invalid if value is empty
+			    };
+				
 			},
 			controller:function($scope){
+				
 			}
 		}
 	}]);

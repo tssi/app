@@ -21,7 +21,7 @@ define(['app'], function (app) {
 
 			},
 			replace:true,
-			transclude:false,
+			transclude:true,
 			bindToController:true,
 			controllerAs:'mFormgroupCtrl',
 			templateUrl:function(elem,attr){
