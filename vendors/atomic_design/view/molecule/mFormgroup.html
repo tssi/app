@@ -10,12 +10,25 @@
 	<div ng-if="mFormgroupCtrl.ObjOptions && mFormgroupCtrl.ObjType==='btn-group'">
 	 <a-navpill   ng-model="mFormgroupCtrl.ObjModel" options="mFormgroupCtrl.ObjOptions" label="mFormgroupCtrl.ObjOptionLabel" type="button" align="justified" size="mFormgroupCtrl.ObjSize"></a-navpill>
 	</div>
-	<select ng-if="mFormgroupCtrl.ObjOptions && mFormgroupCtrl.ObjType!=='btn-group'"  a-select
+	<select ng-if="mFormgroupCtrl.ObjRequired && mFormgroupCtrl.ObjOptions && mFormgroupCtrl.ObjType!=='btn-group'"  a-select
 		ng-model="mFormgroupCtrl.ObjModel"
 		ng-disabled="mFormgroupCtrl.ObjDisabled"
 		ng-options="oItem.id as oItem[ObjOptionLabel] group by  oItem[mFormgroupCtrl.ObjOptionGroup] disable when oItem.disabled  for oItem in mFormgroupCtrl.ObjOptions"
 		class="form-control {{mFormgroupCtrl.ObjSize}}" 
+		name="{{mFormgroupCtrl.ObjName}}"
 		a-select>
+		<option value="">
+			{{mFormgroupCtrl.ObjSelectPrefix}}
+		</option>
+	</select>
+
+	<select ng-if="!mFormgroupCtrl.ObjRequired && mFormgroupCtrl.ObjOptions && mFormgroupCtrl.ObjType!=='btn-group'"
+		ng-model="mFormgroupCtrl.ObjModel"
+		ng-disabled="mFormgroupCtrl.ObjDisabled"
+		ng-options="oItem.id as oItem[ObjOptionLabel] group by  oItem[mFormgroupCtrl.ObjOptionGroup] disable when oItem.disabled  for oItem in mFormgroupCtrl.ObjOptions"
+		class="form-control {{mFormgroupCtrl.ObjSize}}" 
+		name="{{mFormgroupCtrl.ObjName}}"
+		>
 		<option value="">
 			{{mFormgroupCtrl.ObjSelectPrefix}}
 		</option>

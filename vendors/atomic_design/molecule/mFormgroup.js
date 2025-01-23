@@ -17,7 +17,8 @@ define(['app'], function (app) {
 				ObjHideLabel:'=?hideLabel',
 				ObjSelectPrefix:'@?selectPrefix',
 				ObjRequired:'=?ngRequired',
-				ObjPlaceholder:'@?placeholder'
+				ObjPlaceholder:'@?placeholder',
+				ObjName:'@?name'
 
 			},
 			replace:true,
