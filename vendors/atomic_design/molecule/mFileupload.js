@@ -11,7 +11,9 @@ define(['app','exceljs'], function (app,exceljs) {
 				FileUploadUrl:'@?uploadUrl',
 				FilePreview:'=?preview',
 				FileAccept:'@?accept',
-				FileValidations:'=?validate'
+				FileValidations:'=?validate',
+				FileInpuName:'@?name',
+				FileRequired:'=?ngRequired'
 			},
 			transclude:false,
 			templateUrl:function(elem,attr){

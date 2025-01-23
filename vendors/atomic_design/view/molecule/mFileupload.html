@@ -22,4 +22,4 @@
 			</span>
 	</div>
 </label>
-<input class="form-control hide" id="{{'fileInput-'+ELEM_ID}}" type="file"  accept="{{FileTypes}}"/ ng-model="FileInput">
+<input class="form-control hide" id="{{'fileInput-'+ELEM_ID}}" type="file"  accept="{{FileTypes}}"/ ng-required="FileRequired && !FileModel" name="{{FileInpuName}}" ng-model="FileInput">
