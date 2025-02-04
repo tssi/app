@@ -42,7 +42,6 @@ define(['app','exceljs'], function (app,exceljs) {
 							captions.push('CSV (.csv)');
 							break;
 						case 'excel': // .xls Excel 97-2003
-							types.push('.xls');
 							types.push('.xlsx');
 							types.push('application/vnd.ms-excel');
 							types.push('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -146,6 +145,7 @@ define(['app','exceljs'], function (app,exceljs) {
 					img.src = objectUrl;
 				}
 				function validateExcel(file){
+					console.log(file, new Date());
 					$scope.FileModel =null;
 					const WB = {filename:file.name,activeSheet:1,worksheets:[],data:[]};
 					function loadWorksheet(id){
@@ -174,11 +174,12 @@ define(['app','exceljs'], function (app,exceljs) {
 						});
 						
 					}
-					var error =  function(){
-						alert("Invalid Excel file. Try again!");
+					var error =  function(err){
+						alert("Invalid Excel file. It should be .xlsx. Try again!");
 					}
 
 					const workbook = new exceljs.Workbook();
+					
 					workbook.xlsx.load(file).then(success,error);
 					
 					$scope.$on('LoadWorksheet',function(wsObj){
