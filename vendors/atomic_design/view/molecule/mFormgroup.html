@@ -15,8 +15,7 @@
 		ng-disabled="mFormgroupCtrl.ObjDisabled"
 		ng-options="oItem.id as oItem[ObjOptionLabel] group by  oItem[mFormgroupCtrl.ObjOptionGroup] disable when oItem.disabled  for oItem in mFormgroupCtrl.ObjOptions"
 		class="form-control {{mFormgroupCtrl.ObjSize}}" 
-		name="{{mFormgroupCtrl.ObjName}}"
-		a-select>
+		name="{{mFormgroupCtrl.ObjName}}">
 		<option value="">
 			{{mFormgroupCtrl.ObjSelectPrefix}}
 		</option>

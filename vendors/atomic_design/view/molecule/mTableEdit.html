@@ -56,7 +56,7 @@
 						 a-select
 						 	ng-if="Inputs[$index].options" 
 							ng-model="NewItem[Inputs[$index].field]"
-							ng-options="oItem.id as oItem[Inputs[$index].optionLabel] group by  oItem[Inputs[$index].optionsGroup] for oItem in Inputs[$index].options">
+							ng-options="oItem.id as oItem[Inputs[$index].optionLabel] group by  oItem[Inputs[$index].optionsGroup] for oItem in Inputs[$index].options" class="form-control">
 							<option value="">Select {{Inputs[$index].field}}</option>
 						</select>
 					</td>
@@ -115,7 +115,7 @@
 							ng-if="Inputs[$index].options" 
 							ng-disabled="Inputs[$index].disabled"
 							ng-model="Item[Inputs[$index].field]"
-							ng-options="oItem.id as oItem[Inputs[$index].optionLabel] group by  oItem[Inputs[$index].optionsGroup] for oItem in Inputs[$index].options">
+							ng-options="oItem.id as oItem[Inputs[$index].optionLabel] group by  oItem[Inputs[$index].optionsGroup] for oItem in Inputs[$index].options" class="form-control">
 							<option value="">Select {{Inputs[$index].field}}</option>
 						</select>
 					</td>
