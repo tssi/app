@@ -83,7 +83,12 @@ body.full{ overflow:hidden;}
     padding: 0px;
 	padding-top: 80px !important;
 }
-
+#page-content-wrapper .container-fluid{
+	width:100%;
+}
+#page-content-wrapper>div#content-view{
+	transition: width 0.5s ease-in-out, max-width 0.5s ease-in-out, height 0.3s ease-in-out;
+}
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
     margin-right: -250px;

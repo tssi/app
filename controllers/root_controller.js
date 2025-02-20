@@ -65,7 +65,7 @@ define(['settings','demo'], function(settings,demo){
 		$rootScope.$on('$routeChangeStart', function (scope, next, current) {
 			$rootScope.__APP_READY = false;
 			$rootScope.__FAB_READY = false;
-			
+			$rootScope.__WIDE_Module = false;
 			if(!$rootScope.__USER){
 				//Load user
 				try{
