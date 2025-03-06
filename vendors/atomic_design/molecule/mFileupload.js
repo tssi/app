@@ -1,5 +1,5 @@
 "use strict";
-define(['app','exceljs'], function (app,exceljs) {
+define(['app'], function (app) {
 	app.register.directive('mFileupload',['$rootScope','$http','Atomic','AtomicPath',function ($rootScope,$http,atomic,aPath) {
 		const DEFAULT = {elemID:1000,accept:'any'};
 		const _URL = window.URL || window.webkitURL;
@@ -145,45 +145,48 @@ define(['app','exceljs'], function (app,exceljs) {
 					img.src = objectUrl;
 				}
 				function validateExcel(file){
-					console.log(file, new Date());
-					$scope.FileModel =null;
-					const WB = {filename:file.name,activeSheet:1,worksheets:[],data:[]};
-					function loadWorksheet(id){
-						var worksheet = workbook.getWorksheet(id);
-						var wsData = [];
-						worksheet.eachRow(function(row, rowNumber) {
-						  	wsData.push(row.values);
-						});
-						WB.data=wsData;
-						$scope.FileModel= WB;
-						
-						
-					}
-					var success =  function(){
-						workbook.eachSheet(function(worksheet, sheetId) {
-						 	var ws = {id:sheetId, name:worksheet.name};
-						 	WB.worksheets.push(ws);
-						});
-						$scope.$apply(function(){
-							loadWorksheet(WB.activeSheet);	
-						});
-						
-						$scope.$watch('FileModel.activeSheet',function(id){
-							if(id)
-								loadWorksheet(id);
-						});
-						
-					}
-					var error =  function(err){
-						alert("Invalid Excel file. It should be .xlsx. Try again!");
-					}
+					
+					require(['exceljs'], function(ExcelJS) {
 
-					const workbook = new exceljs.Workbook();
-					
-					workbook.xlsx.load(file).then(success,error);
-					
-					$scope.$on('LoadWorksheet',function(wsObj){
-						loadWorksheet(wsObj.id);
+						$scope.FileModel =null;
+						const WB = {filename:file.name,activeSheet:1,worksheets:[],data:[]};
+						function loadWorksheet(id){
+							var worksheet = workbook.getWorksheet(id);
+							var wsData = [];
+							worksheet.eachRow(function(row, rowNumber) {
+							  	wsData.push(row.values);
+							});
+							WB.data=wsData;
+							$scope.FileModel= WB;
+							
+							
+						}
+						var success =  function(){
+							workbook.eachSheet(function(worksheet, sheetId) {
+							 	var ws = {id:sheetId, name:worksheet.name};
+							 	WB.worksheets.push(ws);
+							});
+							$scope.$apply(function(){
+								loadWorksheet(WB.activeSheet);	
+							});
+							
+							$scope.$watch('FileModel.activeSheet',function(id){
+								if(id)
+									loadWorksheet(id);
+							});
+							
+						}
+						var error =  function(err){
+							alert("Invalid Excel file. It should be .xlsx. Try again!");
+						}
+
+						const workbook = new exceljs.Workbook();
+						
+						workbook.xlsx.load(file).then(success,error);
+						
+						$scope.$on('LoadWorksheet',function(wsObj){
+							loadWorksheet(wsObj.id);
+						});
 					});
 
 				}
