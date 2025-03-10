@@ -157,7 +157,7 @@ define(['app'], function (app) {
 										}
 										return obj;
 									  });
-									if (source.length === 1) {
+									if (source.length === 1&&0) {
 						                $scope.ObjModel = source[0]; // Auto-assign the only result
 						                 // **Hide dropdown by blurring input**
 						                $timeout(function() {
@@ -167,7 +167,7 @@ define(['app'], function (app) {
 									        if (dropdown) {
 									            dropdown.style.display = 'none';
 									        }
-						                },200);
+						                },700);
 						            }
 								}
 								
