@@ -157,6 +157,18 @@ define(['app'], function (app) {
 										}
 										return obj;
 									  });
+									if (source.length === 1) {
+						                $scope.ObjModel = source[0]; // Auto-assign the only result
+						                 // **Hide dropdown by blurring input**
+						                $timeout(function() {
+						                	
+						                	var dropdown = $scope.UIelem.find('ul')[0];
+						                	console.log($scope.UI,dropdown);
+									        if (dropdown) {
+									            dropdown.style.display = 'none';
+									        }
+						                },200);
+						            }
 								}
 								
 								return source;
