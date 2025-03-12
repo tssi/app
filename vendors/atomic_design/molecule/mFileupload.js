@@ -146,7 +146,7 @@ define(['app'], function (app) {
 				}
 				function validateExcel(file){
 					
-					require(['exceljs'], function(ExcelJS) {
+					require(['exceljs'], function(exceljs) {
 
 						$scope.FileModel =null;
 						const WB = {filename:file.name,activeSheet:1,worksheets:[],data:[]};
