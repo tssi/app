@@ -144,13 +144,13 @@ define(['app'], function (app) {
 					};
 					img.src = objectUrl;
 				}
-				function validateExcel(file){
-					
-					require(['exceljs'], function(exceljs) {
 
-						$scope.FileModel =null;
-						const WB = {filename:file.name,activeSheet:1,worksheets:[],data:[]};
+				const WB = {filename:null,activeSheet:1,worksheets:[],data:[]};
+				function validateExcel(file){
+					WB.filename = file.name;
+					require(['exceljs'], function(exceljs) {
 						function loadWorksheet(id){
+							$scope.FileModel = undefined;
 							var worksheet = workbook.getWorksheet(id);
 							var wsData = [];
 							worksheet.eachRow(function(row, rowNumber) {
@@ -161,10 +161,17 @@ define(['app'], function (app) {
 							
 							
 						}
+
+						
+						$scope.$on('LoadWorksheet',function(wsObj){
+							loadWorksheet(wsObj.id);
+						});
+						
 						var success =  function(){
 							workbook.eachSheet(function(worksheet, sheetId) {
 							 	var ws = {id:sheetId, name:worksheet.name};
 							 	WB.worksheets.push(ws);
+							 	WB.activeSheet = ws.id;
 							});
 							$scope.$apply(function(){
 								loadWorksheet(WB.activeSheet);	
@@ -180,13 +187,11 @@ define(['app'], function (app) {
 							alert("Invalid Excel file. It should be .xlsx. Try again!");
 						}
 
-						const workbook = new exceljs.Workbook();
 						
+						
+						const workbook = new exceljs.Workbook();
 						workbook.xlsx.load(file).then(success,error);
 						
-						$scope.$on('LoadWorksheet',function(wsObj){
-							loadWorksheet(wsObj.id);
-						});
 					});
 
 				}
@@ -279,10 +284,19 @@ define(['app'], function (app) {
 
 				fileInput.bind('change', function(changeEvent) {
 					$scope.$apply(function() {
+
 						if(fileInput[0].files){
-							$scope.ReadingFile =true;
+							// Reset all state before processing new file
+							$scope.FileType = null;
+							$scope.FileSize = 0;
+							$scope.PreviewFile(null);
+							
+							$scope.ReadingFile = true;
 							var file = fileInput[0].files[0];
-							$scope.FileSize= file.size;
+							if(!file) return;
+							
+							$scope.FileSize = file.size;
+							
 							console.log(file);
 							switch(file.type){
 								case 'image/png':
@@ -309,19 +323,19 @@ define(['app'], function (app) {
 									readFile(file);
 								break;
 							}
-							$scope.ReadingFile=false;
-							
+							$scope.ReadingFile = false;
 						}
 					});
-					
-					//Preview file
-					/*var reader = new FileReader();
-					reader.onload = function (loadEvent) {
-						$scope.$apply(function () {
-							$scope.PreviewFile(loadEvent.target.result);
-						});
+				});
+
+				// Add watch on FileModel to handle external resets
+				$scope.$watch('FileModel', function(newVal) {
+					if (!newVal) {
+						$scope.FileType = null;
+						$scope.FileSize = 0;
+						fileInput.val(null);
+						$scope.PreviewFile(null);
 					}
-					reader.readAsDataURL(changeEvent.target.files[0]);*/
 				});
 
 				$scope.$watch('FilePreview',function(preview){

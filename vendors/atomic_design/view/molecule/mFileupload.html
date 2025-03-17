@@ -10,7 +10,10 @@
 	</div>
 	<div ng-show="FileType=='excel'">
 		<span ng-show="ReadingFile">Reading file...</span>
-		<span ng-show="FileModel">File: {{FileModel.filename}}</span>
+		<span ng-show="FileModel">
+			<a-glyph icon="file-excel-o"></a-glyph>
+			File: {{FileModel.filename}}
+		</span>
 	</div>
 	<div ng-show="FileType=='pdf'">
 		<span ng-show="ReadingFile">Reading pdf...</span>
@@ -18,8 +21,8 @@
 			<a-glyph icon="open-file" ng-show="!FileModel.success"></a-glyph> 
 			<a-glyph icon="ok" ng-show="FileModel.success"></a-glyph> 
 			<span ng-show="FileUploadStarted">Uploading </span>
-		 	File: {{FileModel.filename}}
-			</span>
+			File: {{FileModel.filename}}
+		</span>
 	</div>
 </label>
 <input class="form-control hide" id="{{'fileInput-'+ELEM_ID}}" type="file"  accept="{{FileTypes}}"/ ng-required="FileRequired && !FileModel" name="{{FileInpuName}}" ng-model="FileInput">
