@@ -146,12 +146,13 @@ define(['app'], function (app) {
 				}
 
 				const WB = {filename:null,activeSheet:1,worksheets:[],data:[]};
+				let workbook, worksheet;
 				function validateExcel(file){
 					WB.filename = file.name;
 					require(['exceljs'], function(exceljs) {
 						function loadWorksheet(id){
 							$scope.FileModel = undefined;
-							var worksheet = workbook.getWorksheet(id);
+							worksheet = workbook.getWorksheet(id);
 							var wsData = [];
 							worksheet.eachRow(function(row, rowNumber) {
 							  	wsData.push(row.values);
@@ -186,10 +187,7 @@ define(['app'], function (app) {
 						var error =  function(err){
 							alert("Invalid Excel file. It should be .xlsx. Try again!");
 						}
-
-						
-						
-						const workbook = new exceljs.Workbook();
+						workbook = new exceljs.Workbook();
 						workbook.xlsx.load(file).then(success,error);
 						
 					});
