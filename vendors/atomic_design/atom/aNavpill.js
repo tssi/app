@@ -8,6 +8,7 @@ define(['app'], function (app) {
 			restrict: 'E',
 			scope:{
 				ActiveItem:'=ngModel',
+				ObjDisabled:'=?ngDisabled',
 				Options:'=options',
 				ObjSize:'=?size',
 				label:'=?',

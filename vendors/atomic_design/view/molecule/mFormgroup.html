@@ -8,7 +8,7 @@
 	<a-textbox  ng-if="mFormgroupCtrl.ObjRequired && !mFormgroupCtrl.ObjOptions &&  mFormgroupCtrl.ObjType!='display'" ng-model="mFormgroupCtrl.ObjModel" size="mFormgroupCtrl.ObjSize" ng-disabled="mFormgroupCtrl.ObjDisabled" type="mFormgroupCtrl.ObjType" placeholder="mFormgroupCtrl.ObjPlaceholder" required="true"/>
 	<div ng-if="mFormgroupCtrl.ObjType==='display'" class="form-control {{mFormgroupCtrl.ObjSize}}" disabled>{{mFormgroupCtrl.ObjModel}}</div>
 	<div ng-if="mFormgroupCtrl.ObjOptions && mFormgroupCtrl.ObjType==='btn-group'">
-	 <a-navpill   ng-model="mFormgroupCtrl.ObjModel" options="mFormgroupCtrl.ObjOptions" label="mFormgroupCtrl.ObjOptionLabel" type="button" align="justified" size="mFormgroupCtrl.ObjSize"></a-navpill>
+	 <a-navpill   ng-model="mFormgroupCtrl.ObjModel" options="mFormgroupCtrl.ObjOptions" ng-disabled="mFormgroupCtrl.ObjDisabled"  label="mFormgroupCtrl.ObjOptionLabel" type="button" align="justified" size="mFormgroupCtrl.ObjSize"></a-navpill>
 	</div>
 	<select ng-if="mFormgroupCtrl.ObjRequired && mFormgroupCtrl.ObjOptions && mFormgroupCtrl.ObjType!=='btn-group'"  a-select
 		ng-model="mFormgroupCtrl.ObjModel"
