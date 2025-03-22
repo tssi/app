@@ -1,5 +1,5 @@
-// Example usage based on atomic..md instructions
-
+```javascript
+// Atomic Implementation
 define(['app', 'api', 'atomic/bomb'], function (app) {
 
   app.register.controller('YourController', ['$scope', '$rootScope', 'api', 'Atomic', function ($scope, $rootScope, api, atomic) {
