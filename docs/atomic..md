@@ -2,19 +2,19 @@
 
  ## Overview of Atomic Design
 
-    This library appears to implement a subset of Atomic Design principles, providing reusable components and a structured approach to building user interfaces. Atomic Design breaks down UIs into fundamental building blocks:
+This library appears to implement a subset of Atomic Design principles, providing reusable components and a structured approach to building user interfaces. Atomic Design breaks down UIs into fundamental building blocks:
 
-    *   **Atoms:** Basic HTML elements (e.g., buttons, inputs, labels). The provided code doesn't explicitly show atoms, but `atomic/bomb.js` likely contains functionality for managing them.
+*   **Atoms:** Basic HTML elements (e.g., buttons, inputs, labels). The provided code doesn't explicitly show atoms, but `atomic/bomb.js` likely contains functionality for managing them.
 
-    *   **Molecules:** Combinations of atoms that form simple UI components (e.g., a search form consisting of an input and a button).  The modal service could be considered a molecule.
+*   **Molecules:** Combinations of atoms that form simple UI components (e.g., a search form consisting of an input and a button).  The modal service could be considered a molecule.
 
-    *   **Organisms:** More complex UI sections composed of molecules and atoms (e.g., a header with navigation).
+*   **Organisms:** More complex UI sections composed of molecules and atoms (e.g., a header with navigation).
 
-    *   **Templates:** Page-level layouts that define the structure of content.
+*   **Templates:** Page-level layouts that define the structure of content.
 
-    *   **Pages:** Specific instances of templates with real content.
+*   **Pages:** Specific instances of templates with real content.
 
-    This guide outlines how to integrate and use the core features of this Atomic Design implementation within your application. The focus seems to be on providing a framework for managing components and their interactions.
+This guide outlines how to integrate and use the core features of this Atomic Design implementation within your application. The focus seems to be on providing a framework for managing components and their interactions.
 
 ## Atomic Design Implementation in AngularJS
 
@@ -33,7 +33,7 @@ To understand the full scope of the implementation, you should inspect the conte
 
 ## Integrating the Atomic Design Library
 
-To effectively use the Atomic Design Library within your AngularJS application, follow these steps. This guide assumes you are using RequireJS for module management.  A complete code example can be found at [admin/app/docs/atomic/code_sample.md](admin/app/docs/atomic/code_sample.md).
+To effectively use the Atomic Design Library within your AngularJS application, follow these steps. This guide assumes you are using RequireJS for module management.  A complete code example can be found at [admin/app/docs/atomic/code_sample.md](atomic/code_sample.md).
 
 1.  **Define Dependencies (RequireJS):**
 
