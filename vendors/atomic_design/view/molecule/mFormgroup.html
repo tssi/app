@@ -2,8 +2,9 @@
 	<a-label ng-if="!mFormgroupCtrl.ObjHideLabel">{{mFormgroupCtrl.ObjLabel}}
 		<span ng-if="mFormgroupCtrl.ObjRequired">*</span>
 	</a-label>
-		
-	<a-textbox  ng-if="!mFormgroupCtrl.ObjRequired&& !mFormgroupCtrl.ObjOptions &&  mFormgroupCtrl.ObjType!='display'" ng-model="mFormgroupCtrl.ObjModel" size="mFormgroupCtrl.ObjSize" ng-disabled="mFormgroupCtrl	.ObjDisabled" type="mFormgroupCtrl.ObjType" placeholder="mFormgroupCtrl.ObjPlaceholder" />
+	
+	<a-textbox  ng-if="!mFormgroupCtrl.ObjRequired&& !mFormgroupCtrl.ObjOptions &&  mFormgroupCtrl.ObjType!='display' && mFormgroupCtrl.ObjType!='textarea'" ng-model="mFormgroupCtrl.ObjModel" size="mFormgroupCtrl.ObjSize" ng-disabled="mFormgroupCtrl.ObjDisabled" type="mFormgroupCtrl.ObjType" placeholder="mFormgroupCtrl.ObjPlaceholder" />
+	<a-textarea  ng-if="mFormgroupCtrl.ObjType=='textarea'" ng-model="mFormgroupCtrl.ObjModel" size="mFormgroupCtrl.ObjSize" ng-disabled="mFormgroupCtrl.ObjDisabled"  placeholder="mFormgroupCtrl.ObjPlaceholder" />
 
 	<a-textbox  ng-if="mFormgroupCtrl.ObjRequired && !mFormgroupCtrl.ObjOptions &&  mFormgroupCtrl.ObjType!='display'" ng-model="mFormgroupCtrl.ObjModel" size="mFormgroupCtrl.ObjSize" ng-disabled="mFormgroupCtrl.ObjDisabled" type="mFormgroupCtrl.ObjType" placeholder="mFormgroupCtrl.ObjPlaceholder" required="true"/>
 	<div ng-if="mFormgroupCtrl.ObjType==='display'" class="form-control {{mFormgroupCtrl.ObjSize}}" disabled>{{mFormgroupCtrl.ObjModel}}</div>
