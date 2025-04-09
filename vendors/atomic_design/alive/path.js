@@ -4,7 +4,7 @@ define(['app'],function(app){
 		return {
 			url:function(file){
 				let cacheBreak="?";
-				let isLocal = window.location.hostname=="localhost";
+				let isLocal = window.location.hostname=="localhost" & false;
 				if(isLocal)
 					cacheBreak='?rand='+Math.random();
 				var path =require.config().toUrl("vendors/atomic_design"+file+cacheBreak);
