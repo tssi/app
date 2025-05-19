@@ -48,6 +48,14 @@ define(function() {
 						   'Accepts': 'application/'+settings.API_EXT
 							}
 						};
+					if(typeof data =='object' && data){
+						console.log(data);
+						if(data.hasOwnProperty('token')){
+							
+							request.headers['Authorization']= `Bearer ${data.token}`;
+							delete data.token;
+						}
+					}
 					
 					if(method=='GET') {
 						for(var key in data){
