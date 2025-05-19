@@ -13,7 +13,8 @@ define(['app'], function (app) {
 				FileAccept:'@?accept',
 				FileValidations:'=?validate',
 				FileInpuName:'@?name',
-				FileRequired:'=?ngRequired'
+				FileRequired:'=?ngRequired',
+				FileDisabled:'=?ngDisabled'
 			},
 			transclude:false,
 			templateUrl:function(elem,attr){

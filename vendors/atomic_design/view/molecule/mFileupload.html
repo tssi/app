@@ -1,11 +1,16 @@
-<label class="thumbnail btn btn-default ng-cloak" ng-disabled="FileUploadStarted"  style="cursor:pointer;" for="{{'fileInput-'+ELEM_ID}}">
+<label class="thumbnail btn btn-default ng-cloak" ng-disabled="FileUploadStarted || FileDisabled"  style="cursor:pointer;" for="{{'fileInput-'+ELEM_ID}}">
 	<div ng-show="FileType=='image'">
 		<img src="" alt="" class="FilePreview img-responsive"/>
 	</div>
 	<div class="caption" ng-show="!FileModel">
 	  <center>
-	  	<a-glyph icon="folder-open"></a-glyph>
-	  	&nbsp; Browse {{Caption}}
+	  	
+	  	<span ng-if="!FileDisabled">
+			<a-glyph icon="folder-open"></a-glyph>
+			&nbsp; Browse {{Caption}}</span>
+		<span ng-if="FileDisabled">
+			<a-glyph icon="ban-circle"></a-glyph>
+			 No need to upload {{Caption}}</span>
 		</center>
 	</div>
 	<div ng-show="FileType=='excel'">
