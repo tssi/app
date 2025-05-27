@@ -13,7 +13,7 @@ define(['app'], function (app) {
 				aType:'=?type',
 				aSize:'=?size',
 				aRequired:'=?required',
-				aName:'=?name'
+				aName:'@?name'
 			},
 			transclude: false,
 			templateUrl:function(elem,attr){
