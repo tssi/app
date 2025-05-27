@@ -12,7 +12,8 @@ define(['app'], function (app) {
 				aPlaceholder:'=?placeholder',
 				aType:'=?type',
 				aSize:'=?size',
-				aRequired:'=?required'
+				aRequired:'=?required',
+				aName:'=?name'
 			},
 			transclude: false,
 			templateUrl:function(elem,attr){

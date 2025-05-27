@@ -2,11 +2,10 @@
 	<a-label ng-if="!mFormgroupCtrl.ObjHideLabel">{{mFormgroupCtrl.ObjLabel}}
 		<span ng-if="mFormgroupCtrl.ObjRequired">*</span>
 	</a-label>
-	
-	<a-textbox  ng-if="!mFormgroupCtrl.ObjRequired&& !mFormgroupCtrl.ObjOptions &&  mFormgroupCtrl.ObjType!='display' && mFormgroupCtrl.ObjType!='textarea'" ng-model="mFormgroupCtrl.ObjModel" size="mFormgroupCtrl.ObjSize" ng-disabled="mFormgroupCtrl.ObjDisabled" type="mFormgroupCtrl.ObjType" placeholder="mFormgroupCtrl.ObjPlaceholder" />
-	<a-textarea  ng-if="mFormgroupCtrl.ObjType=='textarea'" ng-model="mFormgroupCtrl.ObjModel" size="mFormgroupCtrl.ObjSize" ng-disabled="mFormgroupCtrl.ObjDisabled"  placeholder="mFormgroupCtrl.ObjPlaceholder" />
+	<a-textbox  ng-if="!mFormgroupCtrl.ObjRequired&& !mFormgroupCtrl.ObjOptions &&  mFormgroupCtrl.ObjType!='display' && mFormgroupCtrl.ObjType!='textarea'" ng-model="mFormgroupCtrl.ObjModel" size="mFormgroupCtrl.ObjSize" ng-disabled="mFormgroupCtrl.ObjDisabled" type="mFormgroupCtrl.ObjType" placeholder="mFormgroupCtrl.ObjPlaceholder"  name="mFormgroupCtrl.ObjName"/>
+	<a-textarea  ng-if="mFormgroupCtrl.ObjType=='textarea'" ng-model="mFormgroupCtrl.ObjModel" size="mFormgroupCtrl.ObjSize" ng-disabled="mFormgroupCtrl.ObjDisabled"  placeholder="mFormgroupCtrl.ObjPlaceholder"  name="mFormgroupCtrl.ObjName"/>
 
-	<a-textbox  ng-if="mFormgroupCtrl.ObjRequired && !mFormgroupCtrl.ObjOptions &&  mFormgroupCtrl.ObjType!='display'" ng-model="mFormgroupCtrl.ObjModel" size="mFormgroupCtrl.ObjSize" ng-disabled="mFormgroupCtrl.ObjDisabled" type="mFormgroupCtrl.ObjType" placeholder="mFormgroupCtrl.ObjPlaceholder" required="true"/>
+	<a-textbox  ng-if="mFormgroupCtrl.ObjRequired && !mFormgroupCtrl.ObjOptions &&  mFormgroupCtrl.ObjType!='display'" ng-model="mFormgroupCtrl.ObjModel" size="mFormgroupCtrl.ObjSize" ng-disabled="mFormgroupCtrl.ObjDisabled" type="mFormgroupCtrl.ObjType" placeholder="mFormgroupCtrl.ObjPlaceholder" required="true" name="mFormgroupCtrl.ObjName"/>
 	<div ng-if="mFormgroupCtrl.ObjType==='display'" class="form-control {{mFormgroupCtrl.ObjSize}}" disabled>{{mFormgroupCtrl.ObjModel}}</div>
 	<div ng-if="mFormgroupCtrl.ObjOptions && mFormgroupCtrl.ObjType==='btn-group'">
 	 <a-navpill   ng-model="mFormgroupCtrl.ObjModel" options="mFormgroupCtrl.ObjOptions" ng-disabled="mFormgroupCtrl.ObjDisabled"  label="mFormgroupCtrl.ObjOptionLabel" type="button" align="justified" size="mFormgroupCtrl.ObjSize"></a-navpill>
