@@ -113,7 +113,7 @@ define(['app'], function (app) {
 							filter = filter || {}
 							var fields =  $scope.Fields;
 							var objFields =  $scope.ObjectFields||null;
-							var data = {keyword:value,fields:fields};
+							var data = {keyword:value,fields:fields, limit:30};
 							for(var field in filter){
 								data[field] = filter[field];
 							}

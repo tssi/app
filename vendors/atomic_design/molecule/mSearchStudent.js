@@ -7,7 +7,7 @@ define(['app'], function (app) {
 								endpoint:'students',
 								display:'full_name',
 								objFields:['sno','lrn','gender','year_level','section','department_id','year_level_id','section_id'],
-								searchFields:['full_name', 'middle_name'],
+								searchFields:['full_name', 'first_name', 'last_name','middle_name'],
 								placeholder:['Student','Search student...'],};
 			var $elem,div,input;
 			return{
@@ -62,7 +62,7 @@ define(['app'], function (app) {
 							filter = filter || {}
 							var fields =  $scope.Fields;
 							var objFields =  $scope.ObjectFields||null;
-							var data = {keyword:value,fields:fields};
+							var data = {keyword:value,fields:fields, limit:30};
 							for(var field in filter){
 								data[field] = filter[field];
 							}
